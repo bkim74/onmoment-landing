@@ -189,11 +189,11 @@ export default function Page() {
             </p>
           </div>
           <div className="mt-4 flex gap-4 text-[11px] text-wood-natural/40">
-            <a href={`${APP}/privacy`} className="hover:text-wood-natural transition-colors">
+            <a href="/privacy" className="hover:text-wood-natural transition-colors">
               개인정보 처리방침
             </a>
             <span>·</span>
-            <a href={`${APP}/terms`} className="hover:text-wood-natural transition-colors">
+            <a href="/terms" className="hover:text-wood-natural transition-colors">
               이용약관
             </a>
           </div>
