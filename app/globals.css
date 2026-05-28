@@ -1,26 +1,31 @@
 @import "tailwindcss";
 
+/* OnMoment Anti-Dopamine tokens */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --paper-cream:   #F5EDE0;
+  --sunlight-warm: #E8C99A;
+  --coffee-deep:   #3D2817;
+  --wood-natural:  #8B6F47;
+  --curtain-soft:  #F0E5D0;
+  --ink-quiet:     #2C2418;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-paper-cream:   var(--paper-cream);
+  --color-sunlight-warm: var(--sunlight-warm);
+  --color-coffee-deep:   var(--coffee-deep);
+  --color-wood-natural:  var(--wood-natural);
+  --color-curtain-soft:  var(--curtain-soft);
+  --color-ink-quiet:     var(--ink-quiet);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--paper-cream);
+  color: var(--coffee-deep);
+  font-family: "Noto Serif KR", "Apple SD Gothic Neo", Georgia, serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
 }
