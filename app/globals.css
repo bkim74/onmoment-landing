@@ -1,13 +1,39 @@
 @import "tailwindcss";
 
-/* OnMoment Anti-Dopamine tokens */
+/* ── OnMoment Anti-Dopamine Design Tokens ─────────────────────────────────
+   Brand: Soul Oasis · Storydoing Gift Ritual OS
+   Principle: text-first / paper not dashboard / quiet contrast / ritual motion
+   ─────────────────────────────────────────────────────────────────────── */
+
 :root {
+  /* Color */
   --paper-cream:   #F5EDE0;
   --sunlight-warm: #E8C99A;
   --coffee-deep:   #3D2817;
   --wood-natural:  #8B6F47;
   --curtain-soft:  #F0E5D0;
   --ink-quiet:     #2C2418;
+
+  /* Typography scale */
+  --text-eyebrow: 10px;
+  --text-caption:  12px;
+  --text-body-sm:  13px;
+  --text-body:     15px;
+  --text-lead:     18px;
+  --text-h3:       22px;
+  --text-h2:       32px;
+  --text-h1:       52px;
+  --text-display:  72px;
+
+  /* Tracking */
+  --tracking-eyebrow: 0.22em;
+  --tracking-caption: 0.12em;
+  --tracking-tight:  -0.02em;
+
+  /* Ritual motion (easeOutQuart) */
+  --ease-ritual: cubic-bezier(0.25, 1, 0.5, 1);
+  --duration-reveal: 1.2s;
+  --duration-settle: 0.8s;
 }
 
 @theme inline {
@@ -19,13 +45,40 @@
   --color-ink-quiet:     var(--ink-quiet);
 }
 
+/* ── Base ── */
+*, *::before, *::after { box-sizing: border-box; }
+
 body {
   background-color: var(--paper-cream);
   color: var(--coffee-deep);
-  font-family: "Noto Serif KR", "Apple SD Gothic Neo", Georgia, serif;
+  font-family: "Noto Serif KR", Georgia, "Apple SD Gothic Neo", serif;
+  font-size: var(--text-body);
+  line-height: 1.75;
   -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
+/* Ritual motion — only for intentional reveals */
 @media (prefers-reduced-motion: no-preference) {
-  html { scroll-behavior: smooth; }
+  .reveal {
+    animation: fadeUp var(--duration-reveal) var(--ease-ritual) both;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+}
+
+/* ── Glyph helpers ── */
+.eyebrow {
+  font-size: var(--text-eyebrow);
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  color: var(--wood-natural);
+  opacity: 0.6;
+}
+
+.hairline {
+  border: none;
+  border-top: 1px solid var(--curtain-soft);
 }
