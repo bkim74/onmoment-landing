@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "gen:og": "pnpm node scripts/gen-og.mjs"
+    "gen:og": "pnpm node scripts/gen-og.mjs",
+    "gen:icons": "pnpm node scripts/gen-icons.mjs",
+    "gen:all": "pnpm gen:icons && pnpm gen:og"
   },
   "dependencies": {
     "next": "16.2.6",

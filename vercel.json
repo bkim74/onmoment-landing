@@ -1,0 +1,11 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "www.onmoment.kr" }],
+      "destination": "https://onmoment.kr/:path*",
+      "permanent": true
+    }
+  ]
+}

@@ -30,7 +30,7 @@ const svg = `<svg
   <!-- Eyebrow -->
   <text
     x="84" y="112"
-    font-family="Georgia, serif"
+    font-family="'Noto Serif KR', Georgia, serif"
     font-size="12"
     letter-spacing="4"
     fill="${WOOD}"
@@ -43,7 +43,7 @@ const svg = `<svg
   <!-- Main headline line 1 -->
   <text
     x="84" y="290"
-    font-family="Georgia, 'Noto Serif KR', serif"
+    font-family="'Noto Serif KR', Georgia, serif"
     font-size="76"
     font-weight="400"
     fill="${COFFEE}"
@@ -52,7 +52,7 @@ const svg = `<svg
   <!-- Main headline line 2 — indented, heavier weight -->
   <text
     x="84" y="390"
-    font-family="Georgia, 'Noto Serif KR', serif"
+    font-family="'Noto Serif KR', Georgia, serif"
     font-size="88"
     font-weight="400"
     fill="${COFFEE}"
@@ -61,7 +61,7 @@ const svg = `<svg
   <!-- Sub copy -->
   <text
     x="84" y="460"
-    font-family="Georgia, 'Noto Serif KR', serif"
+    font-family="'Noto Serif KR', Georgia, serif"
     font-size="20"
     font-weight="300"
     fill="${WOOD}"
@@ -74,7 +74,7 @@ const svg = `<svg
   <!-- Domain -->
   <text
     x="84" y="524"
-    font-family="Georgia, serif"
+    font-family="'Noto Serif KR', Georgia, serif"
     font-size="13"
     letter-spacing="2"
     fill="${WOOD}"
@@ -83,7 +83,7 @@ const svg = `<svg
   <!-- Depth line — right aligned -->
   <text
     x="${W - 84}" y="${H - 60}"
-    font-family="Georgia, serif"
+    font-family="'Noto Serif KR', Georgia, serif"
     font-size="13"
     text-anchor="end"
     fill="${WOOD}"
