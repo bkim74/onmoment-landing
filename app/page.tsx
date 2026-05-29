@@ -78,7 +78,7 @@ export default function Page() {
         <section className="py-24">
           <p className="eyebrow mb-7">선언</p>
           <div className="space-y-4 text-[17px] leading-[1.85] text-coffee-deep/80 sm:text-[19px]">
-            <p>온순간은 오늘의 마음을 평가하지 않습니다.</p>
+            <p>온순간은 오늘의 마음을 있는 그대로 담습니다.</p>
             <p>하루에 하나의 문장만 남겨도 충분합니다.</p>
             <p>
               시간이 지나 그 한 줄들은
