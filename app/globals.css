@@ -105,3 +105,12 @@ body {
 
 /* nowrap for CTA / unit phrases that must not break */
 .om-keep { white-space: nowrap; }
+
+/* Sticky tab nav — scroll offset + hide scrollbar */
+html { scroll-padding-top: 52px; }
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar { display: none; }
