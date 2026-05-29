@@ -7,22 +7,22 @@ const STEPS = [
   {
     glyph: "§1",
     label: "남김",
-    desc: "오늘 마음이 오래 머문 장면을 한 문장으로 남깁니다.\n어떤 문장이어도 괜찮습니다.",
+    desc: "오늘 마음이 오래 머문 장면을 한 문장으로 남깁니다\n어떤 문장이어도 괜찮습니다",
   },
   {
     glyph: "§2",
     label: "비춤",
-    desc: "며칠의 한 줄 사이에서 다시 돌아온 말이\n조용히 비춰집니다.",
+    desc: "며칠의 한 줄 사이에서 다시 돌아온 말이\n조용히 비춰집니다",
   },
   {
     glyph: "§3",
     label: "나의 책",
-    desc: "흩어진 한 줄들은 시간이 지나\n조용히 하나의 이야기로 이어집니다.",
+    desc: "흩어진 한 줄들은 시간이 지나\n조용히 하나의 이야기로 이어집니다",
   },
   {
     glyph: "§4",
     label: "선물",
-    desc: "나의 이야기는 언젠가 누군가에게\n건넬 수 있는 선물이 됩니다.",
+    desc: "나의 이야기는 언젠가 누군가에게\n건넬 수 있는 선물이 됩니다",
   },
 ];
 
@@ -79,12 +79,12 @@ export default function Page() {
         <section className="py-24">
           <p className="eyebrow mb-7">선언</p>
           <div className="space-y-4 text-[17px] leading-[1.85] text-coffee-deep/80 sm:text-[19px]">
-            <p>온순간은 오늘의 마음을 있는 그대로 담습니다.</p>
-            <p>하루에 하나의 문장만 남겨도 충분합니다.</p>
+            <p>온순간은 오늘의 마음을 있는 그대로 담습니다</p>
+            <p>하루에 하나의 문장만 남겨도 충분합니다</p>
             <p>
               시간이 지나 그 한 줄들은
               <br />
-              조용히 하나의 이야기로 이어집니다.
+              조용히 하나의 이야기로 이어집니다
             </p>
           </div>
         </section>
@@ -130,9 +130,9 @@ export default function Page() {
             NO SCORE · NO DIAGNOSIS · NO STREAK · PRIVATE BY DEFAULT
           </p>
           <div className="space-y-2 text-sm text-coffee-deep/65">
-            <p>오늘의 문장은 점수가 아니라 이야기로 남습니다.</p>
-            <p>기록의 리듬은 내가 정합니다.</p>
-            <p>처음부터 나만의 공간으로 시작합니다.</p>
+            <p>오늘의 문장은 점수가 아니라 이야기로 남습니다</p>
+            <p>기록의 리듬은 내가 정합니다</p>
+            <p>처음부터 나만의 공간으로 시작합니다</p>
           </div>
         </section>
 
@@ -146,7 +146,7 @@ export default function Page() {
             <br />
             언젠가 누군가에게 건넬 수 있는
             <br />
-            선물이 됩니다.
+            선물이 됩니다
           </p>
           <p className="mt-8 text-[11px] text-wood-natural/45">
             오늘이 선물이 되도록, 그렇게 살아가는 너와 나
