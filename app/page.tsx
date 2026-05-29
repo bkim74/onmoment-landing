@@ -129,9 +129,9 @@ export default function Page() {
             NO SCORE · NO DIAGNOSIS · NO STREAK · PRIVATE BY DEFAULT
           </p>
           <div className="space-y-2 text-sm text-coffee-deep/65">
-            <p>점수를 매기지 않습니다.</p>
-            <p>연속 기록을 요구하지 않습니다.</p>
-            <p>기본값은 나만의 공간입니다.</p>
+            <p>오늘의 문장은 점수가 아니라 이야기로 남습니다.</p>
+            <p>기록의 리듬은 내가 정합니다.</p>
+            <p>처음부터 나만의 공간으로 시작합니다.</p>
           </div>
         </section>
 
