@@ -90,14 +90,22 @@ export default async function ArticlePage({
             ) : (
               <p
                 key={pi}
-                className="om-serif mb-6 text-[16px] leading-[2.0] text-coffee-deep/85 sm:text-[17px]"
+                className="om-serif mb-8 text-[16px] leading-[2.0] text-coffee-deep/85 sm:text-[17px]"
               >
-                {para.map((line, li) => (
-                  <span key={li}>
-                    {line}
-                    {li < para.length - 1 && <br />}
-                  </span>
-                ))}
+                {para.map((line, li) => {
+                  if (line === "") {
+                    // 의미 단위 소간격 — 단락 내 여백
+                    return <span key={li} className="block mb-3" />;
+                  }
+                  const next = para[li + 1];
+                  const hasBr = li < para.length - 1 && next !== "";
+                  return (
+                    <span key={li}>
+                      {line}
+                      {hasBr && <br />}
+                    </span>
+                  );
+                })}
               </p>
             )
           )}
