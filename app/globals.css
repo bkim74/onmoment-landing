@@ -82,3 +82,26 @@ body {
   border: none;
   border-top: 1px solid var(--curtain-soft);
 }
+
+/* ── Locale-aware text wrapping ── */
+.om-ko {
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  line-break: strict;
+  text-wrap: pretty;        /* progressive — safe fallback */
+}
+
+.om-en {
+  word-break: normal;
+  overflow-wrap: break-word;
+  text-wrap: balance;       /* progressive */
+}
+
+.om-headline {
+  word-break: keep-all;
+  overflow-wrap: normal;
+  text-wrap: balance;       /* progressive */
+}
+
+/* nowrap for CTA / unit phrases that must not break */
+.om-keep { white-space: nowrap; }

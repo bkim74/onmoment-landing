@@ -1,3 +1,6 @@
+import { LocalizedResponsiveLines } from "@/components/ResponsiveLines";
+import { HERO_TITLE, HERO_SUB } from "@/lib/lineContracts";
+
 const APP = "https://app.onmoment.kr";
 
 const STEPS = [
@@ -43,13 +46,11 @@ export default function Page() {
         {/* ── §1 Hero ─────────────────────────────────────────────────── */}
         <section className="pb-24 pt-14">
           <div className="mb-10">
-            <h1 className="text-[42px] font-semibold leading-[1.18] tracking-[-0.02em] text-coffee-deep sm:text-[58px] md:text-[68px]">
-              오늘이 선물이 되도록,
-              <br />
-              <span className="text-coffee-deep/90">한 줄.</span>
+            <h1 className="om-headline text-[42px] font-semibold leading-[1.18] tracking-[-0.02em] text-coffee-deep sm:text-[58px] md:text-[68px]">
+              <LocalizedResponsiveLines contracts={HERO_TITLE} />
             </h1>
-            <p className="mt-5 text-base font-medium text-coffee-deep/65 sm:text-lg">
-              하루 한 줄. 내일 다시 만나는 나.
+            <p className="om-ko mt-5 text-base font-medium text-coffee-deep/65 sm:text-lg">
+              <LocalizedResponsiveLines contracts={HERO_SUB} Tag="span" />
             </p>
             <p className="mt-2 text-sm text-wood-natural/60">
               오늘이 나에게 돌아오는 곳.
