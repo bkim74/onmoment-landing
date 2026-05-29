@@ -46,7 +46,7 @@ export default function Page() {
         {/* ── §1 Hero ─────────────────────────────────────────────────── */}
         <section className="pb-24 pt-14">
           <div className="mb-10">
-            <h1 className="om-headline text-[42px] font-semibold leading-[1.18] tracking-[-0.02em] text-coffee-deep sm:text-[58px] md:text-[68px]">
+            <h1 className="om-headline text-[clamp(28px,9.5vw,42px)] font-semibold leading-[1.18] tracking-[-0.02em] text-coffee-deep sm:text-[58px] md:text-[68px]">
               <LocalizedResponsiveLines contracts={HERO_TITLE} />
             </h1>
             <p className="om-ko mt-5 text-base font-medium text-coffee-deep/65 sm:text-lg">
