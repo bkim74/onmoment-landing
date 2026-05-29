@@ -42,3 +42,6 @@ next-env.d.ts
 
 # Local font files (used for OG image generation only)
 scripts/fonts/
+
+# session handoff — personal work state, not for commit
+.claude/session-handoff.md
