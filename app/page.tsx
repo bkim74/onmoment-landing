@@ -1,5 +1,7 @@
+import Link from "next/link";
 import { LocalizedResponsiveLines } from "@/components/ResponsiveLines";
 import { HERO_TITLE, HERO_SUB } from "@/lib/lineContracts";
+import { ARTICLES } from "./journal/articles";
 
 const APP = "https://app.onmoment.kr";
 
@@ -53,12 +55,6 @@ const TRUST_CARDS = [
   },
 ];
 
-// ── Section 05 ───────────────────────────────────────────────────────────────
-const JOURNAL_PREVIEWS = [
-  "왜 온순간은 한 문장에서 시작하는가",
-  "처음의 한 줄은 왜 나에게만 머물러야 하는가",
-  "점수 없는 기록이 필요한 이유",
-];
 
 // ─────────────────────────────────────────────────────────────────────────────
 
@@ -334,30 +330,34 @@ export default function Page() {
           <div className="mb-10 space-y-1 text-sm leading-relaxed text-coffee-deep/65">
             <p>온순간이 왜 한 줄에서 시작하는지</p>
             <p>조금 더 깊게 적어두었습니다</p>
-            <p className="mt-3 text-coffee-deep/50">
-              점수 없는 기록,<br />
-              처음에는 나에게만 머무는 한 줄,<br />
-              그리고 연약함이 숨지 않아도 되는 공간에 대하여
-            </p>
           </div>
 
-          <div className="mb-8 space-y-3">
-            {JOURNAL_PREVIEWS.map((title, i) => (
-              <div
-                key={i}
-                className="flex items-center gap-4 rounded-xl border border-curtain-soft px-5 py-4"
+          <div className="mb-6 space-y-3">
+            {ARTICLES.slice(0, 3).map((article) => (
+              <Link
+                key={article.slug}
+                href={`/journal/${article.slug}`}
+                className="group flex items-center gap-4 rounded-xl border border-curtain-soft px-5 py-4 transition-colors hover:border-wood-natural/30 hover:bg-curtain-soft/50"
               >
                 <span className="eyebrow shrink-0" style={{ opacity: 0.4 }}>
-                  0{i + 1}
+                  {article.number}
                 </span>
-                <p className="text-sm text-coffee-deep/75">{title}</p>
-              </div>
+                <p className="om-ko flex-1 text-sm text-coffee-deep/75 group-hover:text-coffee-deep">
+                  {article.title}
+                </p>
+                <span className="shrink-0 text-[11px] text-wood-natural/40 group-hover:text-wood-natural">
+                  →
+                </span>
+              </Link>
             ))}
           </div>
 
-          <p className="text-[11px] text-wood-natural/45">
-            저널은 곧 이어집니다
-          </p>
+          <Link
+            href="/journal"
+            className="text-[11px] uppercase tracking-[0.15em] text-wood-natural/50 transition-colors hover:text-wood-natural"
+          >
+            저널 더 읽기 →
+          </Link>
         </section>
 
         <hr className="hairline" />
