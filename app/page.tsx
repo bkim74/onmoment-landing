@@ -390,6 +390,15 @@ export default function Page() {
           <p className="mt-8 text-[11px] text-wood-natural/35">
             오늘이 선물이 되도록, 그렇게 살아가는 너와 나
           </p>
+          <p className="mt-4 text-[11px] text-wood-natural/40">
+            현재 온순간은 소수 베타로 운영 중입니다.{" "}
+            <a
+              href="mailto:hello@onmoment.kr"
+              className="underline underline-offset-2 transition-colors hover:text-wood-natural/70"
+            >
+              베타 참여 문의 →
+            </a>
+          </p>
         </section>
       </main>
 
