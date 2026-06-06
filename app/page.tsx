@@ -43,7 +43,7 @@ const JOURNEY_STAGES = [
 const TRUST_CARDS = [
   {
     title: "무엇을 저장하나요",
-    desc: "계정 정보, 하루의 문장, 감정 위치, 비춤, 선택한 반응, 주간 반영을 저장합니다",
+    desc: "계정 정보, 하루의 문장, 감정 흐름, 비춤, 선택한 반응, 주간 반영을 저장합니다",
   },
   {
     title: "누가 볼 수 있나요",
@@ -217,7 +217,7 @@ export default function Page() {
                 className="eyebrow mb-8"
                 style={{ opacity: 0.45 }}
               >
-                2026. 5. 29
+                {new Date().toLocaleDateString("ko-KR", { year: "numeric", month: "numeric", day: "numeric" })}
               </p>
               <p
                 className="om-serif leading-[1.65] text-coffee-deep"
@@ -336,7 +336,7 @@ export default function Page() {
           </div>
 
           <div className="mb-6 space-y-3">
-            {ARTICLES.slice(0, 3).map((article) => (
+            {ARTICLES.slice(0, 5).map((article) => (
               <Link
                 key={article.slug}
                 href={`/journal/${article.slug}`}
