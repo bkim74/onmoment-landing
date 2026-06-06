@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 };
 
 const CONTACT = "hello@onmoment.kr";
-const UPDATED = "2026년 5월";
+const UPDATED = "2026년 6월";
 
 export default function TermsPage() {
   return (
@@ -50,16 +50,22 @@ export default function TermsPage() {
 
         <hr className="hairline" />
 
-        {/* §2 사용자의 기록 */}
+        {/* §2 사용자의 기록과 권리 */}
         <section className="py-10">
-          <p className="eyebrow mb-5">§2&nbsp; 사용자의 기록</p>
+          <p className="eyebrow mb-5">§2&nbsp; 사용자의 기록과 권리</p>
           <div className="space-y-3 text-[14px] leading-relaxed text-coffee-deep/80">
-            <p>사용자가 남긴 기록의 권리는 사용자에게 있습니다.</p>
             <p>
-              온순간은 서비스 제공, 기록 보관, 동기화,
-              그리고 사용자가 선택한 공유 기능을 위해 기록을 처리합니다.
+              사용자가 온순간에 남긴 기록의 저작권과 소유권은 온전히 사용자에게 있습니다.
             </p>
-            <p>사용자의 허락 없이 기록을 공개하지 않습니다.</p>
+            <p>
+              온순간은 서비스 제공(기록 저장, 동기화, AI 비춤 처리, 이메일 전달)을 위해
+              필요한 범위 내에서만 기록을 처리합니다.
+              사용자의 허락 없이 기록을 공개하거나 제3자에게 판매하지 않습니다.
+            </p>
+            <p>
+              사용자는 언제든 앱 내 프로필 탭에서 모든 기록을 JSON으로 내보내거나
+              계정과 기록 전체를 삭제할 수 있습니다.
+            </p>
           </div>
         </section>
 
@@ -70,9 +76,13 @@ export default function TermsPage() {
           <p className="eyebrow mb-5">§3&nbsp; 선물 링크</p>
           <div className="space-y-3 text-[14px] leading-relaxed text-coffee-deep/80">
             <p>사용자가 직접 선택한 카드만 선물 링크에 포함됩니다.</p>
-            <p>링크를 받은 사람은 선택된 카드만 볼 수 있습니다.</p>
+            <p>링크를 받은 사람은 선택된 카드와 이에 기반한 AI 요약만 볼 수 있습니다.</p>
             <p>
-              전체 기록, 나의 책, 비춤, 프로필은 선물 링크를 통해 공개되지 않습니다.
+              전체 기록, 나의 책, AI 비춤, 조각, 프로필은 선물 링크를 통해 공개되지 않습니다.
+            </p>
+            <p>
+              공유한 선물은 언제든 거두어들일 수 있습니다.
+              거두어들인 후에는 링크에 접근할 수 없습니다.
             </p>
           </div>
         </section>
@@ -93,7 +103,7 @@ export default function TermsPage() {
               "타인의 개인정보를 허락 없이 입력하거나 공유하는 행위",
             ].map((item) => (
               <li key={item} className="flex items-start gap-2">
-                <span className="mt-0.5 text-wood-natural/50">—</span>
+                <span className="mt-0.5 text-wood-natural/50 shrink-0">—</span>
                 <span>{item}</span>
               </li>
             ))}
@@ -114,8 +124,8 @@ export default function TermsPage() {
               중요한 변경은 가능한 방식으로 사전에 안내합니다.
             </p>
             <p>
-              서비스 중단이 필요한 경우, 기록을 확인하거나 내보낼 수 있는
-              방법을 제공하기 위해 노력합니다.
+              서비스 중단이 필요한 경우, 중단 전에 기록을 JSON으로 내보낼 수 있는
+              기간을 제공하기 위해 노력합니다.
             </p>
           </div>
         </section>

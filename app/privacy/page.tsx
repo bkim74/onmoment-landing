@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 };
 
 const CONTACT = "hello@onmoment.kr";
-const UPDATED = "2026년 5월";
+const UPDATED = "2026년 6월";
 
 export default function PrivacyPage() {
   return (
@@ -35,52 +35,73 @@ export default function PrivacyPage() {
 
         <hr className="hairline" />
 
-        {/* §1 요약 */}
+        {/* §1 핵심 약속 */}
         <section className="py-10">
-          <p className="eyebrow mb-5">§1&nbsp; 요약</p>
-          <div className="rounded-2xl bg-curtain-soft/60 px-6 py-5">
-            <p className="text-[15px] leading-loose text-coffee-deep/85">
-              온순간의 기록은 <strong className="font-medium">기본 비공개</strong>입니다.
-              <br />
-              사용자가 선택한 경우에만 일부 문장이 선물 카드로 공유됩니다.
-              <br />
-              사용자의 기록을 광고 목적이나 제3자 판매 목적으로 사용하지 않습니다.
-              <br />
-              문의와 삭제 요청은{" "}
-              <a
-                href={`mailto:${CONTACT}`}
-                className="underline underline-offset-2 hover:text-wood-natural transition-colors"
-              >
-                {CONTACT}
-              </a>
-              으로 받습니다.
-            </p>
+          <p className="eyebrow mb-5">§1&nbsp; 핵심 약속</p>
+          <div className="rounded-2xl bg-curtain-soft/60 px-6 py-6 space-y-3">
+            {[
+              "기록의 소유권은 100% 사용자에게 있습니다.",
+              "모든 기록은 기본 비공개입니다. 사용자가 직접 선택한 경우에만 일부 문장이 공유됩니다.",
+              "광고 목적이나 제3자 판매 목적으로 기록을 사용하지 않습니다.",
+              "AI 처리에 사용된 기록은 AI 학습 데이터로 재사용되지 않습니다.",
+              "앱 내에서 언제든 계정과 기록을 즉시 삭제할 수 있습니다.",
+            ].map((text) => (
+              <div key={text} className="flex items-start gap-3">
+                <span className="mt-[3px] text-wood-natural/50 shrink-0">—</span>
+                <p className="text-[14px] leading-relaxed text-coffee-deep/85">{text}</p>
+              </div>
+            ))}
           </div>
+          <p className="mt-4 text-[13px] text-wood-natural/50 leading-relaxed">
+            문의와 삭제 요청:{" "}
+            <a
+              href={`mailto:${CONTACT}`}
+              className="underline underline-offset-2 hover:text-wood-natural transition-colors"
+            >
+              {CONTACT}
+            </a>
+          </p>
         </section>
 
         <hr className="hairline" />
 
-        {/* §2 무엇을 저장하나요 */}
+        {/* §2 저장하는 정보 */}
         <section className="py-10">
-          <p className="eyebrow mb-5">§2&nbsp; 무엇을 저장하나요?</p>
-          <div className="space-y-5 text-[14px] leading-relaxed text-coffee-deep/80">
+          <p className="eyebrow mb-5">§2&nbsp; 저장하는 정보</p>
+          <div className="space-y-6 text-[14px] leading-relaxed text-coffee-deep/80">
             <div>
               <p className="mb-1 font-medium text-coffee-deep">계정 정보</p>
-              <p>로그인에 사용한 이메일 주소와 인증 토큰을 저장합니다.</p>
+              <p>로그인에 사용한 이메일 주소와 인증 토큰을 저장합니다. 비밀번호는 암호화되어 저장되며 운영자도 조회할 수 없습니다.</p>
             </div>
             <div>
               <p className="mb-1 font-medium text-coffee-deep">사용자가 남긴 기록</p>
               <p>
-                하루의 문장, 감정 위치, 비춤, 주간 반영, 선택한 비춤 반응 등
-                서비스 이용 중 직접 입력하거나 선택한 내용을 서버에 저장합니다.
+                하루의 문장, 조각(텍스트·음성 변환 텍스트), 감정 위치, AI 비춤 결과,
+                주간 반영, 여정(Journey) 정보 등 서비스 이용 중 직접 입력하거나 선택한 내용을 서버에 저장합니다.
+              </p>
+            </div>
+            <div>
+              <p className="mb-1 font-medium text-coffee-deep">사진</p>
+              <p>
+                사용자가 직접 첨부한 사진은 비공개 저장소에 암호화되어 저장됩니다.
+                접근은 서명된 임시 URL을 통해서만 가능하며, URL은 일정 시간 후 만료됩니다.
+                사진 원본은 본인 외에 열람되지 않습니다.
+              </p>
+            </div>
+            <div>
+              <p className="mb-1 font-medium text-coffee-deep">이메일 알림</p>
+              <p>
+                아침 회귀 이메일(전날 남긴 문장이 다음 날 아침 도착하는 기능)을 발송하기 위해
+                이메일 주소를 사용합니다. 마케팅 목적의 이메일은 발송하지 않습니다.
+                이메일 수신 거부는 메일 하단 링크에서 즉시 처리됩니다.
               </p>
             </div>
             <div>
               <p className="mb-1 font-medium text-coffee-deep">AI 비춤 처리</p>
               <p>
-                입력하신 문장은 AI 비춤 기능을 위해 Google AI(Gemini)를 통해 처리됩니다.
-                처리 결과는 사용자의 계정에만 저장되며, 광고나 제3자 판매 목적으로
-                사용되지 않습니다.
+                입력하신 문장은 AI 비춤 기능을 위해 Google AI(Gemini API)를 통해 처리됩니다.
+                Google의 API 이용 약관에 따라, API를 통해 처리된 데이터는 Google의 AI 모델 학습에 사용되지 않습니다.
+                처리 결과는 사용자의 계정에만 저장됩니다.
               </p>
             </div>
             <div>
@@ -95,9 +116,9 @@ export default function PrivacyPage() {
 
         <hr className="hairline" />
 
-        {/* §3 무엇을 저장하지 않나요 */}
+        {/* §3 저장하지 않는 정보 */}
         <section className="py-10">
-          <p className="eyebrow mb-5">§3&nbsp; 무엇을 저장하지 않나요?</p>
+          <p className="eyebrow mb-5">§3&nbsp; 저장하지 않는 정보</p>
           <ul className="space-y-2 text-[14px] leading-relaxed text-coffee-deep/80">
             {[
               "정확한 위치 정보 (GPS 좌표 등)",
@@ -105,9 +126,10 @@ export default function PrivacyPage() {
               "연락처 주소록",
               "마이크 녹음 원본 (음성은 텍스트 변환 후 원본 미저장)",
               "광고 타깃팅 또는 행동 추적 쿠키",
+              "신용카드·결제 정보 (현재 유료 결제 기능 없음)",
             ].map((item) => (
               <li key={item} className="flex items-start gap-2">
-                <span className="mt-0.5 text-wood-natural/50">—</span>
+                <span className="mt-0.5 text-wood-natural/50 shrink-0">—</span>
                 <span>{item}</span>
               </li>
             ))}
@@ -122,20 +144,21 @@ export default function PrivacyPage() {
           <div className="space-y-5 text-[14px] leading-relaxed text-coffee-deep/80">
             <div>
               <p className="mb-1 font-medium text-coffee-deep">기본: 본인만</p>
-              <p>모든 기록은 기본적으로 본인만 볼 수 있습니다.</p>
+              <p>모든 기록은 기본적으로 본인만 볼 수 있습니다. 다른 사용자에게 공개되지 않습니다.</p>
             </div>
             <div>
               <p className="mb-1 font-medium text-coffee-deep">선물 링크</p>
               <p>
                 사용자가 직접 선택하여 공유한 카드만 링크를 받은 사람이 볼 수 있습니다.
-                전체 기록, 나의 책, 비춤 내용, 프로필은 선물 링크에 포함되지 않습니다.
+                전체 기록, 나의 책, AI 비춤 내용, 프로필은 선물 링크에 포함되지 않습니다.
+                공유한 선물은 언제든 거두어들일 수 있으며, 이후 링크는 차단됩니다.
               </p>
             </div>
             <div>
               <p className="mb-1 font-medium text-coffee-deep">온순간 운영자</p>
               <p>
                 서비스 운영, 보안, 오류 대응에 필요한 범위 내에서만 접근합니다.
-                사용자의 기록을 목적 외로 열람하지 않습니다.
+                사용자의 기록 내용을 목적 외로 열람하지 않습니다.
               </p>
             </div>
           </div>
@@ -143,30 +166,82 @@ export default function PrivacyPage() {
 
         <hr className="hairline" />
 
-        {/* §5 삭제와 문의 */}
+        {/* §5 제3자 처리자 */}
         <section className="py-10">
-          <p className="eyebrow mb-5">§5&nbsp; 삭제와 문의</p>
+          <p className="eyebrow mb-5">§5&nbsp; 제3자 처리자</p>
+          <p className="mb-5 text-[14px] text-coffee-deep/80 leading-relaxed">
+            서비스 운영을 위해 아래 제3자 서비스를 사용합니다.
+            각 서비스는 해당 서비스의 개인정보 처리방침에 따라 데이터를 처리합니다.
+          </p>
           <div className="space-y-4 text-[14px] leading-relaxed text-coffee-deep/80">
-            <p>
-              계정 및 기록을 앱 내에서 직접 삭제하는 기능을 준비 중입니다.
-              현재는{" "}
-              <a
-                href={`mailto:${CONTACT}`}
-                className="underline underline-offset-2 hover:text-wood-natural transition-colors"
-              >
-                {CONTACT}
-              </a>
-              으로 요청하시면 삭제를 처리해 드립니다.
-            </p>
-            <p>기타 개인정보 관련 문의도 같은 이메일로 받습니다.</p>
+            {[
+              {
+                name: "Supabase (미국)",
+                purpose: "데이터베이스 호스팅 및 인증. 저장된 데이터는 암호화됩니다.",
+              },
+              {
+                name: "Google AI — Gemini API (미국)",
+                purpose: "AI 비춤 처리. API를 통한 처리 결과는 Google의 AI 학습에 사용되지 않습니다.",
+              },
+              {
+                name: "Resend (미국)",
+                purpose: "아침 회귀 이메일 발송. 이메일 주소만 전달되며 기록 내용은 포함되지 않습니다.",
+              },
+              {
+                name: "hCaptcha (미국)",
+                purpose: "로그인·가입 시 봇 방지. 이메일 주소나 기록은 전달되지 않습니다.",
+              },
+            ].map(({ name, purpose }) => (
+              <div key={name}>
+                <p className="font-medium text-coffee-deep">{name}</p>
+                <p>{purpose}</p>
+              </div>
+            ))}
           </div>
         </section>
 
         <hr className="hairline" />
 
-        {/* §6 쿠키 / 로컬 저장소 */}
+        {/* §6 삭제와 내보내기 */}
         <section className="py-10">
-          <p className="eyebrow mb-5">§6&nbsp; 쿠키 · 로컬 저장소</p>
+          <p className="eyebrow mb-5">§6&nbsp; 삭제와 내보내기</p>
+          <div className="space-y-4 text-[14px] leading-relaxed text-coffee-deep/80">
+            <div>
+              <p className="mb-1 font-medium text-coffee-deep">앱 내 직접 삭제</p>
+              <p>
+                앱 하단 프로필 탭 &gt; 계정 관리에서 언제든 계정과 모든 기록을 직접 삭제할 수 있습니다.
+                삭제는 즉시 처리되며 복구되지 않습니다.
+                사진 파일, 저장된 기록, 계정 정보 모두 함께 삭제됩니다.
+              </p>
+            </div>
+            <div>
+              <p className="mb-1 font-medium text-coffee-deep">데이터 내보내기</p>
+              <p>
+                삭제 전 내 기록을 JSON 파일로 내보낼 수 있습니다.
+                같은 위치(프로필 탭 &gt; 계정 관리)에서 다운로드할 수 있습니다.
+              </p>
+            </div>
+            <div>
+              <p className="mb-1 font-medium text-coffee-deep">이메일 문의</p>
+              <p>
+                직접 삭제가 어려운 경우{" "}
+                <a
+                  href={`mailto:${CONTACT}`}
+                  className="underline underline-offset-2 hover:text-wood-natural transition-colors"
+                >
+                  {CONTACT}
+                </a>
+                으로 요청하시면 처리해 드립니다.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <hr className="hairline" />
+
+        {/* §7 쿠키 / 로컬 저장소 */}
+        <section className="py-10">
+          <p className="eyebrow mb-5">§7&nbsp; 쿠키 · 로컬 저장소</p>
           <div className="space-y-3 text-[14px] leading-relaxed text-coffee-deep/80">
             <p>
               로그인 세션 유지와 서비스 동작에 필요한 최소한의 저장소를 사용합니다.
