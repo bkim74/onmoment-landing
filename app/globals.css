@@ -71,6 +71,7 @@ body {
 
 /* ── Glyph helpers ── */
 .eyebrow {
+  font-family: "IBM Plex Mono", "Courier New", monospace;
   font-size: var(--text-eyebrow);
   letter-spacing: var(--tracking-eyebrow);
   text-transform: uppercase;

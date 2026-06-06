@@ -45,3 +45,4 @@ scripts/fonts/
 
 # session handoff — personal work state, not for commit
 .claude/session-handoff.md
+design-reference/

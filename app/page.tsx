@@ -113,13 +113,13 @@ export default function Page() {
           <div className="flex flex-col gap-3 sm:flex-row">
             <a
               href={`${APP}/today`}
-              className="inline-flex items-center justify-center rounded-xl bg-coffee-deep px-7 py-3.5 text-sm font-medium text-paper-cream transition-colors duration-300 hover:bg-ink-quiet"
+              className="inline-flex items-center justify-center rounded-full bg-coffee-deep px-7 py-3.5 text-sm font-medium text-paper-cream transition-colors duration-300 hover:bg-ink-quiet"
             >
               오늘의 온순간 시작하기 →
             </a>
             <a
               href={`${APP}/install`}
-              className="inline-flex items-center justify-center rounded-xl border border-wood-natural/25 px-7 py-3.5 text-sm font-medium text-coffee-deep/80 transition-colors duration-300 hover:border-coffee-deep/40 hover:text-coffee-deep"
+              className="inline-flex items-center justify-center rounded-full border border-wood-natural/25 px-7 py-3.5 text-sm font-medium text-coffee-deep/80 transition-colors duration-300 hover:border-coffee-deep/40 hover:text-coffee-deep"
             >
               앱 설치 방법 보기
             </a>
@@ -145,7 +145,7 @@ export default function Page() {
 
           <div className="mb-10 grid grid-cols-2 gap-3 sm:grid-cols-4">
             {WHY_CARDS.map((card) => (
-              <div key={card.title} className="rounded-xl border border-curtain-soft bg-curtain-soft/40 px-4 py-5">
+              <div key={card.title} className="rounded-none border border-curtain-soft bg-curtain-soft/40 px-4 py-5">
                 <p className="mb-2 text-sm font-medium text-coffee-deep">{card.title}</p>
                 <p className="text-xs leading-relaxed text-coffee-deep/60">{card.desc}</p>
               </div>
@@ -175,7 +175,7 @@ export default function Page() {
 
           <div className="mb-10 grid grid-cols-2 gap-3 sm:grid-cols-4">
             {SPACE_CARDS.map((card) => (
-              <div key={card.title} className="rounded-xl border border-curtain-soft bg-curtain-soft/40 px-4 py-5">
+              <div key={card.title} className="rounded-none border border-curtain-soft bg-curtain-soft/40 px-4 py-5">
                 <p className="mb-2 text-sm font-medium text-coffee-deep">{card.title}</p>
                 <p className="text-xs leading-relaxed text-coffee-deep/60">{card.desc}</p>
               </div>
@@ -207,10 +207,9 @@ export default function Page() {
           {/* Day card mockup */}
           <div className="mb-14 flex justify-center">
             <div
-              className="relative rounded-2xl border border-curtain-soft bg-paper-cream px-7 py-9"
+              className="relative rounded-none border border-curtain-soft bg-paper-cream px-7 py-9"
               style={{
                 width: "220px",
-                boxShadow: "0 2px 20px rgba(61,40,23,0.09)",
                 transform: "rotate(-1.5deg)",
               }}
             >
@@ -246,7 +245,7 @@ export default function Page() {
             <div className="hidden sm:flex items-start gap-2">
               {JOURNEY_STAGES.map((stage, i) => (
                 <div key={stage.num} className="flex flex-1 items-start gap-2">
-                  <div className="flex-1 rounded-xl border border-curtain-soft bg-curtain-soft/40 px-4 py-5">
+                  <div className="flex-1 rounded-none border border-curtain-soft bg-curtain-soft/40 px-4 py-5">
                     <p className="eyebrow mb-2">{stage.num}</p>
                     <p className="mb-1.5 text-sm font-medium text-coffee-deep">{stage.label}</p>
                     <p className="text-xs leading-relaxed text-coffee-deep/60">{stage.desc}</p>
@@ -300,7 +299,7 @@ export default function Page() {
 
           <div className="mb-10 grid grid-cols-1 gap-3 sm:grid-cols-3">
             {TRUST_CARDS.map((card) => (
-              <div key={card.title} className="rounded-xl border border-curtain-soft bg-curtain-soft/40 px-5 py-5">
+              <div key={card.title} className="rounded-none border border-curtain-soft bg-curtain-soft/40 px-5 py-5">
                 <p className="mb-2 text-sm font-medium text-coffee-deep">{card.title}</p>
                 <p className="text-xs leading-relaxed text-coffee-deep/60">{card.desc}</p>
               </div>
@@ -337,7 +336,7 @@ export default function Page() {
               <Link
                 key={article.slug}
                 href={`/journal/${article.slug}`}
-                className="group flex items-center gap-4 rounded-xl border border-curtain-soft px-5 py-4 transition-colors hover:border-wood-natural/30 hover:bg-curtain-soft/50"
+                className="group flex items-center gap-4 rounded-none border border-curtain-soft px-5 py-4 transition-colors hover:border-wood-natural/30 hover:bg-curtain-soft/50"
               >
                 <span className="eyebrow shrink-0" style={{ opacity: 0.4 }}>
                   {article.number}
@@ -376,13 +375,13 @@ export default function Page() {
           <div className="flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
             <a
               href={`${APP}/today`}
-              className="inline-flex items-center justify-center rounded-xl bg-coffee-deep px-8 py-3.5 text-sm font-medium text-paper-cream transition-colors duration-300 hover:bg-ink-quiet"
+              className="inline-flex items-center justify-center rounded-full bg-coffee-deep px-8 py-3.5 text-sm font-medium text-paper-cream transition-colors duration-300 hover:bg-ink-quiet"
             >
               오늘의 온순간 시작하기 →
             </a>
             <a
               href={`${APP}/install`}
-              className="inline-flex items-center justify-center rounded-xl border border-wood-natural/25 px-8 py-3.5 text-sm font-medium text-coffee-deep/80 transition-colors duration-300 hover:border-coffee-deep/40 hover:text-coffee-deep"
+              className="inline-flex items-center justify-center rounded-full border border-wood-natural/25 px-8 py-3.5 text-sm font-medium text-coffee-deep/80 transition-colors duration-300 hover:border-coffee-deep/40 hover:text-coffee-deep"
             >
               앱 설치 방법 보기
             </a>
