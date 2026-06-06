@@ -26,11 +26,17 @@ export default function TermsPage() {
 
         {/* Header */}
         <div className="pb-12 pt-6">
-          <p className="eyebrow mb-4">법적 고지</p>
+          <p className="eyebrow mb-4">온순간 · 이용약관</p>
           <h1 className="text-[28px] font-semibold leading-snug tracking-tight text-coffee-deep sm:text-[34px]">
             이용약관
           </h1>
           <p className="mt-3 text-sm text-wood-natural/60">최종 수정: {UPDATED}</p>
+          <p className="mt-5 text-[13px] leading-relaxed text-wood-natural/60">
+            온순간이 기록을 대하는 방식을 먼저 읽어보세요.{" "}
+            <a href="/principles" className="underline underline-offset-2 hover:text-wood-natural transition-colors">
+              기록을 대하는 방식 →
+            </a>
+          </p>
         </div>
 
         <hr className="hairline" />

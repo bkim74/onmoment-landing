@@ -26,11 +26,26 @@ export default function PrivacyPage() {
 
         {/* Header */}
         <div className="pb-12 pt-6">
-          <p className="eyebrow mb-4">법적 고지</p>
+          <p className="eyebrow mb-4">온순간 · 개인정보</p>
           <h1 className="text-[28px] font-semibold leading-snug tracking-tight text-coffee-deep sm:text-[34px]">
             개인정보 처리방침
           </h1>
           <p className="mt-3 text-sm text-wood-natural/60">최종 수정: {UPDATED}</p>
+          <div className="mt-6 rounded-2xl border border-wood-natural/15 px-6 py-5">
+            <p className="text-[14px] leading-loose text-coffee-deep/80">
+              이 앱을 만든 사람으로서 한 가지를 먼저 드리고 싶었습니다.
+              <br />
+              당신이 온순간에 쓰는 이야기는 당신의 것입니다.
+              아래는 그 원칙을 법적으로 구체화한 것입니다.
+            </p>
+            <p className="mt-3 text-[12px] text-wood-natural/50">— 김범 · 온순간</p>
+            <a
+              href="/principles"
+              className="mt-2 block text-[12px] underline underline-offset-2 text-wood-natural/60 hover:text-wood-natural transition-colors"
+            >
+              기록을 대하는 방식 →
+            </a>
+          </div>
         </div>
 
         <hr className="hairline" />
@@ -100,8 +115,11 @@ export default function PrivacyPage() {
               <p className="mb-1 font-medium text-coffee-deep">AI 비춤 처리</p>
               <p>
                 입력하신 문장은 AI 비춤 기능을 위해 Google AI(Gemini API)를 통해 처리됩니다.
-                Google의 API 이용 약관에 따라, API를 통해 처리된 데이터는 Google의 AI 모델 학습에 사용되지 않습니다.
                 처리 결과는 사용자의 계정에만 저장됩니다.
+              </p>
+              <p className="mt-2">
+                온순간은 사용자 기록을 AI 학습 데이터로 활용하지 않는 것을 원칙으로 합니다.
+                AI 파트너나 처리 방식이 달라질 경우, 사전에 알리겠습니다.
               </p>
             </div>
             <div>

@@ -306,13 +306,17 @@ export default function Page() {
             ))}
           </div>
 
-          <div className="flex gap-5 text-[11px] text-wood-natural/50">
+          <div className="flex flex-wrap gap-5 text-[11px] text-wood-natural/50">
+            <a href="/principles" className="transition-colors hover:text-wood-natural underline underline-offset-2">
+              기록을 대하는 방식
+            </a>
+            <span>·</span>
             <a href="/privacy" className="transition-colors hover:text-wood-natural underline underline-offset-2">
-              개인정보 처리방침 보기
+              개인정보 처리방침
             </a>
             <span>·</span>
             <a href="/terms" className="transition-colors hover:text-wood-natural underline underline-offset-2">
-              이용약관 보기
+              이용약관
             </a>
           </div>
         </section>
@@ -410,7 +414,11 @@ export default function Page() {
               ⓒ {new Date().getFullYear()} 온순간
             </p>
           </div>
-          <div className="mt-4 flex gap-4 text-[11px] text-wood-natural/40">
+          <div className="mt-4 flex flex-wrap gap-4 text-[11px] text-wood-natural/40">
+            <a href="/principles" className="transition-colors hover:text-wood-natural">
+              기록을 대하는 방식
+            </a>
+            <span>·</span>
             <a href="/privacy" className="transition-colors hover:text-wood-natural">
               개인정보 처리방침
             </a>
