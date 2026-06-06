@@ -252,6 +252,26 @@ export default function PrivacyPage() {
                 으로 요청하시면 처리해 드립니다.
               </p>
             </div>
+            <div>
+              <p className="mb-1 font-medium text-coffee-deep">데이터 보관 기간</p>
+              <p>
+                기록은 계정을 유지하는 동안 보관됩니다.
+                계정 삭제 또는 삭제 요청 시 즉시 파기하며, 별도의 백업 보관 기간을 두지 않습니다.
+              </p>
+            </div>
+            <div>
+              <p className="mb-1 font-medium text-coffee-deep">열람 · 정정 · 처리정지 요청</p>
+              <p>
+                개인정보 열람, 정정, 처리정지를 요청할 권리가 있습니다.{" "}
+                <a
+                  href={`mailto:${CONTACT}`}
+                  className="underline underline-offset-2 hover:text-wood-natural transition-colors"
+                >
+                  {CONTACT}
+                </a>
+                으로 요청하시면 처리해 드립니다.
+              </p>
+            </div>
           </div>
         </section>
 
@@ -268,6 +288,23 @@ export default function PrivacyPage() {
             <p>
               기기의 localStorage와 IndexedDB는 초안 보존, 임시 저장,
               오프라인 보조 용도로만 사용됩니다.
+            </p>
+          </div>
+        </section>
+
+        <hr className="hairline" />
+
+        {/* §8 침해사고 통지 */}
+        <section className="py-10">
+          <p className="eyebrow mb-5">§8&nbsp; 침해사고 통지</p>
+          <div className="space-y-3 text-[14px] leading-relaxed text-coffee-deep/80">
+            <p>
+              개인정보 침해가 발생한 경우, 지체 없이 해당 사실과 피해 최소화 방법을
+              영향을 받은 사용자에게 직접 알립니다.
+            </p>
+            <p>
+              통지는 가입 시 등록된 이메일을 통해 이루어지며,
+              피해 규모와 유형에 따라 관계 기관에도 신고합니다.
             </p>
           </div>
         </section>
