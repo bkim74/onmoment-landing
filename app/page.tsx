@@ -27,7 +27,7 @@ const TABS = [
 const WHY_CARDS = [
   { title: "내려놓음",   desc: "머릿속에 맴도는 장면을 한 문장으로 밖에 놓습니다" },
   { title: "정직함",     desc: "긴 설명보다 한 문장이 더 솔직할 때가 있습니다" },
-  { title: "회귀",       desc: "오늘의 문장이 내일의 나에게 다시 돌아옵니다" },
+  { title: "회귀",       desc: "오늘의 문장이 내일의 나에게 돌아와, 지금의 마음을 다시 보게 합니다" },
   { title: "발견",       desc: "며칠의 한 줄 사이에서 자주 돌아오는 마음이 보입니다" },
 ];
 
@@ -115,7 +115,7 @@ export default function Page() {
               <LocalizedResponsiveLines contracts={HERO_SUB} Tag="span" />
             </p>
             <p className="mt-2 text-sm text-wood-natural/60">
-              오늘이 나에게 돌아오는 곳
+              오늘 마음에 남은 장면 하나를 한 줄로 남겨두는 곳
             </p>
           </div>
           <div className="flex flex-col gap-3 sm:flex-row">
