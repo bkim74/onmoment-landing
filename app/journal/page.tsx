@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ARTICLES } from "./articles";
+import { ARC_LABELS, getArticlesByArc, type Article } from "./articles";
 
 const APP = "https://app.onmoment.kr";
 
@@ -44,35 +44,48 @@ export default function JournalPage() {
             <br className="hidden sm:block" />
             그리고 한 줄이 어떻게 카드와 책과 선물이 되는지 적어둡니다.
           </p>
+          <p className="om-ko mt-5 text-sm leading-relaxed text-coffee-deep/45">
+            순서대로 읽어도 좋고, 지금 마음이 가는 제목부터 펼쳐도 좋습니다.
+          </p>
         </div>
 
         <hr className="hairline mb-12" />
 
-        {/* ── Article list ── */}
-        <ol className="space-y-6">
-          {ARTICLES.map((article) => (
-            <li key={article.slug}>
-              <Link
-                href={`/journal/${article.slug}`}
-                className="group block rounded-2xl border border-curtain-soft bg-curtain-soft/30 px-6 py-6 transition-colors hover:border-wood-natural/30 hover:bg-curtain-soft/60"
-              >
-                <div className="mb-3 flex items-baseline gap-3">
-                  <span className="eyebrow">{article.number}</span>
-                  <span className="eyebrow opacity-30">{article.readingTime} 읽기</span>
-                </div>
-                <h2 className="om-ko mb-2 text-[17px] font-semibold leading-snug text-coffee-deep group-hover:text-ink-quiet sm:text-[19px]">
-                  {article.title}
-                </h2>
-                <p className="om-ko mb-4 text-sm leading-relaxed text-coffee-deep/60">
-                  {article.subtitle}
-                </p>
-                <p className="text-[11px] text-wood-natural/55 transition-colors group-hover:text-wood-natural">
-                  읽기 →
-                </p>
-              </Link>
-            </li>
-          ))}
-        </ol>
+        {/* ── Article list (arc-grouped) ── */}
+        {([1, 2] as const).map((arc) => (
+          <section key={arc} className="mb-16 last:mb-0">
+            <div className="mb-6">
+              <p className="eyebrow mb-2">{ARC_LABELS[arc].eyebrow}</p>
+              <p className="om-ko text-sm leading-relaxed text-coffee-deep/50">
+                {ARC_LABELS[arc].description}
+              </p>
+            </div>
+            <ol className="space-y-6">
+              {getArticlesByArc(arc).map((article: Article) => (
+                <li key={article.slug}>
+                  <Link
+                    href={`/journal/${article.slug}`}
+                    className="group block rounded-2xl border border-curtain-soft bg-curtain-soft/30 px-6 py-6 transition-colors hover:border-wood-natural/30 hover:bg-curtain-soft/60"
+                  >
+                    <div className="mb-3 flex items-baseline gap-3">
+                      <span className="eyebrow">{article.number}</span>
+                      <span className="eyebrow opacity-30">{article.readingTime} 읽기</span>
+                    </div>
+                    <h2 className="om-ko mb-2 text-[17px] font-semibold leading-snug text-coffee-deep group-hover:text-ink-quiet sm:text-[19px]">
+                      {article.title}
+                    </h2>
+                    <p className="om-ko mb-4 text-sm leading-relaxed text-coffee-deep/60">
+                      {article.subtitle}
+                    </p>
+                    <p className="text-[11px] text-wood-natural/55 transition-colors group-hover:text-wood-natural">
+                      읽기 →
+                    </p>
+                  </Link>
+                </li>
+              ))}
+            </ol>
+          </section>
+        ))}
 
         <hr className="hairline my-16" />
 

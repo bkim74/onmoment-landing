@@ -5,6 +5,14 @@ import { ARTICLES } from "./journal/articles";
 
 const APP = "https://app.onmoment.kr";
 
+// 저널 §05 큐레이션 — 카드→챕터→책 흐름을 가장 짧게 보여주는 4편
+const FEATURED_JOURNAL_SLUGS = [
+  "why-one-sentence",
+  "no-score",
+  "card-to-book",
+  "returning-to-self",
+] as const;
+
 // ── Tab nav ──────────────────────────────────────────────────────────────────
 const TABS = [
   { label: "왜 한 줄인가",   href: "#why-one-line"  },
@@ -336,7 +344,10 @@ export default function Page() {
           </div>
 
           <div className="mb-6 space-y-3">
-            {ARTICLES.slice(0, 5).map((article) => (
+            {FEATURED_JOURNAL_SLUGS
+              .map((slug) => ARTICLES.find((article) => article.slug === slug))
+              .filter((article) => article !== undefined)
+              .map((article) => (
               <Link
                 key={article.slug}
                 href={`/journal/${article.slug}`}
@@ -354,6 +365,10 @@ export default function Page() {
               </Link>
             ))}
           </div>
+
+          <p className="om-ko mb-3 text-sm leading-relaxed text-coffee-deep/45">
+            처음부터 읽지 않아도 괜찮습니다. 마음이 가는 글 하나만 펼쳐보세요.
+          </p>
 
           <Link
             href="/journal"

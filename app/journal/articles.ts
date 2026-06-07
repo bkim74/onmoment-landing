@@ -1,6 +1,7 @@
 export type Article = {
   slug: string;
   number: string;
+  arc: 1 | 2;
   title: string;
   subtitle: string;
   excerpt: string;
@@ -12,11 +13,24 @@ export type Article = {
 // ""  = 단락 내 의미 단위 소간격
 // []  = 단락 사이 여백
 
+// arc: 저널을 읽는 흐름 — 새 메타포 아님, 기존 카드→챕터→책 흐름을 저널 정렬에 그대로 적용
+export const ARC_LABELS = {
+  1: {
+    eyebrow: "작게 시작하기",
+    description: "한 줄을 남기는 이유와, 그 한 줄이 머무는 자리를 이야기합니다.",
+  },
+  2: {
+    eyebrow: "한 줄이 자라나는 방식",
+    description: "카드와 책, 선물과 변화로 이어지는 온순간의 흐름을 이야기합니다.",
+  },
+} as const;
+
 export const ARTICLES: Article[] = [
   // ─────────────────────────────────────────────────────────────
   {
     slug: "why-one-sentence",
     number: "01",
+    arc: 1,
     title: "왜 온순간은 한 문장에서 시작하는가",
     subtitle: "한 문장은 작아서 시작할 수 있고, 짧아서 더 솔직해질 수 있습니다",
     excerpt: "우리는 하루를 전부 설명할 수 없습니다. 하지만 오래 남는 장면 하나는 있습니다.",
@@ -151,6 +165,7 @@ export const ARTICLES: Article[] = [
   {
     slug: "private-first",
     number: "02",
+    arc: 1,
     title: "처음의 한 줄은 왜 나에게만 머물러야 하는가",
     subtitle: "진실한 문장은 먼저 보호받을 자리가 필요합니다",
     excerpt: "어떤 말은 누군가에게 전해지기 전에 먼저 나에게 들려야 합니다.",
@@ -262,6 +277,7 @@ export const ARTICLES: Article[] = [
   {
     slug: "no-score",
     number: "03",
+    arc: 1,
     title: "점수 없는 기록이 필요한 이유",
     subtitle: "마음은 점수가 아니라 이야기로 남을 때 더 정직해질 수 있습니다",
     excerpt: "오늘의 마음을 숫자로 바꾸면 무언가를 알게 된 것처럼 느껴질 때가 있습니다.",
@@ -413,6 +429,7 @@ export const ARTICLES: Article[] = [
   {
     slug: "card-to-book",
     number: "04",
+    arc: 2,
     title: "한 줄은 어떻게 카드가 되고, 나의 책이 되는가",
     subtitle: "한 줄은 하루 카드가 되고, 카드들은 나의 책이 됩니다",
     excerpt: "하루는 지나갑니다. 분명히 내 안에 있었는데 어느새 설명하기 어려워진 것들.",
@@ -579,6 +596,7 @@ export const ARTICLES: Article[] = [
   {
     slug: "gift-is-choice",
     number: "05",
+    arc: 2,
     title: "선물은 공유가 아니라 선택이다",
     subtitle: "선물은 모든 것을 보여주는 일이 아니라, 내가 고른 진실 하나를 건네는 일입니다",
     excerpt: "모든 문장이 밖으로 나갈 필요는 없습니다.",
@@ -700,6 +718,7 @@ export const ARTICLES: Article[] = [
   {
     slug: "returning-to-self",
     number: "06",
+    arc: 2,
     title: "온순간의 모든 것은 참 나에게로 돌아가는 리추얼입니다",
     subtitle: "참 나는 완성된 나가 아닙니다. 오늘을, 자신에게 속이지 않은 채 살아낸 나입니다.",
     excerpt: "하루는 돌아오지 않습니다. 그 안에 담긴 설렘도, 감사도, 사랑도 대부분 그냥 흘러갑니다. 리추얼은 그 흘러감 앞에서 잠깐 멈추는 일입니다.",
@@ -908,6 +927,7 @@ export const ARTICLES: Article[] = [
   {
     slug: "why-storydoing",
     number: "07",
+    arc: 2,
     title: "왜 스토리텔링이 아닌 스토리두잉인가",
     subtitle: "좋은 소설의 주인공은 자신의 이야기를 설명하지 않습니다. 그 이야기를 살아냅니다.",
     excerpt: "우리는 자신의 이야기를 잘 말합니다. 그런데 그 이야기를 실제로 살아내고 있는가 — 그것은 조금 다른 질문입니다.",
@@ -1107,6 +1127,10 @@ export const ARTICLES: Article[] = [
 
 export function getArticle(slug: string): Article | undefined {
   return ARTICLES.find((a) => a.slug === slug);
+}
+
+export function getArticlesByArc(arc: Article["arc"]) {
+  return ARTICLES.filter((article) => article.arc === arc);
 }
 
 export function getAdjacentArticles(slug: string): {
