@@ -207,22 +207,20 @@ function HeroEnvelopeSection({
             <div className="om-ko mt-6 space-y-5 text-[15.5px] leading-[1.85] text-[#5C4A3A]">
               <Stanzas text={OPENED_CARD_BODY} />
             </div>
+            {/* v1.2 — primary는 리추얼 심화(돌아옴 구간)로. 앱 이동은 보조 링크로 강등 */}
             <div className="mt-8">
-              <RitualButton
-                href={startHref}
-                onClick={() => track("first_page_primary_cta_clicked", { startHref })}
-              >
-                오늘의 한 줄 남기기
-              </RitualButton>
+              <button type="button" onClick={onReadMore} className="fpk-btn om-keep w-full">
+                어디로 돌아오는지 보기
+              </button>
             </div>
             <div className="mt-6">
-              <button
-                type="button"
-                onClick={onReadMore}
-                className="om-ko cursor-pointer text-[13.5px] text-wood-natural/75 underline underline-offset-4 transition-colors hover:text-wood-natural"
+              <a
+                href={startHref}
+                onClick={() => track("first_page_quick_start_clicked", { startHref })}
+                className="om-ko text-[13.5px] text-wood-natural/75 underline underline-offset-4 transition-colors hover:text-wood-natural"
               >
-                조금 더 읽어보기
-              </button>
+                오늘 바로 남기기
+              </a>
             </div>
           </div>
         )}
@@ -240,18 +238,10 @@ const FIRST_PAGE_BODY = `이 장은 아직 비어 있습니다.
 잘 쓰지 않아도 괜찮습니다.
 오늘의 한 장면이면 충분합니다.`;
 
-function FirstPageCardSection({
-  startHref,
-  sectionRef,
-}: {
-  startHref: string;
-  sectionRef: React.RefObject<HTMLElement | null>;
-}) {
+/* v1.2 — 중간 섹션은 읽는 구간. 앱 이동 CTA 없음 (강한 CTA는 FinalCtaSection 한 곳만) */
+function FirstPageCardSection() {
   return (
-    <section
-      ref={sectionRef}
-      className="flex min-h-[95svh] flex-col items-center justify-center px-6 py-20"
-    >
+    <section className="flex min-h-[95svh] flex-col items-center justify-center px-6 py-20">
       <Reveal className="w-full max-w-[400px]">
         <div className="fpk-paper-card px-7 py-9 text-center">
           <h2 className="om-headline text-[26px] font-medium leading-[1.3] tracking-[-0.02em] text-ink-quiet">
@@ -270,14 +260,6 @@ function FirstPageCardSection({
             </p>
           </div>
 
-          <div className="mt-8">
-            <RitualButton
-              href={startHref}
-              onClick={() => track("first_page_primary_cta_clicked", { startHref })}
-            >
-              오늘의 한 줄 남기기
-            </RitualButton>
-          </div>
         </div>
       </Reveal>
       <Reveal delay={150}>
@@ -548,34 +530,12 @@ function FinalCtaSection({
   );
 }
 
-function StickyRitualCta({ visible, startHref }: { visible: boolean; startHref: string }) {
-  return (
-    <div
-      aria-hidden={!visible}
-      className={`fpk-sticky md:hidden ${visible ? "is-visible" : ""}`}
-    >
-      <a
-        href={startHref}
-        tabIndex={visible ? 0 : -1}
-        onClick={() => track("first_page_sticky_cta_clicked", { startHref })}
-        className="fpk-btn om-keep w-full"
-      >
-        오늘의 한 줄 남기기
-      </a>
-    </div>
-  );
-}
-
 /* ════════════════════════ 페이지 루트 ════════════════════════ */
+/* v1.2 — Sticky CTA 완전 제거: 현재 목적은 전환 최적화가 아니라 리추얼 감각 검증 */
 
 export default function FirstPageKitLanding({ startHref }: { startHref: string }) {
   const [opened, setOpened] = useState(false);
-  const [stickyArmed, setStickyArmed] = useState(false);
-  const [heroInView, setHeroInView] = useState(true);
-  const [finalInView, setFinalInView] = useState(false);
 
-  const heroRef = useRef<HTMLDivElement>(null);
-  const firstPageRef = useRef<HTMLElement>(null);
   const timelineWrapRef = useRef<HTMLDivElement>(null);
   const finalRef = useRef<HTMLElement>(null);
 
@@ -583,43 +543,20 @@ export default function FirstPageKitLanding({ startHref }: { startHref: string }
     track("first_page_viewed", {}, { once: true });
   }, []);
 
-  // Sticky CTA — Hero에서는 숨김, Final에서는 병합(숨김)
-  useEffect(() => {
-    const hero = heroRef.current;
-    const final = finalRef.current;
-    if (!hero || !final) return;
-    const heroObs = new IntersectionObserver(
-      ([e]) => setHeroInView(e.isIntersecting),
-      { threshold: 0.12 },
-    );
-    const finalObs = new IntersectionObserver(
-      ([e]) => setFinalInView(e.isIntersecting),
-      { threshold: 0.12 },
-    );
-    heroObs.observe(hero);
-    finalObs.observe(final);
-    return () => {
-      heroObs.disconnect();
-      finalObs.disconnect();
-    };
-  }, []);
-
-  // v1.1 — 자동 스크롤 없음. 열림과 약속은 같은 화면 안에서 일어난다.
-  // sticky CTA는 opened 후 1.2s 지연 무장 (개봉 순간을 침범하지 않음)
+  // 자동 스크롤 없음. 열림과 약속은 같은 화면 안에서 일어난다.
   const handleOpen = () => {
     track("first_page_envelope_opened", {}, { once: true });
     setOpened(true);
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    window.setTimeout(() => setStickyArmed(true), reduce ? 0 : 1200);
   };
 
-  // "조금 더 읽어보기" — 유일하게 아래(심화 콘텐츠)로 안내하는 동작
+  // "어디로 돌아오는지 보기" — ReturnTimelineSection 시작점으로 정확히.
+  // scrollIntoView 대신 offset 보정 (115svh flex 센터링이 시작점을 지나치게 만들던 문제)
   const handleReadMore = () => {
+    const el = timelineWrapRef.current;
+    if (!el) return;
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    timelineWrapRef.current?.scrollIntoView({
-      behavior: reduce ? "auto" : "smooth",
-      block: "start",
-    });
+    const top = el.getBoundingClientRect().top + window.scrollY - 24;
+    window.scrollTo({ top, behavior: reduce ? "auto" : "smooth" });
   };
 
   return (
@@ -627,27 +564,20 @@ export default function FirstPageKitLanding({ startHref }: { startHref: string }
       {/* 종이 질감 — 보이지 않고 느껴지는 정도 */}
       <div aria-hidden="true" className="fpk-texture" />
 
-      <div ref={heroRef}>
-        <HeroEnvelopeSection
-          opened={opened}
-          onOpen={handleOpen}
-          startHref={startHref}
-          onReadMore={handleReadMore}
-        />
-      </div>
-      {/* 이하 보조 심화 콘텐츠 — "조금 더 읽어보기" 또는 수동 스크롤로만 도달 */}
-      <FirstPageCardSection startHref={startHref} sectionRef={firstPageRef} />
-      <div ref={timelineWrapRef}>
+      <HeroEnvelopeSection
+        opened={opened}
+        onOpen={handleOpen}
+        startHref={startHref}
+        onReadMore={handleReadMore}
+      />
+      {/* 이하 읽는 구간 — "어디로 돌아오는지 보기" 또는 수동 스크롤로 도달. 강한 CTA는 Final 한 곳 */}
+      <FirstPageCardSection />
+      <div ref={timelineWrapRef} style={{ scrollMarginTop: 24 }}>
         <ReturnTimelineSection />
       </div>
       <StoryGrowthSection />
       <GiftPossibilitySection />
       <FinalCtaSection startHref={startHref} sectionRef={finalRef} />
-
-      <StickyRitualCta
-        visible={stickyArmed && !heroInView && !finalInView}
-        startHref={startHref}
-      />
 
       <style>{`
         /* ── 종이 질감 ── */
@@ -892,31 +822,10 @@ export default function FirstPageKitLanding({ startHref }: { startHref: string }
           background: rgba(139, 111, 71, 0.25);
         }
 
-        /* ── Sticky CTA ── */
-        .fpk-sticky {
-          position: fixed;
-          left: 20px;
-          right: 20px;
-          bottom: calc(16px + env(safe-area-inset-bottom));
-          z-index: 50;
-          opacity: 0;
-          transform: translateY(12px);
-          pointer-events: none;
-          transition:
-            opacity 0.7s var(--ease-ritual),
-            transform 0.7s var(--ease-ritual);
-        }
-        .fpk-sticky.is-visible {
-          opacity: 1;
-          transform: none;
-          pointer-events: auto;
-        }
-
         /* ── Reduced motion — 모든 모션을 즉시 상태로 ── */
         @media (prefers-reduced-motion: reduce) {
           .fpk .fpk-reveal,
           .fpk .fpk-btn,
-          .fpk .fpk-sticky,
           .fpk .fpk-envelope,
           .fpk .fpk-env-card,
           .fpk .fpk-env-flap,
