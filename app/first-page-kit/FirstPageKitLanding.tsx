@@ -121,56 +121,44 @@ function RitualButton({
 
 /* ════════════════════════ 섹션들 ════════════════════════ */
 
+const OPENED_CARD_BODY = `이 장은 아직 비어 있습니다.
+
+오늘 남긴 한 줄은
+내일의 당신에게 돌아옵니다.
+
+시간이 지나면
+하나의 페이지가 되고,
+언젠가 건넬 수 있는 이야기로 엮입니다.
+
+준비되었다면,
+오늘의 한 장면을 남겨주세요.`;
+
+/* v1.1 — 리추얼은 Hero 안에서 완결된다.
+   닫힘: 도착 카피 + [첫 장 열기]. 열림: 봉투가 작아지며 같은 자리에서 첫 장 카드가 나타남.
+   봉투는 상시 마운트 (열림 모션 연속성), 앱 이동 CTA는 opened 후에만, 자동 스크롤 없음. */
 function HeroEnvelopeSection({
   opened,
   onOpen,
+  startHref,
+  onReadMore,
 }: {
   opened: boolean;
   onOpen: () => void;
+  startHref: string;
+  onReadMore: () => void;
 }) {
   return (
     <section className="flex min-h-[100svh] flex-col items-center justify-center px-6 py-16">
-      <div className="mx-auto grid w-full max-w-[342px] items-center gap-10 md:max-w-4xl md:grid-cols-2 md:gap-16">
-        <div className="order-2 flex flex-col items-center text-center md:order-1 md:items-start md:text-left">
-          <Reveal>
-            <p className="eyebrow om-keep">온순간 · Soul Oasis</p>
-          </Reveal>
-          <Reveal delay={120}>
-            <h1 className="om-headline mt-6 text-[34px] font-medium leading-[1.18] tracking-[-0.02em] text-ink-quiet">
-              당신의 첫 장이
-              <br />
-              비어 있는 채로
-              <br />
-              도착했습니다.
-            </h1>
-          </Reveal>
-          <Reveal delay={240}>
-            <p className="om-ko mt-6 text-[15.5px] leading-[1.85] text-[#7A6654]">
-              아직 아무것도 쓰지 않아도 괜찮습니다.
-              <br />
-              오늘은 이 첫 장을 열고,
-              <br />한 줄만 남기면 됩니다.
-            </p>
-          </Reveal>
-          <Reveal delay={360} className="mt-9 w-full md:w-auto">
-            <button type="button" onClick={onOpen} className="fpk-btn om-keep w-full md:w-auto md:px-12">
-              첫 장 열어보기
-            </button>
-          </Reveal>
-          <Reveal delay={460}>
-            <p className="om-ko mt-5 text-[13px] leading-[1.6] text-wood-natural/70">
-              오늘 남긴 한 줄은
-              <br />
-              내일의 당신에게 돌아옵니다.
-            </p>
-          </Reveal>
-        </div>
+      <div className="mx-auto flex w-full max-w-[400px] flex-col items-center text-center">
+        <Reveal>
+          <p className="eyebrow om-keep">온순간 · Soul Oasis</p>
+        </Reveal>
 
-        {/* 닫힌 봉투 — 장식 비주얼, 상태는 카피·CTA가 전달 */}
-        <Reveal delay={200} className="order-1 md:order-2">
+        {/* 봉투 — 장식 비주얼, 상태는 카피·CTA가 전달. 열리면 작아지며 자리를 내어줌 */}
+        <Reveal delay={150} className="mt-8">
           <div
             aria-hidden="true"
-            className={`fpk-envelope mx-auto ${opened ? "is-open" : ""}`}
+            className={`fpk-envelope mx-auto ${opened ? "is-open fpk-envelope--docked" : ""}`}
           >
             <div className="fpk-env-back" />
             <div className="fpk-env-card">
@@ -181,6 +169,63 @@ function HeroEnvelopeSection({
             <div className="fpk-env-seal om-keep">첫 장</div>
           </div>
         </Reveal>
+
+        {!opened ? (
+          <>
+            <Reveal delay={280}>
+              <h1 className="om-headline mt-8 text-[34px] font-medium leading-[1.18] tracking-[-0.02em] text-ink-quiet">
+                당신의 첫 장이
+                <br />
+                비어 있는 채로
+                <br />
+                도착했습니다.
+              </h1>
+            </Reveal>
+            <Reveal delay={400}>
+              <p className="om-ko mt-6 text-[15.5px] leading-[1.85] text-[#7A6654]">
+                아직 아무것도 쓰지 않아도 괜찮습니다.
+                <br />
+                오늘은 먼저 이 장을 여는 것부터 시작합니다.
+              </p>
+            </Reveal>
+            <Reveal delay={520} className="mt-9 w-full">
+              <button type="button" onClick={onOpen} className="fpk-btn om-keep w-full md:w-auto md:px-12">
+                첫 장 열기
+              </button>
+            </Reveal>
+            <Reveal delay={620}>
+              <p className="om-ko mt-5 text-[13px] leading-[1.6] text-wood-natural/70">
+                열면, 오늘 남긴 한 줄이
+                <br />
+                어디로 돌아오는지 먼저 보여드립니다.
+              </p>
+            </Reveal>
+          </>
+        ) : (
+          <div className="fpk-paper-card fpk-opened-card mt-3 w-full px-7 py-9">
+            <p className="eyebrow om-keep">첫 장</p>
+            <div className="om-ko mt-6 space-y-5 text-[15.5px] leading-[1.85] text-[#5C4A3A]">
+              <Stanzas text={OPENED_CARD_BODY} />
+            </div>
+            <div className="mt-8">
+              <RitualButton
+                href={startHref}
+                onClick={() => track("first_page_primary_cta_clicked", { startHref })}
+              >
+                오늘의 한 줄 남기기
+              </RitualButton>
+            </div>
+            <div className="mt-6">
+              <button
+                type="button"
+                onClick={onReadMore}
+                className="om-ko cursor-pointer text-[13.5px] text-wood-natural/75 underline underline-offset-4 transition-colors hover:text-wood-natural"
+              >
+                조금 더 읽어보기
+              </button>
+            </div>
+          </div>
+        )}
       </div>
     </section>
   );
@@ -525,11 +570,13 @@ function StickyRitualCta({ visible, startHref }: { visible: boolean; startHref: 
 
 export default function FirstPageKitLanding({ startHref }: { startHref: string }) {
   const [opened, setOpened] = useState(false);
+  const [stickyArmed, setStickyArmed] = useState(false);
   const [heroInView, setHeroInView] = useState(true);
   const [finalInView, setFinalInView] = useState(false);
 
   const heroRef = useRef<HTMLDivElement>(null);
   const firstPageRef = useRef<HTMLElement>(null);
+  const timelineWrapRef = useRef<HTMLDivElement>(null);
   const finalRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -557,19 +604,22 @@ export default function FirstPageKitLanding({ startHref }: { startHref: string }
     };
   }, []);
 
+  // v1.1 — 자동 스크롤 없음. 열림과 약속은 같은 화면 안에서 일어난다.
+  // sticky CTA는 opened 후 1.2s 지연 무장 (개봉 순간을 침범하지 않음)
   const handleOpen = () => {
     track("first_page_envelope_opened", {}, { once: true });
     setOpened(true);
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    window.setTimeout(
-      () => {
-        firstPageRef.current?.scrollIntoView({
-          behavior: reduce ? "auto" : "smooth",
-          block: "start",
-        });
-      },
-      reduce ? 0 : 500,
-    );
+    window.setTimeout(() => setStickyArmed(true), reduce ? 0 : 1200);
+  };
+
+  // "조금 더 읽어보기" — 유일하게 아래(심화 콘텐츠)로 안내하는 동작
+  const handleReadMore = () => {
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    timelineWrapRef.current?.scrollIntoView({
+      behavior: reduce ? "auto" : "smooth",
+      block: "start",
+    });
   };
 
   return (
@@ -578,15 +628,26 @@ export default function FirstPageKitLanding({ startHref }: { startHref: string }
       <div aria-hidden="true" className="fpk-texture" />
 
       <div ref={heroRef}>
-        <HeroEnvelopeSection opened={opened} onOpen={handleOpen} />
+        <HeroEnvelopeSection
+          opened={opened}
+          onOpen={handleOpen}
+          startHref={startHref}
+          onReadMore={handleReadMore}
+        />
       </div>
+      {/* 이하 보조 심화 콘텐츠 — "조금 더 읽어보기" 또는 수동 스크롤로만 도달 */}
       <FirstPageCardSection startHref={startHref} sectionRef={firstPageRef} />
-      <ReturnTimelineSection />
+      <div ref={timelineWrapRef}>
+        <ReturnTimelineSection />
+      </div>
       <StoryGrowthSection />
       <GiftPossibilitySection />
       <FinalCtaSection startHref={startHref} sectionRef={finalRef} />
 
-      <StickyRitualCta visible={!heroInView && !finalInView} startHref={startHref} />
+      <StickyRitualCta
+        visible={stickyArmed && !heroInView && !finalInView}
+        startHref={startHref}
+      />
 
       <style>{`
         /* ── 종이 질감 ── */
@@ -679,6 +740,21 @@ export default function FirstPageKitLanding({ startHref }: { startHref: string }
           perspective: 900px;
           margin-top: 8px;
           margin-bottom: 8px;
+          transition: transform 1s var(--ease-ritual), margin 1s var(--ease-ritual);
+        }
+        /* 열린 봉투는 작아지며 첫 장에게 자리를 내어준다 */
+        .fpk-envelope--docked {
+          transform: scale(0.58);
+          margin-top: -16px;
+          margin-bottom: -22px;
+        }
+        /* 열림 카드 — 봉투에서 꺼내듯, 숨 한 번 쉬고 떠오름 */
+        .fpk-opened-card {
+          animation: fpkCardIn 1.1s var(--ease-ritual) 0.45s both;
+        }
+        @keyframes fpkCardIn {
+          from { opacity: 0; transform: translateY(18px); }
+          to   { opacity: 1; transform: none; }
         }
         .fpk-env-back {
           position: absolute;
@@ -841,11 +917,15 @@ export default function FirstPageKitLanding({ startHref }: { startHref: string }
           .fpk .fpk-reveal,
           .fpk .fpk-btn,
           .fpk .fpk-sticky,
+          .fpk .fpk-envelope,
           .fpk .fpk-env-card,
           .fpk .fpk-env-flap,
           .fpk .fpk-env-seal {
             transition-duration: 0.01ms !important;
             transition-delay: 0ms !important;
+            animation: none !important;
+          }
+          .fpk .fpk-opened-card {
             animation: none !important;
           }
         }
