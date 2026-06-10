@@ -12,10 +12,14 @@ export const metadata: Metadata = {
     title: "당신의 첫 장이 도착했습니다",
     description: "비어 있는 채로 도착한 첫 장. 오늘 한 줄을 남기면, 내일의 당신에게 돌아옵니다.",
     url: "https://onmoment.kr/first-page-kit",
+    // 페이지 openGraph는 layout 것을 통째로 교체 — 이미지 명시 필수 (기본 OG 재사용)
+    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "온순간" }],
   },
   twitter: {
+    card: "summary_large_image",
     title: "당신의 첫 장이 도착했습니다",
     description: "비어 있는 채로 도착한 첫 장. 오늘 한 줄을 남기면, 내일의 당신에게 돌아옵니다.",
+    images: ["/og-image.png"],
   },
 };
 
