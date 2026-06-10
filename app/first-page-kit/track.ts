@@ -5,6 +5,8 @@
 export type FirstPageEvent =
   | "first_page_viewed"
   | "first_page_envelope_opened"
+  | "first_page_received_seen"
+  | "first_page_promise_revealed"
   | "first_page_primary_cta_clicked"
   | "first_page_quick_start_clicked"
   | "first_page_timeline_seen"

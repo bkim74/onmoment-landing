@@ -121,28 +121,26 @@ function RitualButton({
 
 /* ════════════════════════ 섹션들 ════════════════════════ */
 
-const OPENED_CARD_BODY = `이 장은 아직 비어 있습니다.
-
-오늘 남긴 한 줄은
+/* 어휘 구분 (v1.3 확정): 첫 장에는 "도착"만 쓴다 · "돌아오다"는 오직 한 줄(오늘 남긴 문장)에만 쓴다. */
+const PROMISE_BODY = `오늘 남긴 한 줄은
 내일의 당신에게 돌아옵니다.
 
 시간이 지나면
 하나의 페이지가 되고,
-언젠가 건넬 수 있는 이야기로 엮입니다.
+언젠가 건넬 수 있는 이야기로 엮입니다.`;
 
-준비되었다면,
-오늘의 한 장면을 남겨주세요.`;
+export type HeroStage = "closed" | "received" | "promise";
 
-/* v1.1 — 리추얼은 Hero 안에서 완결된다.
-   닫힘: 도착 카피 + [첫 장 열기]. 열림: 봉투가 작아지며 같은 자리에서 첫 장 카드가 나타남.
-   봉투는 상시 마운트 (열림 모션 연속성), 앱 이동 CTA는 opened 후에만, 자동 스크롤 없음. */
+/* v1.3 — 도착 → 수령 → 약속 → 행동.
+   received 단계는 첫 장이 화면의 주인공: CTA·스크롤·앱 이동 없음, 보는 시간만.
+   promise 단계에 같은 카드 안에서 약속 문장 + action area가 떠오름. */
 function HeroEnvelopeSection({
-  opened,
+  stage,
   onOpen,
   startHref,
   onReadMore,
 }: {
-  opened: boolean;
+  stage: HeroStage;
   onOpen: () => void;
   startHref: string;
   onReadMore: () => void;
@@ -158,7 +156,7 @@ function HeroEnvelopeSection({
         <Reveal delay={150} className="mt-8">
           <div
             aria-hidden="true"
-            className={`fpk-envelope mx-auto ${opened ? "is-open fpk-envelope--docked" : ""}`}
+            className={`fpk-envelope mx-auto ${stage !== "closed" ? "is-open fpk-envelope--docked" : ""}`}
           >
             <div className="fpk-env-back" />
             <div className="fpk-env-card">
@@ -170,7 +168,7 @@ function HeroEnvelopeSection({
           </div>
         </Reveal>
 
-        {!opened ? (
+        {stage === "closed" ? (
           <>
             <Reveal delay={280}>
               <h1 className="om-headline mt-8 text-[34px] font-medium leading-[1.18] tracking-[-0.02em] text-ink-quiet">
@@ -202,26 +200,47 @@ function HeroEnvelopeSection({
             </Reveal>
           </>
         ) : (
+          /* received·promise — 첫 장 카드가 주인공. received에는 행동 요소가 일절 없다 */
           <div className="fpk-paper-card fpk-opened-card mt-3 w-full px-7 py-9">
-            <p className="eyebrow om-keep">첫 장</p>
-            <div className="om-ko mt-6 space-y-5 text-[15.5px] leading-[1.85] text-[#5C4A3A]">
-              <Stanzas text={OPENED_CARD_BODY} />
+            <h2 className="om-headline text-[24px] font-medium leading-[1.3] tracking-[-0.02em] text-ink-quiet">
+              당신에게 도착한 첫 장
+            </h2>
+
+            {/* 비어 있는 첫 장 — 수령의 실체 */}
+            <div className="fpk-empty-page fpk-empty-page--receipt mt-7">
+              <p className="om-ko text-[14px] leading-[1.8] text-wood-natural/75">
+                아직 아무것도 쓰이지 않았습니다.
+              </p>
             </div>
-            {/* v1.2 — primary는 리추얼 심화(돌아옴 구간)로. 앱 이동은 보조 링크로 강등 */}
-            <div className="mt-8">
-              <button type="button" onClick={onReadMore} className="fpk-btn om-keep w-full">
-                어디로 돌아오는지 보기
-              </button>
-            </div>
-            <div className="mt-6">
-              <a
-                href={startHref}
-                onClick={() => track("first_page_quick_start_clicked", { startHref })}
-                className="om-ko text-[13.5px] text-wood-natural/75 underline underline-offset-4 transition-colors hover:text-wood-natural"
-              >
-                오늘 바로 남기기
-              </a>
-            </div>
+
+            <p className="om-ko mt-6 text-[13.5px] leading-[1.7] text-wood-natural/75">
+              이 장은 오늘의 한 줄을 기다리고 있습니다.
+            </p>
+
+            {stage === "promise" && (
+              <div className="fpk-promise-in">
+                <div className="om-ko mt-8 space-y-5 text-[15.5px] leading-[1.85] text-[#5C4A3A]">
+                  <Stanzas text={PROMISE_BODY} />
+                </div>
+                <p className="om-ko mt-7 text-[13.5px] leading-[1.7] text-wood-natural/75">
+                  이제, 이 장이 어디로 돌아오는지 살펴볼 수 있습니다.
+                </p>
+                <div className="mt-7">
+                  <button type="button" onClick={onReadMore} className="fpk-btn om-keep w-full">
+                    어디로 돌아오는지 보기
+                  </button>
+                </div>
+                <div className="mt-6">
+                  <a
+                    href={startHref}
+                    onClick={() => track("first_page_quick_start_clicked", { startHref })}
+                    className="om-ko text-[13.5px] text-wood-natural/75 underline underline-offset-4 transition-colors hover:text-wood-natural"
+                  >
+                    오늘 바로 한 줄 남기기
+                  </a>
+                </div>
+              </div>
+            )}
           </div>
         )}
       </div>
@@ -534,19 +553,33 @@ function FinalCtaSection({
 /* v1.2 — Sticky CTA 완전 제거: 현재 목적은 전환 최적화가 아니라 리추얼 감각 검증 */
 
 export default function FirstPageKitLanding({ startHref }: { startHref: string }) {
-  const [opened, setOpened] = useState(false);
+  const [heroStage, setHeroStage] = useState<HeroStage>("closed");
 
   const timelineWrapRef = useRef<HTMLDivElement>(null);
   const finalRef = useRef<HTMLElement>(null);
+  const promiseTimerRef = useRef<number | null>(null);
 
   useEffect(() => {
     track("first_page_viewed", {}, { once: true });
+    return () => {
+      if (promiseTimerRef.current != null) window.clearTimeout(promiseTimerRef.current);
+    };
   }, []);
 
-  // 자동 스크롤 없음. 열림과 약속은 같은 화면 안에서 일어난다.
+  // 도착 → 수령: 자동 스크롤·CTA 없음. 첫 장을 "보는 시간"(1.3s)을 가진 뒤 약속이 떠오른다.
+  // 카드 등장 모션(0.45s 지연)이 끝난 기준으로 1.3s — reduced-motion은 0.2s (강제 대기감 없이).
   const handleOpen = () => {
     track("first_page_envelope_opened", {}, { once: true });
-    setOpened(true);
+    setHeroStage("received");
+    track("first_page_received_seen", {}, { once: true });
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    promiseTimerRef.current = window.setTimeout(
+      () => {
+        setHeroStage("promise");
+        track("first_page_promise_revealed", {}, { once: true });
+      },
+      reduce ? 200 : 450 + 1300,
+    );
   };
 
   // "어디로 돌아오는지 보기" — ReturnTimelineSection 시작점으로 정확히.
@@ -565,7 +598,7 @@ export default function FirstPageKitLanding({ startHref }: { startHref: string }
       <div aria-hidden="true" className="fpk-texture" />
 
       <HeroEnvelopeSection
-        opened={opened}
+        stage={heroStage}
         onOpen={handleOpen}
         startHref={startHref}
         onReadMore={handleReadMore}
@@ -685,6 +718,14 @@ export default function FirstPageKitLanding({ startHref }: { startHref: string }
         @keyframes fpkCardIn {
           from { opacity: 0; transform: translateY(18px); }
           to   { opacity: 1; transform: none; }
+        }
+        /* 수령 단계의 빈 장 — 첫 장이 주인공이 되는 넓은 자리 */
+        .fpk-empty-page--receipt {
+          min-height: 216px;
+        }
+        /* 약속 — 같은 카드 안에서 조용히 떠오름 */
+        .fpk-promise-in {
+          animation: fpkCardIn 0.9s var(--ease-ritual) both;
         }
         .fpk-env-back {
           position: absolute;
@@ -834,7 +875,8 @@ export default function FirstPageKitLanding({ startHref }: { startHref: string }
             transition-delay: 0ms !important;
             animation: none !important;
           }
-          .fpk .fpk-opened-card {
+          .fpk .fpk-opened-card,
+          .fpk .fpk-promise-in {
             animation: none !important;
           }
         }
