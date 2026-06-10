@@ -223,7 +223,7 @@ function HeroEnvelopeSection({
                   <Stanzas text={PROMISE_BODY} />
                 </div>
                 <p className="om-ko mt-7 text-[13.5px] leading-[1.7] text-wood-natural/75">
-                  이제, 이 장이 어디로 돌아오는지 살펴볼 수 있습니다.
+                  이제, 오늘의 한 줄이 어디로 돌아오는지 살펴볼 수 있습니다.
                 </p>
                 <div className="mt-7">
                   <button type="button" onClick={onReadMore} className="fpk-btn om-keep w-full">
