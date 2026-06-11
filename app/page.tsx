@@ -411,10 +411,10 @@ export default function Page() {
           <p className="mt-4 text-[11px] text-wood-natural/40">
             현재 온순간은 소수 베타로 운영 중입니다.{" "}
             <a
-              href="mailto:hello@onmoment.kr"
+              href="/beta"
               className="underline underline-offset-2 transition-colors hover:text-wood-natural/70"
             >
-              베타 참여 문의 →
+              온순간의 시작을 함께하고 싶다면 →
             </a>
           </p>
         </section>
