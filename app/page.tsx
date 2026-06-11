@@ -118,6 +118,18 @@ export default function Page() {
               오늘 마음에 남은 장면 하나를 한 줄로 남겨두는 곳
             </p>
           </div>
+
+          {/* 대표 예시 — 한 줄이 무엇인지 3초 안에 보여준다 (founder 실소재) */}
+          <div className="mb-10 border-l-2 border-wood-natural/25 pl-5">
+            <p className="om-serif text-[15px] leading-[1.8] text-coffee-deep/80">
+              아이와 걷는 동안 별말은 하지 않았다.<br />
+              그런데 그 조용한 시간이 이상하게 오래 마음에 남았다.
+            </p>
+            <p className="mt-2 text-[11px] text-wood-natural/45">
+              이런 하루의 한 줄이면 충분합니다
+            </p>
+          </div>
+
           <div className="flex flex-col gap-3 sm:flex-row">
             <a
               href={`${APP}/today`}
@@ -181,6 +193,26 @@ export default function Page() {
             <p>선물이 되는 문장은 내가 고릅니다</p>
           </div>
 
+          {/* AI 비춤 실예시 — "진단보다 비춤"을 말이 아니라 실물로 (founder 실소재) */}
+          <div className="mb-10 rounded-none border border-curtain-soft bg-curtain-soft/40 px-5 py-6">
+            <p className="eyebrow mb-3" style={{ opacity: 0.45 }}>
+              어느 저녁의 한 줄
+            </p>
+            <p className="om-serif text-[14px] leading-[1.8] text-coffee-deep/80">
+              오늘 가족에게 짧게 대답하고 말았다. 바쁜 하루였다는 말로 넘겼지만,
+              마음 한쪽에는 미안함이 남았다.
+            </p>
+            <p className="eyebrow mb-3 mt-6" style={{ opacity: 0.45 }}>
+              다음 날 아침, 돌아온 비춤
+            </p>
+            <p className="om-ko text-[14px] leading-[1.8] text-coffee-deep">
+              바쁜 하루라는 말 뒤에, 가족에게 머무는 마음이 함께 남아 있었습니다.
+            </p>
+            <p className="mt-5 text-[11px] text-wood-natural/45">
+              평가 대신, 내가 쓴 문장이 다시 보이게 곁에 놓입니다
+            </p>
+          </div>
+
           <div className="mb-10 grid grid-cols-2 gap-3 sm:grid-cols-4">
             {SPACE_CARDS.map((card) => (
               <div key={card.title} className="rounded-none border border-curtain-soft bg-curtain-soft/40 px-4 py-5">
@@ -227,11 +259,12 @@ export default function Page() {
               >
                 {new Date().toLocaleDateString("ko-KR", { year: "numeric", month: "numeric", day: "numeric" })}
               </p>
+              {/* founder 실소재 — 말보다 몸이 먼저 아는 하루 (깊이감) */}
               <p
-                className="om-serif leading-[1.65] text-coffee-deep"
-                style={{ fontSize: "17px" }}
+                className="om-serif leading-[1.75] text-coffee-deep"
+                style={{ fontSize: "15px" }}
               >
-                오늘 나는 조금 늦게<br />나에게 돌아왔다
+                회의가 끝나고도<br />괜찮은 척했다.<br />그런데 집에 오는 길에는<br />몸이 먼저 지친 걸<br />알고 있었다.
               </p>
               <div className="mt-10 flex items-end justify-between">
                 <span
