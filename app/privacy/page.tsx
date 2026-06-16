@@ -96,6 +96,19 @@ export default function PrivacyPage() {
               </p>
             </div>
             <div>
+              <p className="mb-1 font-medium text-coffee-deep">기록 원문의 보호</p>
+              <p>
+                기록 원문은 저장소와 백업에서 그대로 읽히지 않도록 암호화해 보관합니다.
+                AI 비춤과 아침 회귀, 선물 표시를 위해 서버가 필요한 범위에서 기록을 처리할 수 있지만,
+                일반 관리자 화면에서 사용자의 기록 원문이 노출되지 않도록 설계했습니다.
+              </p>
+              <p className="mt-2">
+                AI 비춤이 허용된 기록의 텍스트는 AI 제공자(Gemini)에 전송될 수 있습니다.
+                또한 시스템 최고권한이나 복구·장애 대응을 위한 제한된 운영 경로까지 포함하면,
+                기록 접근 가능성을 완전히 배제하는 구조는 아닙니다.
+              </p>
+            </div>
+            <div>
               <p className="mb-1 font-medium text-coffee-deep">사진</p>
               <p>
                 사용자가 직접 첨부한 사진은 비공개 저장소에 암호화되어 저장됩니다.
