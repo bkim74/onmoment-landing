@@ -544,6 +544,16 @@ function FinalCtaSection({
             혼자만의 것으로 끝나지 않도록.
           </p>
         </Reveal>
+        {/* 앱 직행 외 출구 — 아직 둘러보고 싶은 사람은 랜딩으로 (강요 없는 두 번째 길) */}
+        <Reveal delay={520} className="mt-12">
+          <a
+            href="/"
+            onClick={() => track("first_page_back_to_landing_clicked")}
+            className="om-ko text-[13px] text-wood-natural/55 underline underline-offset-4 transition-colors hover:text-wood-natural"
+          >
+            ← 온순간 둘러보기
+          </a>
+        </Reveal>
       </div>
     </section>
   );

@@ -13,7 +13,8 @@ export type FirstPageEvent =
   | "first_page_story_growth_seen"
   | "first_page_gift_section_seen"
   | "first_page_sticky_cta_clicked"
-  | "first_page_final_cta_clicked";
+  | "first_page_final_cta_clicked"
+  | "first_page_back_to_landing_clicked";
 
 const firedOnce = new Set<FirstPageEvent>();
 

@@ -130,24 +130,13 @@ export default function Page() {
             </p>
           </div>
 
+          {/* Hero는 단일 진입점 — 시작하기·앱 설치는 맨 하단 §06에만 둔다(부담 완화) */}
           <div className="flex flex-col gap-3 sm:flex-row">
             <a
-              href={`${APP}/today`}
+              href="/first-page-kit"
               className="inline-flex items-center justify-center rounded-full bg-coffee-deep px-7 py-3.5 text-sm font-medium text-paper-cream transition-colors duration-300 hover:bg-ink-quiet"
             >
-              오늘의 온순간 시작하기 →
-            </a>
-            <a
-              href="/first-page-kit"
-              className="inline-flex items-center justify-center rounded-full border border-wood-natural/25 px-7 py-3.5 text-sm font-medium text-coffee-deep/80 transition-colors duration-300 hover:border-coffee-deep/40 hover:text-coffee-deep"
-            >
-              처음이라면 첫 장 열어보기
-            </a>
-            <a
-              href={`${APP}/install`}
-              className="inline-flex items-center justify-center rounded-full border border-wood-natural/25 px-7 py-3.5 text-sm font-medium text-coffee-deep/80 transition-colors duration-300 hover:border-coffee-deep/40 hover:text-coffee-deep"
-            >
-              앱 설치 방법 보기
+              처음이라면 첫 장 열어보기 →
             </a>
           </div>
           <p className="mt-6 text-[11px] text-wood-natural/45">
