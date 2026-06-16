@@ -138,6 +138,12 @@ export default function Page() {
               오늘의 온순간 시작하기 →
             </a>
             <a
+              href="/first-page-kit"
+              className="inline-flex items-center justify-center rounded-full border border-wood-natural/25 px-7 py-3.5 text-sm font-medium text-coffee-deep/80 transition-colors duration-300 hover:border-coffee-deep/40 hover:text-coffee-deep"
+            >
+              처음이라면 첫 장 열어보기
+            </a>
+            <a
               href={`${APP}/install`}
               className="inline-flex items-center justify-center rounded-full border border-wood-natural/25 px-7 py-3.5 text-sm font-medium text-coffee-deep/80 transition-colors duration-300 hover:border-coffee-deep/40 hover:text-coffee-deep"
             >
@@ -320,6 +326,12 @@ export default function Page() {
           <p className="text-[11px] text-wood-natural/45">
             공유가 목표가 아닙니다 — 내가 고른 문장만 선물이 됩니다
           </p>
+          <a
+            href="/first-page-kit"
+            className="mt-6 inline-block text-[11px] text-wood-natural/55 underline underline-offset-2 transition-colors hover:text-wood-natural"
+          >
+            이 여정이 어떻게 시작되는지 보기 →
+          </a>
         </section>
 
         <hr className="hairline" />
