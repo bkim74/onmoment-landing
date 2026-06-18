@@ -16,7 +16,7 @@ const svg = `<svg width="${W}" height="${H}" xmlns="http://www.w3.org/2000/svg">
   <rect width="${W}" height="${H}" fill="#F4EFE6"/>
 
   <text x="88" y="88"
-    font-family="monospace" font-size="17" fill="#8B7355" letter-spacing="3.2">ON MOMENT — DAILY OFFERING</text>
+    font-family="monospace" font-size="17" fill="#8B7355" letter-spacing="3.2">ONMOMENT — DAILY RITUAL</text>
   <line x1="88" y1="106" x2="296" y2="106" stroke="#D9CCB3" stroke-width="1"/>
 
   <text x="88" y="244"
@@ -28,7 +28,7 @@ const svg = `<svg width="${W}" height="${H}" xmlns="http://www.w3.org/2000/svg">
 
   <text x="90" y="438"
     font-family="Cormorant Garamond Medium, Cormorant Garamond" font-size="68"
-    font-style="italic" font-weight="500" fill="#5A4A3A">Turn On</text>
+    font-style="italic" font-weight="500" fill="#5A4A3A">Return to</text>
   <text x="90" y="513"
     font-family="Cormorant Garamond Medium, Cormorant Garamond" font-size="68"
     font-style="italic" font-weight="500" fill="#5A4A3A">the Whole You.</text>
