@@ -46,3 +46,7 @@ scripts/fonts/
 # session handoff — personal work state, not for commit
 .claude/session-handoff.md
 design-reference/
+
+# copyright: 정본 원고(.md)·신청정보·export 스크립트만 커밋. 파생 PDF·편집용 마커는 제외(재생성 가능)
+copyright/*.pdf
+copyright/*편집용.md
