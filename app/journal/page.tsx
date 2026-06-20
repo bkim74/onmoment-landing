@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ARC_LABELS, getArticlesByArc, type Article } from "./articles";
+import { ARC_LABELS, DEPTH_LABEL, getArticlesByArc, ARTICLES, type Article } from "./articles";
 
 const APP = "https://app.onmoment.kr";
 
@@ -9,6 +9,31 @@ export const metadata: Metadata = {
   description: "한 줄을 대하는 마음을 천천히 적어두는 곳",
   robots: { index: true, follow: true },
 };
+
+function ArticleCard({ article }: { article: Article }) {
+  return (
+    <li>
+      <Link
+        href={`/journal/${article.slug}`}
+        className="group block rounded-2xl border border-curtain-soft bg-curtain-soft/30 px-6 py-6 transition-colors hover:border-wood-natural/30 hover:bg-curtain-soft/60"
+      >
+        <div className="mb-3 flex items-baseline gap-3">
+          <span className="eyebrow">{article.number}</span>
+          <span className="eyebrow opacity-30">{article.readingTime} 읽기</span>
+        </div>
+        <h2 className="om-ko mb-2 text-[17px] font-semibold leading-snug text-coffee-deep group-hover:text-ink-quiet sm:text-[19px]">
+          {article.title}
+        </h2>
+        <p className="om-ko mb-4 text-sm leading-relaxed text-coffee-deep/60">
+          {article.subtitle}
+        </p>
+        <p className="text-[11px] text-wood-natural/55 transition-colors group-hover:text-wood-natural">
+          읽기 →
+        </p>
+      </Link>
+    </li>
+  );
+}
 
 export default function JournalPage() {
   return (
@@ -51,7 +76,24 @@ export default function JournalPage() {
 
         <hr className="hairline mb-12" />
 
-        {/* ── Article list (arc-grouped) ── */}
+        {/* ── 깊이층 (한 겹 더 안에서) — 책 깊이 묶음, 맨 앞에 선다 ── */}
+        {ARTICLES.some((a) => a.collection === "depth") && (
+          <section className="mb-16">
+            <div className="mb-6">
+              <p className="eyebrow mb-2">{DEPTH_LABEL.eyebrow}</p>
+              <p className="om-ko text-sm leading-relaxed text-coffee-deep/50">
+                {DEPTH_LABEL.description}
+              </p>
+            </div>
+            <ol className="space-y-6">
+              {ARTICLES.filter((a) => a.collection === "depth").map((article: Article) => (
+                <ArticleCard key={article.slug} article={article} />
+              ))}
+            </ol>
+          </section>
+        )}
+
+        {/* ── Article list (arc-grouped, surface) ── */}
         {([1, 2] as const).map((arc) => (
           <section key={arc} className="mb-16 last:mb-0">
             <div className="mb-6">
@@ -61,28 +103,11 @@ export default function JournalPage() {
               </p>
             </div>
             <ol className="space-y-6">
-              {getArticlesByArc(arc).map((article: Article) => (
-                <li key={article.slug}>
-                  <Link
-                    href={`/journal/${article.slug}`}
-                    className="group block rounded-2xl border border-curtain-soft bg-curtain-soft/30 px-6 py-6 transition-colors hover:border-wood-natural/30 hover:bg-curtain-soft/60"
-                  >
-                    <div className="mb-3 flex items-baseline gap-3">
-                      <span className="eyebrow">{article.number}</span>
-                      <span className="eyebrow opacity-30">{article.readingTime} 읽기</span>
-                    </div>
-                    <h2 className="om-ko mb-2 text-[17px] font-semibold leading-snug text-coffee-deep group-hover:text-ink-quiet sm:text-[19px]">
-                      {article.title}
-                    </h2>
-                    <p className="om-ko mb-4 text-sm leading-relaxed text-coffee-deep/60">
-                      {article.subtitle}
-                    </p>
-                    <p className="text-[11px] text-wood-natural/55 transition-colors group-hover:text-wood-natural">
-                      읽기 →
-                    </p>
-                  </Link>
-                </li>
-              ))}
+              {getArticlesByArc(arc)
+                .filter((a) => !a.collection)
+                .map((article: Article) => (
+                  <ArticleCard key={article.slug} article={article} />
+                ))}
             </ol>
           </section>
         ))}

@@ -84,8 +84,19 @@ export default async function ArticlePage({
           className="om-ko"
           style={{ maxWidth: "680px" }}
         >
-          {article.paragraphs.map((para, pi) =>
-            para.length === 0 ? (
+          {article.paragraphs.map((para, pi) => {
+            // 작은 섹션 오버라인 (멈춤 · 직면 · 비춤 등)
+            if (!Array.isArray(para)) {
+              return (
+                <p
+                  key={pi}
+                  className="om-ko mb-6 mt-14 text-[12px] font-medium tracking-[0.14em] text-wood-natural/55 first:mt-0"
+                >
+                  {para.overline}
+                </p>
+              );
+            }
+            return para.length === 0 ? (
               <div key={pi} className="h-4" />
             ) : (
               <p
@@ -107,8 +118,8 @@ export default async function ArticlePage({
                   );
                 })}
               </p>
-            )
-          )}
+            );
+          })}
         </article>
 
         <hr className="hairline mt-12 mb-12" />
