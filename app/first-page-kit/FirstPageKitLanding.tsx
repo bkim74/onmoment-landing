@@ -301,7 +301,7 @@ const TIMELINE_CARDS = [
   {
     label: "내일",
     title: "그 문장이 당신에게 돌아옵니다.",
-    body: "어제는 스쳐 지나간 하루도\n다음 날엔 조금 다른 빛으로 읽힐 수 있습니다.",
+    body: "어제는 스쳐 지나간 하루도\n다음 날엔 조금 다른 빛으로 읽히고,\n오늘을 조금 다르게 마주하게 됩니다.",
   },
   {
     label: "시간이 지나면",
@@ -357,9 +357,9 @@ function ReturnTimelineSection() {
 
         <Reveal delay={120}>
           <p className="om-ko mt-14 text-center text-[14px] leading-[1.8] text-[#7A6654]">
-            온순간은 남겨진 하루가 사라지지 않도록,
+            돌아온 한 줄이
             <br />
-            당신의 속도로 조용히 이어줍니다.
+            오늘을 조금 더 당신의 것으로 만듭니다.
           </p>
         </Reveal>
       </div>
@@ -424,7 +424,7 @@ function StoryGrowthSection() {
           <p className="om-ko mt-14 text-center text-[14px] leading-[1.8] text-[#7A6654]">
             당신은 대단한 글을 쓰지 않아도 됩니다.
             <br />
-            온순간은 살아낸 하루를 잃어버리지 않게 하는 자리입니다.
+            온순간은 살아낸 하루가 오늘의 당신에게 다시 닿게 하는 자리입니다.
           </p>
         </Reveal>
       </div>
@@ -489,10 +489,10 @@ function GiftPossibilitySection() {
   );
 }
 
-const FINAL_BODY = `잘 쓴 문장이 아니어도 괜찮습니다.
+const FINAL_BODY = `더 보고 싶다면 천천히 둘러보세요.
 
-지금 떠오르는 한 장면,
-혹은 마음에 잠시 머문 한 줄이면 충분합니다.
+마음이 머무는 날,
+한 줄이면 충분합니다.
 
 온순간은 그 문장을
 먼저 당신에게 돌려드립니다.`;
@@ -512,9 +512,9 @@ function FinalCtaSection({
       <div className="flex w-full max-w-[342px] flex-col items-center text-center">
         <Reveal>
           <h2 className="om-headline text-[28px] font-medium leading-[1.3] tracking-[-0.02em] text-ink-quiet">
-            오늘의 첫 장면을
+            천천히 둘러보셔도
             <br />
-            남겨볼까요?
+            괜찮습니다.
           </h2>
         </Reveal>
         <Reveal delay={120}>
@@ -524,10 +524,10 @@ function FinalCtaSection({
         </Reveal>
         <Reveal delay={240} className="mt-10 w-full">
           <RitualButton
-            href={startHref}
-            onClick={() => track("first_page_final_cta_clicked", { startHref })}
+            href="/"
+            onClick={() => track("first_page_back_to_landing_clicked")}
           >
-            오늘의 한 줄 남기기
+            온순간 계속 둘러보기
           </RitualButton>
         </Reveal>
         <Reveal delay={340}>
@@ -544,14 +544,14 @@ function FinalCtaSection({
             혼자만의 것으로 끝나지 않도록.
           </p>
         </Reveal>
-        {/* 앱 직행 외 출구 — 아직 둘러보고 싶은 사람은 랜딩으로 (강요 없는 두 번째 길) */}
+        {/* 충분히 둘러본 뒤 바로 시작하고 싶은 사람을 위한 조용한 두 번째 길 */}
         <Reveal delay={520} className="mt-12">
           <a
-            href="/"
-            onClick={() => track("first_page_back_to_landing_clicked")}
+            href={startHref}
+            onClick={() => track("first_page_final_cta_clicked", { startHref })}
             className="om-ko text-[13px] text-wood-natural/55 underline underline-offset-4 transition-colors hover:text-wood-natural"
           >
-            ← 온순간 둘러보기
+            오늘의 한 줄 남기기 →
           </a>
         </Reveal>
       </div>
