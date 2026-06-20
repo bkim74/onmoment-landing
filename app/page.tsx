@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { LocalizedResponsiveLines } from "@/components/ResponsiveLines";
+import DepthReveal from "@/components/DepthReveal";
 import { HERO_TITLE, HERO_SUB } from "@/lib/lineContracts";
 import { ARTICLES } from "./journal/articles";
 
@@ -170,6 +171,9 @@ export default function Page() {
           <p className="text-[11px] text-wood-natural/45">
             긴 기록을 쓰지 않아도 괜찮습니다 — 오늘의 나를 속이지 않는 한 문장이면 충분합니다
           </p>
+
+          {/* 두 층 웹의 첫 문턱 — 선택한 사람에게만 깊이층(/journal/soul-mirror)으로 */}
+          <DepthReveal />
         </section>
 
         <hr className="hairline" />
