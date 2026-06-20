@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ARC_LABELS, DEPTH_LABEL, getArticlesByArc, ARTICLES, type Article } from "./articles";
+import JournalDepthReveal from "@/components/JournalDepthReveal";
 
 const APP = "https://app.onmoment.kr";
 
@@ -76,26 +77,9 @@ export default function JournalPage() {
 
         <hr className="hairline mb-12" />
 
-        {/* ── 깊이층 (한 겹 더 안에서) — 책 깊이 묶음, 맨 앞에 선다 ── */}
-        {ARTICLES.some((a) => a.collection === "depth") && (
-          <section className="mb-16">
-            <div className="mb-6">
-              <p className="eyebrow mb-2">{DEPTH_LABEL.eyebrow}</p>
-              <p className="om-ko text-sm leading-relaxed text-coffee-deep/50">
-                {DEPTH_LABEL.description}
-              </p>
-            </div>
-            <ol className="space-y-6">
-              {ARTICLES.filter((a) => a.collection === "depth").map((article: Article) => (
-                <ArticleCard key={article.slug} article={article} />
-              ))}
-            </ol>
-          </section>
-        )}
-
-        {/* ── Article list (arc-grouped, surface) ── */}
+        {/* ── 표면(제품-경험) 글이 먼저 선다 — arc-grouped ── */}
         {([1, 2] as const).map((arc) => (
-          <section key={arc} className="mb-16 last:mb-0">
+          <section key={arc} className="mb-16">
             <div className="mb-6">
               <p className="eyebrow mb-2">{ARC_LABELS[arc].eyebrow}</p>
               <p className="om-ko text-sm leading-relaxed text-coffee-deep/50">
@@ -111,6 +95,20 @@ export default function JournalPage() {
             </ol>
           </section>
         ))}
+
+        {/* ── 깊이층 (한 겹 더 안에서) — 열기로 선택한 사람에게만 펼쳐지는 두 번째 문턱 ── */}
+        {ARTICLES.some((a) => a.collection === "depth") && (
+          <JournalDepthReveal
+            eyebrow={DEPTH_LABEL.eyebrow}
+            description={DEPTH_LABEL.description}
+          >
+            <ol className="space-y-6">
+              {ARTICLES.filter((a) => a.collection === "depth").map((article: Article) => (
+                <ArticleCard key={article.slug} article={article} />
+              ))}
+            </ol>
+          </JournalDepthReveal>
+        )}
 
         <hr className="hairline my-16" />
 
