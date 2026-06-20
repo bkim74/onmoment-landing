@@ -1,6 +1,14 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ARC_LABELS, DEPTH_LABEL, getArticlesByArc, ARTICLES, type Article } from "./articles";
+import {
+  ARC_LABELS,
+  DEPTH_LABEL,
+  DEPTH_DOORWAY,
+  DEPTH_ACTS,
+  getArticlesByArc,
+  getDepthSequence,
+  type Article,
+} from "./articles";
 import JournalDepthReveal from "@/components/JournalDepthReveal";
 
 const APP = "https://app.onmoment.kr";
@@ -96,19 +104,30 @@ export default function JournalPage() {
           </section>
         ))}
 
-        {/* ── 깊이층 (한 겹 더 안에서) — 열기로 선택한 사람에게만 펼쳐지는 두 번째 문턱 ── */}
-        {ARTICLES.some((a) => a.collection === "depth") && (
-          <JournalDepthReveal
-            eyebrow={DEPTH_LABEL.eyebrow}
-            description={DEPTH_LABEL.description}
-          >
-            <ol className="space-y-6">
-              {ARTICLES.filter((a) => a.collection === "depth").map((article: Article) => (
-                <ArticleCard key={article.slug} article={article} />
-              ))}
-            </ol>
-          </JournalDepthReveal>
-        )}
+        {/* ── 깊이층 입구 — 9편 목록이 아니라 첫 글로 들어가는 문 하나 ── */}
+        {(() => {
+          const depthSeq = getDepthSequence();
+          if (depthSeq.length === 0) return null;
+          const entry = depthSeq[0];
+          const acts = ([1, 2, 3, 4] as const)
+            .map((act) => ({
+              ...DEPTH_ACTS[act],
+              items: depthSeq
+                .filter((a) => a.bookAct === act)
+                .map((a) => ({ slug: a.slug, number: a.number, title: a.title })),
+            }))
+            .filter((act) => act.items.length > 0);
+          return (
+            <JournalDepthReveal
+              eyebrow={DEPTH_LABEL.eyebrow}
+              framing={[...DEPTH_DOORWAY.framing]}
+              enterLabel={DEPTH_DOORWAY.enter}
+              spineLabel={DEPTH_DOORWAY.spine}
+              entry={{ slug: entry.slug, title: entry.title }}
+              acts={acts}
+            />
+          );
+        })()}
 
         <hr className="hairline my-16" />
 

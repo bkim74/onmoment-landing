@@ -3,6 +3,10 @@ export type Article = {
   number: string;
   arc: 1 | 2; // 독서 순서(책 부) — 표면 저널 그룹
   collection?: "depth"; // 깊이층(영혼) 묶음 — arc와 직교하는 별도 차원
+  // ↓ collection === "depth" 전용 — 소설형 읽기 흐름 메타 (순서는 배열에서 파생, 저장 안 함)
+  bookAct?: 1 | 2 | 3 | 4; // 4악장(발견되는 등뼈) 묶음 — 진행표 아님
+  echoLine?: string; // 돌아온 문장 — 앞 글에서 verbatim으로 옅게 돌아오는 한 줄 (글 머리)
+  bridgeLine?: string[]; // 앞 글의 결이 다음 글을 청하는 산문 (글 끝, "다음 글" 기능명 대신)
   title: string;
   subtitle: string;
   excerpt: string;
@@ -20,6 +24,25 @@ export type Article = {
 export const DEPTH_LABEL = {
   eyebrow: "한 겹 더 안에서",
   description: "왜 이런 멈춤이 우리에게 필요한지, 조금 더 안쪽에서 이야기합니다.",
+} as const;
+
+// 깊이 스레드를 여는 문턱 — 9편 목록이 아니라 첫 글로 들어가는 입구
+export const DEPTH_DOORWAY = {
+  framing: [
+    "하루의 표면 아래에는",
+    "천천히 돌아보아야 보이는 것들이 있습니다.",
+  ],
+  enter: "이 글에서 시작하기",
+  spine: "이 흐름의 차례", // 기본 닫힘 · 정보용 구조도(진행표 아님)
+} as const;
+
+// 깊이 스레드 4악장(발견되는 등뼈). 스토리두잉(표면 arc2)은 이 스레드에서 제외 —
+// 9편은 책 전체 목차가 아니라, 선택해 들어온 독자를 위한 자립된 읽기 흐름이다.
+export const DEPTH_ACTS: Record<1 | 2 | 3 | 4, { numeral: string; label: string }> = {
+  1: { numeral: "Ⅰ", label: "멈춰 서서, 안을 보다" },
+  2: { numeral: "Ⅱ", label: "상처와 시간에 자리를 내주다" },
+  3: { numeral: "Ⅲ", label: "받은 것이 관계가 되다" },
+  4: { numeral: "Ⅳ", label: "사랑이 오늘로 돌아오다" },
 } as const;
 
 export const ARC_LABELS = {
@@ -40,6 +63,11 @@ export const ARTICLES: Article[] = [
     number: "01",
     arc: 1,
     collection: "depth",
+    bookAct: 1,
+    bridgeLine: [
+      "거울 앞에 서려면 먼저 멈춰야 한다면,",
+      "그 멈춤은 어떻게 하루 안에 생길까요.",
+    ],
     title: "왜 우리는 영혼의 거울을 매일 보지 않는가",
     subtitle: "몸의 거울은 매일 들여다보면서, 안을 비추는 일은 왜 자꾸 미루게 될까.",
     excerpt: "우리는 매일 거울 앞에 섭니다. 다만 그 거울은 늘 바깥을 향해 있습니다.",
@@ -182,6 +210,12 @@ export const ARTICLES: Article[] = [
     number: "02",
     arc: 1,
     collection: "depth",
+    bookAct: 1,
+    echoLine: "영혼의 거울 앞에 서려면 먼저 멈춰야 합니다.",
+    bridgeLine: [
+      "실제 앞에 서면,",
+      "감추고 싶던 약한 곳도 함께 보입니다.",
+    ],
     title: "리추얼은 왜 나를 실제 앞에 세우는가",
     subtitle: "습관은 하루를 흘려보내고, 리추얼은 하루 앞에 잠깐 멈춰 세웁니다.",
     excerpt: "우리는 대부분 실제가 아니라, 실제에 대한 설명 앞에서 하루를 보냅니다.",
@@ -309,6 +343,12 @@ export const ARTICLES: Article[] = [
     number: "03",
     arc: 1,
     collection: "depth",
+    bookAct: 2,
+    echoLine: "실제는 내가 어떻게 보이고 싶은지를 묻지 않습니다.",
+    bridgeLine: [
+      "그렇게 한 번 안아본 마음은,",
+      "때로 한 줄로만 남습니다.",
+    ],
     title: "연약함은 왜 관계를 약하게 하지 않는가",
     subtitle: "약함을 감추면 관계가 단단해질 것 같지만, 실은 그 반대일 때가 많습니다.",
     excerpt: "우리는 약한 모습을 보이면 관계가 약해질까 봐, 자주 강한 척을 합니다.",
@@ -438,6 +478,12 @@ export const ARTICLES: Article[] = [
     number: "04",
     arc: 1,
     collection: "depth",
+    bookAct: 2,
+    echoLine: "지워지지 않은 채로도, 삶 안에서 자리를 얻을 수 있습니다.",
+    bridgeLine: [
+      "그 한 줄이 다시 돌아오기 시작하면,",
+      "우리는 비로소 무언가를 받습니다.",
+    ],
     title: "한 문장 뒤의 삶",
     subtitle: "한 줄은 작지만, 그 뒤에는 쓰이지 않은 하루 전부가 있습니다.",
     excerpt: "한 문장으로 하루를 다 담을 수는 없습니다. 그런데 이상하게, 그 한 줄이 하루 전부를 다시 불러옵니다.",
@@ -554,6 +600,12 @@ export const ARTICLES: Article[] = [
     number: "05",
     arc: 1,
     collection: "depth",
+    bookAct: 3,
+    echoLine: "한 줄은 그릇이 아니라 열쇠에 가깝습니다.",
+    bridgeLine: [
+      "넘친 것은 어딘가로 흘러갑니다.",
+      "그 흐름은 나를 넘어 어디까지 닿을까요.",
+    ],
     title: "받은 것이 흘러갈 때",
     subtitle: "주는 것이 더 낫다는 걸 알면서도, 자주 그 기쁨을 누리지 못합니다.",
     excerpt: "우리는 주는 것이 받는 것보다 낫다고 배웁니다. 그런데 정작 그 기쁨을 누리고 있는지는, 다른 질문입니다.",
@@ -682,6 +734,12 @@ export const ARTICLES: Article[] = [
     number: "06",
     arc: 1,
     collection: "depth",
+    bookAct: 3,
+    echoLine: "가득 찬 잔은 애쓰지 않아도 넘칩니다.",
+    bridgeLine: [
+      "여러 방향으로 이어지는 그 시작점으로 돌아올 때,",
+      "닫혀 있던 것이 조금씩 움직이기 시작합니다.",
+    ],
     title: "관계는 나를 넘어 어디까지 이어지는가",
     subtitle: "관계는 몇몇 사람 사이의 일로 보이지만, 한 사람의 삶은 생각보다 여러 방향으로 이어져 있습니다.",
     excerpt: "우리는 관계를 가까운 몇 사람 사이의 일로 생각합니다. 그런데 한 사람의 삶은, 그보다 여러 방향으로 이어져 있습니다.",
@@ -813,6 +871,12 @@ export const ARTICLES: Article[] = [
     number: "07",
     arc: 1,
     collection: "depth",
+    bookAct: 4,
+    echoLine: "나에게로 돌아오는 일은, 관계로부터 물러나는 일이 아닙니다.",
+    bridgeLine: [
+      "그 작은 마주함을 끝까지 밀어주는 힘이 있다면,",
+      "그것은 아마, 사랑일 것입니다.",
+    ],
     title: "변화의 비밀",
     subtitle: "사람은 왜 그렇게 변하기 어려운가, 그리고 무엇이 변화를 가능하게 하는가.",
     excerpt: "우리는 자주 변하려 하고, 자주 실패합니다. 어쩌면 변화는, 우리가 생각한 방식으로 오지 않는지도 모릅니다.",
@@ -945,6 +1009,12 @@ export const ARTICLES: Article[] = [
     number: "08",
     arc: 1,
     collection: "depth",
+    bookAct: 4,
+    echoLine: "변화는 갚아야 할 숙제가 아닙니다.",
+    bridgeLine: [
+      "지금의 나에게서 시작된 그 모든 것이",
+      "결국 향하는 곳은, 다름 아닌 오늘입니다.",
+    ],
     title: "사랑은 어떻게 연약함을 품고 앞으로 가게 하는가",
     subtitle: "지금의 나 · 아직 오지 않은 나 · 너에게.",
     excerpt: "사랑은 약함을 없애는 힘이 아니라, 약함을 감추지 않아도 되게 하는 힘인지도 모릅니다.",
@@ -1077,6 +1147,8 @@ export const ARTICLES: Article[] = [
     number: "09",
     arc: 1,
     collection: "depth",
+    bookAct: 4,
+    echoLine: "사랑은 약함을 없애는 힘이 아니라, 약함을 감추지 않아도 되게 하는 힘입니다.",
     title: "오늘이 선물이 되도록",
     subtitle: "오늘은 통과해야 하는 과제가 아니라, 어쩌면 이미 건네받은 시간인지도 모릅니다.",
     excerpt:
@@ -2524,6 +2596,21 @@ export function getArticle(slug: string): Article | undefined {
 
 export function getArticlesByArc(arc: Article["arc"]) {
   return ARTICLES.filter((article) => article.arc === arc);
+}
+
+// 깊이 스레드 = collection "depth" 배열 순서 그대로 (순서·다음글을 손으로 저장하지 않음)
+export function getDepthSequence(): Article[] {
+  return ARTICLES.filter((a) => a.collection === "depth");
+}
+
+export function getAdjacentDepth(slug: string): { prev: Article | null; next: Article | null } {
+  const seq = getDepthSequence();
+  const idx = seq.findIndex((a) => a.slug === slug);
+  if (idx === -1) return { prev: null, next: null };
+  return {
+    prev: idx > 0 ? seq[idx - 1] : null,
+    next: idx < seq.length - 1 ? seq[idx + 1] : null,
+  };
 }
 
 export function getAdjacentArticles(slug: string): {

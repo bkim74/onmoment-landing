@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ARTICLES, getArticle, getAdjacentArticles } from "../articles";
+import { ARTICLES, getArticle, getAdjacentArticles, getAdjacentDepth } from "../articles";
 
 const APP = "https://app.onmoment.kr";
 
@@ -34,6 +34,8 @@ export default async function ArticlePage({
   if (!article) notFound();
 
   const { prev, next } = getAdjacentArticles(slug);
+  const isDepth = article.collection === "depth";
+  const depth = isDepth ? getAdjacentDepth(slug) : { prev: null, next: null };
 
   return (
     <div className="min-h-screen bg-paper-cream text-coffee-deep">
@@ -62,6 +64,17 @@ export default async function ArticlePage({
             ← 저널로 돌아가기
           </Link>
         </div>
+
+        {/* ── 돌아온 문장 — 앞 글에서 옅게 이어지는 한 줄 (깊이 글, 첫 글 제외) ── */}
+        {isDepth && article.echoLine && (
+          <div className="mb-12">
+            <p className="eyebrow mb-3 text-wood-natural/45">돌아온 문장</p>
+            <p className="om-serif text-[15px] italic leading-relaxed text-coffee-deep/45 sm:text-[16px]">
+              “{article.echoLine}”
+            </p>
+            <hr className="hairline mt-10" />
+          </div>
+        )}
 
         {/* ── Article header ── */}
         <div className="mb-12">
@@ -124,54 +137,113 @@ export default async function ArticlePage({
 
         <hr className="hairline mt-12 mb-12" />
 
-        {/* ── Article CTA ── */}
-        <div className="mb-16 text-center">
-          <p className="om-ko mb-2 text-sm text-coffee-deep/70">
-            오늘 마음이 오래 머문 장면이 있다면
-          </p>
-          <p className="mb-2 text-sm text-coffee-deep/50">
-            한 문장만 조용히 놓아두세요
-          </p>
-          <p className="mb-8 text-[11px] text-wood-natural/40">
-            처음의 한 줄은 나에게만 머무릅니다
-          </p>
-          <a
-            href={`${APP}/today`}
-            className="inline-flex items-center justify-center rounded-xl bg-coffee-deep px-8 py-3.5 text-sm font-medium text-paper-cream transition-colors hover:bg-ink-quiet"
-          >
-            오늘의 온순간 시작하기 →
-          </a>
-        </div>
+        {isDepth ? (
+          depth.next ? (
+            /* ── Bridge — 앞 글의 결이 다음 글을 청하는 한 줄 (기능명 대신 산문) ── */
+            <nav aria-label="다음 글로 이어집니다" className="mb-16 text-center">
+              {article.bridgeLine && (
+                <div className="om-serif mb-8 space-y-1 text-[16px] leading-[1.9] text-coffee-deep/70 sm:text-[17px]">
+                  {article.bridgeLine.map((line, li) => (
+                    <p key={li}>{line}</p>
+                  ))}
+                </div>
+              )}
+              <Link
+                href={`/journal/${depth.next.slug}`}
+                className="om-ko inline-flex items-center gap-2 text-[15px] text-coffee-deep underline decoration-wood-natural/30 underline-offset-4 transition-colors hover:decoration-coffee-deep sm:text-base"
+              >
+                {depth.next.title} →
+              </Link>
+              <div className="mt-12">
+                <Link
+                  href="/journal"
+                  className="text-[11px] uppercase tracking-[0.15em] text-wood-natural/40 transition-colors hover:text-wood-natural"
+                >
+                  ← 저널로 돌아가기
+                </Link>
+              </div>
+            </nav>
+          ) : (
+            /* ── 실의 끝(종장) — 제품 초대 한 번 + 조용한 귀환 ── */
+            <>
+              <div className="mb-12 text-center">
+                <p className="om-ko mb-2 text-sm text-coffee-deep/70">
+                  오늘 마음이 오래 머문 장면이 있다면
+                </p>
+                <p className="mb-2 text-sm text-coffee-deep/50">
+                  한 문장만 조용히 놓아두세요
+                </p>
+                <p className="mb-8 text-[11px] text-wood-natural/40">
+                  처음의 한 줄은 나에게만 머무릅니다
+                </p>
+                <a
+                  href={`${APP}/today`}
+                  className="inline-flex items-center justify-center rounded-xl bg-coffee-deep px-8 py-3.5 text-sm font-medium text-paper-cream transition-colors hover:bg-ink-quiet"
+                >
+                  오늘의 온순간 시작하기 →
+                </a>
+              </div>
+              <div className="mb-16 text-center">
+                <Link
+                  href="/journal"
+                  className="text-[11px] uppercase tracking-[0.15em] text-wood-natural/40 transition-colors hover:text-wood-natural"
+                >
+                  ← 저널로 돌아가기
+                </Link>
+              </div>
+            </>
+          )
+        ) : (
+          /* ── 표면 글 — 기존 제품 CTA + 이전/다음 그리드 (브라우징 질감 유지) ── */
+          <>
+            <div className="mb-16 text-center">
+              <p className="om-ko mb-2 text-sm text-coffee-deep/70">
+                오늘 마음이 오래 머문 장면이 있다면
+              </p>
+              <p className="mb-2 text-sm text-coffee-deep/50">
+                한 문장만 조용히 놓아두세요
+              </p>
+              <p className="mb-8 text-[11px] text-wood-natural/40">
+                처음의 한 줄은 나에게만 머무릅니다
+              </p>
+              <a
+                href={`${APP}/today`}
+                className="inline-flex items-center justify-center rounded-xl bg-coffee-deep px-8 py-3.5 text-sm font-medium text-paper-cream transition-colors hover:bg-ink-quiet"
+              >
+                오늘의 온순간 시작하기 →
+              </a>
+            </div>
 
-        {/* ── Prev / Next navigation ── */}
-        <nav aria-label="이전/다음 글" className="grid grid-cols-2 gap-3">
-          <div>
-            {prev && (
-              <Link
-                href={`/journal/${prev.slug}`}
-                className="group flex flex-col rounded-xl border border-curtain-soft px-4 py-4 transition-colors hover:border-wood-natural/30"
-              >
-                <span className="eyebrow mb-2 opacity-40">← 이전 글</span>
-                <span className="om-ko text-sm leading-snug text-coffee-deep/70 group-hover:text-coffee-deep">
-                  {prev.title}
-                </span>
-              </Link>
-            )}
-          </div>
-          <div>
-            {next && (
-              <Link
-                href={`/journal/${next.slug}`}
-                className="group flex flex-col rounded-xl border border-curtain-soft px-4 py-4 text-right transition-colors hover:border-wood-natural/30"
-              >
-                <span className="eyebrow mb-2 opacity-40">다음 글 →</span>
-                <span className="om-ko text-sm leading-snug text-coffee-deep/70 group-hover:text-coffee-deep">
-                  {next.title}
-                </span>
-              </Link>
-            )}
-          </div>
-        </nav>
+            <nav aria-label="이전/다음 글" className="grid grid-cols-2 gap-3">
+              <div>
+                {prev && (
+                  <Link
+                    href={`/journal/${prev.slug}`}
+                    className="group flex flex-col rounded-xl border border-curtain-soft px-4 py-4 transition-colors hover:border-wood-natural/30"
+                  >
+                    <span className="eyebrow mb-2 opacity-40">← 이전 글</span>
+                    <span className="om-ko text-sm leading-snug text-coffee-deep/70 group-hover:text-coffee-deep">
+                      {prev.title}
+                    </span>
+                  </Link>
+                )}
+              </div>
+              <div>
+                {next && (
+                  <Link
+                    href={`/journal/${next.slug}`}
+                    className="group flex flex-col rounded-xl border border-curtain-soft px-4 py-4 text-right transition-colors hover:border-wood-natural/30"
+                  >
+                    <span className="eyebrow mb-2 opacity-40">다음 글 →</span>
+                    <span className="om-ko text-sm leading-snug text-coffee-deep/70 group-hover:text-coffee-deep">
+                      {next.title}
+                    </span>
+                  </Link>
+                )}
+              </div>
+            </nav>
+          </>
+        )}
       </main>
 
       {/* ── Footer ── */}
