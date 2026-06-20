@@ -27,7 +27,7 @@ const TABS = [
 const WHY_CARDS = [
   { title: "내려놓음",   desc: "머릿속에 맴도는 장면을 한 문장으로 밖에 놓습니다" },
   { title: "정직함",     desc: "긴 설명보다 한 문장이 더 솔직할 때가 있습니다" },
-  { title: "회귀",       desc: "오늘의 문장이 내일의 나에게 돌아와, 지금의 마음을 다시 보게 합니다" },
+  { title: "회귀",       desc: "오늘의 문장이 내일의 나에게 돌아와, 오늘을 조금 다르게 마주하게 합니다" },
   { title: "발견",       desc: "며칠의 한 줄 사이에서 자주 돌아오는 마음이 보입니다" },
 ];
 
@@ -44,7 +44,7 @@ const JOURNEY_STAGES = [
   { num: "01", label: "하루 카드",    desc: "오늘의 문장이 하나의 카드로 남습니다" },
   { num: "02", label: "이번 주 챕터", desc: "며칠의 카드가 모여 이번 주의 이야기가 됩니다" },
   { num: "03", label: "나의 책",      desc: "챕터들이 쌓여 내가 지나온 마음의 윤곽을 보여줍니다" },
-  { num: "04", label: "선물 카드",    desc: "내가 고른 문장만 누군가에게 건넬 수 있습니다" },
+  { num: "04", label: "선물 카드",    desc: "내가 고른 문장만, 간직하거나 언젠가 누군가에게 건넵니다" },
 ];
 
 // ── Section 04 ───────────────────────────────────────────────────────────────
@@ -313,7 +313,7 @@ export default function Page() {
           </div>
 
           <p className="text-[11px] text-wood-natural/45">
-            공유가 목표가 아닙니다 — 내가 고른 문장만 선물이 됩니다
+            무엇을 건넬지는 내가 정합니다 — 내가 고른 문장만 선물이 됩니다
           </p>
           <a
             href="/first-page-kit"
@@ -421,6 +421,9 @@ export default function Page() {
           <h2 className="om-headline om-ko mx-auto mb-4 max-w-sm text-[20px] font-semibold leading-snug text-coffee-deep sm:text-[24px]">
             오늘 마음이 오래 머문 장면 하나를<br />조용히 놓아두세요
           </h2>
+          <p className="mb-2 text-sm text-coffee-deep/60">
+            돌아온 한 줄이 오늘을 조금 더 나의 것으로 만듭니다
+          </p>
           <p className="mb-2 text-sm text-wood-natural/70">오늘의 첫 줄을 남겨볼까요?</p>
           <p className="mb-10 text-[11px] text-wood-natural/40">
             잘 쓴 문장이 아니어도 괜찮습니다 — 처음의 한 줄은 나에게만 머무릅니다
