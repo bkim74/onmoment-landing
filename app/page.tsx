@@ -224,6 +224,16 @@ export default function Page() {
           <p className="text-center text-[11px] uppercase tracking-[0.18em] text-wood-natural/35">
             NO SCORE · NO DIAGNOSIS · NO STREAK · PRIVATE BY DEFAULT
           </p>
+
+          {/* 깊이층 문턱 — 사적인 자리(§02)는 정직한 자기 직면으로 이어진다. 열려 있는 글에만 문을 둔다(§03은 보류) */}
+          <div className="mt-10 text-center">
+            <a
+              href="/journal/soul-mirror"
+              className="text-[11px] text-wood-natural/50 underline underline-offset-4 transition-colors hover:text-wood-natural"
+            >
+              이 방의 안쪽으로 →
+            </a>
+          </div>
         </section>
 
         <hr className="hairline" />
