@@ -335,6 +335,14 @@ export default function Page() {
           >
             이 여정이 어떻게 시작되는지 보기 →
           </a>
+
+          {/* 깊이층 문턱(§03) — 「한 문장 뒤의 삶」이 열렸으므로 카드→책→시간 축이 정확히 맞물린다 */}
+          <a
+            href="/journal/the-life-behind-a-line"
+            className="mt-3 block text-[11px] text-wood-natural/50 underline underline-offset-2 transition-colors hover:text-wood-natural"
+          >
+            한 문장 뒤를 보다 →
+          </a>
         </section>
 
         <hr className="hairline" />
