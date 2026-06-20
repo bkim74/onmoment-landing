@@ -67,12 +67,12 @@ export default async function ArticlePage({
 
         {/* ── 돌아온 문장 — 앞 글에서 옅게 이어지는 한 줄 (깊이 글, 첫 글 제외) ── */}
         {isDepth && article.echoLine && (
-          <div className="mb-12">
+          <div className="mb-14">
             <p className="eyebrow mb-3 text-wood-natural/45">돌아온 문장</p>
             <p className="om-serif text-[15px] italic leading-relaxed text-coffee-deep/45 sm:text-[16px]">
               “{article.echoLine}”
             </p>
-            <hr className="hairline mt-10" />
+            <hr className="hairline mt-12" />
           </div>
         )}
 
@@ -103,23 +103,23 @@ export default async function ArticlePage({
               return (
                 <p
                   key={pi}
-                  className="om-ko mb-6 mt-14 text-[12px] font-medium tracking-[0.14em] text-wood-natural/55 first:mt-0"
+                  className="om-ko mb-7 mt-16 text-[12px] font-medium tracking-[0.14em] text-wood-natural/55 first:mt-0"
                 >
                   {para.overline}
                 </p>
               );
             }
             return para.length === 0 ? (
-              <div key={pi} className="h-4" />
+              <div key={pi} className="h-8" />
             ) : (
               <p
                 key={pi}
-                className="om-serif mb-8 text-[16px] leading-[2.0] text-coffee-deep/85 sm:text-[17px]"
+                className="om-serif mb-12 text-[16px] leading-[2.1] text-coffee-deep/85 sm:text-[17px]"
               >
                 {para.map((line, li) => {
                   if (line === "") {
                     // 의미 단위 소간격 — 단락 내 여백
-                    return <span key={li} className="block mb-3" />;
+                    return <span key={li} className="block mb-4" />;
                   }
                   const next = para[li + 1];
                   const hasBr = li < para.length - 1 && next !== "";
@@ -142,7 +142,7 @@ export default async function ArticlePage({
             /* ── Bridge — 앞 글의 결이 다음 글을 청하는 한 줄 (기능명 대신 산문) ── */
             <nav aria-label="다음 글로 이어집니다" className="mb-16 text-center">
               {article.bridgeLine && (
-                <div className="om-serif mb-8 space-y-1 text-[16px] leading-[1.9] text-coffee-deep/70 sm:text-[17px]">
+                <div className="om-serif mb-10 space-y-1 text-[16px] leading-[2.1] text-coffee-deep/70 sm:text-[17px]">
                   {article.bridgeLine.map((line, li) => (
                     <p key={li}>{line}</p>
                   ))}
@@ -154,7 +154,7 @@ export default async function ArticlePage({
               >
                 {depth.next.title} →
               </Link>
-              <div className="mt-12">
+              <div className="mt-14">
                 <Link
                   href="/journal"
                   className="text-[11px] uppercase tracking-[0.15em] text-wood-natural/40 transition-colors hover:text-wood-natural"
