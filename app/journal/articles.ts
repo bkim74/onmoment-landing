@@ -2627,6 +2627,11 @@ export function getDepthSequence(): Article[] {
   return ARTICLES.filter((a) => a.collection === "depth");
 }
 
+// 표면(제품-경험) 글 = collection 없는 것. 마지막 표면 글 끝에서 깊이 입구로 잇기 위함.
+export function getSurfaceSequence(): Article[] {
+  return ARTICLES.filter((a) => !a.collection);
+}
+
 export function getAdjacentDepth(slug: string): { prev: Article | null; next: Article | null } {
   const seq = getDepthSequence();
   const idx = seq.findIndex((a) => a.slug === slug);

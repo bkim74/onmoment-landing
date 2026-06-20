@@ -1,7 +1,16 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ARTICLES, getArticle, getAdjacentArticles, getAdjacentDepth } from "../articles";
+import {
+  ARTICLES,
+  getArticle,
+  getAdjacentArticles,
+  getAdjacentDepth,
+  getDepthSequence,
+  getSurfaceSequence,
+  DEPTH_LABEL,
+  DEPTH_DOORWAY,
+} from "../articles";
 
 const APP = "https://app.onmoment.kr";
 
@@ -36,6 +45,10 @@ export default async function ArticlePage({
   const { prev, next } = getAdjacentArticles(slug);
   const isDepth = article.collection === "depth";
   const depth = isDepth ? getAdjacentDepth(slug) : { prev: null, next: null };
+  // 표면 마지막 글 → 깊이 첫 글(soul-mirror)로 잇는 문턱 (강요 아닌 선택)
+  const surfaceSeq = getSurfaceSequence();
+  const isLastSurface = !isDepth && surfaceSeq[surfaceSeq.length - 1]?.slug === slug;
+  const depthEntry = getDepthSequence()[0];
 
   return (
     <div className="min-h-screen bg-paper-cream text-coffee-deep">
@@ -213,6 +226,25 @@ export default async function ArticlePage({
                 오늘의 온순간 시작하기 →
               </a>
             </div>
+
+            {/* 표면 마지막 글 → 깊이 첫 글로 잇는 문턱 (선택으로만 한 겹 안으로) */}
+            {isLastSurface && depthEntry && (
+              <nav aria-label="한 겹 더 안으로" className="mb-16 text-center">
+                <hr className="hairline mb-12" />
+                <p className="eyebrow mb-5 text-wood-natural/45">{DEPTH_LABEL.eyebrow}</p>
+                <div className="om-serif mb-8 space-y-1 text-[16px] leading-[2.1] text-coffee-deep/70 sm:text-[17px]">
+                  {DEPTH_DOORWAY.framing.map((line, li) => (
+                    <p key={li}>{line}</p>
+                  ))}
+                </div>
+                <Link
+                  href={`/journal/${depthEntry.slug}`}
+                  className="om-ko inline-flex items-center gap-2 text-[15px] text-coffee-deep underline decoration-wood-natural/30 underline-offset-4 transition-colors hover:decoration-coffee-deep sm:text-base"
+                >
+                  {depthEntry.title} →
+                </Link>
+              </nav>
+            )}
 
             <nav aria-label="이전/다음 글" className="grid grid-cols-2 gap-3">
               <div>
