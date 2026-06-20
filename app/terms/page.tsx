@@ -146,6 +146,10 @@ export default function TermsPage() {
               온순간의 브랜드, 디자인, 그리고 저널·글을 포함한 본 사이트의 모든 콘텐츠에 대한
               저작권은 온순간 또는 정당한 권리자에게 있습니다.
             </p>
+            <p>
+              본 사이트 저널의 깊이 글(9편)은 한국저작권위원회에 어문저작물로 등록되어 있습니다
+              (등록 제2026-037910호).
+            </p>
             <p>사전 서면 동의 없이 다음의 행위를 할 수 없습니다.</p>
           </div>
           <ul className="mt-4 space-y-2 text-[14px] leading-relaxed text-coffee-deep/80">

@@ -62,6 +62,10 @@ export default async function ArticlePage({
     publisher: { "@type": "Organization", name: "온순간", url: SITE },
     copyrightHolder: { "@type": "Organization", name: "온순간" },
     copyrightYear: new Date().getFullYear(),
+    // 등록 저작물 공시 — 복제본 발견 시 권리 입증 신호 (깊이 9편만 등록)
+    copyrightNotice: isDepth
+      ? `© ${new Date().getFullYear()} 온순간. 한국저작권위원회 어문저작물 등록 제2026-037910호.`
+      : `© ${new Date().getFullYear()} 온순간.`,
     license: `${SITE}/terms/`,
     isAccessibleForFree: true,
   };

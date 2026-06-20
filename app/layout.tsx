@@ -25,6 +25,10 @@ export const metadata: Metadata = {
     images: ["/og-image.png"],
   },
   robots: { index: true, follow: true },
+  // 기계가독 저작권·라이선스 신호 (복제본 대비 출처 명시)
+  other: {
+    copyright: "© 온순간 (OnMoment). All rights reserved.",
+  },
   icons: {
     icon: [
       { url: "/icon.svg", type: "image/svg+xml", sizes: "any" },
@@ -49,6 +53,8 @@ export default function RootLayout({
           rel="stylesheet"
         />
         <meta name="theme-color" content="#F5EDE0" />
+        {/* 라이선스(이용약관) 연결 — 기계가독 권리 신호 */}
+        <link rel="license" href={`${SITE_URL}/terms/`} />
         {/* 원저자·발행 주체 귀속 — 복제본 대비 출처(provenance) 신호 */}
         <script
           type="application/ld+json"
