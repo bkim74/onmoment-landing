@@ -138,9 +138,38 @@ export default function TermsPage() {
 
         <hr className="hairline" />
 
-        {/* §6 면책 */}
+        {/* §6 콘텐츠 저작권 및 무단 이용 금지 */}
         <section className="py-10">
-          <p className="eyebrow mb-5">§6&nbsp; 면책</p>
+          <p className="eyebrow mb-5">§6&nbsp; 콘텐츠 저작권 및 무단 이용 금지</p>
+          <div className="space-y-3 text-[14px] leading-relaxed text-coffee-deep/80">
+            <p>
+              온순간의 브랜드, 디자인, 그리고 저널·글을 포함한 본 사이트의 모든 콘텐츠에 대한
+              저작권은 온순간 또는 정당한 권리자에게 있습니다.
+            </p>
+            <p>사전 서면 동의 없이 다음의 행위를 할 수 없습니다.</p>
+          </div>
+          <ul className="mt-4 space-y-2 text-[14px] leading-relaxed text-coffee-deep/80">
+            {[
+              "본 사이트 콘텐츠의 복제 · 배포 · 전송 또는 2차적저작물 작성",
+              "자동화된 수집(스크래핑 · 크롤링) 또는 대량 추출",
+              "인공지능(AI) 모델의 학습 · 미세조정 데이터로의 이용",
+            ].map((item) => (
+              <li key={item} className="flex items-start gap-2">
+                <span className="mt-0.5 text-wood-natural/50 shrink-0">—</span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+          <p className="mt-5 text-[14px] text-coffee-deep/70">
+            무단 이용이 확인되면 관련 법령에 따라 필요한 조치를 취할 수 있습니다.
+          </p>
+        </section>
+
+        <hr className="hairline" />
+
+        {/* §7 면책 */}
+        <section className="py-10">
+          <p className="eyebrow mb-5">§7&nbsp; 면책</p>
           <div className="space-y-3 text-[14px] leading-relaxed text-coffee-deep/80">
             <p>
               온순간은 감정 기록과 회고를 돕는 서비스입니다.
@@ -159,9 +188,9 @@ export default function TermsPage() {
 
         <hr className="hairline" />
 
-        {/* §7 문의 */}
+        {/* §8 문의 */}
         <section className="py-10">
-          <p className="eyebrow mb-5">§7&nbsp; 문의</p>
+          <p className="eyebrow mb-5">§8&nbsp; 문의</p>
           <p className="text-[14px] text-coffee-deep/80">
             서비스 이용, 기록 삭제, 약관 관련 문의는 아래로 보내주세요.
           </p>

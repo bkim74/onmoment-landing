@@ -50,8 +50,28 @@ export default async function ArticlePage({
   const isLastSurface = !isDepth && surfaceSeq[surfaceSeq.length - 1]?.slug === slug;
   const depthEntry = getDepthSequence()[0];
 
+  const SITE = "https://onmoment.kr";
+  const articleJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: article.title,
+    description: article.subtitle,
+    inLanguage: "ko",
+    mainEntityOfPage: `${SITE}/journal/${slug}/`,
+    author: { "@type": "Organization", name: "온순간", url: SITE },
+    publisher: { "@type": "Organization", name: "온순간", url: SITE },
+    copyrightHolder: { "@type": "Organization", name: "온순간" },
+    copyrightYear: new Date().getFullYear(),
+    license: `${SITE}/terms/`,
+    isAccessibleForFree: true,
+  };
+
   return (
     <div className="min-h-screen bg-paper-cream text-coffee-deep">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+      />
 
       {/* ── Brand nav ── */}
       <header className="mx-auto flex max-w-2xl items-center justify-between px-6 py-7">

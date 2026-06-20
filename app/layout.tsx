@@ -49,6 +49,20 @@ export default function RootLayout({
           rel="stylesheet"
         />
         <meta name="theme-color" content="#F5EDE0" />
+        {/* 원저자·발행 주체 귀속 — 복제본 대비 출처(provenance) 신호 */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              name: "온순간",
+              alternateName: "OnMoment",
+              url: SITE_URL,
+              logo: `${SITE_URL}/icon-192.png`,
+            }),
+          }}
+        />
       </head>
       <body>{children}</body>
     </html>
