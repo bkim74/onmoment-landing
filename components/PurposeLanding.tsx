@@ -16,7 +16,7 @@ const APP = process.env.NEXT_PUBLIC_APP_ORIGIN ?? "https://app.onmoment.kr";
 
 type Intent = "gift" | "self";
 type Purpose = "occasion" | "thanks" | "together" | "myself";
-type Src = "hero" | "occasion" | "example" | "closing";
+type Src = "hero" | "occasion" | "example" | "closing" | "story";
 type Person = "friend" | "self" | "partner" | "parent" | "child" | "trip";
 
 function startHref(intent: Intent, src: Src, occasion?: Purpose | null) {
@@ -229,6 +229,12 @@ export default function PurposeLanding({ ways }: { ways: React.ReactNode }) {
             </section>
 
             {ways}
+
+            <aside className="explore" aria-label="온순간의 이야기">
+              <p className="eyebrow">온순간을 조금 더 알고 싶다면</p>
+              <p className="explore-copy">남기고, 발견하고, 고르고, 살아보고, 건네기까지.<br />한 문장이 내 이야기가 되는 길을 천천히 펼쳐 두었어요.</p>
+              <a className="text" href="/story/">온순간의 이야기 읽기 →</a>
+            </aside>
           </section>
 
           <section className="workspace" hidden={view !== "example"}>

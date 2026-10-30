@@ -77,3 +77,6 @@
 #om-purpose .ways nav{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:22px}
 #om-purpose .legal{display:flex;flex-wrap:wrap;gap:6px 14px}
 #om-purpose .legal a{color:var(--muted);text-decoration:none}
+#om-purpose .explore{margin:10px 7% 0;padding:34px 0 40px;border-top:1px solid var(--line)}
+#om-purpose .explore-copy{word-break:keep-all;font-family:"Noto Serif KR",Georgia,serif;font-size:15px;line-height:1.9;color:var(--ink);margin:10px 0 14px}
+#om-purpose .explore a.text{min-height:44px}
