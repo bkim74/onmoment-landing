@@ -49,6 +49,17 @@ const CASES: Record<Person, Case> = {
   trip: { to: "함께한 우리에게", title: "함께 머문\n그 오후", label1: "비가 오던 여행길", note1: "비를 피해 작은 카페에 들어갔다. 한참 이야기했다.", label2: "돌아온 저녁", note2: "여행에서 그 카페가 가장 생각났다.", chapter: "계획에 없던 시간", copy: "비를 피해 들어간 작은 카페에서 우리는 한참 이야기했다. 돌아온 뒤에도 그 시간이 생각났다.", end: "함께 머물렀던 그 오후를 이 이야기에 남겨둔다.", mirror: "“나는 많이 둘러보는 것만큼,\n함께 이야기할 시간도\n소중히 여기고 있었네.”", current: "여행 계획은 빼곡했지만,\n느긋하게 머물 시간은 적었다.", wish: "서두르지 않고 앉아\n서로의 이야기를 듣는 오후.", choice: "다음 만남에는 일정을 하나 비워두기.", after: "“멀리 가지 않고\n동네 카페에서 오래 이야기했다.”" },
 };
 
+type GiftWay = "alone" | "oneline" | "together";
+// 모두 가상 기록·편집 예시 — 실제 가족 기록은 쓰지 않는다
+const GIFT_WAYS: { key: GiftWay; label: string; notes: { who: string; text: string }[]; page: string; status: string }[] = [
+  { key: "alone", label: "혼자 완성한 선물", notes: [{ who: "내가 남긴 기억", text: "비 오는 날, 역 앞에서 우산을 들고 기다려 줬다." }],
+    page: "“역 앞에서 우산을 들고 기다려 줬다.” 그날 적어 둔 한 줄이다. 그 한 줄을, 이제 당신에게 건넨다.", status: "상대가 아무것도 쓰지 않아도 완성되는 선물 · 편집은 시범" },
+  { key: "oneline", label: "한 문장이 더해진 선물", notes: [{ who: "내가 남긴 기억", text: "비 오는 날, 역 앞에서 우산을 들고 기다려 줬다." }, { who: "받은 사람이 더한 한 줄", text: "그날은 비가 그칠 때까지 같이 서 있고 싶었어." }],
+    page: "같은 비 오는 날을, 한 사람은 기다려 준 날로, 다른 한 사람은 같이 서 있고 싶었던 날로 남겼다. 두 문장은 쓴 사람의 이름으로 나란히 둔다.", status: "받은 사람이 원할 때만 한 줄 · 준비 중" },
+  { key: "together", label: "함께 엮은 책", notes: [{ who: "한 사람의 기록 · 바닷가의 오후", text: "말이 없길래, 무슨 걱정이 있나 싶었다." }, { who: "다른 사람의 기록 · 같은 오후", text: "오늘은 말없이 바다를 보며 쉬고 싶었다." }],
+    page: "같은 오후의 침묵이 한 사람에게는 걱정으로, 다른 사람에게는 쉼으로 남았다. 그 사이를 어떻게 이어 읽을지는 두 사람이 정한다.", status: "두 사람이 함께 쓰기로 고른 글만 엮어요 · 준비 중" },
+];
+
 const PEOPLE: { key: Person; label: string }[] = [
   { key: "friend", label: "친구에게" },
   { key: "self", label: "나에게" },
@@ -66,6 +77,8 @@ function Lines({ text }: { text: string }) {
 export default function PurposeLanding({ ways }: { ways: React.ReactNode }) {
   const [person, setPerson] = useState<Person>("friend");
   const [purpose, setPurpose] = useState<Purpose>("occasion");
+  const [giftWay, setGiftWay] = useState<GiftWay>("alone");
+  const g = GIFT_WAYS.find((w) => w.key === giftWay)!;
   // 사용 계기를 직접 고른 뒤에만 그 계기를 앱으로 넘긴다(기본 선택값은 목적 선택이 아니다)
   const [purposeChosen, setPurposeChosen] = useState(false);
   const [view, setView] = useState<"home" | "example">("home");
@@ -127,21 +140,22 @@ export default function PurposeLanding({ ways }: { ways: React.ReactNode }) {
               </div>
             </div>
 
-            {/* 두 사람의 책(ADR-65) — 준비 중. 가상 예시만, 실제 접수·작성 경로처럼 보이는 버튼은 두지 않는다 */}
+            {/* 한 사람이 시작해도 완성되는 책 · 원하는 만큼 함께(ADR-65 개정 1). 세 예시는 단계가 아니라 고를 수 있는 경험 — 모두 가상 */}
             <section className="together" aria-labelledby="together-h">
-              <p className="eyebrow">두 사람의 책 · 준비 중</p>
-              <h2 id="together-h">같은 여행, 서로 다른 기억.<br />두 사람의 시선으로 엮는 우리의 책.</h2>
-              <p className="intro">각자 남긴 장면을 엮어, 함께했던 시간을 새롭게 읽습니다.</p>
-              <div className="twoviews">
-                <article><small>한 사람의 기록 · 바닷가의 오후</small><p>말이 없길래, 무슨 걱정이 있나 싶었다.</p></article>
-                <article><small>다른 사람의 기록 · 같은 오후</small><p>오늘은 말없이 바다를 보며 쉬고 싶었다.</p></article>
+              <p className="eyebrow">소중한 사람에게 건네는 책</p>
+              <h2 id="together-h">함께한 기억을,<br />소중한 사람에게 한 권의 책으로.</h2>
+              <p className="intro">남겨 둔 기록이 있어도, 기억나는 장면 하나부터 시작해도 좋아요.<br />혼자 준비해 건네고, 원하면 서로의 이야기를 더해요.</p>
+              <div className="people" role="group" aria-label="건네는 방식 예시 고르기">
+                {GIFT_WAYS.map((w) => (
+                  <button key={w.key} type="button" aria-pressed={giftWay === w.key} onClick={() => setGiftWay(w.key)}>{w.label}</button>
+                ))}
               </div>
-              <details className="woven">
-                <summary>두 기록이 엮인 한 쪽 펼쳐보기</summary>
-                <p>같은 오후의 침묵이 한 사람에게는 걱정으로, 다른 사람에게는 쉼으로 남았다. 두 문장은 각자의 말 그대로 나란히 둔다. 그 사이를 어떻게 이어 읽을지는 두 사람이 정한다.</p>
-                <small>각자 쓴 글은 쓴 사람의 이름으로 남고, 두 사람이 함께 쓰기로 고른 글만 책에 엮입니다.</small>
-              </details>
-              <p className="source">경험을 설명하기 위한 가상 기록·편집 예시예요. 함께 쓰는 책은 지금 준비하고 있어요.</p>
+              <div className="twoviews">
+                {g.notes.map((n) => <article key={n.who}><small>{n.who}</small><p>{n.text}</p></article>)}
+              </div>
+              <div className="woven"><small>엮인 한 쪽</small><p>{g.page}</p></div>
+              <p className="status">{g.status}</p>
+              <p className="source">경험을 설명하기 위한 가상 기록·편집 예시예요. 지금은 기억과 사진을 남길 수 있고, 엮는 편집은 시범, 함께 엮기는 준비하고 있어요.</p>
             </section>
 
             <section className="purpose-section">
