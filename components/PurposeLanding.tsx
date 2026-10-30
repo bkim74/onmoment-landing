@@ -127,6 +127,23 @@ export default function PurposeLanding({ ways }: { ways: React.ReactNode }) {
               </div>
             </div>
 
+            {/* 두 사람의 책(ADR-65) — 준비 중. 가상 예시만, 실제 접수·작성 경로처럼 보이는 버튼은 두지 않는다 */}
+            <section className="together" aria-labelledby="together-h">
+              <p className="eyebrow">두 사람의 책 · 준비 중</p>
+              <h2 id="together-h">같은 여행, 서로 다른 기억.<br />두 사람의 시선으로 엮는 우리의 책.</h2>
+              <p className="intro">각자 남긴 장면을 엮어, 함께했던 시간을 새롭게 읽습니다.</p>
+              <div className="twoviews">
+                <article><small>한 사람의 기록 · 바닷가의 오후</small><p>말이 없길래, 무슨 걱정이 있나 싶었다.</p></article>
+                <article><small>다른 사람의 기록 · 같은 오후</small><p>오늘은 말없이 바다를 보며 쉬고 싶었다.</p></article>
+              </div>
+              <details className="woven">
+                <summary>두 기록이 엮인 한 쪽 펼쳐보기</summary>
+                <p>같은 오후의 침묵이 한 사람에게는 걱정으로, 다른 사람에게는 쉼으로 남았다. 두 문장은 각자의 말 그대로 나란히 둔다. 그 사이를 어떻게 이어 읽을지는 두 사람이 정한다.</p>
+                <small>각자 쓴 글은 쓴 사람의 이름으로 남고, 두 사람이 함께 쓰기로 고른 글만 책에 엮입니다.</small>
+              </details>
+              <p className="source">경험을 설명하기 위한 가상 기록·편집 예시예요. 함께 쓰는 책은 지금 준비하고 있어요.</p>
+            </section>
+
             <section className="purpose-section">
               <p className="eyebrow">지금 떠오르는 마음이 있나요?</p>
               <div className="purpose-tabs" role="group" aria-label="시작하는 마음">
