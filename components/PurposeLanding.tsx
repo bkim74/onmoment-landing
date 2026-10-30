@@ -7,7 +7,7 @@
  *   - 시작 버튼은 앱의 /start 로 간다. 넘기는 것은 허용 목록 enum(목적·계기·버튼 위치)뿐이다.
  *     이름·본문·날짜는 이 페이지에서 받지도 넘기지도 않는다.
  *   - 예시는 모두 가상 기록이다. 실제 사용자의 변화나 후기로 읽히지 않게 표시한다.
- *   - 지금 앱이 하는 일(기록·한 쪽·직접 고른 책)과 준비 중인 일(사람이 함께하는 편집·인쇄)을 섞지 않는다.
+ *   - 지금 앱이 하는 일(기록·한 쪽·직접 고른 책)과 준비 중인 일(AI 편집 초안 시범·인쇄)을 섞지 않는다.
  */
 
 import { useState } from "react";
@@ -107,7 +107,7 @@ export default function PurposeLanding({ ways }: { ways: React.ReactNode }) {
               </div>
 
               <div className="evidence">
-                <p className="example-heading">누구에게 건네고 싶으세요?</p>
+                <p className="example-heading">누구에게 건네는 이야기일까요? 예시로 펼쳐 보세요</p>
                 <div className="people" role="group" aria-label="이야기 예시 고르기">
                   {PEOPLE.map((x) => (
                     <button key={x.key} type="button" aria-pressed={person === x.key} onClick={() => setPerson(x.key)}>{x.label}</button>
@@ -160,7 +160,7 @@ export default function PurposeLanding({ ways }: { ways: React.ReactNode }) {
               </div>
               <div className="easy-steps">
                 <article><span>01</span><div><h3>내가 할 일 — 이야기 가져오기</h3><p>새 편지를 쓰거나, 남겨둔 기록을 골라요.<br />기록이 없다면 지금 떠오른 기억부터.</p></div></article>
-                <article><span>02</span><div><h3>온순간이 도울 일 — 한 편으로 엮기</h3><p>고른 기록을 책의 쪽으로 바로 놓아 보여드려요.<br />장면·순서·제목을 함께 다듬는 편집은 사람이 돕는 시범으로 준비하고 있어요.</p></div></article>
+                <article><span>02</span><div><h3>온순간이 도울 일 — 한 편으로 엮기</h3><p>고른 기록을 책의 쪽으로 바로 놓아 보여드려요.<br />기록에서 이야기를 찾아 장면·순서·제목을 엮는 편집 초안은 시범으로 만들고 있어요. 원문과 편집 글은 나눠서 보여드려요.</p></div></article>
                 <article><span>03</span><div><h3>내가 정할 일 — 확인하고 간직하기</h3><p>원문을 확인하고, 내 뜻에 맞게 고쳐요.<br />혼자 간직할지, 누구에게 건넬지도 내가 정합니다.</p></div></article>
               </div>
             </section>
@@ -252,7 +252,7 @@ export default function PurposeLanding({ ways }: { ways: React.ReactNode }) {
               <p>{c.note2}</p>
               <small>기록을 그대로 옮길 수도, 흐름을 엮을 수도 있습니다. 연결한 문장과 제목은 내가 확인하고 고칩니다.</small>
             </details>
-            <p className="quiet">가상 기록 두 개로 구성한 편집 예시입니다. 이렇게 다듬는 편집은 사람이 함께하는 시범으로 준비하고 있어요.</p>
+            <p className="quiet">가상 기록 두 개로 구성한 편집 예시입니다. 이렇게 엮는 편집 초안은 시범으로 만들고 있어요.</p>
             <div className="actions">
               <a className="primary" href={startHref("gift", "example")}>내 마음으로 시작하기 ↗</a>
               <a className="secondary" href={startHref("self", "example")}>나에게 남기기</a>
