@@ -524,7 +524,7 @@ export default function StoryPage() {
             오늘이 선물이 되도록, 그렇게 살아가는 너와 나
           </p>
           <p className="mt-4 text-[11px] text-wood-natural/40">
-            지금 온순간은 공개 베타로 함께 다듬고 있어요. 기록을 엮는 편집 초안은 시범으로 만들고 있고, 인쇄는 준비 중입니다.
+            지금 온순간은 초대받은 분부터 함께 다듬는 작은 베타예요. AI 편집 초안과 종이책은 시범을 준비하고 있어요.
           </p>
         </section>
       </main>

@@ -5,7 +5,8 @@
  *
  * 경계
  *   - 버튼은 하나. 앱의 /start 로 가고, 넘기는 것은 버튼 위치(src)뿐이다.
- *   - 예시는 가상 기록이다. 원문과 AI 편집 초안을 가르고, 지금 되는 일과 시범 중인 일을 섞지 않는다.
+ *   - 예시는 가상 기록이다. 원문과 AI 시안을 가르고, 지금 되는 일과 준비 중인 일을 섞지 않는다.
+ *   - 사람 편집 시범은 기본 서비스가 아니라 이 화면에 싣지 않는다. 앱의 별도 선택 안내에만 둔다.
  *   - 앱 주소 바꾸기(?app=)는 *.vercel.app 시범 화면에서만 듣는다. 운영 주소에서는 무시한다.
  */
 
@@ -38,7 +39,7 @@ export default function FirstLineLanding({ ways }: { ways: React.ReactNode }) {
               <div className="actions">
                 <a className="primary" href={start("hero")}>오늘의 한 줄 쓰기 <span>↗</span></a>
               </div>
-              <p className="quiet">가입하면 바로 쓸 수 있어요. 나만의 공간으로 시작합니다.</p>
+              <p className="quiet">지금은 초대받은 분부터 함께하는 작은 베타예요. 초대 링크가 없으면 참여 신청 안내로 이어져요. 나만의 공간으로 시작합니다.</p>
             </div>
 
             <div className="evidence">
@@ -46,7 +47,7 @@ export default function FirstLineLanding({ ways }: { ways: React.ReactNode }) {
                 <small>11월 2일</small>
                 <p>퇴근길에 비가 그쳤다.<br />우산을 접고 조금 더 걸었다.</p>
               </div>
-              <p className="source">가상 기록 예시 · 쓴 글을 고치지 않고 그대로 놓은 한 쪽</p>
+              <p className="source">가상 기록 예시 · 앱에서 바로 보는 한 쪽, 쓴 글 그대로</p>
             </div>
           </section>
 
@@ -57,13 +58,14 @@ export default function FirstLineLanding({ ways }: { ways: React.ReactNode }) {
             </div>
             <div className="easy-steps">
               <article><span>1</span><div><h3>오늘의 한 줄을 씁니다</h3><p>한 단어도, 긴 글도 쓴 그대로 담깁니다.</p></div></article>
-              <article><span>2</span><div><h3>내 말이 책의 한 쪽이 됩니다</h3><p>남긴 글을 한 쪽으로 보고, 책 탭에서 언제든 다시 찾습니다.</p></div></article>
-              <article><span>3</span><div><h3>쌓이면 내 책이 됩니다</h3><p>담을 기록은 내가 고릅니다. 원하면 하루를 돌아보는 시간도 이어집니다.</p></div></article>
+              <article><span>2</span><div><h3>원문을 한 쪽으로 봅니다</h3><p>쓴 글을 고치지 않고 책의 한 쪽에 놓습니다.</p></div></article>
+              <article><span>3</span><div><h3>저장을 확인하고 다시 읽습니다</h3><p>남긴 글은 책 탭에서 언제든 다시 읽습니다. 원하면 하루를 돌아보는 시간도 이어집니다.</p></div></article>
+              <article><span>4</span><div><h3>쌓이면 내 책이 됩니다</h3><p>담을 기록은 내가 고르고, 책 모양으로 미리 봅니다.</p></div></article>
             </div>
           </section>
 
           <section className="purpose-section">
-            <p className="eyebrow">책은 이렇게 만들어집니다</p>
+            <p className="eyebrow">지금 되는 일과 준비 중인 일</p>
             <div className="purpose-preview">
               <div className="purpose-paper">
                 <small>내가 쓴 원문</small>
@@ -71,15 +73,15 @@ export default function FirstLineLanding({ ways }: { ways: React.ReactNode }) {
                 <p>오늘은 할 말을 끝내 하지 못했다.</p>
               </div>
               <div className="purpose-paper">
-                <small>AI 편집 초안 · 시범 제작</small>
+                <small>AI 편집 시안 · 앱에 아직 없는 기능</small>
                 <p>할 말을 끝내 하지 못한 날에도, 퇴근길에는 우산을 접고 조금 더 걸었다.</p>
-                <small>원문에 있는 일로만 이야기를 엮어 제안합니다.</small>
+                <small>준비 중인 방향을 보여 주는 가상 시안입니다.</small>
               </div>
             </div>
             <p className="source">모두 가상 기록·편집 예시입니다.</p>
             <p className="quiet">
-              지금 앱에서 되는 일: 한 줄 남기기, 한 쪽으로 보기, 다시 찾기, 고른 기록으로 책 미리 보기.<br />
-              시범 중인 일: AI 편집 초안, 인쇄된 책. 원문은 그대로 보관하고, 책으로 건네기 전 내가 확인합니다.
+              지금 앱에서: 한 줄 쓰기, 원문을 한 쪽으로 보기, 다시 읽기, 고른 기록을 책 모양으로 미리 보기.<br />
+              준비 중: AI 편집 초안과 종이책은 시범을 준비하고 있어요. 지금 신청하거나 받을 수 있는 기능은 아니에요.
             </p>
           </section>
 
