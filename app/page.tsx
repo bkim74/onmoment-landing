@@ -1,5 +1,5 @@
 import Link from "next/link";
-import PurposeLanding from "@/components/PurposeLanding";
+import FirstLineLanding from "@/components/FirstLineLanding";
 import "./home.css";
 
 // 첫 화면 아래 — 온순간이 기록을 대하는 방식(확정 표현 유지)과 깊이 읽기 입구
@@ -14,6 +14,7 @@ function Ways() {
         <li>무엇을 남기고 누구에게 건넬지는 내가 정합니다.</li>
       </ul>
       <nav aria-label="더 읽기">
+        <Link className="text" href="/story">온순간의 이야기 →</Link>
         <Link className="text" href="/journal">온순간 저널 →</Link>
         <Link className="text" href="/principles">기록을 대하는 방식 →</Link>
       </nav>
@@ -27,5 +28,5 @@ function Ways() {
 }
 
 export default function Home() {
-  return <PurposeLanding ways={<Ways />} />;
+  return <FirstLineLanding ways={<Ways />} />;
 }
