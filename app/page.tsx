@@ -1,6 +1,7 @@
 import Link from "next/link";
-import FirstLineLanding from "@/components/FirstLineLanding";
+import JourneyLanding from "@/components/JourneyLanding";
 import "./home.css";
+import "./journey.css";
 
 // 첫 화면 아래 — 온순간이 기록을 대하는 방식(확정 표현 유지)과 깊이 읽기 입구
 function Ways() {
@@ -28,5 +29,5 @@ function Ways() {
 }
 
 export default function Home() {
-  return <FirstLineLanding ways={<Ways />} />;
+  return <JourneyLanding ways={<Ways />} />;
 }
