@@ -13,6 +13,9 @@ export type Journey = {
   steps: [Step, Step];
   rest: string;
   book: string;
+  /** 두 권 — 같은 날들에서 나오지만 읽는 사람이 다르다 */
+  selfBook: string;
+  giftBook: string;
 };
 
 export const JOURNEYS: Journey[] = [
@@ -29,6 +32,8 @@ export const JOURNEYS: Journey[] = [
     ],
     rest: "오늘은 아무 말도 보태지 않았다. 나도 좀 쉬었다.",
     book: "언젠가 아이에게 건넬 책",
+    selfBook: "내가 다시 펼치는 책",
+    giftBook: "아이에게 건네는 책",
   },
   {
     key: "retire",
@@ -43,6 +48,8 @@ export const JOURNEYS: Journey[] = [
     ],
     rest: "오늘은 벤치에 오래 앉아 있었다. 볼 것이 많았다.",
     book: "자녀에게 남기는 내 이야기",
+    selfBook: "내가 다시 펼치는 책",
+    giftBook: "자녀에게 건네는 책",
   },
   {
     key: "baby",
@@ -57,6 +64,8 @@ export const JOURNEYS: Journey[] = [
     ],
     rest: "오늘은 아기 잘 때 같이 잤다.",
     book: "아이가 자라서 읽을 이 시절",
+    selfBook: "내가 다시 펼치는 책",
+    giftBook: "아이에게 건네는 책",
   },
   {
     key: "pilgrim",
@@ -71,6 +80,8 @@ export const JOURNEYS: Journey[] = [
     ],
     rest: "오늘은 길에서 찍은 사진을 한 장만 다시 보았다.",
     book: "길 위와 돌아온 뒤를 잇는 책",
+    selfBook: "내가 다시 펼치는 책",
+    giftBook: "함께 걸은 사람에게 건네는 책",
   },
   {
     key: "unsure",
@@ -85,5 +96,7 @@ export const JOURNEYS: Journey[] = [
     ],
     rest: "오늘은 하늘만 보고 끝냈다. 그것도 오늘의 한 줄이다.",
     book: "나에게 남기는 책, 또는 누군가에게 건네는 책",
+    selfBook: "내가 다시 펼치는 책",
+    giftBook: "소중한 사람에게 건네는 책",
   },
 ];

@@ -1,7 +1,7 @@
 "use client";
 
 /**
- * 첫 화면 — 오늘의 한 줄이 책이 된다. 여정을 누르면 그 시절의 하루를 전체 화면에서 직접 넘겨 본다.
+ * 첫 화면 — 내가 먼저 달라진 날들이 두 권의 책으로 남는다. 상대가 변한다고 약속하지 않고 장면으로만 보여 준다. 여정을 누르면 그 시절의 하루를 전체 화면에서 직접 넘겨 본다.
  *
  * 경계
  *   - 고르지 않아도 시작할 수 있다. 앱으로 넘기는 값은 버튼 위치·여정 이름(src)뿐, 이름·본문은 없다.
@@ -92,6 +92,7 @@ function JourneyView({ journey, startHref, onBack }: { journey: Journey; startHr
               <article><small>다음 날</small><p>{after}</p></article>
             </div>
             <p className="jv-book-for">쌓이면, <strong>{journey.book}</strong></p>
+            <div className="jv-two"><span>{journey.selfBook}</span><span>{journey.giftBook}</span></div>
             <p className="jv-note">담을 기록은 내가 고릅니다. 종이책은 시범을 준비하고 있어요.</p>
           </div>
         )}
@@ -104,24 +105,25 @@ function JourneyView({ journey, startHref, onBack }: { journey: Journey; startHr
   );
 }
 
-// 첫 화면의 책 — 부모 여정의 문장을 한 쪽씩 넘긴다. 움직임을 줄인 환경에서는 넘기지 않는다.
-const parent = JOURNEYS.find((j) => j.key === "teen")!;
-const PAGES = [parent.steps[0].after, parent.line, parent.steps[1].after];
+// 첫 화면 — 같은 날들에서 나오는 두 권. 표지는 가상 예시다.
+const STORY = JOURNEYS.find((j) => j.key === "teen")!;
 
-function BookTurn({ paused }: { paused: boolean }) {
-  const [i, setI] = useState(0);
-  useEffect(() => {
-    if (paused || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const t = setInterval(() => setI((n) => (n + 1) % PAGES.length), 5200);
-    return () => clearInterval(t);
-  }, [paused]);
+function TwoBooks() {
   return (
-    <figure className="ol-book" aria-label="책 한 쪽 예시">
-      <div className="ol-spread">
-        <div className="ol-page ol-left"><small>언젠가 아이에게 건넬 책</small><span className="ol-title">너를 기다린<br />저녁들</span></div>
-        <div key={i} className="ol-page ol-right"><p>{PAGES[i]}</p><small className="ol-no">{String(i + 12).padStart(2, "0")}</small></div>
+    <figure className="ol-books" aria-label="두 권의 책 표지 예시">
+      <div className="ol-covers">
+        <div className="ol-cover ol-cover-self">
+          <small>나에게</small>
+          <span>다시<br />펼치는<br />저녁들</span>
+          <em>온순간</em>
+        </div>
+        <div className="ol-cover ol-cover-gift">
+          <small>너에게</small>
+          <span>네가 먼저<br />말을 꺼낸<br />저녁</span>
+          <em>온순간</em>
+        </div>
       </div>
-      <figcaption>가상 기록으로 만든 예시</figcaption>
+      <figcaption>가상 표지 예시</figcaption>
     </figure>
   );
 }
@@ -194,20 +196,36 @@ export default function JourneyLanding({ ways }: { ways: React.ReactNode }) {
           </header>
           <div className="ol-hero-in">
             <div className="ol-lead">
-              <h1>오늘의 한 줄이,<br />평생 간직할 책이 됩니다.</h1>
-              <p className="ol-sub">내 말 그대로, 한 쪽씩.</p>
+              <h1>내가 먼저 달라진 날들이,<br />두 권의 책으로 남습니다.</h1>
+              <p className="ol-sub">한 권은 내가 다시 펼치는 책.<br />한 권은 소중한 사람에게 건네는 책.</p>
               <a className="ol-cta" href={start("hero")}>오늘의 한 줄 쓰기 <span>↗</span></a>
               <p className="ol-small">쓰는 건 무료, 책은 원할 때만. 지금은 초대받은 분부터 함께합니다.</p>
             </div>
-            <BookTurn paused={!!current} />
+            <TwoBooks />
           </div>
         </section>
 
         <main>
           <section className="ol-how">
-            <article><span>쓰기</span><h3>한 줄이면 충분합니다</h3><p>말하듯 적으면, 그날이 남습니다.</p></article>
-            <article><span>비춤</span><h3>원할 때, 다른 시선으로</h3><p>AI가 건네는 질문으로 내 하루를 다시 봅니다.</p></article>
-            <article><span>책</span><h3>쌓이면, 내 책으로</h3><p>담을 날은 내가 고르고, 누구에게 건넬지도 내가 정합니다.</p></article>
+            <article><span>한 줄</span><h3>내 마음이 먼저 보입니다</h3><p>오늘 마음에 남은 한 줄이면 충분합니다.</p></article>
+            <article><span>비춤</span><h3>한 걸음 떨어져 봅니다</h3><p>AI의 질문으로 오늘을 다른 시선으로 봅니다.</p></article>
+            <article><span>한 걸음</span><h3>오늘의 한마디가 달라집니다</h3><p>해보고 싶은 작은 한 걸음은 내가 고릅니다.</p></article>
+          </section>
+
+          <section className="ol-story">
+            <p className="ol-story-kicker">어느 부모의 기록 · 가상 예시</p>
+            <h2>그 저녁의 한마디는,<br />이렇게 남습니다.</h2>
+            <ol className="ol-time">
+              <li><small>첫날</small><p>{STORY.line}</p></li>
+              <li className="ol-time-q"><small>AI의 비춤</small><p>{STORY.mirror}</p></li>
+              <li className="ol-time-step"><small>내가 고른 한 걸음</small><p>{STORY.steps[0].label}</p></li>
+              <li><small>다음 날</small><p>{STORY.steps[0].after}</p></li>
+              <li className="ol-time-last"><small>마흔 날째</small><p>아이가 먼저 오늘 있었던 일을 꺼냈다. 나는 끝까지 듣기만 했다.</p></li>
+            </ol>
+            <div className="ol-fork">
+              <article><small>{STORY.selfBook}</small><p>불안했던 날도, 질문 하나를 건넨 날도. 그 저녁들이 내 책에 그대로 있다.</p></article>
+              <article className="ol-fork-gift"><small>{STORY.giftBook}</small><p>네가 먼저 말을 꺼낸 저녁을 기억해. 나는 그날, 듣는 법을 조금 배웠어.</p></article>
+            </div>
           </section>
 
           <section className="jl-pick" id="journeys">
