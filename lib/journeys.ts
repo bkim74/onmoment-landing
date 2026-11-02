@@ -2,6 +2,8 @@
 // 모두 지어낸 기록이다. 실제 사용자의 변화나 후기로 쓰지 않는다.
 export type JourneyKey = "teen" | "retire" | "baby" | "pilgrim" | "unsure";
 export type Step = { label: string; after: string };
+// 기쁜 날의 하루 — 정본: 받음(오늘 나를 살게 한 것)과 누림이 나눔보다 먼저다. 나아지려는 이야기가 아니다.
+export type Joy = { line: string; comfort: string; mirror: string; steps: [Step, Step]; rest: string };
 export type Journey = {
   key: JourneyKey;
   /** false 면 카드에 "오픈 준비 중"만 보이고 눌리지 않는다. 주소로 바로 와도 열리지 않는다. */
@@ -18,6 +20,8 @@ export type Journey = {
   /** 두 권 — 같은 날들에서 나오지만 읽는 사람이 다르다 */
   selfBook: string;
   giftBook: string;
+  /** 있으면 부모처럼 [기쁜 날 / 버거운 날]을 고르며 본다 */
+  joy?: Joy;
 };
 
 export const JOURNEYS: Journey[] = [
@@ -37,6 +41,16 @@ export const JOURNEYS: Journey[] = [
     book: "언젠가 아이에게 건넬 책",
     selfBook: "내가 다시 펼치는 책",
     giftBook: "아이에게 건네는 책",
+    joy: {
+      line: "오늘 아이가 먼저 웃었다. 별것 아닌 농담이었는데 하루 종일 좋았다.",
+      comfort: "오래 간직하고 싶은 하루네요.",
+      mirror: "오늘의 웃음에서, 무엇이 가장 오래 남았나요?",
+      steps: [
+        { label: "오늘 좋았다고 아이에게 말하기", after: "오늘 네 농담 웃겼다고 했다. 아이가 어이없어 하며 또 웃었다." },
+        { label: "이 기분을 조금 더 누리기", after: "설거지하다 그 농담이 생각나서 혼자 또 웃었다." },
+      ],
+      rest: "오늘은 더 적지 않았다. 그 웃음이면 충분했다.",
+    },
   },
   {
     key: "retire",
@@ -105,5 +119,15 @@ export const JOURNEYS: Journey[] = [
     book: "나에게 남기는 책, 또는 누군가에게 건네는 책",
     selfBook: "내가 다시 펼치는 책",
     giftBook: "소중한 사람에게 건네는 책",
+    joy: {
+      line: "서른여덟에 처음으로 혼자 운전해 바다까지 갔다. 차 안에서 소리를 질렀다.",
+      comfort: "오래 간직하고 싶은 하루네요.",
+      mirror: "오늘의 나에게, 뭐라고 말해 주고 싶나요?",
+      steps: [
+        { label: "오늘의 나를 축하하기", after: "저녁에 나에게 케이크 한 조각을 샀다. 축하할 만한 날이었다." },
+        { label: "떠오른 사람에게 자랑하기", after: "친구에게 바다 사진을 보냈다. 네가 운전을? 하고 답이 왔다." },
+      ],
+      rest: "오늘은 바다만 생각하다 잠들었다.",
+    },
   },
 ];

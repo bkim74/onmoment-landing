@@ -1,7 +1,7 @@
 "use client";
 
 /**
- * 첫 화면 — 아무에게도 못 한 말을 두는 곳. 이해받음 → 알아차림 → 흘러넘침 순서(세 겹 효능), 어디서 멈춰도 온전하다.
+ * 첫 화면 — 못 한 말도, 벅찬 오늘도 두는 곳. 받음·누림이 나눔보다 먼저이고, 문제가 없는 사람도 환영한다.
  * 메인에는 관계 이야기를 두지 않고(Six Bans 6), 여정을 누르면 그 시절의 하루를 전체 화면에서 넘겨 본다. 상대가 변한다고 약속하지 않는다.
  *
  * 경계
@@ -23,6 +23,8 @@ function Lines({ text }: { text: string }) {
 
 function JourneyView({ journey, startHref, onBack }: { journey: Journey; startHref: string; onBack: () => void }) {
   const [showComfort, setShowComfort] = useState(false);
+  const [tone, setTone] = useState<"joy" | "hard">(journey.joy ? "joy" : "hard");
+  const day = tone === "joy" && journey.joy ? journey.joy : journey;
   const [path, setPath] = useState<"rest" | "more" | null>(null);
   const [answer, setAnswer] = useState<"yes" | "no" | null>(null);
   const [after, setAfter] = useState<string | null>(null);
@@ -42,6 +44,7 @@ function JourneyView({ journey, startHref, onBack }: { journey: Journey; startHr
   }, [after, path]);
 
   const choose = (label: string, text: string) => { setChosen(label); setAfter(text); };
+  const pickTone = (t: "joy" | "hard") => { setTone(t); setPath(null); setAnswer(null); setAfter(null); setChosen(null); };
 
   return (
     <div className="jv" role="dialog" aria-modal="true" aria-label={journey.label}>
@@ -56,12 +59,19 @@ function JourneyView({ journey, startHref, onBack }: { journey: Journey; startHr
         <p className="eyebrow">{journey.label}</p>
         <h2><Lines text={journey.hook} /></h2>
 
+        {journey.joy && (
+          <div className="jv-tones" role="group" aria-label="어떤 날을 볼까요">
+            <button type="button" aria-pressed={tone === "joy"} onClick={() => pickTone("joy")}>기쁜 날</button>
+            <button type="button" aria-pressed={tone === "hard"} onClick={() => pickTone("hard")}>버거운 날</button>
+          </div>
+        )}
+
         <p className="jv-step-label">오늘 남긴 한 줄</p>
-        <div className="jv-line"><p>{journey.line}</p></div>
+        <div className={`jv-line${tone === "joy" && journey.joy ? " jv-line-joy" : ""}`}><p key={day.line}>{day.line}</p></div>
 
         {showComfort && (
           <div className="jv-rise">
-            <p className="jv-comfort">{journey.comfort}</p>
+            <p className="jv-comfort">{day.comfort}</p>
             {path === null && (
               <div className="jv-choices two">
                 <button type="button" onClick={() => setPath("rest")}>오늘은 여기까지</button>
@@ -74,7 +84,7 @@ function JourneyView({ journey, startHref, onBack }: { journey: Journey; startHr
         {path === "rest" && (
           <div ref={bookRef} className="jv-rise jv-book">
             <p className="jv-step-label">이 한 줄은 책의 한 쪽으로</p>
-            <div className="jv-page"><p>{journey.line}</p></div>
+            <div className="jv-page"><p>{day.line}</p></div>
             <p className="jv-note">오늘은 이걸로 충분합니다. 내일 또 와도, 며칠 뒤에 와도 그대로 있어요.</p>
           </div>
         )}
@@ -82,7 +92,7 @@ function JourneyView({ journey, startHref, onBack }: { journey: Journey; startHr
         {path === "more" && (
           <div className="jv-rise">
             <p className="jv-step-label">원할 때, 다른 시선으로</p>
-            <p className="jv-mirror">{journey.mirror}</p>
+            <p className="jv-mirror">{day.mirror}</p>
             {answer === null ? (
               <div className="jv-choices two">
                 <button type="button" onClick={() => setAnswer("yes")}>맞아요</button>
@@ -98,10 +108,10 @@ function JourneyView({ journey, startHref, onBack }: { journey: Journey; startHr
           <div className="jv-rise">
             <p className="jv-step-label">마음이 가는 한 걸음이 있다면</p>
             <div className="jv-choices">
-              {journey.steps.map((s) => (
+              {day.steps.map((s) => (
                 <button key={s.label} type="button" aria-pressed={chosen === s.label} onClick={() => choose(s.label, s.after)}>{s.label}</button>
               ))}
-              <button type="button" aria-pressed={chosen === "rest"} onClick={() => choose("rest", journey.rest)}>오늘은 쉬기</button>
+              <button type="button" aria-pressed={chosen === "rest"} onClick={() => choose("rest", day.rest)}>오늘은 쉬기</button>
             </div>
           </div>
         )}
@@ -110,7 +120,7 @@ function JourneyView({ journey, startHref, onBack }: { journey: Journey; startHr
           <div ref={bookRef} className="jv-rise jv-book">
             <p className="jv-step-label">이 날들이 책의 한 쪽으로</p>
             <div className="jv-pages">
-              <article><small>첫째 날</small><p>{journey.line}</p></article>
+              <article><small>첫째 날</small><p>{day.line}</p></article>
               <article><small>다음 날</small><p>{after}</p></article>
             </div>
             <p className="jv-book-for">쌓이면, <strong>{journey.book}</strong></p>
@@ -128,9 +138,10 @@ function JourneyView({ journey, startHref, onBack }: { journey: Journey; startHr
 
 // 첫 화면의 종이 — 누구에게도 보여 주지 않은 한 줄이 조용히 놓인다. 관계 이야기는 여기에 두지 않는다(Six Bans 6).
 const QUIET_LINES = [
-  "괜찮다고 했지만, 괜찮지 않았다.",
-  "아무도 모르지만, 오늘 나는 꽤 애썼다.",
-  "사실은 오늘 좀 서운했다.",
+  { text: "서른여덟에 면허를 땄다. 주차장에서 혼자 소리를 질렀다.", joy: true },
+  { text: "괜찮다고 했지만, 괜찮지 않았다.", joy: false },
+  { text: "오늘 하늘이 처음 보는 색이었다. 사진 대신 한 줄로 남긴다.", joy: true },
+  { text: "아무도 모르지만, 오늘 나는 꽤 애썼다.", joy: false },
 ];
 
 function QuietPage({ paused }: { paused: boolean }) {
@@ -142,7 +153,7 @@ function QuietPage({ paused }: { paused: boolean }) {
   }, [paused]);
   return (
     <figure className="ol-quiet">
-      <div className="ol-paper"><p key={i}>{QUIET_LINES[i]}</p></div>
+      <div className={`ol-paper${QUIET_LINES[i].joy ? " ol-paper-joy" : ""}`}><p key={i}>{QUIET_LINES[i].text}</p></div>
       <figcaption>가상 기록 예시</figcaption>
     </figure>
   );
@@ -216,8 +227,8 @@ export default function JourneyLanding({ ways }: { ways: React.ReactNode }) {
           </header>
           <div className="ol-hero-in">
             <div className="ol-lead">
-              <h1>아무에게도 못 한 말,<br />여기에 두세요.</h1>
-              <p className="ol-sub">있는 그대로 담습니다.<br />나만의 공간으로 시작합니다.</p>
+              <h1>아무에게도 못 한 말도,<br />벅차게 좋았던 오늘도,<br />여기에 두세요.</h1>
+              <p className="ol-sub">있는 그대로 담습니다.<br />오늘이 선물이 되도록.</p>
               <a className="ol-cta" href={start("hero")}>오늘의 한 줄 쓰기 <span>↗</span></a>
               <p className="ol-small">쓰는 건 무료예요. 지금은 초대받은 분부터 함께합니다.</p>
             </div>
@@ -227,19 +238,19 @@ export default function JourneyLanding({ ways }: { ways: React.ReactNode }) {
 
         <main>
           <section className="ol-flow">
-            <article><h3>먼저, 쉬어 갑니다</h3><p>한 줄이면 충분합니다.</p></article>
+            <article><h3>좋은 날은 오래, 버거운 날은 가볍게</h3><p>한 줄이면 충분합니다.</p></article>
             <article><h3>그러다 보면, 내 마음이 보입니다</h3><p>원할 때 AI가 조용히 비춰 줍니다.</p></article>
             <article><h3>마음이 차면, 건네고 싶은 말이 생깁니다</h3><p>언제 건넬지는 내가 정합니다.</p></article>
             <p className="ol-enough">어디서 멈춰도 온전합니다.</p>
           </section>
 
           <section className="ol-books-sec">
-            <h2>그 날들이,<br />책으로 남습니다.</h2>
+            <h2>그 날들이,<br />선물이 됩니다.</h2>
             <div className="ol-covers">
-              <div className="ol-cover ol-cover-self"><span>나에게<br />남기는 책</span><em>온순간</em></div>
-              <div className="ol-cover ol-cover-gift"><span>누군가에게<br />건네는 책</span><em>온순간</em></div>
+              <div className="ol-cover ol-cover-self"><span>소중한<br />나에게</span><em>온순간</em></div>
+              <div className="ol-cover ol-cover-gift"><span>소중한<br />당신에게</span><em>온순간</em></div>
             </div>
-            <p className="ol-books-note">내 말 그대로, 한 쪽씩. 표지는 가상 예시이고, 종이책은 시범을 준비하고 있어요.</p>
+            <p className="ol-books-note">나에게 남기는 책 한 권, 건네는 책 한 권. 내 말 그대로, 한 쪽씩. 표지는 가상 예시이고, 종이책은 시범을 준비하고 있어요.</p>
           </section>
 
           <section className="jl-pick" id="journeys">
@@ -262,7 +273,7 @@ export default function JourneyLanding({ ways }: { ways: React.ReactNode }) {
           </section>
 
           <section className="ol-close">
-            <h2>첫 줄은, 오늘이어도 좋습니다.</h2>
+            <h2>오늘이 그 첫 줄입니다.</h2>
             <a className="ol-cta" href={start("closing")}>오늘의 한 줄 쓰기 <span>↗</span></a>
             <details className="ol-status">
               <summary>지금 되는 일과 준비 중인 일</summary>
