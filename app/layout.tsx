@@ -5,9 +5,9 @@ const SITE_URL = "https://onmoment.kr";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: "온순간 · 내가 쓴 한 줄이 쌓여, 내 책이 됩니다",
+  title: "온순간 · 오늘의 한 줄이, 평생 간직할 책이 됩니다",
   description:
-    "오늘을 온전히 남기는, 한 줄. 남긴 글은 내 말 그대로 책의 한 쪽이 되고, 쌓이면 내 책이 됩니다.",
+    "하루 한 줄이면 충분합니다. 내 말 그대로 한 쪽씩, 나와 소중한 사람이 간직할 책이 됩니다.",
   alternates: { canonical: SITE_URL },
   openGraph: {
     type: "website",

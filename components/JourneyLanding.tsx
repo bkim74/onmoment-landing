@@ -1,7 +1,7 @@
 "use client";
 
 /**
- * 첫 화면 — 한 줄·비춤·내가 고른 한 걸음이 쌓여 책이 된다. 여정을 누르면 그 시절의 하루를 전체 화면에서 직접 넘겨 본다.
+ * 첫 화면 — 오늘의 한 줄이 책이 된다. 여정을 누르면 그 시절의 하루를 전체 화면에서 직접 넘겨 본다.
  *
  * 경계
  *   - 고르지 않아도 시작할 수 있다. 앱으로 넘기는 값은 버튼 위치·여정 이름(src)뿐, 이름·본문은 없다.
@@ -45,7 +45,7 @@ function JourneyView({ journey, startHref, onBack }: { journey: Journey; startHr
     <div className="jv" role="dialog" aria-modal="true" aria-label={journey.label}>
       <div className="jv-bar">
         <button ref={backRef} type="button" className="jv-back" onClick={onBack}>
-          <span aria-hidden="true">←</span> 다른 시절 보기
+          <span aria-hidden="true">←</span> 다른 이야기 보기
         </button>
         <span className="jv-tag">가상 예시</span>
       </div>
@@ -101,6 +101,28 @@ function JourneyView({ journey, startHref, onBack }: { journey: Journey; startHr
         <a className="primary" href={startHref}>오늘의 한 줄 쓰기 <span>↗</span></a>
       </div>
     </div>
+  );
+}
+
+// 첫 화면의 책 — 부모 여정의 문장을 한 쪽씩 넘긴다. 움직임을 줄인 환경에서는 넘기지 않는다.
+const parent = JOURNEYS.find((j) => j.key === "teen")!;
+const PAGES = [parent.steps[0].after, parent.line, parent.steps[1].after];
+
+function BookTurn({ paused }: { paused: boolean }) {
+  const [i, setI] = useState(0);
+  useEffect(() => {
+    if (paused || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const t = setInterval(() => setI((n) => (n + 1) % PAGES.length), 5200);
+    return () => clearInterval(t);
+  }, [paused]);
+  return (
+    <figure className="ol-book" aria-label="책 한 쪽 예시">
+      <div className="ol-spread">
+        <div className="ol-page ol-left"><small>언젠가 아이에게 건넬 책</small><span className="ol-title">너를 기다린<br />저녁들</span></div>
+        <div key={i} className="ol-page ol-right"><p>{PAGES[i]}</p><small className="ol-no">{String(i + 12).padStart(2, "0")}</small></div>
+      </div>
+      <figcaption>가상 기록으로 만든 예시</figcaption>
+    </figure>
   );
 }
 
@@ -165,36 +187,31 @@ export default function JourneyLanding({ ways }: { ways: React.ReactNode }) {
   return (
     <div id="om-purpose">
       <div className="surface" aria-hidden={current ? true : undefined}>
-        <header>
-          <span className="logo">온순간<small>ONMOMENT</small></span>
-          <a className="text" href={`${app}/`}>이미 쓰고 있어요</a>
-        </header>
+        <section className="ol-hero">
+          <header>
+            <span className="logo">온순간<small>ONMOMENT</small></span>
+            <a className="text" href={`${app}/`}>이미 쓰고 있어요</a>
+          </header>
+          <div className="ol-hero-in">
+            <div className="ol-lead">
+              <h1>오늘의 한 줄이,<br />평생 간직할 책이 됩니다.</h1>
+              <p className="ol-sub">내 말 그대로, 한 쪽씩.</p>
+              <a className="ol-cta" href={start("hero")}>오늘의 한 줄 쓰기 <span>↗</span></a>
+              <p className="ol-small">쓰는 건 무료, 책은 원할 때만. 지금은 초대받은 분부터 함께합니다.</p>
+            </div>
+            <BookTurn paused={!!current} />
+          </div>
+        </section>
 
         <main>
-          <section className="hero">
-            <div className="lead">
-              <p className="eyebrow">일기를 써도 그때뿐이었다면</p>
-              <h1>내가 쓴 한 줄이 쌓여,<br /><em>내 책이 됩니다.</em></h1>
-              <p className="intro">한 줄을 남기면, 원할 때 AI가 세 줄로 비춰 줘요.<br /><strong>한 걸음은 내가 고르고, 살아낸 날들은 책이 됩니다.</strong></p>
-              <div className="actions">
-                <a className="primary" href={start("hero")}>오늘의 한 줄 쓰기 <span>↗</span></a>
-              </div>
-              <p className="quiet">쓰는 건 무료예요. 지금은 초대받은 분부터 함께하는 작은 베타예요.</p>
-            </div>
-
-            <div className="evidence">
-              <div className="jv-three" aria-label="세 줄 예시">
-                <div><small>내 한 줄</small><p>오늘 엄마 전화에 또 짜증냈다. 그만큼 지쳐 있었다.</p></div>
-                <div><small>AI의 비춤</small><p>혹시 인정받고 싶었던 걸까?</p></div>
-                <div><small>내가 고르는 한 걸음</small><p>오늘 밤 ‘고마워’ 한 줄 보내 볼까? 오늘은 쉬어도 좋고.</p></div>
-              </div>
-              <p className="source">가상 기록 예시 · AI는 비춰 줄 뿐, 정하는 건 나입니다</p>
-            </div>
+          <section className="ol-how">
+            <article><span>쓰기</span><h3>한 줄이면 충분합니다</h3><p>말하듯 적으면, 그날이 남습니다.</p></article>
+            <article><span>비춤</span><h3>원할 때, 다른 시선으로</h3><p>AI가 건네는 질문으로 내 하루를 다시 봅니다.</p></article>
+            <article><span>책</span><h3>쌓이면, 내 책으로</h3><p>담을 날은 내가 고르고, 누구에게 건넬지도 내가 정합니다.</p></article>
           </section>
 
           <section className="jl-pick" id="journeys">
-            <h2>지금, 어떤 시절을<br />지나고 있나요?</h2>
-            <p className="intro">열린 이야기를 눌러 그 시절의 하루를 직접 넘겨 보세요.</p>
+            <h2>지금 당신의 이야기는<br />어디쯤인가요?</h2>
             <div className="jl-cards">
               {JOURNEYS.map((j) => !j.ready ? (
                 <div key={j.key} className="jl-card jl-soon">
@@ -212,19 +229,14 @@ export default function JourneyLanding({ ways }: { ways: React.ReactNode }) {
             </div>
           </section>
 
-          <section className="jl-status">
-            <p className="eyebrow">지금 되는 일과 준비 중인 일</p>
-            <p className="quiet">
-              지금 앱에서: 한 줄 쓰기, 원문을 한 쪽으로 보기, 다시 읽기, 고른 기록을 책 모양으로 미리 보기. 돌아보기를 고르면 AI가 비춰 주고 문장을 제안하기도 하며, 제안은 내가 고른 때에만 저장됩니다.<br />
-              준비 중: AI 편집 초안과 종이책 시범. 내 원문은 그대로 보관하고, 편집 초안은 내가 확인한 뒤에만 건네는 방식으로 만들고 있어요.
-            </p>
-          </section>
-
-          <section className="closing">
-            <h2>오늘의 한 줄부터.</h2>
-            <div className="actions">
-              <a className="primary" href={start("closing")}>오늘의 한 줄 쓰기 <span>↗</span></a>
-            </div>
+          <section className="ol-close">
+            <h2>첫 쪽은, 오늘입니다.</h2>
+            <a className="ol-cta" href={start("closing")}>오늘의 한 줄 쓰기 <span>↗</span></a>
+            <details className="ol-status">
+              <summary>지금 되는 일과 준비 중인 일</summary>
+              <p>지금 앱에서: 한 줄 쓰기, 원문을 한 쪽으로 보기, 다시 읽기, 고른 기록을 책 모양으로 미리 보기. 돌아보기를 고르면 AI가 비춰 주고 문장을 제안하기도 하며, 제안은 내가 고른 때에만 저장됩니다.</p>
+              <p>준비 중: AI 편집 초안과 종이책 시범. 내 원문은 그대로 보관하고, 편집 초안은 내가 확인한 뒤에만 건네는 방식으로 만들고 있어요. 이 화면의 글은 모두 가상 예시입니다.</p>
+            </details>
           </section>
         </main>
         {ways}

@@ -1,9 +1,4 @@
 /* 여정 첫 화면 — 승인 디자인(home.css)의 색·서체 위에 얹는다 */
-#om-purpose .jv-three{background:var(--sheet);border:1px solid var(--line);box-shadow:4px 4px 0 var(--soft);padding:10px 24px}
-#om-purpose .jv-three>div{padding:15px 0;border-bottom:1px solid var(--line)}
-#om-purpose .jv-three>div:last-child{border-bottom:0}
-#om-purpose .jv-three small{display:block;color:var(--wine);margin-bottom:6px}
-#om-purpose .jv-three p{font-family:"Gowun Batang",serif;font-size:18px;line-height:1.7;margin:0}
 #om-purpose .source{font-size:11px;color:var(--muted);text-align:center;margin:12px 0 0}
 #om-purpose .jl-pick{padding:50px 6%;border-top:1px solid var(--line);background:var(--soft)}
 #om-purpose .jl-pick h2{margin-bottom:10px}
@@ -17,8 +12,6 @@
 #om-purpose .jl-soon:hover{transform:none;box-shadow:none}
 #om-purpose .jl-soon small,#om-purpose .jl-soon .jl-hook{color:var(--muted)}
 #om-purpose .jl-soon-tag{display:inline-block;margin-top:10px;font-size:12px;color:var(--wine)}
-#om-purpose .jl-status{padding:34px 6%;border-top:1px solid var(--line)}
-#om-purpose .jl-status .eyebrow{margin-bottom:8px}
 
 #om-purpose .jv{position:fixed;inset:0;z-index:100;background:var(--paper);overflow-y:auto;-webkit-overflow-scrolling:touch;display:flex;flex-direction:column;animation:jvIn .24s ease-out}
 @keyframes jvIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
@@ -51,5 +44,55 @@
 #om-purpose .jv-book-for strong{font-weight:500;color:var(--green)}
 #om-purpose .jv-cta{position:sticky;bottom:0;padding:10px 24px;padding-bottom:max(10px,env(safe-area-inset-bottom));background:color-mix(in srgb,var(--paper) 94%,transparent);border-top:1px solid var(--line)}
 #om-purpose .jv-cta .primary{max-width:512px;margin:0 auto}
-@media(max-width:680px){#om-purpose .jl-pick,#om-purpose .jl-status{padding-left:24px;padding-right:24px}#om-purpose .jv-body h2{font-size:27px}}
+@media(max-width:680px){#om-purpose .jl-pick{padding-left:24px;padding-right:24px}#om-purpose .jv-body h2{font-size:27px}}
 @media(prefers-reduced-motion:reduce){#om-purpose .jv,#om-purpose .jv-rise{animation:none}#om-purpose .jl-card{transition:none}}
+
+/* 첫 화면 — 깊은 초록 위에 펼친 책 */
+#om-purpose .ol-hero{--oh:#26332a;background:radial-gradient(120% 90% at 75% 20%,#3a4c3d 0%,var(--oh) 62%);color:#f6f2e9;min-height:100svh;display:flex;flex-direction:column}
+#om-purpose .ol-hero header{padding:22px 6%}
+#om-purpose .ol-hero .logo,#om-purpose .ol-hero .logo small{color:#f6f2e9}
+#om-purpose .ol-hero a.text{color:#d9dcc9;font-size:13px}
+#om-purpose .ol-hero-in{flex:1;display:grid;grid-template-columns:1fr 1.1fr;gap:6%;align-items:center;padding:10px 6% 50px}
+#om-purpose .ol-lead h1{font-size:clamp(38px,3.5vw,50px);line-height:1.42;letter-spacing:-1.6px;color:#fffdf5;margin:0 0 14px;white-space:nowrap}
+#om-purpose .ol-sub{font-family:"Gowun Batang",serif;font-size:21px;color:#d9dcc9;margin:0 0 30px}
+#om-purpose a.ol-cta{display:inline-flex;align-items:center;justify-content:space-between;gap:22px;min-height:56px;padding:15px 26px;border-radius:999px;background:#f6ecd3;color:#26332a;font-size:16px;font-weight:500;text-decoration:none;transition:transform .18s ease}
+#om-purpose a.ol-cta:hover{transform:translateY(-2px)}
+#om-purpose .ol-small{font-size:12px;color:#b9bfae;margin:16px 0 0}
+#om-purpose .ol-book{margin:0;perspective:1400px}
+#om-purpose .ol-spread{display:grid;grid-template-columns:1fr 1fr;background:#fffaf0;border-radius:4px;box-shadow:0 30px 60px rgba(0,0,0,.42),0 2px 0 #e6dcc4;transform:rotateX(4deg) rotateZ(-1.5deg);min-height:340px;position:relative}
+#om-purpose .ol-spread::after{content:"";position:absolute;top:0;bottom:0;left:50%;width:44px;margin-left:-22px;background:linear-gradient(90deg,transparent,rgba(70,60,40,.14) 48%,rgba(70,60,40,.2) 50%,rgba(70,60,40,.1) 52%,transparent);pointer-events:none}
+#om-purpose .ol-page{padding:30px 28px;color:#30382e;display:flex;flex-direction:column;justify-content:center;min-width:0}
+#om-purpose .ol-left{justify-content:space-between;background:linear-gradient(90deg,#f6efdf,#fffaf0)}
+#om-purpose .ol-left small{color:#794952}
+#om-purpose .ol-title{font-family:"Gowun Batang",serif;font-size:27px;line-height:1.5;word-break:keep-all;margin-bottom:40px}
+#om-purpose .ol-right{position:relative;animation:olTurn .7s ease-out;transform-origin:left center}
+#om-purpose .ol-right p{font-family:"Gowun Batang",serif;font-size:18px;line-height:1.95;margin:0}
+#om-purpose .ol-no{position:absolute;right:20px;bottom:16px;color:#8a8a78}
+@keyframes olTurn{from{opacity:0;transform:rotateY(-24deg)}to{opacity:1;transform:none}}
+#om-purpose .ol-book figcaption{font-size:11px;color:#b9bfae;text-align:center;margin-top:18px}
+#om-purpose .ol-how{display:grid;grid-template-columns:repeat(3,1fr);gap:0;padding:0 6%;background:var(--paper)}
+#om-purpose .ol-how article{padding:44px 26px 44px 0;border-bottom:1px solid var(--line)}
+#om-purpose .ol-how span{font-size:12px;color:var(--wine)}
+#om-purpose .ol-how h3{font-family:"Gowun Batang",serif;font-size:23px;font-weight:400;line-height:1.5;margin:10px 0 8px;word-break:keep-all}
+#om-purpose .ol-how p{font-size:14px;color:var(--muted);margin:0}
+#om-purpose .ol-close{background:var(--oh,#26332a);color:#f6f2e9;text-align:center;padding:70px 6% 44px}
+#om-purpose .ol-close h2{color:#fffdf5;font-size:36px;margin:0 0 26px}
+#om-purpose .ol-status{margin:44px auto 0;max-width:640px;text-align:left;font-size:12px;color:#b9bfae}
+#om-purpose .ol-status summary{cursor:pointer;text-align:center;min-height:44px;line-height:44px}
+#om-purpose .ol-status p{font-size:12px;margin:10px 0 0}
+@media(max-width:820px){
+#om-purpose .ol-hero{min-height:auto}
+#om-purpose .ol-hero header{padding:20px 24px}
+#om-purpose .ol-hero-in{grid-template-columns:1fr;gap:36px;padding:14px 24px 42px}
+#om-purpose .ol-lead h1{font-size:clamp(25px,7.6vw,44px);line-height:1.45;letter-spacing:-1px}
+#om-purpose .ol-sub{font-size:18px;margin-bottom:24px}
+#om-purpose a.ol-cta{width:100%}
+#om-purpose .ol-spread{min-height:262px}
+#om-purpose .ol-page{padding:22px 16px}
+#om-purpose .ol-title{font-size:20px;margin-bottom:24px}
+#om-purpose .ol-right p{font-size:15px;line-height:1.85}
+#om-purpose .ol-how{grid-template-columns:1fr;padding:6px 24px}
+#om-purpose .ol-how article{padding:26px 0}
+#om-purpose .ol-close h2{font-size:29px}
+}
+@media(prefers-reduced-motion:reduce){#om-purpose .ol-right{animation:none}#om-purpose a.ol-cta{transition:none}}
