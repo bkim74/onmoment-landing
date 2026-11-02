@@ -38,7 +38,7 @@ const TEMPLATE = `<a class="skip-link" href="#main">본문으로 바로가기</a
       <div class="journey-card-image"><img src="/assets/journey-pilgrim.webp" alt="햇살 드는 시골길을 바라보는 돌담 위 여행 공책과 지팡이, 작은 야생화" width="1536" height="1024" loading="lazy"></div>
       <div class="journey-card-copy"><div class="journey-card-kicker"><span>JOURNEY 04</span><span aria-hidden="true">↗</span></div><h3>순례·리트릿, 돌아온 뒤에도</h3><p>길에서 만난 마음을 담고,<br>돌아온 일상과 천천히 이어봐요.</p><span class="journey-card-link">이 여정 둘러보기 <span aria-hidden="true">→</span></span><span class="journey-card-soon">맞춤 여정 준비 중 · 예시 먼저 보기</span></div></a><a class="journey-card journey-card-wide" href="/journeys/unsure/" style="--journey-accent:#8c764f;--journey-tint:#eee9dc">
       <div class="journey-card-image"><img src="/assets/journey-unsure.webp" alt="푸른 하늘이 비치는 창가의 물 한 잔과 작은 노란 꽃, 빈 공책" width="1536" height="1024" loading="lazy"></div>
-      <div class="journey-card-copy"><div class="journey-card-kicker"><span>JOURNEY 05</span><span aria-hidden="true">↗</span></div><h3>아직 모르겠어요, 오늘의 나부터</h3><p>목적을 정하지 않아도 좋아요.<br>오늘 마음에 남은 한 줄부터.</p><span class="journey-card-link">이 여정 둘러보기 <span aria-hidden="true">→</span></span><span class="journey-card-soon">맞춤 여정 준비 중 · 예시 먼저 보기</span></div></a></div>
+      <div class="journey-card-copy"><div class="journey-card-kicker"><span>JOURNEY 05</span><span aria-hidden="true">↗</span></div><h3>있는 그대로, 오늘의 나부터</h3><p>목적을 정하지 않아도 좋아요.<br>오늘 마음에 남은 한 줄부터.</p><span class="journey-card-link">이 여정 둘러보기 <span aria-hidden="true">→</span></span><span class="journey-card-soon">맞춤 여정 준비 중 · 예시 먼저 보기</span></div></a></div>
   <a class="journey-skip" href="#experience">아직 고르지 않고, 한 줄부터 써볼게요 <span aria-hidden="true">→</span></a>
 </section>
 <!-- JOURNEY_SELECTOR_END -->
