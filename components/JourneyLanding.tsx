@@ -1,7 +1,7 @@
 "use client";
 
 /**
- * 첫 화면 — 못 한 말도, 벅찬 오늘도 두는 곳. 받음·누림이 나눔보다 먼저이고, 문제가 없는 사람도 환영한다.
+ * 첫 화면 — 무엇을 얻는지(내 말로 만든 책)를 먼저 보여 준다. 안쪽 경험은 받음·누림 먼저, 어디서 멈춰도 온전하다.
  * 메인에는 관계 이야기를 두지 않고(Six Bans 6), 여정을 누르면 그 시절의 하루를 전체 화면에서 넘겨 본다. 상대가 변한다고 약속하지 않는다.
  *
  * 경계
@@ -136,25 +136,27 @@ function JourneyView({ journey, startHref, onBack }: { journey: Journey; startHr
   );
 }
 
-// 첫 화면의 종이 — 누구에게도 보여 주지 않은 한 줄이 조용히 놓인다. 관계 이야기는 여기에 두지 않는다(Six Bans 6).
-const QUIET_LINES = [
-  { text: "서른여덟에 면허를 땄다. 주차장에서 혼자 소리를 질렀다.", joy: true },
-  { text: "괜찮다고 했지만, 괜찮지 않았다.", joy: false },
-  { text: "오늘 하늘이 처음 보는 색이었다. 사진 대신 한 줄로 남긴다.", joy: true },
-  { text: "아무도 모르지만, 오늘 나는 꽤 애썼다.", joy: false },
+// 첫 화면의 상품 — 무엇을 얻는지 눈으로 먼저 본다. 글은 가상 예시이고 쪽을 넘겨 기쁜 날과 버거운 날을 함께 보여 준다.
+const PAGES = [
+  { date: "3월 2일", text: "서른여덟에 면허를 땄다. 주차장에서 혼자 소리를 질렀다." },
+  { date: "5월 18일", text: "괜찮다고 했지만, 괜찮지 않았다. 그래도 오늘을 적어 둔다." },
+  { date: "8월 9일", text: "오늘 하늘이 처음 보는 색이었다. 사진 대신 한 줄로 남긴다." },
 ];
 
-function QuietPage({ paused }: { paused: boolean }) {
+function ProductBook({ paused }: { paused: boolean }) {
   const [i, setI] = useState(0);
   useEffect(() => {
     if (paused || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const t = setInterval(() => setI((n) => (n + 1) % QUIET_LINES.length), 6000);
+    const t = setInterval(() => setI((n) => (n + 1) % PAGES.length), 4800);
     return () => clearInterval(t);
   }, [paused]);
   return (
-    <figure className="ol-quiet">
-      <div className={`ol-paper${QUIET_LINES[i].joy ? " ol-paper-joy" : ""}`}><p key={i}>{QUIET_LINES[i].text}</p></div>
-      <figcaption>가상 기록 예시</figcaption>
+    <figure className="pb">
+      <div className="pb-spread">
+        <div className="pb-page pb-left"><small>나의 올해</small><span>내 말로 남긴<br />한 권</span></div>
+        <div key={i} className="pb-page pb-right"><small>{PAGES[i].date}</small><p>{PAGES[i].text}</p></div>
+      </div>
+      <figcaption>가상 기록으로 만든 예시</figcaption>
     </figure>
   );
 }
@@ -227,34 +229,38 @@ export default function JourneyLanding({ ways }: { ways: React.ReactNode }) {
           </header>
           <div className="ol-hero-in">
             <div className="ol-lead">
-              <h1>아무에게도 못 한 말도,<br />벅차게 좋았던 오늘도,<br />여기에 두세요.</h1>
-              <p className="ol-sub">있는 그대로 담습니다.<br />오늘이 선물이 되도록.</p>
+              <p className="pb-kicker">하루 한 줄로 만드는 내 책</p>
+              <h1>사진은 수만 장인데,<br />그날의 마음은 한 줄도 없습니다.</h1>
+              <p className="ol-sub">하루 한 줄이면, 그 마음이 내 책이 됩니다.</p>
               <a className="ol-cta" href={start("hero")}>오늘의 한 줄 쓰기 <span>↗</span></a>
-              <p className="ol-small">쓰는 건 무료예요. 지금은 초대받은 분부터 함께합니다.</p>
+              <p className="ol-small">무료 · 쓰자마자 책의 한 쪽으로 · 지금은 초대받은 분부터</p>
             </div>
-            <QuietPage paused={!!current} />
+            <ProductBook paused={!!current} />
           </div>
         </section>
 
         <main>
-          <section className="ol-flow">
-            <article><h3>좋은 날은 오래, 버거운 날은 가볍게</h3><p>한 줄이면 충분합니다.</p></article>
-            <article><h3>그러다 보면, 내 마음이 보입니다</h3><p>원할 때 AI가 조용히 비춰 줍니다.</p></article>
-            <article><h3>마음이 차면, 건네고 싶은 말이 생깁니다</h3><p>언제 건넬지는 내가 정합니다.</p></article>
-            <p className="ol-enough">어디서 멈춰도 온전합니다.</p>
+          <section className="pb-why">
+            <article><strong>30초</strong><h3>길게 안 써도 됩니다</h3><p>좋았던 일도, 속상했던 일도 한 줄이면 끝.</p></article>
+            <article><strong>바로</strong><h3>쓰자마자 책이 됩니다</h3><p>내가 쓴 말 그대로, 책의 한 쪽으로 보여 드립니다.</p></article>
+            <article><strong>나만</strong><h3>내 계정에만 남습니다</h3><p>원할 때만 AI에게 질문을 받고, 건넬지도 내가 정합니다.</p></article>
           </section>
 
-          <section className="ol-books-sec">
-            <h2>그 날들이,<br />선물이 됩니다.</h2>
+          <section className="pb-two">
+            <h2>한 권은 나에게.<br />한 권은 소중한 사람에게.</h2>
             <div className="ol-covers">
-              <div className="ol-cover ol-cover-self"><span>소중한<br />나에게</span><em>온순간</em></div>
-              <div className="ol-cover ol-cover-gift"><span>소중한<br />당신에게</span><em>온순간</em></div>
+              <div className="ol-cover ol-cover-self"><span>나에게</span><em>온순간</em></div>
+              <div className="ol-cover ol-cover-gift"><span>당신에게</span><em>온순간</em></div>
             </div>
-            <p className="ol-books-note">나에게 남기는 책 한 권, 건네는 책 한 권. 내 말 그대로, 한 쪽씩. 표지는 가상 예시이고, 종이책은 시범을 준비하고 있어요.</p>
+            <div className="pb-two-copy">
+              <p><strong>내가 다시 펼치는 책</strong>기뻤던 날도 버거웠던 날도, 내 말 그대로.</p>
+              <p><strong>세상에 한 권뿐인 선물</strong>말로 다 못 한 마음을, 그 사람에게.</p>
+            </div>
+            <p className="ol-books-note">표지는 가상 예시입니다. 종이책은 시범을 준비하고 있어요.</p>
           </section>
 
           <section className="jl-pick" id="journeys">
-            <h2>지금 어떤 시절을<br />지나고 계신가요?</h2>
+            <h2>지금, 누구의 이야기를<br />남기고 싶으세요?</h2>
             <div className="jl-cards">
               {JOURNEYS.map((j) => !j.ready ? (
                 <div key={j.key} className="jl-card jl-soon">
@@ -273,7 +279,7 @@ export default function JourneyLanding({ ways }: { ways: React.ReactNode }) {
           </section>
 
           <section className="ol-close">
-            <h2>오늘이 그 첫 줄입니다.</h2>
+            <h2>오늘의 한 줄이, 첫 쪽입니다.</h2>
             <a className="ol-cta" href={start("closing")}>오늘의 한 줄 쓰기 <span>↗</span></a>
             <details className="ol-status">
               <summary>지금 되는 일과 준비 중인 일</summary>
