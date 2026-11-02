@@ -26,15 +26,22 @@
     const link = document.querySelector('a[data-app-link]');
     return link ? new URL(link.href).origin : 'https://app.onmoment.kr';
   };
-  const inviteHref = (origin, src) =>
-    `${origin}/invite?code=${encodeURIComponent(invite.code)}&src=${encodeURIComponent(invite.src || src || 'invite')}`;
+  // 이야기 맥락(여정·방식·계기)은 코드와 함께 입구로 넘긴다. 값 검사는 앱이 다시 한다.
+  const inviteHref = (origin, src, from) => {
+    let href = `${origin}/invite?code=${encodeURIComponent(invite.code)}&src=${encodeURIComponent(invite.src || src || 'invite')}`;
+    ['journey', 'way', 'occasion'].forEach((k) => {
+      const v = from && from.searchParams.get(k);
+      if (v) href += `&${k}=${encodeURIComponent(v)}`;
+    });
+    return href;
+  };
 
   const apply = (a) => {
     const u = new URL(a.href);
     if (a.dataset.inviteBeta) {
       a.href = inviteHref(appOrigin(), null);
     } else if (a.dataset.inviteSrc) {
-      a.href = inviteHref(u.origin, a.dataset.inviteSrc);
+      a.href = inviteHref(u.origin, a.dataset.inviteSrc, u);
     } else if (u.origin === location.origin && /^\/beta\/?$/.test(u.pathname)) {
       // 이미 초대받은 사람에게는 참여 신청 대신 앱 입구를 연다.
       a.dataset.inviteBeta = '1';
@@ -43,7 +50,7 @@
     } else if (a.hasAttribute('data-app-link') || (u.hostname === 'app.onmoment.kr' && /^\/(start|today)?\/?$/.test(u.pathname))) {
       const src = u.searchParams.get('src');
       a.dataset.inviteSrc = src && SRC.test(src) ? src : 'invite';
-      a.href = inviteHref(u.origin, a.dataset.inviteSrc);
+      a.href = inviteHref(u.origin, a.dataset.inviteSrc, u);
     }
   };
 

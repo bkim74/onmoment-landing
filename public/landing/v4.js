@@ -55,7 +55,19 @@
       document.querySelectorAll('[data-occasion]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.occasion===occasion)));
     }
   }
+  // 고른 여정·방식·계기만 앱 링크에 싣는다(허용값). 이름·본문은 싣지 않는다.
+  function syncStoryLinks(){
+    document.querySelectorAll('a[data-story-link]').forEach(a=>{
+      const u=new URL(a.href);
+      if(baseJourney?.journey)u.searchParams.set('journey',baseJourney.journey);
+      u.searchParams.set('way',mode);
+      if(occasion&&baseJourney?.journey==='parents')u.searchParams.set('occasion',occasion);else u.searchParams.delete('occasion');
+      a.href=u.toString();
+    });
+    document.querySelectorAll('a[href^="/keepsakes/"]').forEach(a=>{a.setAttribute('href','/keepsakes/?way='+(mode==='self'?'self':'gift'));});
+  }
   function renderMode(){
+    syncStoryLinks();
     const m=modes[mode], memorial=occasion==='memorial';
     document.querySelectorAll('[data-mode]').forEach(b=>{const active=b.dataset.mode===mode;b.classList.toggle('active',active);b.setAttribute('aria-pressed',String(active));if(journey){b.hidden=b.dataset.mode==='together'&&journey.allowTogether===false;b.textContent=b.dataset.mode==='gift'&&memorial?'가족에게 나누기':modes[b.dataset.mode].label;}});
     document.querySelectorAll('[data-mode-label]').forEach(el=>el.textContent=mode==='gift'&&memorial?'가족에게 나누기':m.label);
