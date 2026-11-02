@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import "./globals.css";
 
 const SITE_URL = "https://onmoment.kr";
@@ -70,7 +71,10 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body>{children}</body>
+      <body>
+        {children}
+        <Script src="/landing/invite-link.js" strategy="afterInteractive" />
+      </body>
     </html>
   );
 }
