@@ -1,0 +1,19 @@
+/* 결과 선택 화면 — 시안의 페이지 틀. 본문 스타일은 #onmoment-choices 안에 있다. */
+@font-face{font-family:Gowun;src:url('/assets/gowun.woff') format('woff');font-display:swap}
+@font-face{font-family:Noto;src:url('/assets/noto-sans.woff') format('woff');font-display:swap}
+.keepsakes-page{background:#f8f5ec;padding:24px;color:#303d31;font-family:Noto,'Malgun Gothic',sans-serif;min-height:100vh}
+.keepsakes-page main{max-width:1080px;margin:auto}
+.keepsakes-page a.home{display:inline-block;padding:12px 0;margin-bottom:8px;color:#4b594a;font-size:14px}
+#onmoment-choices{font-family:Noto,'Malgun Gothic',sans-serif!important}
+#onmoment-choices h2,#onmoment-choices .om-cover-button,#onmoment-choices .om-paper h3,#onmoment-choices .om-paper p{font-family:Gowun,'Batang',serif!important}
+.keepsakes-page button,.keepsakes-page summary{cursor:pointer}
+.keepsakes-page button:disabled,.keepsakes-page select:disabled{cursor:default}
+/* 지금 앱에서 되는 일 — 실제 결과물과 시안을 가른다 */
+.reality{background:#fffdf9;border:1px solid #d9dacb;border-radius:12px;padding:20px 22px;margin:0 0 16px;font-size:14px;line-height:1.75}
+.reality h2{font-family:Gowun,'Batang',serif;font-size:21px;font-weight:400;margin:0 0 10px}
+.reality ul{margin:0 0 10px;padding:0;list-style:none;display:grid;gap:5px}
+.reality b{font-weight:500;color:#3d503e}
+.reality .soon{color:#793c36}
+.reality a{display:inline-flex;align-items:center;min-height:44px;text-decoration:underline;text-underline-offset:5px}
+@media(max-width:650px){.keepsakes-page{padding:10px}}
+#onmoment-choices .om-state{display:block;font-style:normal;font-size:11px;font-weight:400;opacity:.85;margin:2px 0}
