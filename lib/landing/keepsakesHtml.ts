@@ -1,3 +1,4 @@
+import { twoViewsHtml } from "./twoViews";
 // 결과 선택 화면 마크업 — 시안 9e919ca 를 옮겼다. 동작은 public/landing/keepsakes.js. 가상 기록만 쓰고 저장·전송하지 않는다.
 const TEMPLATE = `<div id="onmoment-choices">
   <style>
@@ -106,6 +107,7 @@ const TEMPLATE = `<div id="onmoment-choices">
   <section id="om-editor" class="om-editor" hidden>
     <div class="om-editor-header"><div><button type="button" id="om-back" class="om-plain cursor-interaction">← 두 권의 책</button><h2>하나의 삶, 두 개의 시선.</h2><p class="om-sub">내가 바라보는 이야기와 선물로 만나게 될 이야기.<br>받는 사람이 나여도, 서로 다른 두 권이 될 수 있어요.</p></div></div>
     <fieldset class="om-recipient-bar"><legend>이번 선물은 누구에게 건넬까요?</legend><div class="om-row" data-key="recipient"><button type="button" data-value="other" aria-pressed="true" class="cursor-interaction">소중한 사람에게</button><button type="button" data-value="self" aria-pressed="false" class="cursor-interaction">나 자신에게</button></div><p class="om-help" id="om-recipient-help">내가 간직할 한 권과 당신에게 건넬 한 권을 각각 엮어요.</p><p id="om-result-relationship" class="om-discovery-note" aria-live="polite">내가 간직할 책 + 당신에게 건넬 책</p></fieldset>
+    __TWO_VIEWS__
     <section class="om-discovery" aria-label="결과를 담는 모습"><div class="om-presets" data-key="preset">
       <button type="button" data-value="books" aria-pressed="true" class="cursor-interaction"><span class="om-mini" aria-hidden="true"><i></i><i class="rose" data-second-mark></i></span><strong id="om-books-preset-label">나와 당신의 두 권</strong><small>쌓인 날들을 이어 읽기</small></button>
       <button type="button" data-value="cards" aria-pressed="false" class="cursor-interaction"><span class="om-mini" aria-hidden="true"><i class="card-shape"></i><i class="card-shape" data-second-mark></i></span><strong id="om-cards-preset-label">카드로 가볍게</strong><small>한 장면을 담아 간직하고 건네기</small></button>
@@ -153,4 +155,4 @@ const TEMPLATE = `<div id="onmoment-choices">
   
 </div>
 `;
-export const keepsakesHtml = (appOrigin: string) => TEMPLATE.split("__APP__").join(appOrigin);
+export const keepsakesHtml = (appOrigin: string) => TEMPLATE.split("__APP__").join(appOrigin).replace("__TWO_VIEWS__", twoViewsHtml('id="om-two-views" hidden'));
