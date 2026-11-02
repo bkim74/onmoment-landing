@@ -5,9 +5,9 @@ const SITE_URL = "https://onmoment.kr";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: "온순간 · 오늘이 선물이 되도록, 한 줄.",
+  title: "온순간 — 오늘을 담아, 나에게 선물하세요.",
   description:
-    "하루 한 줄. 내일 다시 만나는 나. 점수도 진단도 연속 기록도 없습니다. 오늘의 마음을 있는 그대로 남깁니다.",
+    "사진은 수만 장인데, 그날의 마음은 한 줄도 없습니다. 하루 한 줄이면, 그 마음이 내 책이 됩니다.",
   alternates: { canonical: SITE_URL },
   openGraph: {
     type: "website",
@@ -49,7 +49,7 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
-          href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500&family=Noto+Serif+KR:wght@300;400;500;600&display=swap"
+          href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500&family=Gowun+Batang:wght@400;700&family=Noto+Serif+KR:wght@300;400;500;600&family=Noto+Sans+KR:wght@400;500&display=swap"
           rel="stylesheet"
         />
         <meta name="theme-color" content="#F5EDE0" />
