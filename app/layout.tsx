@@ -5,7 +5,7 @@ const SITE_URL = "https://onmoment.kr";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: "온순간 · 하루 한 줄로 만드는 내 책",
+  title: "온순간 — 오늘을 담아, 나에게 선물하세요.",
   description:
     "사진은 수만 장인데, 그날의 마음은 한 줄도 없습니다. 하루 한 줄이면, 그 마음이 내 책이 됩니다.",
   alternates: { canonical: SITE_URL },

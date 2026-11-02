@@ -19,7 +19,7 @@
 `/ship` 전 반드시: `pnpm run check`
 
 - `app/favicon.ico` · `app/icon.svg` — create-next-app 기본 ICO 덮어쓰기 금지
-- CTA: 반드시 절대 URL `https://app.onmoment.kr/start?intent=…`(첫 화면 시작 버튼 — 목적·계기·위치 enum 만), `https://app.onmoment.kr/today`, `https://app.onmoment.kr/install` (`href="#"` 금지). 프리뷰 빌드만 `NEXT_PUBLIC_APP_ORIGIN` 으로 앱 주소를 바꾼다
+- CTA: 반드시 절대 URL `https://app.onmoment.kr/start?src=…`(앱 시작 버튼 — src 는 유입 출처 표시뿐, intent·occasion 은 쓰지 않는다), `https://app.onmoment.kr/today`, `https://app.onmoment.kr/install` (`href="#"` 금지). 프리뷰 빌드만 `NEXT_PUBLIC_APP_ORIGIN` 으로 앱 주소를 바꾼다
 - `scripts/fonts/` · `.env*` 커밋 금지
 - 프리뷰 URL (`onmoment-feature.vercel.app`, `localhost`) landing copy 잔존 금지
 - Privacy/Terms 법적 고지 부정문 유지 (예외)

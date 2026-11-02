@@ -1,33 +1,25 @@
-import Link from "next/link";
-import JourneyLanding from "@/components/JourneyLanding";
-import "./home.css";
-import "./journey.css";
+import type { Metadata } from "next";
+import Script from "next/script";
+import { homeHtml } from "@/lib/landing/homeHtml";
+import "./landing.css";
 
-// 첫 화면 아래 — 온순간이 기록을 대하는 방식(확정 표현 유지)과 깊이 읽기 입구
-function Ways() {
-  return (
-    <section className="ways" id="ways">
-      <p className="eyebrow">온순간이 기록을 대하는 방식</p>
-      <ul>
-        <li>온순간은 처음부터 나만의 공간으로 시작합니다.</li>
-        <li>오늘의 마음을 있는 그대로 담습니다.</li>
-        <li>오늘의 문장은 점수가 아니라 이야기로 남습니다.</li>
-        <li>무엇을 남기고 누구에게 건넬지는 내가 정합니다.</li>
-      </ul>
-      <nav aria-label="더 읽기">
-        <Link className="text" href="/story">온순간의 이야기 →</Link>
-        <Link className="text" href="/journal">온순간 저널 →</Link>
-        <Link className="text" href="/principles">기록을 대하는 방식 →</Link>
-      </nav>
-      <p className="quiet legal">
-        <a href="/privacy">개인정보 처리방침</a>
-        <a href="/terms">이용약관</a>
-        <span>ⓒ {new Date().getFullYear()} 온순간</span>
-      </p>
-    </section>
-  );
-}
+const APP = process.env.NEXT_PUBLIC_APP_ORIGIN ?? "https://app.onmoment.kr";
+
+export const metadata: Metadata = {
+  title: "온순간 — 오늘을 담아, 나에게 선물하세요.",
+  description: "벅차게 좋았던 날도, 마음이 쓰인 날도. 온순간에서 한 줄씩 담고 나의 이야기를 다시 펼쳐보세요. 가입 없이 첫 한 쪽을 미리 만들어볼 수 있습니다.",
+  openGraph: {
+    title: "온순간 — 오늘을 담아, 나에게 선물하세요.",
+    description: "한 줄 기록으로 시작하는 나만의 이야기책. 좋은 날도, 애쓴 날도 당신의 이야기입니다.",
+  },
+};
 
 export default function Home() {
-  return <JourneyLanding ways={<Ways />} />;
+  return (
+    <>
+      <div dangerouslySetInnerHTML={{ __html: homeHtml(APP) }} />
+      <Script src="/landing/app.js" strategy="afterInteractive" />
+      <Script src="/landing/app-origin.js" strategy="afterInteractive" />
+    </>
+  );
 }
