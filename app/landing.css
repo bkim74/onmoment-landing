@@ -43,3 +43,5 @@ dialog{border:1px solid #dedfce;background:var(--paper);color:var(--ink);padding
 .deeper-link p{font-family:var(--serif);font-size:20px;margin-bottom:14px}
 .deeper-link a{display:inline-flex;align-items:center;gap:10px;min-height:48px;padding:12px 22px;border:1px solid var(--ink);border-radius:999px;font-size:14px}
 .deeper-link a:hover{background:var(--ink);color:var(--paper)}
+.invite-ask{text-decoration:underline;text-underline-offset:4px;color:var(--wine)}
+.app-bridge-bottom .invite-ask{display:inline-flex;align-items:center;min-height:44px;font-size:13px}
