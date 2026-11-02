@@ -28,7 +28,7 @@
         const e=get();const records=chosen(e);const selfGift=state.recipient==='self';const medium=effectiveMedium(e);
         root.querySelectorAll('[data-key]').forEach(group=>{const key=group.dataset.key;const v=key==='medium'?medium:['recipient','edition','preset','binding','scope'].includes(key)?state[key]:e[key];group.querySelectorAll('button[data-value]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.value===v)));});
         q('#om-editions').hidden=false;
-        q('#om-recipient-help').textContent=selfGift?'기록하고 바라보는 나, 선물로 받아 읽는 나. 같은 사람이어도 두 시선은 각각의 이야기가 됩니다.':'내가 간직할 것과 당신에게 건넬 것을 각각 엮어요. 수록할 기록과 편집은 따로 고를 수 있어요.';
+        q('#om-two-views').hidden=!selfGift;q('#om-recipient-help').textContent=selfGift?'기록하고 바라보는 나, 선물로 받아 읽는 나. 같은 사람이어도 두 시선은 각각의 이야기가 됩니다.':'내가 간직할 것과 당신에게 건넬 것을 각각 엮어요. 수록할 기록과 편집은 따로 고를 수 있어요.';
         const artifact=e=>e.format==='book'?'책':'카드';
         q('#om-result-relationship').textContent=state.binding==='combined'?'한 권 안에 두 시선 · 1부 기록하는 나 / 2부 선물로 읽는 나':selfGift?'기록하는 나의 '+artifact(state.self)+' + 선물로 읽는 나의 '+artifact(state.gift):'내가 간직할 '+artifact(state.self)+' + 당신에게 건넬 '+artifact(state.gift);
         q('#om-books-preset-label').textContent=selfGift?'두 시선으로 엮는 책':'나와 당신의 두 권';
