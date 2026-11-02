@@ -9,6 +9,8 @@ export type Journey = {
   label: string;
   hook: string;
   line: string;
+  /** 먼저 받아 주는 한마디 — 묻거나 권하지 않는다. 여기서 끝나도 온전하다(세 겹 효능 1). */
+  comfort: string;
   mirror: string;
   steps: [Step, Step];
   rest: string;
@@ -25,6 +27,7 @@ export const JOURNEYS: Journey[] = [
     label: "사춘기 아이를 키우는 중",
     hook: "아이와 자꾸 엇갈리는 요즘,\n내 마음부터 남기는 한 줄",
     line: "오늘도 아이에게 잔소리했다. 불안했다.",
+    comfort: "그만큼 마음 쓰인 하루였네요.",
     mirror: "아이는 스스로 무엇을 찾아가는 중일까?",
     steps: [
       { label: "답 대신 질문 하나 건네기", after: "저녁에 오늘 어땠냐고만 물었다. 대답은 “몰라”였다. 그래도 방문은 열려 있었다." },
@@ -41,6 +44,7 @@ export const JOURNEYS: Journey[] = [
     label: "은퇴를 앞두거나 지나는 중",
     hook: "명함을 내려놓은 날,\n내 이야기의 다음 장이 열립니다",
     line: "처음으로 평일 오전의 공원을 걸었다. 나무가 이렇게 많은 줄 몰랐다.",
+    comfort: "낯선 오전을 천천히 걸어 본 하루였네요.",
     mirror: "일이 아니었다면, 나는 무엇을 사랑하는 사람일까?",
     steps: [
       { label: "배우자에게 오늘 하루 묻기", after: "저녁 먹으며 오늘 하루를 물었다. 처음 듣는 이야기가 나왔다." },
@@ -57,6 +61,7 @@ export const JOURNEYS: Journey[] = [
     label: "아기를 기다리거나 키우는 중",
     hook: "금방 지나갈 이 시절을,\n30초에 한 줄씩",
     line: "아기가 처음으로 내 손가락을 꽉 잡았다. 한참을 그대로 있었다.",
+    comfort: "그 작은 손을 오래 느낀 하루였네요.",
     mirror: "아이가 커서 이 시절을 듣는다면, 무슨 말을 해 주고 싶을까?",
     steps: [
       { label: "배우자에게 고마움 한 문장", after: "새벽에 교대해 줘서 고맙다고 보냈다. 답은 하트 하나였다. 충분했다." },
@@ -73,6 +78,7 @@ export const JOURNEYS: Journey[] = [
     label: "순례·리트릿에서 돌아오는 중",
     hook: "길 위에서 만난 나를,\n돌아와서도 이어 갑니다",
     line: "길 끝에서 본 노을을 아직 말로 못 하겠다. 그래도 적어 둔다.",
+    comfort: "아직 말이 되지 않은 것을 품고 돌아오셨네요.",
     mirror: "돌아와서, 무엇을 다르게 살고 싶었을까?",
     steps: [
       { label: "동행자에게 본 것 한 문장", after: "함께 걸은 사람에게 그때 당신이 먼저 기다려 줬다고 보냈다." },
@@ -89,6 +95,7 @@ export const JOURNEYS: Journey[] = [
     label: "아직 모르겠어요",
     hook: "누구를 위한 책인지는,\n쓰다 보면 알게 됩니다",
     line: "오늘 하늘이 처음 보는 색이었다. 사진 대신 한 줄로 남긴다.",
+    comfort: "그 하늘 앞에 잠시 멈춘 하루였네요.",
     mirror: "오늘 나를 멈춰 세운 건 무엇이었을까?",
     steps: [
       { label: "오늘 나에게 고마운 일 하나 적기", after: "오늘 먼저 웃어 준 나에게 고맙다고 적었다. 쓰고 나니 조금 웃겼다." },
