@@ -20,6 +20,7 @@
 
 - `app/favicon.ico` · `app/icon.svg` — create-next-app 기본 ICO 덮어쓰기 금지
 - CTA: 반드시 절대 URL `https://app.onmoment.kr/?src=…`(앱 시작 버튼 — src 는 유입 출처 표시뿐. 운영 앱에 /start 가 생기면 그때 바꾼다), `https://app.onmoment.kr/today`, `https://app.onmoment.kr/install` (`href="#"` 금지). 프리뷰 빌드만 `NEXT_PUBLIC_APP_ORIGIN` 으로 앱 주소를 바꾼다
+- 초대 링크: `https://onmoment.kr/?code=…&src=…` — `public/landing/invite-link.js` 가 이 탭의 앱 버튼을 `app.onmoment.kr/invite` 로 바꾼다. 코드 없는 방문자는 그대로
 - `scripts/fonts/` · `.env*` 커밋 금지
 - 프리뷰 URL (`onmoment-feature.vercel.app`, `localhost`) landing copy 잔존 금지
 - Privacy/Terms 법적 고지 부정문 유지 (예외)
