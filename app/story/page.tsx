@@ -7,7 +7,7 @@ import { ARTICLES } from "../journal/articles";
 
 // 운영 기본값은 절대 URL. 프리뷰는 NEXT_PUBLIC_APP_ORIGIN 으로 앱 프리뷰를 가리킨다(첫 화면과 같은 규칙).
 const APP = process.env.NEXT_PUBLIC_APP_ORIGIN ?? "https://app.onmoment.kr";
-const START = `${APP}/start?intent=self&src=story`;
+const START = `${APP}/?src=story`; // 운영 앱에 /start 가 생기기 전까지 첫 화면으로 보낸다
 
 export const metadata: Metadata = {
   title: "온순간의 이야기",

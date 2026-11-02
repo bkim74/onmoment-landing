@@ -120,7 +120,7 @@
   function fallback(target){text.value=allText();manual.hidden=false;target.textContent='아래 글을 직접 선택해 복사해 주세요.';text.focus();text.select();}
   async function copy(target){
     if(!input.value.trim()){target.textContent='먼저 지금의 말 한 줄을 적어주세요. 앱에서 바로 시작해도 좋아요.';return;}
-    try{await navigator.clipboard.writeText(allText());target.textContent='내가 남긴 현실·바람·선택을 복사했어요. 앱의 오늘 기록에 붙여 넣어 주세요.';}
+    try{await navigator.clipboard.writeText(allText());target.textContent='내가 남긴 현실·바람·선택을 복사했어요. 따로 간직해 두세요.';}
     catch(_){if(!dialog.open)openDialog();fallback($('dialog-copy-status'));}
   }
   $('journey-copy').addEventListener('click',()=>copy(status));$('dialog-copy-page').addEventListener('click',()=>copy($('dialog-copy-status')));

@@ -45,3 +45,5 @@ dialog{border:1px solid #dedfce;background:var(--paper);color:var(--ink);padding
 .deeper-link a:hover{background:var(--ink);color:var(--paper)}
 .invite-ask{text-decoration:underline;text-underline-offset:4px;color:var(--wine)}
 .app-bridge-bottom .invite-ask{display:inline-flex;align-items:center;min-height:44px;font-size:13px}
+.next-apply{display:inline-flex;align-items:center;min-height:44px;padding:8px 16px;border-radius:3px;background:var(--wine);color:#fff;font-size:13px;font-weight:500}
+.dialog-note a{color:var(--wine)}

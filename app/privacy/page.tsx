@@ -89,6 +89,10 @@ export default function PrivacyPage() {
               <p>로그인에 사용한 이메일 주소와 인증 토큰을 저장합니다. 비밀번호는 암호화되어 저장되며 운영자도 조회할 수 없습니다.</p>
             </div>
             <div>
+              <p className="mb-1 font-medium text-coffee-deep">베타 참여 신청</p>
+              <p>초대 베타 안내를 보내기 위해 신청한 이메일 주소를 저장합니다. 다른 목적으로 쓰지 않습니다.</p>
+            </div>
+            <div>
               <p className="mb-1 font-medium text-coffee-deep">사용자가 남긴 기록</p>
               <p>
                 하루의 문장, 조각(텍스트·음성 변환 텍스트), 감정 위치, AI 비춤 결과,

@@ -4,7 +4,7 @@ const TEMPLATE = `<a class="skip-link" href="#main">본문으로 바로가기</a
     <div class="header-inner">
       <a class="wordmark" href="/" aria-label="온순간 처음으로"><span class="brand-mark" aria-hidden="true">온</span><span>온순간<small>ONMOMENT</small></span></a>
       <nav aria-label="주요 메뉴"><a href="#journeys">나의 여정</a><a href="#experience">한 쪽 체험</a><a href="#books">두 권의 책</a><a href="#questions">궁금한 점</a></nav>
-      <a class="header-cta app-link" href="__APP__/start?src=header" data-app-link target="_blank" rel="noopener noreferrer">베타 앱 열기 <span aria-hidden="true">↗</span></a>
+      <a class="header-cta app-link" href="__APP__/?src=header" data-app-link target="_blank" rel="noopener noreferrer">베타 앱 열기 <span aria-hidden="true">↗</span></a>
     </div>
   </header>
   <main id="main">
@@ -74,7 +74,7 @@ const TEMPLATE = `<a class="skip-link" href="#main">본문으로 바로가기</a
             <div class="paper-content"><p class="paper-date" id="paper-date"></p><p class="paper-quote empty" id="paper-quote">오늘의 나를,<br>이곳에 남겨 보세요.</p></div>
             <div class="paper-bottom"><span>온순간</span><span>01</span></div>
           </div>
-          <div id="preview-actions" class="preview-actions" hidden><button type="button" id="edit-page">한 줄 고치기</button><span aria-hidden="true">·</span><button type="button" id="copy-page">한 줄 복사</button><button class="text-link" type="button" id="continue-page">앱에서 이어쓰기 ↗</button></div>
+          <div id="preview-actions" class="preview-actions" hidden><button type="button" id="edit-page">한 줄 고치기</button><span aria-hidden="true">·</span><button type="button" id="copy-page">한 줄 복사</button><a class="next-apply" href="/beta/" target="_blank" rel="noopener">초대 베타 참여 신청 ↗</a><button class="text-link" type="button" id="continue-page">이미 초대받았어요</button></div>
           <p id="preview-status" class="preview-status" aria-live="polite"></p>
         </div>
       </div>
@@ -105,9 +105,9 @@ const TEMPLATE = `<a class="skip-link" href="#main">본문으로 바로가기</a
       <div class="faq-list">
         <details><summary>온순간은 어떤 서비스인가요?<span aria-hidden="true">+</span></summary><div>일상의 한 줄을 남기고, 쌓인 기록을 다시 펼쳐보는 서비스입니다. 내 삶을 돌아보는 기록에서 출발해, 나와 소중한 이를 위한 책으로 이어가는 경험을 준비하고 있습니다.</div></details>
         <details><summary>글을 잘 쓰지 못해도 괜찮나요?<span aria-hidden="true">+</span></summary><div>네. “오늘 커피가 맛있었다” 같은 짧은 문장으로 시작해도 좋아요. 특별한 사건이나 잘 정리된 생각이 없어도, 지금 떠오르는 장면 하나를 내 말로 남겨보세요.</div></details>
-        <details><summary>이 화면에서 쓴 글은 저장되나요?<span aria-hidden="true">+</span></summary><div>이곳은 가입 없이 해보는 한 쪽 체험입니다. 쓴 글은 서버로 전송되거나 저장되지 않으며, 새로고침하거나 창을 닫으면 사라집니다. 계속 간직하고 싶다면 ‘한 줄 복사’ 후 온순간 앱에 직접 붙여 넣어 주세요.</div></details>
+        <details><summary>이 화면에서 쓴 글은 저장되나요?<span aria-hidden="true">+</span></summary><div>이곳은 가입 없이 해보는 한 쪽 체험입니다. 쓴 글은 서버로 전송되거나 저장되지 않으며, 새로고침하거나 창을 닫으면 사라집니다. 계속 간직하고 싶다면 ‘한 줄 복사’로 따로 챙겨 두세요.</div></details>
         <details><summary>지금 종이책을 주문할 수 있나요?<span aria-hidden="true">+</span></summary><div>종이책은 시범 준비 중이며, 이 페이지에서는 주문이나 결제를 받지 않습니다. 두 권의 책도 제작 방향을 보여주는 시안입니다. 현재 앱에서는 기록을 남기고 다시 보는 경험부터 시작합니다.</div></details>
-        <details><summary>지금 누구나 앱을 이용할 수 있나요?<span aria-hidden="true">+</span></summary><div>현재는 초대받은 분들과 베타를 진행하고 있습니다. 이 페이지의 한 쪽 체험은 가입 없이 이용할 수 있어요. 초대받으셨다면 상단의 ‘베타 앱 열기’로 이동해 앱의 안내를 따라 주세요.</div></details>
+        <details><summary>지금 누구나 앱을 이용할 수 있나요?<span aria-hidden="true">+</span></summary><div>현재는 초대받은 분들과 베타를 진행하고 있습니다. 이 페이지의 한 쪽 체험은 가입 없이 이용할 수 있어요. 초대받으셨다면 전달받은 링크로 들어와 주세요. 초대 링크가 없다면 <a class="invite-ask" href="/beta/" target="_blank" rel="noopener">초대 베타 참여 신청</a>으로 남겨 주세요.</div></details>
       </div>
     </section>
 
@@ -118,5 +118,5 @@ const TEMPLATE = `<a class="skip-link" href="#main">본문으로 바로가기</a
   <footer class="section-wrap"><a class="footer-logo" href="#">온순간 <span>ONMOMENT</span></a><p>오늘이 선물이 되도록.</p><span class="footer-status"><i aria-hidden="true"></i> 현재 초대 베타 운영 중</span><small>© 2026 OnMoment</small><nav class="footer-legal" aria-label="법적 고지"><a href="/privacy/">개인정보 처리방침</a><a href="/terms/">이용약관</a></nav></footer>
 
   <dialog id="book-dialog" aria-labelledby="dialog-book-title"><button class="dialog-close" data-close aria-label="책 미리보기 닫기">✕</button><div class="dialog-label">가상 편집 예시 · 시범 준비 중</div><div class="dialog-spread"><div class="dialog-cover"><p id="dialog-book-series"></p><h2 id="dialog-book-title"></h2><span aria-hidden="true">✳</span><small>온순간</small></div><div class="dialog-page"><p id="dialog-page-heading"></p><blockquote id="dialog-book-text"></blockquote><p class="dialog-source" id="dialog-book-source"></p><span class="dialog-page-number">01</span></div></div><p class="dialog-note" id="dialog-book-note"></p><button class="button outline" data-close>천천히 덮어두기</button></dialog>
-  <dialog id="continue-dialog" aria-labelledby="continue-title"><button class="dialog-close" data-close aria-label="안내 닫기">✕</button><p class="eyebrow">나의 이야기를 이어가려면</p><h2 id="continue-title">한 줄을 챙겨,<br>온순간으로.</h2><p>체험 글은 앱으로 자동 이동하지 않아요.<br>먼저 복사한 뒤 앱에 붙여 넣어 주세요.</p><button class="button outline" id="copy-and-continue" type="button">내 한 줄 복사하기</button><p id="continue-copy-status" role="status"></p><a class="button primary app-link" href="__APP__/start?src=experience" " data-app-link target="_blank" rel="noopener noreferrer">베타 앱 열기 ↗</a><p class="dialog-note">현재는 초대받은 분들과 베타를 진행하고 있습니다.</p></dialog>`;
+  <dialog id="continue-dialog" aria-labelledby="continue-title"><button class="dialog-close" data-close aria-label="안내 닫기">✕</button><p class="eyebrow">이미 초대받으셨다면</p><h2 id="continue-title">한 줄을 챙겨,<br>온순간으로.</h2><p>체험 글은 앱으로 자동 이동하지 않아요. 먼저 복사해 간직해 주세요.<br>지금 앱의 입력칸은 한 줄로 저장돼요. 여러 줄은 줄마다 나누어 남겨 주세요.</p><button class="button outline" id="copy-and-continue" type="button">내 한 줄 복사하기</button><p id="continue-copy-status" role="status"></p><a class="button primary app-link" href="__APP__/?src=experience" data-app-link target="_blank" rel="noopener noreferrer">베타 앱 열기 ↗</a><p class="dialog-note">이 브라우저에서 처음이라면 전달받은 초대 링크로 들어와 주세요. 초대 링크 없이 열면 베타 안내 화면이 나와요.<br>초대 링크가 없다면 <a class="invite-ask" href="/beta/" target="_blank" rel="noopener">초대 베타 참여 신청</a>으로 남겨 주세요.</p></dialog>`;
 export const homeHtml = (appOrigin: string) => TEMPLATE.split("__APP__").join(appOrigin);

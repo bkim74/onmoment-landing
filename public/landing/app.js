@@ -60,7 +60,7 @@
     if (!text.trim()) {target.textContent = '먼저 남기고 싶은 한 줄을 적어주세요.';return;}
     try {
       await navigator.clipboard.writeText(text);
-      target.textContent = '한 줄을 복사했어요. 앱에 붙여 넣어 이어가세요.';
+      target.textContent = '한 줄을 복사했어요. 따로 간직해 두세요.';
     } catch (_) {
       const currentDialog = target.closest('dialog');
       if (currentDialog?.open) currentDialog.close();
