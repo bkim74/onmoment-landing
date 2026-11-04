@@ -7,7 +7,8 @@
         {id:'c',text:'일에 쫓겨 마음이 복잡했다.',date:'10월 14일',private:true}
       ];
       const initial=()=>({format:'book',medium:'digital',mode:'original',purpose:'keep',structure:'recommend',detail:'brief',tone:'plain',length:'fit',date:true,life:false,ids:['a','b']});
-      const state={recipient:'other',edition:'self',binding:'separate',combinedMedium:'digital',scope:'both',preset:'books',self:initial(),gift:{...initial(),mode:'connect',purpose:'heart',ids:['a','b']}};
+      const wayParam=new URLSearchParams(location.search).get('way');
+      const state={recipient:wayParam==='self'?'self':'other',edition:'self',binding:'separate',combinedMedium:'digital',scope:'both',preset:'books',self:initial(),gift:{...initial(),mode:'connect',purpose:'heart',ids:['a','b']}};
       const modeNames={original:'내 문장만',connect:'제목과 짧은 연결',story:'이야기로 풀기'};
       const purposeNames={keep:'그때의 기록을 간직하기',discover:'나를 새롭게 바라보기',celebrate:'지나온 나를 축하하기',heart:'마음을 전하기',milestone:'삶의 한 시기를 기념하기'};
       const get=()=>state[state.edition];
