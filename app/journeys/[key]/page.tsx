@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: { params: Promise<{ key: stri
   return {
     title: `${j.label} — 온순간의 여정`,
     description: j.description.replace(/\n/g, " "),
-    openGraph: { title: `${j.label} — 온순간`, description: (j.card ?? j.description).replace(/\n/g, " ") },
+    openGraph: { title: `${j.label} — 온순간`, description: (j.card ?? j.description).replace(/\n/g, " "), images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "온순간" }] },
   };
 }
 
