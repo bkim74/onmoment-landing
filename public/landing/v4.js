@@ -50,7 +50,7 @@
       document.querySelectorAll('[data-source]').forEach(el=>el.textContent=journey.source);
       document.querySelectorAll('[data-source-title]').forEach(el=>el.textContent=journey.episode);
       setText('occasion-label',journey.label);setText('occasion-caption',journey.caption);setText('occasion-context',journey.context);setText('occasion-notice',journey.notice);
-      setText('first-question',journey.question);byId('my-story').placeholder=journey.placeholder;
+      setText('first-question',journey.question);
       setText('life-wish',journey.wish);setText('life-choice',journey.choice);setText('life-later',journey.later);
       document.querySelectorAll('[data-occasion]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.occasion===occasion)));
     }
@@ -93,9 +93,5 @@
   document.querySelectorAll('[data-book]').forEach(b=>b.addEventListener('click',()=>{openBook=b.dataset.book;byId('book-reader').hidden=false;renderBook();byId('book-reader').scrollIntoView({behavior:prefersReduced()?'instant':'smooth',block:'center'});}));
   byId('other-book')?.addEventListener('click',()=>{openBook=openBook==='a'?'b':'a';renderBook();});
   byId('close-book')?.addEventListener('click',()=>{const previous=openBook;openBook=null;byId('book-reader').hidden=true;document.querySelectorAll('[data-book]').forEach(b=>b.setAttribute('aria-expanded','false'));document.querySelector(`[data-book="${previous}"]`).focus();});
-  const form=byId('first-form'),input=byId('my-story'),page=byId('my-page');
-  input.addEventListener('input',()=>{input.setCustomValidity('');if(!page.hidden)setText('my-original',input.value);setText('copy-state','');});
-  form.addEventListener('submit',event=>{event.preventDefault();if(!input.value.trim()){input.setCustomValidity('마음에 남은 말 한 줄을 남겨주세요.');input.reportValidity();return;}setText('my-original',input.value);page.hidden=false;page.scrollIntoView({behavior:prefersReduced()?'instant':'smooth',block:'center'});});
-  byId('copy-story').addEventListener('click',async()=>{try{await navigator.clipboard.writeText(input.value);setText('copy-state','내가 쓴 글을 복사했어요.');}catch{setText('copy-state','자동 복사를 할 수 없어요. 위의 글을 선택해 직접 복사해주세요.');}});
   if(occasion)selectOccasion(occasion);else renderMode();
 })();
