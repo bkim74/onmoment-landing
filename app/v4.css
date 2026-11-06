@@ -38,3 +38,14 @@ footer a[href^="/privacy"],footer a[href^="/terms"]{text-decoration:underline;te
 
 /* 터치 목표 44px — 글 링크도 손가락이 닿게 */
 a.text-button{display:inline-flex;align-items:center;min-height:44px}
+
+/* 선택한 방식을 유지하면서, 준비 상태는 선택·시작 위치에서 읽게 한다. */
+.availability-badge{display:inline-block;font:500 12px/1.5 var(--sans);color:#70442f;background:#eee0ca;border:1px solid #bfa17b;border-radius:4px;padding:2px 7px;vertical-align:middle;white-space:nowrap}
+.gift-door .availability-badge{margin-top:8px}
+.mode-menu button .availability-badge{margin-left:8px}
+.mode-menu summary .availability-badge{margin-left:6px}
+p.availability-note{font:400 16px/1.75 var(--sans);color:#654936;margin:12px 0 0;max-width:36em;word-break:keep-all;overflow-wrap:anywhere}
+.closing .availability-note{margin-left:auto;margin-right:auto}
+.form-bottom:has(> .availability-note:not([hidden])){display:grid;grid-template-columns:1fr;justify-items:start;gap:12px}
+.form-bottom>.availability-note{margin:0}
+@media(max-width:760px){.mode-menu summary{min-height:44px;display:flex;align-items:center;gap:4px}.mode-menu>div{top:100%;margin-top:6px}.gift-door .availability-badge{font-size:12px}.home nav .nav-cta{max-width:10em}}

@@ -14,7 +14,8 @@ export default function KeepsakesPage() {
   return (
     <div className="keepsakes-page">
       <main>
-        <a className="home" href="/#books">← 온순간 랜딩으로</a>
+        <a className="home" href="/#gifts">← 온순간 랜딩으로</a>
+        <p id="keepsakes-context" hidden />
         <section className="reality" aria-label="지금 앱에서 되는 일">
           <h2>실제로 지금 되는 일과, 준비 중인 일</h2>
           <ul>
@@ -24,7 +25,7 @@ export default function KeepsakesPage() {
           <p>아래는 앞으로의 구성을 가상 기록으로 미리 고르는 화면이에요. 고른 내용은 저장되지 않아요.</p>
           <a href="/beta/" target="_blank" rel="noopener">초대 베타 참여 신청 ↗</a>
           <span> · </span>
-          <a href={`${APP}/?src=keepsakes`} data-app-link target="_blank" rel="noopener noreferrer">이미 초대받았어요 ↗</a>
+          <a href={`${APP}/?src=keepsakes`} data-app-link data-story-link target="_blank" rel="noopener noreferrer">이미 초대받았어요 ↗</a>
         </section>
         <div dangerouslySetInnerHTML={{ __html: keepsakesHtml(APP) }} />
       </main>
