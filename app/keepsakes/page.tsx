@@ -23,9 +23,8 @@ export default function KeepsakesPage() {
             <li className="soon"><b className="soon">준비 중</b> 이야기로 풀기, 전권 편집, 한 권에 묶기, 전자책 파일, 종이책 주문, 함께 쓰기</li>
           </ul>
           <p>아래는 앞으로의 구성을 가상 기록으로 미리 고르는 화면이에요. 고른 내용은 저장되지 않아요.</p>
-          <a href="/beta/" target="_blank" rel="noopener">초대 베타 참여 신청 ↗</a>
-          <span> · </span>
-          <a href={`${APP}/?src=keepsakes`} data-app-link data-story-link target="_blank" rel="noopener noreferrer">이미 초대받았어요 ↗</a>
+          <a href={`${APP}/?src=keepsakes`} data-app-link data-story-link target="_blank" rel="noopener noreferrer">앱에서 시작하기 ↗</a>
+          <span> · 지금은 누구나 시작할 수 있는 시범 운영 중이에요.</span>
         </section>
         <div dangerouslySetInnerHTML={{ __html: keepsakesHtml(APP) }} />
       </main>
