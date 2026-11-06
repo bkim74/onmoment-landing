@@ -7,7 +7,32 @@
         {id:'c',text:'일에 쫓겨 마음이 복잡했다.',date:'10월 14일',private:true}
       ];
       const initial=()=>({format:'book',medium:'digital',mode:'original',purpose:'keep',structure:'recommend',detail:'brief',tone:'plain',length:'fit',date:true,life:false,ids:['a','b']});
-      const wayParam=new URLSearchParams(location.search).get('way');
+      const contextParams=new URLSearchParams(location.search);
+      const wayParam=contextParams.get('way');
+      const context=new URLSearchParams();
+      if(['self','gift','together'].includes(wayParam))context.set('way',wayParam);
+      const journey=contextParams.get('journey');
+      if(['teen','couple','parents','retire','baby','pilgrim','unsure'].includes(journey))context.set('journey',journey);
+      const occasion=contextParams.get('occasion');
+      if(journey==='parents'&&['parents_day','birthday','care','memorial'].includes(occasion))context.set('occasion',occasion);
+      const back=document.querySelector('a.home');
+      if(back){
+        const u=new URL(journey&&context.has('journey')?'/journeys/'+journey+'/':'/',location.origin);
+        if(context.has('way'))u.searchParams.set('way',wayParam);
+        if(context.has('occasion'))u.searchParams.set('occasion',occasion);
+        u.hash=journey?'episode-gift':'gifts';back.href=u.toString();
+        if(journey)back.textContent='← 보던 여정으로';
+      }
+      if(wayParam==='together'){
+        const note=document.getElementById('keepsakes-context');
+        note.hidden=false;note.textContent='함께 쓰고 서로에게 · 준비 중. 여기서는 내가 간직할 판본과 내가 건넬 판본의 모양을 미리 살펴봐요. 각자가 함께 쓰는 화면은 준비 중이며, 돌아가면 고른 방식이 이어져요.';
+        if(journey==='parents'&&occasion==='memorial')note.textContent+=' 앱에서는 나에게 간직하기로 내 기록을 남길 수 있어요.';
+      }
+      document.querySelectorAll('a[data-app-link]').forEach(a=>{
+        const u=new URL(a.href);context.forEach((v,k)=>u.searchParams.set(k,v));
+        if(wayParam==='together'&&journey==='parents'&&occasion==='memorial'){u.searchParams.set('way','self');a.textContent='나에게 남기기 ↗';}
+        a.href=u.toString();
+      });
       const state={recipient:wayParam==='self'?'self':'other',edition:'self',binding:'separate',combinedMedium:'digital',scope:'both',preset:'books',self:initial(),gift:{...initial(),mode:'connect',purpose:'heart',ids:['a','b']}};
       const modeNames={original:'내 문장만',connect:'제목과 짧은 연결',story:'이야기로 풀기'};
       const purposeNames={keep:'그때의 기록을 간직하기',discover:'나를 새롭게 바라보기',celebrate:'지나온 나를 축하하기',heart:'마음을 전하기',milestone:'삶의 한 시기를 기념하기'};

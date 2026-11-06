@@ -38,15 +38,17 @@
 
   const apply = (a) => {
     const u = new URL(a.href);
+    const story = document.querySelector('a[data-story-link]');
+    const context = story ? new URL(story.href) : new URL(location.href);
     if (a.dataset.inviteBeta) {
-      a.href = inviteHref(appOrigin(), null);
+      a.href = inviteHref(appOrigin(), null, context);
     } else if (a.dataset.inviteSrc) {
       a.href = inviteHref(u.origin, a.dataset.inviteSrc, u);
     } else if (u.origin === location.origin && /^\/beta\/?$/.test(u.pathname)) {
       // 이미 초대받은 사람에게는 참여 신청 대신 앱 입구를 연다.
       a.dataset.inviteBeta = '1';
       a.textContent = '베타 앱 열기 ↗';
-      a.href = inviteHref(appOrigin(), null);
+      a.href = inviteHref(appOrigin(), null, context);
     } else if (a.hasAttribute('data-app-link') || (u.hostname === 'app.onmoment.kr' && /^\/(start|today)?\/?$/.test(u.pathname))) {
       const src = u.searchParams.get('src');
       a.dataset.inviteSrc = src && SRC.test(src) ? src : 'invite';
