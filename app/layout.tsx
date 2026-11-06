@@ -74,6 +74,8 @@ export default function RootLayout({
       <body>
         {children}
         <Script src="/landing/invite-link.js" strategy="afterInteractive" />
+        {/* 의견 남기기(첫 사용 설문·막힌 곳) + 익명 방문·선택 측정 — 앱과 같은 위젯 한 파일 */}
+        <Script src="https://app.onmoment.kr/feedback/widget.js" strategy="afterInteractive" />
       </body>
     </html>
   );

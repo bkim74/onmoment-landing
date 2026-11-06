@@ -104,6 +104,7 @@
     const unavailableTogether=together&&journey?.allowTogether===false;
     const note=unavailableTogether?'추모의 함께 쓰기는 준비 중이에요. 이 버튼은 나에게 간직하기로 이어져요.':'함께 쓰기는 준비 중이에요. 지금은 내 이야기부터 나만의 기록으로 남겨요.';
     document.querySelectorAll('[data-together-note]').forEach(el=>{el.hidden=!together;el.textContent=note;});
+    document.querySelectorAll('[data-together-stuck]').forEach(el=>{el.hidden=!together;}); // 준비 중 안내 곁의 막힌 곳 신고 입구(의견 위젯이 연다)
     document.querySelectorAll('[data-together-badge]').forEach(el=>el.hidden=!together);
     document.querySelectorAll('a[data-story-link]').forEach(a=>{
       if(!a.dataset.defaultLabel)a.dataset.defaultLabel=a.textContent;
@@ -128,9 +129,11 @@
     occasion=key;journey={...baseJourney,...selected};lensIndex=0;
     renderMode();
   }
-  document.querySelectorAll('[data-occasion]').forEach(b=>b.addEventListener('click',()=>selectOccasion(b.dataset.occasion)));
+  // 선택 변경 측정(익명·세션 단위, 허용값만) — 의견 위젯(app.onmoment.kr/feedback/widget.js)이 보낸다. 위젯이 없으면 아무것도 하지 않는다
+  const trackChoice=()=>{try{window.__omFeedback?.track?.('landing_choice_changed',{way:mode,journey:baseJourney?.journey,occasion:baseJourney?.journey==='parents'?occasion:undefined});}catch{}};
+  document.querySelectorAll('[data-occasion]').forEach(b=>b.addEventListener('click',()=>{selectOccasion(b.dataset.occasion);trackChoice();}));
   document.querySelectorAll('[data-open-book]').forEach(a=>a.addEventListener('click',()=>{byId('book-detail').open=true;}));
-  document.querySelectorAll('[data-mode]').forEach(b=>b.addEventListener('click',()=>{mode=b.dataset.mode;renderMode();const menu=b.closest('details');if(menu){menu.open=false;menu.querySelector('summary').focus();}if(mode==='together'&&journey?.allowTogether!==false&&byId('book-detail'))byId('book-detail').open=true;}));
+  document.querySelectorAll('[data-mode]').forEach(b=>b.addEventListener('click',()=>{mode=b.dataset.mode;renderMode();trackChoice();const menu=b.closest('details');if(menu){menu.open=false;menu.querySelector('summary').focus();}if(mode==='together'&&journey?.allowTogether!==false&&byId('book-detail'))byId('book-detail').open=true;}));
   document.querySelectorAll('[data-lens]').forEach(b=>b.addEventListener('click',()=>{lensIndex=Number(b.dataset.lens);renderJourney();}));
   document.querySelectorAll('[data-episode-format]').forEach(b=>b.addEventListener('click',()=>{episodeFormat=b.dataset.episodeFormat;renderJourney();}));
   const prefersReduced=()=>matchMedia('(prefers-reduced-motion: reduce)').matches;
