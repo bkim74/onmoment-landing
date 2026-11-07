@@ -49,3 +49,7 @@ p.availability-note{font:400 16px/1.75 var(--sans);color:#654936;margin:12px 0 0
 .form-bottom:has(> .availability-note:not([hidden])){display:grid;grid-template-columns:1fr;justify-items:start;gap:12px}
 .form-bottom>.availability-note{margin:0}
 @media(max-width:760px){.mode-menu summary{min-height:44px;display:flex;align-items:center;gap:4px}.mode-menu>div{top:100%;margin-top:6px}.gift-door .availability-badge{font-size:12px}.home nav .nav-cta{max-width:10em}}
+
+/* 준비 중 안내 곁 '이곳에서 막혔어요' — 의견 위젯 입구 */
+.stuck-link{display:inline-block;margin-top:6px;font:400 14px/1.6 var(--sans);color:#70442f;background:none;border:none;padding:8px 0;min-height:44px;text-decoration:underline;text-underline-offset:4px;cursor:pointer}
+.stuck-link[hidden]{display:none}
