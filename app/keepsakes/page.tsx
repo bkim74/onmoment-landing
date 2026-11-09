@@ -19,8 +19,8 @@ export default function KeepsakesPage() {
         <section className="reality" aria-label="지금 앱에서 되는 일">
           <h2>실제로 지금 되는 일과, 준비 중인 일</h2>
           <ul>
-            <li><b>지금 앱에서</b> 내 기록에서 고른 한 문장, 한 장면을 담은 카드, 대표 장을 나에게 간직하거나 건네요. 한 문장과 카드는 내 문장 그대로예요. 대표 장은 제목과 짧은 연결을 더할 수 있어요. 확정한 내용은 링크로 건네고, 받는 분은 가입 없이 읽어요. 책 한 권은 인쇄 창에서 PDF로 저장해요.</li>
-            <li className="soon"><b className="soon">준비 중</b> 이야기로 풀기, 전권 편집, 한 권에 묶기, 전자책 파일, 종이책 주문, 함께 쓰기</li>
+            <li><b>지금 앱에서</b> 내 기록에서 고른 장면을 카드로 간직하고, 여러 장면을 대표 장으로 엮어 건네요. 모두 내 문장 그대로 담겨요. 확정한 대표 장은 링크로 건네고, 받는 분은 가입 없이 읽어요. 건넨 링크는 언제든 거둘 수 있어요. 책 한 권은 인쇄 창을 열어 PDF로 저장해요.</li>
+            <li className="soon"><b className="soon">준비 중</b> 한 문장 고르기와 짧은 연결(AI 편집), 이야기로 풀기, 전권 편집, 한 권에 묶기, 전자책 파일, 종이책 주문, 함께 쓰기</li>
           </ul>
           <p>아래는 앞으로의 구성을 가상 기록으로 미리 고르는 화면이에요. 고른 내용은 저장되지 않아요.</p>
           <a href={`${APP}/?src=keepsakes`} data-app-link data-story-link target="_blank" rel="noopener noreferrer">앱에서 시작하기 ↗</a>
