@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 };
 
 const CONTACT = "hello@onmoment.kr";
-const UPDATED = "2026년 6월";
+const UPDATED = "2026년 11월";
 
 export default function PrivacyPage() {
   return (
@@ -123,8 +123,9 @@ export default function PrivacyPage() {
             <div>
               <p className="mb-1 font-medium text-coffee-deep">이메일 알림</p>
               <p>
-                아침 회귀 이메일(전날 남긴 문장이 다음 날 아침 도착하는 기능)을 발송하기 위해
-                이메일 주소를 사용합니다. 마케팅 목적의 이메일은 발송하지 않습니다.
+                아침 회귀 이메일(전날 남긴 문장이 다음 날 아침 도착하는 기능)과 기록 캡슐 알림을 발송하기 위해
+                이메일 주소와 메일에 담길 내용(전날 남긴 문장 한 줄, 캡슐을 봉인한 날짜와 장소 이름)을 사용합니다.
+                기록이 담긴 메일은 이메일 주소의 소유를 확인한 계정에만 보냅니다. 마케팅 목적의 이메일은 발송하지 않습니다.
                 이메일 수신 거부는 메일 하단 링크에서 즉시 처리됩니다.
               </p>
             </div>
@@ -220,7 +221,11 @@ export default function PrivacyPage() {
               },
               {
                 name: "Resend (미국)",
-                purpose: "아침 회귀 이메일 발송. 이메일 주소만 전달되며 기록 내용은 포함되지 않습니다.",
+                purpose: "아침 회귀·기록 캡슐 이메일 발송. 이메일 주소와 메일 본문(전날 남긴 문장 한 줄, 캡슐을 봉인한 날짜와 장소 이름)이 전달됩니다. 기록이 담긴 메일은 이메일 소유를 확인한 계정에만 보냅니다.",
+              },
+              {
+                name: "Vercel (미국)",
+                purpose: "앱과 웹사이트 호스팅. 요청을 처리하는 동안 기록 내용이 서버를 거치며, 기록은 Supabase에 암호화해 저장됩니다.",
               },
               {
                 name: "hCaptcha (미국)",
