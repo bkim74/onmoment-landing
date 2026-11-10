@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 };
 
 const CONTACT = "hello@onmoment.kr";
-const UPDATED = "2026년 6월";
+const UPDATED = "2026년 11월";
 
 export default function TermsPage() {
   return (
@@ -115,7 +115,7 @@ export default function TermsPage() {
             ))}
           </ul>
           <p className="mt-5 text-[14px] text-coffee-deep/70">
-            온순간은 만 14세 이상이 이용할 수 있습니다.
+            온순간은 만 18세 이상이 이용할 수 있습니다. 가입할 때 만 18세 이상임을 확인합니다.
           </p>
         </section>
 
