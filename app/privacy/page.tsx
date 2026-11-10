@@ -228,8 +228,8 @@ export default function PrivacyPage() {
                 purpose: "앱과 웹사이트 호스팅. 요청을 처리하는 동안 기록 내용이 서버를 거치며, 기록은 Supabase에 암호화해 저장됩니다.",
               },
               {
-                name: "hCaptcha (미국)",
-                purpose: "로그인·가입 시 봇 방지. 이메일 주소나 기록은 전달되지 않습니다.",
+                name: "Cloudflare Turnstile (미국)",
+                purpose: "가입·로그인·비밀번호 재설정 요청 시 자동화된 접근 방지. 기기·브라우저 신호가 처리되며, 이메일 주소나 기록은 전달되지 않습니다.",
               },
             ].map(({ name, purpose }) => (
               <div key={name}>
