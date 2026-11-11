@@ -40,15 +40,15 @@ def event_section():
     if not EVENT_ON:
         return ''
     winners = esc(POLICY['event']['winnerCount'])
+    paper = POLICY['paperBook']['price']
     return f'''<section class="launch-event section" id="book-event" aria-labelledby="event-title"><div class="wrap launch-event-layout">
-  <div class="launch-event-copy"><p class="eyebrow">첫 참여자를 위한 책 선물 · 준비 중</p><h2 id="event-title">내 이야기를<br>책으로 만나는 시간.</h2><p>오늘 남긴 작은 장면이,<br>나와 소중한 사람에게 건네는 이야기가 되도록.</p><p class="launch-event-offer">참여자 <strong>{winners}분께 두 시선의 책 2권 한 세트</strong>를<br>추첨으로 선물하는 이벤트를 준비하고 있어요.</p><p class="launch-caption">참여 기간·제작 사양·배송 범위 확정 후 응모를 열어요.<br>지금은 이벤트 응모를 받기 전입니다.</p><a class="button primary" href="__APP__/start?src=book-event" data-app-link data-story-link>먼저 내 한 줄 남기기 ↗</a></div>
-  <div class="launch-event-guide"><p class="launch-guide-label">이런 경험을 함께 나누려 해요</p><ol>
-    <li><span aria-hidden="true">01</span><div><h3>서로 다른 3일, 한 장면씩</h3><p>연속으로 쓰지 않아도 괜찮아요.</p></div></li>
-    <li><span aria-hidden="true">02</span><div><h3>한 번 돌아보고, 내 말 남기기</h3><p>AI와 함께해도, 스스로 돌아봐도 좋아요.</p></div></li>
-    <li><span aria-hidden="true">03</span><div><h3>써 본 느낌, 솔직하게</h3><p>좋았던 점도, 어려웠던 점도 들려주세요.</p></div></li>
-  </ol><details class="launch-details"><summary>예정된 참여 방식 자세히 보기</summary><div><p>위 세 가지를 경험하고 직접 응모한 분 중 {winners}분을 추첨할 예정이에요. 유료 결제나 친구 초대 없이도 같은 기회로 참여하도록 준비하고 있어요.</p><p>책 원고는 당첨 후, 간직하고 싶은 기록이 준비되었을 때 함께 엮어요. 인쇄 전 최종 내용은 내가 확인해요.</p><p>응모 기간, 당첨 안내일, 제작권 기한과 배송 조건은 정식 이벤트 안내에서 알려드릴게요. 지금의 기록이 참여 조건에 포함되는지도 그때 확인해 주세요.</p></div></details></div>
+  <div class="launch-event-copy"><p class="eyebrow">책 선물 이벤트 · 준비 중</p><h2 id="event-title">내 이야기를<br>책으로 만나는 시간.</h2><p>오늘 남긴 작은 장면이,<br>나와 소중한 사람에게 건네는 이야기가 되도록.</p><p class="launch-event-offer">온순간을 써 보고 응모한 분 중 <strong>{winners}분께</strong>,<br>내 기록으로 엮은 <strong>두 시선의 종이책 한 세트</strong>를 선물해요.</p><ul class="launch-event-pair"><li><strong>당신을 알아보는 책</strong><span>내가 본 당신의 장면과, 그때 내가 받은 마음</span></li><li><strong>나를 당신에게 전하는 책</strong><span>당신에게 전하고 싶은 내 삶의 장면과 그 이유</span></li></ul><p class="launch-caption">2권 한 세트 · {paper:,}원 상당. 나에게 주는 책으로도 엮을 수 있어요.<br>응모는 기간과 제작 · 배송 조건이 정해지면 열려요.</p><a class="button primary" href="__APP__/start?src=book-event" data-app-link data-story-link>오늘의 한 장면 남기기 ↗</a></div>
+  <div class="launch-event-guide"><p class="launch-guide-label">이렇게 함께해요</p><ol>
+     <li><span aria-hidden="true">01</span><div><h3>서로 다른 3일, 한 장면씩</h3><p>이어서 쓰지 않아도 돼요. 생각날 때 한 장면이면 충분해요.</p></div></li>
+     <li><span aria-hidden="true">02</span><div><h3>한 번 돌아보고, 내 말 남기기</h3><p>AI 비춤과 함께해도, 혼자 다시 읽어도 좋아요.</p></div></li>
+     <li><span aria-hidden="true">03</span><div><h3>써 본 느낌 들려주기</h3><p>좋았던 점도, 어려웠던 점도 그대로요. 온순간이 더 나아지는 데 쓰여요.</p></div></li>
+  </ol><details class="launch-details"><summary>참여 방식 자세히 보기</summary><div><p>세 가지를 해 보고 직접 응모한 분 중 {winners}분을 추첨해요. 결제나 친구 초대와 상관없이, 누구에게나 같은 기회예요.</p><p>책은 당첨 후, 간직하고 싶은 기록이 모였을 때 함께 엮어요. 내가 고르고 확인한 기록만 담기고, 받는 사람의 마음은 지어내지 않아요. 인쇄 전 마지막 원고도 내가 확인해요.</p><p>배송 주소는 당첨된 분께만, 배송을 위해서만 여쭤요. 응모하지 않아도 온순간은 지금처럼 무료로 쓸 수 있어요.</p><p>응모 기간 · 당첨 안내일 · 제작 기한 · 배송 조건은 응모를 열 때 함께 알려 드려요.</p></div></details></div>
 </div></section>'''
-
 
 def pricing_section():
     cards = []
@@ -80,8 +80,8 @@ def launch_faq():
         ('1년 이용권은 얼마이며, 언제 시작하나요?', f"기본 {PLAN_BY_KEY['basic']['annualPromotionPrice']:,}원, 프리미엄 {PLAN_BY_KEY['premium']['annualPromotionPrice']:,}원을 한 번에 결제하는 12개월 이용권으로 준비해요. 월로 나누면 각각 {PLAN_BY_KEY['basic']['annualPromotionPrice'] // 12:,}원, {PLAN_BY_KEY['premium']['annualPromotionPrice'] // 12:,}원이에요. 지금은 결제나 예약금을 받지 않아요. 유료 이용이 열린 뒤 원할 때 직접 결제한 날부터 12개월이에요."),
         ('1년 이용이 끝나면 어떻게 되나요?', '자동 갱신 없이 끝나요. 끝나기 전에 먼저 알려 드리고, 이어갈지는 그때 직접 골라요. 무료로 돌아가도 남긴 기록은 그대로 다시 읽을 수 있어요.'),
         ('1년치 AI와 책 제작권을 한 번에 받나요?', '1년 이용권이어도 AI 이용량과 책은 매달 나눠 드려요. 프리미엄 디지털 책은 월 1권이고, 종이책은 따로예요. 제공량 · 사용 기한 · 남은 양의 처리는 결제 전에 먼저 알려 드려요.'),
-        ('책 선물 이벤트에는 지금 응모할 수 있나요?', '아직 응모 전이에요. 참여 기간과 제작·배송 조건이 확정되면 응모 방법을 안내해요. 지금은 먼저 기록을 남기며 온순간을 경험할 수 있어요.'),
-        ('책을 받으려면 매일 쓰거나 결제해야 하나요?', '서로 다른 3일의 기록, 한 번의 돌아보기, 한 번의 솔직한 의견을 나누고 응모하는 방식을 준비하고 있어요. 연속 출석이나 유료 결제, 친구 초대를 조건으로 두지 않아요. 최종 조건은 응모 시작 전에 안내해요.'),
+        ('책 선물 이벤트에는 지금 응모할 수 있나요?', '응모는 기간과 제작 · 배송 조건이 정해지면 열려요. 그때 응모 방법을 함께 알려 드려요. 그동안에도 기록을 남기며 온순간을 그대로 써 볼 수 있어요.'),
+        ('책을 받으려면 매일 쓰거나 결제해야 하나요?', '서로 다른 3일의 기록, 한 번의 돌아보기, 써 본 느낌 한 번이면 응모할 수 있도록 준비하고 있어요. 매일 쓰기 · 결제 · 친구 초대는 조건이 아니에요. 최종 조건은 응모를 열 때 함께 알려 드려요.'),
         ('디지털 책과 종이책은 어떻게 다른가요?', '프리미엄에 포함할 디지털 책은 한 시선의 PDF 1종이에요. 별도 종이책 상품은 ‘당신을 알아보는 책’과 ‘나를 당신에게 전하는 책’, 두 시선의 소책자 2권 한 세트, 49,000원으로 준비하고 있어요. 이 페이지의 천 표지 이미지는 방향을 보여주는 시안이에요.'),
         ('온순간을 초대하면 내 기록도 공개되나요?', '아래 초대 버튼은 온순간의 공개 소개 주소만 건네요. 내 기록이나 개인 초대 코드는 함께 보내지 않아요. 개인 이야기를 건네는 일은 앱에서 별도로 선택해요.'),
     ]
