@@ -6,8 +6,8 @@ import "../keepsakes.css";
 const APP = process.env.NEXT_PUBLIC_APP_ORIGIN ?? "https://app.onmoment.kr";
 
 export const metadata: Metadata = {
-  title: "두 권에서 시작하는 나만의 선물 | 온순간",
-  description: "나에게 한 권, 소중한 당신에게 한 권. 두 권의 책에서 카드와 전자책까지 각자의 모습으로 골라보세요.",
+  title: "두 시선의 책 — 당신을 알아보는 책 · 나를 당신에게 전하는 책 | 온순간",
+  description: "나에게도, 소중한 당신에게도. 같은 기록을 ‘당신을 알아보는 책’과 ‘나를 당신에게 전하는 책’, 두 시선으로 엮어요. 카드와 전자책까지 골라보세요.",
 };
 
 export default function KeepsakesPage() {
