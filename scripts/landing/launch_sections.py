@@ -73,6 +73,85 @@ def pricing_section():
 </section>'''
 
 
+
+# 온순간 가치 동참 — 이용 요금을 '함께 이어 가는 일'의 결로. 금액·제공 범위는 launch-policy.json 그대로(출시 예정, 결제 없음).
+VALUE_COST = (
+    ('기록 · 다시 읽기', '내 글과 사진을 담고 펼치는 일이라, 모두가 온순간을 쉽게 누리도록', '늘 무료로 열어 둬요.'),
+    ('AI 비춤 · 돌아보기', 'AI가 내 글을 읽고 다른 시선으로 답할 때마다, 읽고 쓰는 글자만큼 AI 토큰 비용이 들어요.', '자주, 깊이 만날수록 비용도 함께 커져요.'),
+    ('이야기책 엮기', '한 달의 기록을 처음부터 끝까지 읽고 한 권으로 엮어요. 가장 많은 토큰이 드는 일이에요.', '그래서 프리미엄에 담았어요.'),
+)
+VALUE_MEANING = {
+    'free': '온순간의 문은 누구에게나 열려 있어요.',
+    'basic': '내가 AI와 만나는 시간을, 내가 함께 채워요.',
+    'premium': '내 이야기책을 엮고, 다음 사람의 첫 기록까지 함께 지켜요.',
+}
+VALUE_ROWS = (
+    ('글 · 사진 · 목소리 기록', ('✓', '✓', '✓')),
+    ('다시 읽기 · 내 말로 돌아보기', ('✓', '✓', '✓')),
+    ('내보내기 · 지우기', ('✓', '✓', '✓')),
+    ('AI 비춤', ('맛보기', '넉넉히', '가장 넉넉히')),
+    ('지난 기록까지 잇는 깊은 돌아보기', ('', '✓', '✓')),
+    ('한 주 · 한 달 다시 만나기', ('', '✓', '✓')),
+    ('디지털 이야기책(PDF)', ('', '', '월 1권')),
+)
+
+
+def value_section():
+    plans = POLICY['plans']
+    months = POLICY['annualPromotion']['durationMonths']
+    cost = ''.join(f'<li><h3>{esc(t)}</h3><p>{esc(d)}</p><p class="value-cost-note">{esc(n)}</p></li>' for t, d, n in VALUE_COST)
+    cards = []
+    for plan in plans:
+        free = plan['key'] == 'free'
+        features = ''.join(f'<li>{esc(item)}</li>' for item in plan['features'])
+        if free:
+            price = '<p class="value-price"><strong>0</strong>원</p><p class="value-annual"><span>처음부터, 언제까지나</span></p>'
+            action = '<a class="button primary" href="__APP__/start?src=value-free" data-app-link data-story-link>지금 한 줄 남기기 ↗</a>'
+        else:
+            total = plan['annualPromotionPrice']
+            if not isinstance(total, int) or total <= 0 or months != 12 or total % months:
+                raise ValueError('Expected a 12-month annual amount with an exact monthly equivalent.')
+            price = (f'<p class="value-price"><span>월 </span><strong>{plan["price"]:,}</strong>원</p>'
+                     f'<p class="value-annual">1년 동참이면 <strong>월 {total // months:,}원</strong><span>연 {total:,}원 · 한 번 결제 · 자동 갱신 없이</span></p>')
+            action = '<p class="value-soon">출시 예정 · 지금은 결제 없이 무료로 써요</p>'
+        cards.append(f'<article class="value-plan value-plan-{esc(plan["key"])}"><p class="value-plan-name">{esc(plan["name"])}</p>'
+                     f'<p class="value-meaning">{esc(VALUE_MEANING[plan["key"]])}</p>{price}<ul>{features}</ul>{action}</article>')
+    head_cells = ''.join(f'<th scope="col">{esc(p["name"])}</th>' for p in plans)
+    dash = '<span class="value-dash" aria-label="없음">·</span>'
+    body = ''.join('<tr><th scope="row">' + esc(label) + '</th>' + ''.join(f'<td>{esc(v) if v else dash}</td>' for v in vals) + '</tr>' for label, vals in VALUE_ROWS)
+    paper = POLICY['paperBook']['price']
+    return (
+        '<section class="value-hero section wrap" aria-labelledby="value-title">'
+        '<p class="eyebrow">온순간 가치 동참 · 출시 예정</p>'
+        '<h1 id="value-title">오늘이 선물이 되는 시간을,<br>함께 이어 가요.</h1>'
+        '<p>기록하고 다시 읽는 일은 누구에게나 늘 무료예요.<br>AI와 더 깊이 만나고 싶을 때 동참해 주세요.<br>그 마음이 온순간을 오늘도, 내일도 이어지게 해요.</p>'
+        '<a class="value-jump" href="#value-levels">세 가지 동참 바로 보기 ↓</a>'
+        '</section>'
+        '<section class="value-cost section wrap" aria-labelledby="value-cost-title">'
+        '<div class="section-heading"><p class="eyebrow">동참이 쓰이는 곳</p><h2 id="value-cost-title">AI가 함께하는 시간에는<br>실제 비용이 들어요.</h2>'
+        '<p>동참해 주신 마음은 먼저 AI 토큰 비용에 쓰여요.<br>그래서 누구나 첫 한 줄을 편히 남길 수 있어요.</p></div>'
+        f'<ol class="value-cost-list">{cost}</ol>'
+        '</section>'
+        '<section class="value-levels section wrap" id="value-levels" aria-labelledby="value-levels-title">'
+        '<div class="section-heading"><p class="eyebrow">세 가지 동참</p><h2 id="value-levels-title">내게 맞는 만큼,<br>함께해요.</h2></div>'
+        f'<div class="value-plans">{"".join(cards)}</div>'
+        f'<div class="value-table-wrap"><table class="value-table"><caption>동참마다 함께 받는 것</caption><thead><tr><th scope="col">혜택</th>{head_cells}</tr></thead><tbody>{body}</tbody></table></div>'
+        '<p class="launch-caption">AI 비춤의 넉넉함과 책을 엮는 범위는 정하는 중이에요. 열리기 전에 정확한 양을 먼저 알려 드려요.</p>'
+        '<div class="value-intent"><p>동참할 마음이 있다면, 먼저 알려 주세요.</p><a class="button primary" href="__APP__/plan?src=value" data-app-link>동참 의향 남기기 ↗</a><p class="launch-caption">결제 없이 마음만 남겨요. 앱에 로그인하면 남길 수 있고, 언제든 거둘 수 있어요.</p></div>'
+        '</section>'
+        '<section class="value-promise section wrap" aria-labelledby="value-promise-title">'
+        '<h2 id="value-promise-title">지금 드리는 약속</h2><ul>'
+        '<li><strong>지금은 결제 없이 무료로 써요.</strong> 결제 · 예약금 · 카드 등록이 없어요.</li>'
+        '<li><strong>약속드린 90일 무료 체험은 그대로예요.</strong> 체험이 끝나도 자동으로 결제되지 않고, 동참은 그때 직접 골라요.</li>'
+        '<li><strong>1년 동참은 12개월 한 번, 자동 갱신 없이.</strong> AI 이용량과 책은 매달 나눠 드려요.</li>'
+        '<li><strong>무료로 돌아가도 내 기록은 그대로예요.</strong> 언제든 다시 읽고, 내보내고, 지울 수 있어요.</li>'
+        '</ul></section>'
+        '<section class="launch-paper section wrap"><div><p class="eyebrow">곁에 두고, 소중한 사람에게 건네고</p><h3>당신을 알아보는 책,<br>나를 당신에게 전하는 책.</h3>'
+        '<p>같은 기록을 두 시선으로 엮은 이야기책 두 권.<br>동참과 상관없이 따로 주문할 수 있게 준비해요.</p></div>'
+        f'<div class="launch-paper-price"><p>종이책 2권 · 한 세트</p><strong>{paper:,}<span>원</span></strong>'
+        '<p class="launch-caption">주문 준비 중 · 사양과 배송은 주문 전에 먼저 알려 드려요.</p><a class="launch-detail-link" href="/keepsakes/">두 시선의 구성 예시 보기 ↗</a></div></section>'
+    )
+
 def pricing_teaser():
     """Home keeps one light strip; full plans live on /pricing/."""
     rows = []
