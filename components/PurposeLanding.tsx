@@ -145,6 +145,8 @@ export default function PurposeLanding({ ways }: { ways: React.ReactNode }) {
               <p className="eyebrow">소중한 사람에게 건네는 책</p>
               <h2 id="together-h">함께한 기억을,<br />소중한 사람에게 한 권의 책으로.</h2>
               <p className="intro">남겨 둔 기록이 있어도, 기억나는 장면 하나부터 시작해도 좋아요.<br />혼자 준비해 건네고, 원하면 서로의 이야기를 더해요.</p>
+              {/* 두 시선(2026-11-11 정본) — 같은 기록을 편집 역할로 나눈다. 받는 사람의 마음은 지어내지 않는다 */}
+              <p className="intro">두 시선으로 엮어요 — <b>당신을 알아보는 책</b>, 그리고 <b>나를 당신에게 전하는 책</b>.</p>
               <div className="people" role="group" aria-label="건네는 방식 예시 고르기">
                 {GIFT_WAYS.map((w) => (
                   <button key={w.key} type="button" aria-pressed={giftWay === w.key} onClick={() => setGiftWay(w.key)}>{w.label}</button>

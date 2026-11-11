@@ -25,7 +25,7 @@
       }
       if(wayParam==='together'){
         const note=document.getElementById('keepsakes-context');
-        note.hidden=false;note.textContent='함께 쓰고 서로에게 · 준비 중. 여기서는 내가 간직할 판본과 내가 건넬 판본의 모양을 미리 살펴봐요. 각자가 함께 쓰는 화면은 준비 중이며, 돌아가면 고른 방식이 이어져요.';
+        note.hidden=false;note.textContent='함께 쓰고 서로에게 · 준비 중. 여기서는 당신을 알아보는 책과 나를 당신에게 전하는 책의 모양을 미리 살펴봐요. 각자가 함께 쓰는 화면은 준비 중이며, 돌아가면 고른 방식이 이어져요.';
         if(journey==='parents'&&occasion==='memorial')note.textContent+=' 앱에서는 나에게 간직하기로 내 기록을 남길 수 있어요.';
       }
       document.querySelectorAll('a[data-app-link]').forEach(a=>{
@@ -54,19 +54,19 @@
         const e=get();const records=chosen(e);const selfGift=state.recipient==='self';const medium=effectiveMedium(e);
         root.querySelectorAll('[data-key]').forEach(group=>{const key=group.dataset.key;const v=key==='medium'?medium:['recipient','edition','preset','binding','scope'].includes(key)?state[key]:e[key];group.querySelectorAll('button[data-value]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.value===v)));});
         q('#om-editions').hidden=false;
-        q('#om-two-views').hidden=!selfGift;q('#om-recipient-help').textContent=selfGift?'기록하고 바라보는 나, 선물로 받아 읽는 나. 같은 사람이어도 두 시선은 각각의 이야기가 됩니다.':'내가 간직할 것과 당신에게 건넬 것을 각각 엮어요. 수록할 기록과 편집은 따로 고를 수 있어요.';
+        q('#om-two-views').hidden=false;q('#om-recipient-help').textContent=selfGift?'그때의 나를 알아보는 책, 지금의 나를 앞으로의 나에게 전하는 책. 같은 사람이어도 두 시선은 각각의 이야기가 됩니다.':'당신을 알아보는 책과 나를 당신에게 전하는 책을 각각 엮어요. 수록할 기록과 편집은 따로 고를 수 있어요.';
         const artifact=e=>e.format==='book'?'책':'카드';
-        q('#om-result-relationship').textContent=state.binding==='combined'?'한 권 안에 두 시선 · 1부 기록하는 나 / 2부 선물로 읽는 나':selfGift?'기록하는 나의 '+artifact(state.self)+' + 선물로 읽는 나의 '+artifact(state.gift):'내가 간직할 '+artifact(state.self)+' + 당신에게 건넬 '+artifact(state.gift);
-        q('#om-books-preset-label').textContent=selfGift?'두 시선으로 엮는 책':'나와 당신의 두 권';
-        q('#om-cards-preset-label').textContent=selfGift?'두 시선의 카드':'카드로 간직하고 건네기';
+        q('#om-result-relationship').textContent=state.binding==='combined'?(selfGift?'한 권 안에 두 시선 · 1부 그때의 나를 알아보는 / 2부 앞으로의 나에게 전하는':'한 권 안에 두 시선 · 1부 당신을 알아보는 / 2부 나를 당신에게 전하는'):selfGift?'그때의 나를 알아보는 '+artifact(state.self)+' + 앞으로의 나에게 전하는 '+artifact(state.gift):'당신을 알아보는 '+artifact(state.self)+' + 나를 당신에게 전하는 '+artifact(state.gift);
+        q('#om-books-preset-label').textContent='두 시선의 책';
+        q('#om-cards-preset-label').textContent='두 시선의 카드';
         root.querySelectorAll('[data-second-mark]').forEach(el=>el.hidden=false);
-        q('#om-editions [data-value="self"]').textContent=selfGift?'기록하고 바라보는 나':'내가 간직할 판본';
-        q('#om-editions [data-value="gift"]').textContent=selfGift?'선물로 받아 읽는 나':'당신에게 건넬 판본';
-        q('#om-binding-options').hidden=!selfGift||state.self.format!=='book'||state.gift.format!=='book';
+        q('#om-editions [data-value="self"]').textContent=selfGift?'그때의 나를 알아보는 책':'당신을 알아보는 책';
+        q('#om-editions [data-value="gift"]').textContent=selfGift?'앞으로의 나에게 전하는 책':'나를 당신에게 전하는 책';
+        q('#om-binding-options').hidden=state.self.format!=='book'||state.gift.format!=='book';
         q('#om-scope-options').hidden=state.binding==='combined';
-        q('[data-key="scope"] [data-value="self"]').textContent=selfGift?'기록하는 나의 판본만':'내가 간직할 판본만';
-        q('[data-key="scope"] [data-value="gift"]').textContent=selfGift?'선물로 읽는 나의 판본만':'선물할 판본만';
-        q('#om-edition-label').textContent=(selfGift?(state.edition==='self'?'기록하는 나의 ':'선물로 읽는 나의 '):(state.edition==='self'?'나를 위한 ':'당신을 위한 '))+(e.format==='card'?'카드':'책');
+        q('[data-key="scope"] [data-value="self"]').textContent='알아보는 책만';
+        q('[data-key="scope"] [data-value="gift"]').textContent='전하는 책만';
+        q('#om-edition-label').textContent=(selfGift?(state.edition==='self'?'그때의 나를 알아보는 ':'앞으로의 나에게 전하는 '):(state.edition==='self'?'당신을 알아보는 ':'나를 당신에게 전하는 '))+(e.format==='card'?'카드':'책');
         q('#om-digital-label').textContent=e.format==='card'?'이미지로':'전자책으로';
         q('#om-format-help').textContent=e.format==='card'?'한 문장이나 한 장면을 꺼내 보기 좋게.':'여러 날의 장면을 이어, 한 시기를 다시 읽기 좋게.';
         q('#om-medium-help').textContent=(state.binding==='combined'?'한 권 전체에 적용돼요. ':'')+(medium==='digital'?(e.format==='book'?'전자책만으로도 완성할 수 있는 구상입니다. 종이책 선택은 필요하지 않아요.':'화면에서 꺼내 보는 카드 구상입니다.'):'인쇄·배송은 준비 중입니다. 지금은 원하는 모습만 살펴봐요.');
@@ -128,7 +128,7 @@
         render();
       });
       root.addEventListener('change',ev=>{const el=ev.target;if(el.dataset.source){const sourceId=el.dataset.source;const e=get();if(el.checked)e.ids.push(sourceId);else e.ids=e.ids.filter(id=>id!==sourceId);render();q('[data-source="'+sourceId+'"]').focus();return;}const key=el.id.replace('om-','');if(['purpose','structure','detail','tone','length'].includes(key))get()[key]=el.value;else if(['date','life'].includes(key))get()[key]=el.checked;else return;render();});
-      q('#om-confirm-btn').addEventListener('click',()=>{const ul=q('#om-summary');ul.replaceChildren();q('#om-confirm h3').textContent=state.binding==='combined'?'한 권 안에, 두 개의 시선':state.scope==='both'?'두 시선을 각각 간직해요':'이번에 꺼내 둘 한 판본';(state.scope==='both'?['self','gift']:[state.scope]).forEach((k,i)=>{const e=state[k];const li=document.createElement('li');const role=state.recipient==='self'?(k==='self'?'기록하고 바라보는 나':'선물로 받아 읽는 나'):(k==='self'?'내가 간직할 것':'당신에게 건넬 것');li.textContent=(state.binding==='combined'?(i+1)+'부 · ':'')+role+': '+(e.format==='card'?'카드':'책')+' / '+mediumName(e)+' / '+modeNames[e.mode]+' / '+purposeNames[e.purpose]+' / 고른 기록 '+e.ids.length+'개'+(e.length==='short'&&e.ids.length>1?' 중 첫 기록만 추린 예시':'')+(e.ids.length?'':' — 먼저 기록을 골라주세요');ul.append(li);});q('#om-confirm').hidden=false;q('#om-live').textContent='선택한 구성 요약을 열었어요. 앱 저장이나 제작 신청은 되지 않았어요.';});
+      q('#om-confirm-btn').addEventListener('click',()=>{const ul=q('#om-summary');ul.replaceChildren();q('#om-confirm h3').textContent=state.binding==='combined'?'한 권 안에, 두 개의 시선':state.scope==='both'?'두 시선을 각각 간직해요':'이번에 꺼내 둘 한 시선';(state.scope==='both'?['self','gift']:[state.scope]).forEach((k,i)=>{const e=state[k];const li=document.createElement('li');const role=state.recipient==='self'?(k==='self'?'그때의 나를 알아보는 책':'앞으로의 나에게 전하는 책'):(k==='self'?'당신을 알아보는 책':'나를 당신에게 전하는 책');li.textContent=(state.binding==='combined'?(i+1)+'부 · ':'')+role+': '+(e.format==='card'?'카드':'책')+' / '+mediumName(e)+' / '+modeNames[e.mode]+' / '+purposeNames[e.purpose]+' / 고른 기록 '+e.ids.length+'개'+(e.length==='short'&&e.ids.length>1?' 중 첫 기록만 추린 예시':'')+(e.ids.length?'':' — 먼저 기록을 골라주세요');ul.append(li);});q('#om-confirm').hidden=false;q('#om-live').textContent='선택한 구성 요약을 열었어요. 앱 저장이나 제작 신청은 되지 않았어요.';});
       render();
       const routeFocus=new URLSearchParams(window.location.search).get('focus');
       if(routeFocus==='self'||routeFocus==='gift')openChoice(routeFocus);

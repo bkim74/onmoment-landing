@@ -95,17 +95,17 @@ const TEMPLATE = `<div id="onmoment-choices">
   <section id="om-intro" class="om-intro">
     <p class="om-kicker">두 권의 책 · 시범 준비 중</p>
     <h2>한 권은 나에게.<br>한 권은, 소중한 당신에게.</h2>
-    <p class="om-sub">살아온 날들을 다시 펼쳐보는 책.<br>그중 건네고 싶은 마음을 골라 담는 책.</p>
+    <p class="om-sub">당신을 알아보는 책.<br>나를 당신에게 전하는 책.</p>
     <div class="om-still-life" aria-label="두 권에서 시작하는 결과 선택">
       <button type="button" class="om-cover-button cursor-interaction" data-open-edition="self" aria-label="나를 위한 책을 펼쳐 다양한 결과 살펴보기"><small>MY OWN STORY</small><span class="om-cover-title">소중한<br>나에게</span><span class="om-cover-desc">좋은 날도, 애쓴 날도<br>모두 나의 이야기</span><small>온순간 · 펼쳐보기 ↗</small></button>
       <button type="button" class="om-cover-button om-cover-gift cursor-interaction" data-open-edition="gift" aria-label="소중한 당신을 위한 책을 펼쳐 다양한 결과 살펴보기"><small>A GIFT OF MY HEART</small><span class="om-cover-title">소중한<br>당신에게</span><span class="om-cover-desc">당신에게 전하고 싶은<br>내 마음의 장면들</span><small>온순간 · 펼쳐보기 ↗</small></button>
     </div>
-    <p class="om-sub">나에게 남고, 당신에게 닿는 이야기.<br>선물의 대상이 나여도, 서로 다른 시선으로 두 권을 엮어요.</p>
+    <p class="om-sub">나에게도, 소중한 당신에게도 — 같은 기록을 두 시선으로 엮어요.<br>나에게 건넬 때 ‘당신’은 그때의 나, 앞으로의 나예요.</p>
     <button type="button" id="om-enter" class="om-primary cursor-interaction">두 권 펼쳐보고, 내 모습으로 고르기 →</button>
     <p class="om-footnote">표지를 눌러도 다양한 결과를 살펴볼 수 있어요.<br>표지와 내용은 가상 시안이며, 자동 제작·주문·전송은 제공하지 않습니다.</p>
   </section>
   <section id="om-editor" class="om-editor" hidden>
-    <div class="om-editor-header"><div><button type="button" id="om-back" class="om-plain cursor-interaction">← 두 권의 책</button><h2>하나의 삶, 두 개의 시선.</h2><p class="om-sub">내가 바라보는 이야기와 선물로 만나게 될 이야기.<br>받는 사람이 나여도, 서로 다른 두 권이 될 수 있어요.</p></div></div>
+    <div class="om-editor-header"><div><button type="button" id="om-back" class="om-plain cursor-interaction">← 두 권의 책</button><h2>하나의 삶, 두 개의 시선.</h2><p class="om-sub">당신을 알아보는 책과, 나를 당신에게 전하는 책.<br>받는 사람이 나여도 두 시선은 그대로 이어져요.</p></div></div>
     <fieldset class="om-recipient-bar"><legend>이번 선물은 누구에게 건넬까요?</legend><div class="om-row" data-key="recipient"><button type="button" data-value="other" aria-pressed="true" class="cursor-interaction">소중한 사람에게</button><button type="button" data-value="self" aria-pressed="false" class="cursor-interaction">나 자신에게</button></div><p class="om-help" id="om-recipient-help">내가 간직할 한 권과 당신에게 건넬 한 권을 각각 엮어요.</p><p id="om-result-relationship" class="om-discovery-note" aria-live="polite">내가 간직할 책 + 당신에게 건넬 책</p></fieldset>
     __TWO_VIEWS__
     <section class="om-discovery" aria-label="결과를 담는 모습"><div class="om-presets" data-key="preset">
@@ -113,9 +113,9 @@ const TEMPLATE = `<div id="onmoment-choices">
       <button type="button" data-value="cards" aria-pressed="false" class="cursor-interaction"><span class="om-mini" aria-hidden="true"><i class="card-shape"></i><i class="card-shape" data-second-mark></i></span><strong id="om-cards-preset-label">카드로 가볍게</strong><small>한 장면을 담아 간직하고 건네기</small></button>
       <button type="button" data-value="ebook" aria-pressed="false" class="cursor-interaction"><span class="om-mini" aria-hidden="true"><i class="digital-shape"></i><i class="digital-shape" data-second-mark></i></span><strong>전자책으로만</strong><small>화면에서 오래 꺼내 보기</small></button>
     </div><p class="om-discovery-note">책이나 카드로, 디지털이나 종이로. 각자의 이야기에 맞게 담아보세요.</p></section>
-    <div class="om-row om-edition-row" id="om-editions" data-key="edition"><button type="button" data-value="self" aria-pressed="true" class="cursor-interaction">내가 간직할 판본</button><button type="button" data-value="gift" aria-pressed="false" class="cursor-interaction">당신에게 건넬 판본</button></div>
-    <details id="om-binding-options" hidden><summary class="cursor-interaction">두 관점을 한 권으로 모으고 싶다면</summary><div class="om-row" data-key="binding"><button type="button" data-value="separate" aria-pressed="true" class="cursor-interaction">두 권으로 각각</button><button type="button" data-value="combined" aria-pressed="false" class="cursor-interaction">한 권에 두 부분으로</button></div><p class="om-help">두 시선의 내용은 따로 유지하고, 한 권의 1부와 2부로 모아요.</p></details>
-    <details id="om-scope-options"><summary class="cursor-interaction">이번에는 한 판본만 꺼내두고 싶다면</summary><div class="om-row" data-key="scope"><button type="button" data-value="both" aria-pressed="true" class="cursor-interaction">두 판본 모두</button><button type="button" data-value="self" aria-pressed="false" class="cursor-interaction">내가 간직할 판본만</button><button type="button" data-value="gift" aria-pressed="false" class="cursor-interaction">선물할 판본만</button></div><p class="om-help">이번에 꺼내둘 것만 골라요. 다른 판본의 기록과 편집은 그대로 유지됩니다.</p></details>
+    <div class="om-row om-edition-row" id="om-editions" data-key="edition"><button type="button" data-value="self" aria-pressed="true" class="cursor-interaction">당신을 알아보는 책</button><button type="button" data-value="gift" aria-pressed="false" class="cursor-interaction">나를 당신에게 전하는 책</button></div>
+    <details id="om-binding-options" hidden><summary class="cursor-interaction">두 시선을 한 권으로 모으고 싶다면</summary><div class="om-row" data-key="binding"><button type="button" data-value="separate" aria-pressed="true" class="cursor-interaction">두 권으로 각각</button><button type="button" data-value="combined" aria-pressed="false" class="cursor-interaction">한 권에 두 부분으로</button></div><p class="om-help">두 시선의 내용은 따로 유지하고, 한 권의 1부와 2부로 모아요.</p></details>
+    <details id="om-scope-options"><summary class="cursor-interaction">이번에는 한 시선만 꺼내두고 싶다면</summary><div class="om-row" data-key="scope"><button type="button" data-value="both" aria-pressed="true" class="cursor-interaction">두 시선 모두</button><button type="button" data-value="self" aria-pressed="false" class="cursor-interaction">알아보는 책만</button><button type="button" data-value="gift" aria-pressed="false" class="cursor-interaction">전하는 책만</button></div><p class="om-help">이번에 꺼내둘 것만 골라요. 다른 시선의 기록과 편집은 그대로 유지됩니다.</p></details>
     <div class="om-columns">
       <div>
         <fieldset><legend>어떤 크기의 이야기로 담을까요?</legend><div class="om-row" data-key="format"><button type="button" data-value="card" aria-pressed="true" class="cursor-interaction">한 장의 카드</button><button type="button" data-value="book" aria-pressed="false" class="cursor-interaction">한 권의 책</button></div><p class="om-help" id="om-format-help">한 문장이나 한 장면을 꺼내 보기 좋게.</p></fieldset>
@@ -136,7 +136,7 @@ const TEMPLATE = `<div id="onmoment-choices">
           <label class="om-check"><input id="om-date" type="checkbox" checked><span>기록일을 함께 표시</span></label>
           <label class="om-check"><input id="om-life" type="checkbox"><span>현실·바람·선택을 담을 자리 보기<br><span class="om-source-note">책의 필수 목차가 아니에요. 남긴 내용이 있을 때만 담아요.</span></span></label>
         </div></details>
-        <details id="om-material"><summary class="cursor-interaction">이 판본에 담을 기록 고르기</summary><p class="om-help">이 체험에서는 가상 기록을 미리 골라두었어요. 실제 선물책에는 본인이 선택한 기록만 들어갑니다.</p><div id="om-sources"></div><p class="om-help">이번 작품에서 빼도 원기록은 남아요.</p></details>
+        <details id="om-material"><summary class="cursor-interaction">이 시선에 담을 기록 고르기</summary><p class="om-help">이 체험에서는 가상 기록을 미리 골라두었어요. 실제 선물책에는 본인이 선택한 기록만 들어갑니다.</p><div id="om-sources"></div><p class="om-help">이번 작품에서 빼도 원기록은 남아요.</p></details>
       </div>
       <div class="om-preview-area">
         <div class="om-preview-top"><span id="om-edition-label">나를 위한 카드</span><span class="om-tag">가상 예시</span></div>
