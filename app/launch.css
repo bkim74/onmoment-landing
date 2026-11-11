@@ -112,3 +112,5 @@
   .launch-caption{font-size:14px}
 }
 @media(prefers-reduced-motion:reduce){.launch-example li:first-child{transform:none}}
+
+.launch-pricing-teaser .section-heading{max-width:720px}.launch-teaser-plans{list-style:none;padding:0;margin:0 0 32px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.launch-teaser-plans li{background:var(--sheet);border:1px solid var(--line);border-radius:4px;padding:20px 22px}.launch-teaser-plans span{display:block;font-size:14px;color:var(--wine)}.launch-teaser-plans strong{display:block;font-family:var(--serif);font-weight:400;font-size:26px;margin-top:6px;letter-spacing:-.03em}.launch-teaser-plans small{display:block;font-size:14px;color:var(--muted);margin-top:4px}.pricing-page .launch-pricing h1{font-size:clamp(30px,3.1vw,43px);line-height:1.42}@media(max-width:760px){.launch-teaser-plans{grid-template-columns:1fr}}

@@ -73,7 +73,26 @@ def pricing_section():
 </section>'''
 
 
-def launch_faq():
+def pricing_teaser():
+    """Home keeps one light strip; full plans live on /pricing/."""
+    rows = []
+    for plan in POLICY['plans']:
+        if plan['key'] == 'free':
+            rows.append(f'<li><span>{esc(plan["name"])}</span><strong>0원</strong><small>기록 · 다시 읽기 · 내보내기</small></li>')
+        else:
+            monthly = plan['annualPromotionPrice'] // POLICY['annualPromotion']['durationMonths']
+            rows.append(f'<li><span>{esc(plan["name"])}</span><strong>월 {plan["price"]:,}원</strong><small>1년 이용권이면 월 {monthly:,}원</small></li>')
+    return f'''<section class="launch-pricing-teaser section wrap" id="pricing" aria-labelledby="pricing-teaser-title">
+  <div class="section-heading"><p class="eyebrow">이용 요금 · 출시 예정</p><h2 id="pricing-teaser-title">기록하고 다시 읽는 일은<br>늘 무료예요.</h2><p>더 자주, 더 깊이 만나고 싶을 때 고를 수 있게 준비하고 있어요. <br>지금은 결제 없이, 무료로 써요.</p></div>
+  <ul class="launch-teaser-plans">{''.join(rows)}</ul>
+  <a class="button secondary" href="/pricing/">요금과 제공 내용 자세히 보기 →</a>
+</section>'''
+
+
+PRICING_QS = ('무료 체험이 끝나면', '1년 이용권은 얼마', '1년 이용이 끝나면', '1년치 AI', '디지털 책과 종이책')
+
+
+def launch_faq(scope='home'):
     pairs = [
         ('지금은 무엇부터 시작할 수 있나요?', '앱에서 마음에 남은 장면을 쓰고, 가입하면 내 기록으로 저장돼요. 다시 읽고 내 말로 돌아보기, 카드와 대표 장 만들기, 함께에서 고른 글 나누기까지 지금 할 수 있어요. 이 페이지의 이야기와 책 이미지는 가상 예시이고, 종이책 주문은 준비하고 있어요.'),
         ('무료 체험이 끝나면 자동 결제되나요?', '아니요. 체험이 끝났다는 이유만으로 결제되지 않아요. 유료 이용이 열리면 요금과 제공 범위를 먼저 보여 드리고, 그때 직접 골라요. 내 90일 체험의 종료일은 앱에서 확인할 수 있어요.'),
@@ -87,8 +106,11 @@ def launch_faq():
     ]
     if not EVENT_ON:
         pairs = [(q, a) for q, a in pairs if '이벤트' not in q and '책을 받으려면' not in q]
+    is_pricing = lambda q: any(q.startswith(p) for p in PRICING_QS)
+    pairs = [(q, a) for q, a in pairs if is_pricing(q) == (scope == 'pricing')]
     rows = ''.join(f'<details><summary>{esc(q)}</summary><p>{esc(a)}</p></details>' for q, a in pairs)
-    return f'<section class="section faq wrap launch-faq"><div><p class="eyebrow">마음 편히 시작하도록</p><h2>작은 궁금함에,<br>작은 답을.</h2></div><div>{rows}</div></section>'
+    eyebrow = '요금에 대해 자주 묻는 것' if scope == 'pricing' else '마음 편히 시작하도록'
+    return f'<section class="section faq wrap launch-faq"><div><p class="eyebrow">{eyebrow}</p><h2>작은 궁금함에,<br>작은 답을.</h2></div><div>{rows}</div></section>'
 
 
 def invite_section():
