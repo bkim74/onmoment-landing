@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Script from "next/script";
 import { homeHtml } from "@/lib/landing/homeHtml";
 import "./v4.css";
+import "./launch.css";
 
 const APP = process.env.NEXT_PUBLIC_APP_ORIGIN ?? "https://app.onmoment.kr";
 
@@ -22,6 +23,7 @@ export default function Home() {
       <div className="home" dangerouslySetInnerHTML={{ __html: homeHtml(APP) }} />
       <Script src="/landing/v4.js" strategy="afterInteractive" />
       <Script src="/landing/app-origin.js" strategy="afterInteractive" />
+      <Script src="/landing/launch.js" strategy="afterInteractive" />
     </>
   );
 }

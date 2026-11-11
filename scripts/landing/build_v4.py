@@ -3,6 +3,7 @@
 #   실행: python3 scripts/landing/build_v4.py → lib/landing/v4/pages.json (내용을 바꾸면 다시 실행해 함께 커밋한다)
 from pathlib import Path
 import json,html,re
+from launch_sections import first_experience, event_section, pricing_section, launch_faq, invite_section, EVENT_ON
 ROOT=Path(__file__).resolve().parents[2];V=ROOT/'lib/landing/v4'
 J=json.loads((V/'journeys.json').read_text(encoding='utf8'));MODES=json.loads((V/'gift-modes.json').read_text(encoding='utf8'))
 next(j for j in J if j['key']=='parents')['occasions']=json.loads((V/'parent-occasions.json').read_text(encoding='utf8'))
@@ -117,5 +118,22 @@ for j in J:
  tile_visual=f'<img src="/assets/journey-{key}.webp" alt="{e(j["imageAlt"])}" loading="lazy">'
  home+=f'''<a class="journey-tile tile-{key}" data-journey-link href="/journeys/{key}/">{tile_visual}<div><span class="tile-kicker">{e(j['short'])} · {j['number']}</span><h3>{br(j['headline'])}</h3><p>{e(j['benefits'][1][0])}</p><span class="tile-arrow" aria-hidden="true">↗</span></div></a>'''
 home+='''</div><p class="below-note">나에게 간직하거나, 소중한 사람과 나눠요. 함께 쓰는 방식은 여정마다 조금씩 달라요.</p></div></section>'''+first()+faq()+'''<section class="closing wrap"><span class="closing-star" aria-hidden="true">✳</span><h2>여기서는, 내 모습 그대로.<br>여기서부터, 조금 더 나답게.</h2><p>마음에 남은 한 장면이면 충분해요.</p><a class="button primary" href="__APP__/start?src=closing" data-app-link data-story-link>오늘의 나를 남겨보기 ↗</a></section></main>'''+f'<script id="experience-data" type="application/json">{data_json(dict(modes=MODES,journey=None))}</script>'+footer()
+# Home launch additions keep the seven journey pages unchanged. Named markers
+# fail loudly if the existing structure changes, rather than silently disappearing.
+def home_insert_before(markup, marker, addition):
+ if markup.count(marker)!=1:raise ValueError('Expected one home marker: '+marker)
+ return markup.replace(marker,addition+marker,1)
+home=home_insert_before(home,'<section class="gift-entrance section"',first_experience())
+home=home_insert_before(home,'<section class="section meaning-section wrap"',event_section()+pricing_section())
+home=home.replace(faq(),launch_faq(),1)
+home=home_insert_before(home,'</main>',invite_section())
+home=home.replace('내 하루가, 선물이 되는 순간','온순간 오픈베타',1)
+home=home.replace('한 줄로 시작해,<br>다시 펼쳐보고 싶은 이야기로.','마음에 남은 하루를 짧게 기록하고,<br>다른 시선으로 돌아보며 나만의 이야기를 간직해요.',1)
+home=home.replace('내 첫 한 쪽 만나보기 ↗','내 첫 한 줄 남기기 ↗',1)
+home=home.replace('먼저 써 보고, 저장할 때 가입해요 · 지금은 누구나 시작할 수 있어요','먼저 써 보고, 저장할 때 가입해요.<br>기록은 무료로 시작할 수 있어요.',1)
+home=home.replace('<a class="hero-link" href="#gifts">어떤 선물이 되는지 볼까요 ↓</a>','<a class="hero-link" href="#book-event">첫 참여 혜택과 책 선물 안내 ↓</a>' if EVENT_ON else '<a class="hero-link" href="#pricing">출시 예정 요금 안내 ↓</a>',1)
+home=home.replace('<a href="/#gifts">세 가지 선물</a><a href="/#journeys">일곱 여정</a>','<a href="#book-event">책 선물</a><a href="#pricing">이용 요금</a>' if EVENT_ON else '<a href="/#journeys">일곱 여정</a><a href="#pricing">이용 요금</a>',1)
+home=home.replace('지금은 누구나 시작할 수 있는 시범 운영 중 · 이야기와 이미지는 가상 예시이며, 비춤·편집·카드·책·함께 쓰기는 완성 방향을 보여줍니다.','지금은 누구나 시작할 수 있는 시범 운영 중 · 이 페이지의 이야기와 이미지는 가상 예시입니다. 유료 요금제'+('·책 선물 이벤트' if EVENT_ON else '')+'·종이책 주문은 준비 중이며, 확정 조건은 시작 전에 안내합니다.',1)
+home=home.replace('오늘의 나를 남겨보기 ↗</a></section>','오늘의 나를 남겨보기 ↗</a><p class="launch-brand-line">온순간, 가장 나답게.</p></section>',1)
 PAGES['home']=with_availability(home)
 (V/'pages.json').write_text(json.dumps(PAGES,ensure_ascii=False,indent=0)+'\n',encoding='utf8')
