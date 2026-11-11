@@ -3,11 +3,11 @@
 #   실행: python3 scripts/landing/build_v4.py → lib/landing/v4/pages.json (내용을 바꾸면 다시 실행해 함께 커밋한다)
 from pathlib import Path
 import json,html,re
-from launch_sections import first_experience, event_section, pricing_section, pricing_teaser, launch_faq, invite_section, EVENT_ON
+from launch_sections import first_experience, event_section, launch_faq, invite_section, EVENT_ON
 ROOT=Path(__file__).resolve().parents[2];V=ROOT/'lib/landing/v4'
 J=json.loads((V/'journeys.json').read_text(encoding='utf8'));MODES=json.loads((V/'gift-modes.json').read_text(encoding='utf8'))
 next(j for j in J if j['key']=='parents')['occasions']=json.loads((V/'parent-occasions.json').read_text(encoding='utf8'))
-PAGES={'home':'','journeys':{},'pricing':''}
+PAGES={'home':'','journeys':{}}
 def e(s):return html.escape(str(s),quote=True)
 def br(s):return e(s).replace('\n','<br>')
 def data_json(d):return json.dumps(d,ensure_ascii=False).replace('<','\\u003c')
@@ -46,7 +46,7 @@ ALT_GIFT={
  'unsure':'맛있던 커피 앞에서 휴대폰을 잠깐 내려놓았어요. 천천히 마신 마지막 한 모금까지 따뜻했어요. 잠시 머무는 쪽을 골랐던 내 아침을 당신에게 나눠요.'}
 def head(title,desc,cls='home'):
  return '''<a class="skip" href="#main">본문으로 바로가기</a><header><a class="brand" href="/" aria-label="온순간 처음으로"><span aria-hidden="true">✳︎</span> 온순간<small>ONMOMENT</small></a><nav aria-label="주 메뉴"><a href="/#gifts">세 가지 선물</a><a href="/#journeys">일곱 여정</a><a class="nav-cta" href="__APP__/start?src=nav" data-app-link data-story-link>한 줄 남겨보기 ↗</a></nav></header>'''
-def footer():return '''<section class="ways-lite wrap" aria-label="온순간이 기록을 대하는 방식"><p class="eyebrow">온순간이 기록을 대하는 방식</p><ul><li>온순간은 처음부터 나만의 공간으로 시작합니다.</li><li>오늘의 마음을 있는 그대로 담습니다.</li><li>오늘의 문장은 점수가 아니라 이야기로 남습니다.</li><li>무엇을 남기고 누구에게 건넬지는 내가 정합니다.</li></ul></section><footer class="wrap"><a class="brand" href="/">✳︎ 온순간</a><p>내 모습 그대로 머물고,<br>내 이야기를 조금 더 만나는 곳.</p><div><a href="/story/">온순간의 이야기 →</a><br><a href="/journal/">온순간 저널 →</a><br><a href="/principles/">기록을 대하는 방식 →</a><br><a href="/pricing/">이용 요금 →</a></div><p class="fine">지금은 누구나 시작할 수 있는 시범 운영 중 · 이야기와 이미지는 가상 예시이며, 비춤·편집·카드·책·함께 쓰기는 완성 방향을 보여줍니다.</p><p class="fine">© 2026 OnMoment · <a href="/privacy/">개인정보 처리방침</a> · <a href="/terms/">이용약관</a></p></footer>'''
+def footer():return '''<section class="ways-lite wrap" aria-label="온순간이 기록을 대하는 방식"><p class="eyebrow">온순간이 기록을 대하는 방식</p><ul><li>온순간은 처음부터 나만의 공간으로 시작합니다.</li><li>오늘의 마음을 있는 그대로 담습니다.</li><li>오늘의 문장은 점수가 아니라 이야기로 남습니다.</li><li>무엇을 남기고 누구에게 건넬지는 내가 정합니다.</li></ul></section><footer class="wrap"><a class="brand" href="/">✳︎ 온순간</a><p>내 모습 그대로 머물고,<br>내 이야기를 조금 더 만나는 곳.</p><div><a href="/story/">온순간의 이야기 →</a><br><a href="/journal/">온순간 저널 →</a><br><a href="/principles/">기록을 대하는 방식 →</a></div><p class="fine">지금은 누구나 시작할 수 있는 시범 운영 중 · 이야기와 이미지는 가상 예시이며, 비춤·편집·카드·책·함께 쓰기는 완성 방향을 보여줍니다.</p><p class="fine">© 2026 OnMoment · <a href="/privacy/">개인정보 처리방침</a> · <a href="/terms/">이용약관</a></p></footer>'''
 def mode_controls(compact=False):
  badge='<span class="availability-badge">준비 중</span>'
  if compact:return '''<div class="mode-strip wrap"><span class="mode-context">이번 이야기를</span><details class="mode-menu"><summary><span data-mode-label>나에게</span> <span class="availability-badge" data-together-badge hidden>준비 중</span><span aria-hidden="true">⌄</span></summary><div role="group" aria-label="선물 방식">'''+''.join(f'<button type="button" data-mode="{k}" aria-pressed="{str(k=="self").lower()}"><span data-mode-name>{e(v["label"])}</span>{badge if k=="together" else ""}</button>' for k,v in MODES.items())+'''</div></details><span class="fine">먼저 읽어보고, 나중에 정해도 좋아요.</span></div>'''
@@ -124,20 +124,16 @@ def home_insert_before(markup, marker, addition):
  if markup.count(marker)!=1:raise ValueError('Expected one home marker: '+marker)
  return markup.replace(marker,addition+marker,1)
 home=home_insert_before(home,'<section class="gift-entrance section"',first_experience())
-home=home_insert_before(home,'<section class="section meaning-section wrap"',event_section()+pricing_teaser())
+home=home_insert_before(home,'<section class="section meaning-section wrap"',event_section())
 home=home.replace(faq(),launch_faq(),1)
 home=home_insert_before(home,'</main>',invite_section())
 home=home.replace('내 하루가, 선물이 되는 순간','온순간 오픈베타',1)
 home=home.replace('한 줄로 시작해,<br>다시 펼쳐보고 싶은 이야기로.','마음에 남은 하루를 짧게 기록하고,<br>다른 시선으로 돌아보며 나만의 이야기를 간직해요.',1)
 home=home.replace('내 첫 한 쪽 만나보기 ↗','내 첫 한 줄 남기기 ↗',1)
 home=home.replace('먼저 써 보고, 저장할 때 가입해요 · 지금은 누구나 시작할 수 있어요','먼저 써 보고, 저장할 때 가입해요.<br>기록은 무료로 시작할 수 있어요.',1)
-home=home.replace('<a class="hero-link" href="#gifts">어떤 선물이 되는지 볼까요 ↓</a>','<a class="hero-link" href="#book-event">첫 참여 혜택과 책 선물 안내 ↓</a>' if EVENT_ON else '<a class="hero-link" href="#pricing">출시 예정 요금 안내 ↓</a>',1)
-home=home.replace('<a href="/#gifts">세 가지 선물</a><a href="/#journeys">일곱 여정</a>','<a href="#book-event">책 선물</a><a href="/pricing/">이용 요금</a>' if EVENT_ON else '<a href="/#journeys">일곱 여정</a><a href="/pricing/">이용 요금</a>',1)
+home=home.replace('<a class="hero-link" href="#gifts">어떤 선물이 되는지 볼까요 ↓</a>','<a class="hero-link" href="#book-event">첫 참여 혜택과 책 선물 안내 ↓</a>' if EVENT_ON else '<a class="hero-link" href="#gifts">어떤 선물이 되는지 볼까요 ↓</a>',1)
+home=home.replace('<a href="/#gifts">세 가지 선물</a><a href="/#journeys">일곱 여정</a>','<a href="#book-event">책 선물</a><a href="/#journeys">일곱 여정</a>' if EVENT_ON else '<a href="/#gifts">세 가지 선물</a><a href="/#journeys">일곱 여정</a>',1)
 home=home.replace('지금은 누구나 시작할 수 있는 시범 운영 중 · 이야기와 이미지는 가상 예시이며, 비춤·편집·카드·책·함께 쓰기는 완성 방향을 보여줍니다.','지금은 누구나 시작할 수 있는 시범 운영 중 · 이 페이지의 이야기와 이미지는 가상 예시입니다. 유료 요금제'+('·책 선물 이벤트' if EVENT_ON else '')+'·종이책 주문은 준비 중이며, 확정 조건은 시작 전에 안내합니다.',1)
 home=home.replace('오늘의 나를 남겨보기 ↗</a></section>','오늘의 나를 남겨보기 ↗</a><p class="launch-brand-line">온순간, 가장 나답게.</p></section>',1)
 PAGES['home']=with_availability(home)
-# 요금은 따로 한 쪽 — 홈은 한 줄 띠만 둔다
-pricing=head('이용 요금','기록하고 다시 읽는 일은 늘 무료. 더 자주, 더 깊이 만나고 싶을 때 고르는 온순간의 출시 예정 요금.','pricing-page').replace('<a href="/#gifts">세 가지 선물</a><a href="/#journeys">일곱 여정</a>','<a href="/#journeys">일곱 여정</a><a href="/pricing/" aria-current="page">이용 요금</a>',1)
-pricing+='<main id="main"><div class="breadcrumbs wrap"><a href="/">온순간</a><span>/</span><span>이용 요금</span></div>'+pricing_section().replace('<h2 id="pricing-title">','<h1 id="pricing-title">',1).replace('함께해요.</h2>','함께해요.</h1>',1)+launch_faq('pricing')+'<section class="closing wrap"><span class="closing-star" aria-hidden="true">✳︎</span><h2>마음에 남은 한 장면이면 충분해요.</h2><a class="button primary" href="__APP__/start?src=pricing-page" data-app-link data-story-link>오늘의 한 장면 남기기 ↗</a></section></main>'+footer()
-PAGES['pricing']=with_availability(pricing)
 (V/'pages.json').write_text(json.dumps(PAGES,ensure_ascii=False,indent=0)+'\n',encoding='utf8')
