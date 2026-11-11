@@ -1,0 +1,76 @@
+{
+  "version": "2026-11-11-v3-pre-registration",
+  "status": "planned",
+  "plans": [
+    {
+      "key": "free",
+      "name": "무료",
+      "price": 0,
+      "tagline": "내 속도로, 오늘을 남겨요.",
+      "description": "마음에 남은 장면을 기록하고, 다시 읽으며 내 말로 돌아보는 시간.",
+      "features": [
+        "글과 사진으로 남기는 나의 하루",
+        "내 기록 다시 읽기",
+        "AI 함께보기 체험 준비"
+      ]
+    },
+    {
+      "key": "basic",
+      "name": "기본",
+      "price": 9900,
+      "tagline": "나를 만나는 시간을, 조금 더 자주.",
+      "description": "AI와 장면을 함께 읽고, 마음에 남은 것을 내 말과 작은 선택으로.",
+      "features": [
+        "더 자주 사용하는 AI 함께보기",
+        "지난 기록을 연결하는 깊은 비춤",
+        "주간·월간 돌아보기"
+      ],
+      "annualPromotionPrice": 70800
+    },
+    {
+      "key": "premium",
+      "name": "프리미엄",
+      "price": 19900,
+      "tagline": "깊이 바라보고, 이야기로 엮어요.",
+      "description": "흩어진 장면을 더 깊게 돌아보고, 내가 고른 기록을 한 권의 이야기로.",
+      "features": [
+        "더 넉넉한 AI 함께보기와 깊은 비춤",
+        "주간·월간 돌아보기",
+        "디지털 이야기책 월 1권 · PDF 1종"
+      ],
+      "annualPromotionPrice": 178800
+    }
+  ],
+  "paperBook": {
+    "price": 49000,
+    "copies": 2
+  },
+  "event": {
+    "status": "planned",
+    "winnerCount": 10,
+    "published": false
+  },
+  "annualPromotion": {
+    "status": "planned",
+    "commercialDecision": "approved",
+    "audience": "eligible_open_beta_participants",
+    "eligibilityStatus": "pending_confirmation",
+    "durationMonths": 12,
+    "trialIsSeparate": true,
+    "firstAnnualPurchaseOnly": true,
+    "autoRenew": false,
+    "grantCadence": "monthly",
+    "claimWindowDaysCandidate": null,
+    "claimWindowStartsAfter": "trial_end_and_sales_open"
+  },
+  "commercialMode": "pre_registration_validation",
+  "paymentsEnabled": false,
+  "demandValidation": {
+    "status": "specification_only",
+    "binding": false,
+    "depositAllowed": false,
+    "primaryCustomer": "institution_program_operator",
+    "secondaryCustomer": "individual_adult",
+    "contactConsentRequired": true
+  }
+}
