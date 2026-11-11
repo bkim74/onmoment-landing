@@ -41,12 +41,12 @@ def event_section():
         return ''
     winners = esc(POLICY['event']['winnerCount'])
     return f'''<section class="launch-event section" id="book-event" aria-labelledby="event-title"><div class="wrap launch-event-layout">
-  <div class="launch-event-copy"><p class="eyebrow">첫 참여자를 위한 책 선물 · 준비 중</p><h2 id="event-title">내 이야기를<br>책으로 만나는 시간.</h2><p>오늘 남긴 작은 장면이,<br>나와 소중한 사람에게 건네는 이야기가 되도록.</p><p class="launch-event-offer">참여자 <strong>{winners}분께 두 시선의 책 2권 한 세트</strong>를<br>추첨으로 선물하는 이벤트를 준비하고 있어요.</p><p class="launch-caption">참여 기간·제작 사양·배송 범위 확정 후 응모를 열어요.<br>지금은 이벤트 응모를 받기 전입니다.</p><a class="button primary" href="__APP__/start?src=book-event" data-app-link data-story-link>먼저 내 한 줄 남기기 ↗</a></div>
+  <div class="launch-event-copy"><p class="eyebrow">첫 참여자를 위한 책 선물 · 준비 중</p><h2 id="event-title">내 이야기를<br>책으로 만나는 시간.</h2><p>오늘 남긴 작은 장면이,<br>나와 소중한 사람에게 건네는 이야기가 되도록.</p><p class="launch-event-offer">참여자 <strong>{winners}분께 두 시선의 책 2권 한 세트</strong>를<br>추첨으로 선물하는 이벤트를 준비하고 있어요.</p><p class="launch-event-pair">당신을 알아보는 책 · 나를 당신에게 전하는 책</p><p class="launch-caption">참여 기간·제작 사양·배송 범위 확정 후 응모를 열어요.<br>지금은 이벤트 응모를 받기 전입니다.</p><a class="button primary" href="__APP__/start?src=book-event" data-app-link data-story-link>먼저 내 한 줄 남기기 ↗</a></div>
   <div class="launch-event-guide"><p class="launch-guide-label">이런 경험을 함께 나누려 해요</p><ol>
     <li><span aria-hidden="true">01</span><div><h3>서로 다른 3일, 한 장면씩</h3><p>연속으로 쓰지 않아도 괜찮아요.</p></div></li>
     <li><span aria-hidden="true">02</span><div><h3>한 번 돌아보고, 내 말 남기기</h3><p>AI와 함께해도, 스스로 돌아봐도 좋아요.</p></div></li>
     <li><span aria-hidden="true">03</span><div><h3>써 본 느낌, 솔직하게</h3><p>좋았던 점도, 어려웠던 점도 들려주세요.</p></div></li>
-  </ol><details class="launch-details"><summary>예정된 참여 방식 자세히 보기</summary><div><p>위 세 가지를 경험하고 직접 응모한 분 중 {winners}분을 추첨할 예정이에요. 유료 결제나 친구 초대 없이도 같은 기회로 참여하도록 준비하고 있어요.</p><p>책 원고는 당첨 후, 간직하고 싶은 기록이 준비되었을 때 함께 엮어요. 인쇄 전 최종 내용은 내가 확인해요.</p><p>응모 기간, 당첨 안내일, 제작권 기한과 배송 조건은 정식 이벤트 안내에서 알려드릴게요. 지금의 기록이 참여 조건에 포함되는지도 그때 확인해 주세요.</p></div></details></div>
+  </ol><details class="launch-details"><summary>예정된 참여 방식 자세히 보기</summary><div><p>위 세 가지를 경험하고 직접 응모한 분 중 {winners}분을 추첨할 예정이에요. 유료 결제나 친구 초대 없이도 같은 기회로 참여하도록 준비하고 있어요.</p><p>책 원고는 당첨 후, 간직하고 싶은 기록이 준비되었을 때 함께 엮어요. 책에는 내가 고르고 확인한 기록만 담기고, 받는 사람의 마음을 지어내지 않아요. 인쇄 전 최종 내용은 내가 확인해요.</p><p>배송 주소는 당첨된 분께만, 배송을 위해서만 받아요. 응모하지 않아도 온순간은 지금처럼 무료로 쓸 수 있어요.</p><p>응모 기간, 당첨 안내일, 제작권 기한과 배송 조건은 정식 이벤트 안내에서 알려드릴게요. 지금의 기록이 참여 조건에 포함되는지도 그때 확인해 주세요.</p></div></details></div>
 </div></section>'''
 
 

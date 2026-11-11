@@ -48,7 +48,7 @@
   "event": {
     "status": "planned",
     "winnerCount": 10,
-    "published": false
+    "published": true
   },
   "annualPromotion": {
     "status": "planned",
