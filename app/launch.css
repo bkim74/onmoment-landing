@@ -15,6 +15,7 @@
 .launch-event-copy>p:not(.eyebrow){margin-top:22px}
 .launch-event-copy .launch-event-offer{font-size:18px}
 .launch-event-offer strong{font-weight:500;color:var(--wine)}
+.launch-event-pair{list-style:none;padding:0;margin:20px 0 0;display:grid;gap:10px}.launch-event-pair li{border-left:2px solid #c9ac80;padding-left:14px}.launch-event-pair strong{display:block;font-family:var(--serif);font-weight:400;font-size:19px;color:var(--wine)}.launch-event-pair span{display:block;font-size:14px;color:var(--muted);line-height:1.7}
 .launch-event-copy .button{margin-top:28px}
 .launch-event-guide{background:#faf4e9;padding:36px;border:1px solid #d5bea5;box-shadow:9px 9px 0 #e1d0bc}
 .launch-guide-label{font-size:14px;color:var(--wine);letter-spacing:.04em}
