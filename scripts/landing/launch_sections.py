@@ -62,24 +62,24 @@ def pricing_section():
             months = POLICY['annualPromotion']['durationMonths']
             if not isinstance(total, int) or total <= 0 or months != 12 or total % months:
                 raise ValueError('Expected a 12-month annual amount with an exact monthly equivalent.')
-            annual = f'''<div class="launch-annual-preview"><span>출시 예정 · 베타 첫 1년 혜택</span><strong>연 {total:,}원</strong><p>12개월 일시결제 예정<br>월 환산 {total // months:,}원</p></div>'''
+            annual = f'''<div class="launch-annual-preview"><span>1년 이용권 · 출시 예정</span><strong>연 {total:,}원</strong><p>월 {plan['price']:,}원이 월 {total // months:,}원으로<br>12개월 한 번 결제 · 자동 갱신 없이</p></div>'''
         cards.append(f'''<article class="launch-plan launch-plan-{esc(plan['key'])}"><p class="launch-plan-label">{esc(plan['name'])}</p><h3>{esc(plan['tagline'])}</h3><p class="launch-price">{'' if free else '<span>월 </span>'}{plan['price']:,}<span>원</span></p>{annual}<p class="launch-plan-description">{esc(plan['description'])}</p><ul>{features}</ul>{action}</article>''')
     return f'''<section class="launch-pricing section wrap" id="pricing" aria-labelledby="pricing-title">
-  <div class="section-heading"><p class="eyebrow">정식 출시 예정 요금</p><h2 id="pricing-title">내게 맞는 만큼,<br>온순간과 함께해요.</h2><p>기록은 무료로 시작하고,<br>AI와 더 자주 돌아보고 싶을 때 선택하세요.</p></div>
+  <div class="section-heading"><p class="eyebrow">정식 출시 예정 요금</p><h2 id="pricing-title">내게 맞는 만큼,<br>온순간과 함께해요.</h2><p>기록하고 다시 읽는 일은 늘 무료예요. <br>더 자주, 더 깊이 만나고 싶을 때 골라요.</p></div>
   <div class="launch-plans">{''.join(cards)}</div>
-  <div class="launch-plan-notes" id="plan-details"><p><strong>90일 동안 만나보고, 이어갈지는 내 뜻으로.</strong> 체험 종료만으로 유료로 전환되지 않아요. 무료로 계속 이용할 수 있고, 유료 서비스가 준비된 뒤 원할 때 직접 선택해요.</p><p>베타 참여자의 첫 연간 혜택은 체험과 별도 12개월, 자동갱신 없는 1년 이용권으로 준비해요. 체험 종료와 판매 개시 이후 직접 결제한 날부터 시작하며, AI 이용량과 책 제작권은 매달 제공할 예정이에요.</p><p><strong>지금은 예정 가격을 안내하는 단계예요.</strong> 결제나 예약금을 받지 않으며 구매 의무가 없어요. 혜택 대상·신청 기간·AI 제공량·중도해지와 환불 기준은 판매 시작 전에 안내해요. 판매 준비가 늦어져도 구매할 수 없었던 기간 때문에 혜택 신청 기회를 잃지 않도록 준비해요.</p><p>프리미엄의 디지털 책은 한 시선으로 엮는 PDF 1종이에요. 종이책 제작·배송은 별도 상품으로 준비해요.</p></div>
-  <div class="launch-paper"><div><p class="eyebrow">곁에 두고, 소중한 사람에게 건네고</p><h3>당신을 알아보는 책,<br>나를 당신에게 전하는 책.</h3><p>같은 기록을 두 시선으로 엮는 이야기책 두 권.<br>유료 구독 없이도 주문할 수 있도록 준비하고 있어요.</p></div><div class="launch-paper-price"><p>종이책 2권 · 한 세트</p><strong>{POLICY['paperBook']['price']:,}<span>원</span></strong><p class="launch-caption">주문 준비 중 · 최종 사양과 배송 조건은 주문 전에 안내해요.</p><a class="launch-detail-link" href="/keepsakes/">두 시선의 구성 예시 보기 ↗</a></div></div>
-  <aside class="launch-beta" aria-labelledby="beta-title"><h3 id="beta-title">초대로 시작한 90일 체험은 그대로.</h3><p>기존에 안내받은 90일 무료 혜택은 유지해요. 내게 적용되는 기능과 종료일은 초대 안내와 앱에서 확인해 주세요.{' 책 이벤트 응모 기간과 체험 기간은 별개예요.' if EVENT_ON else ''}</p></aside>
+  <div class="launch-plan-notes" id="plan-details"><p><strong>지금은 결제 없이, 무료로 써요.</strong> 결제 · 예약금 · 카드 등록이 없고, 마음을 남겨도 구매 의무가 생기지 않아요.</p><p>90일 무료 체험이 끝나도 자동으로 결제되지 않아요. 유료 이용이 열리기 전에 앱에서 먼저 알려 드리고, 그때 직접 골라요. 기록하고 다시 읽는 일은 계속 무료예요.</p><p>1년 이용권은 12개월을 한 번에, 자동 갱신 없이 준비해요. AI 이용량과 책은 매달 나눠 드려요. 제공량 · 중도 해지 · 환불 기준은 열리기 전에 알려 드려요.</p><p>프리미엄의 디지털 책은 한 시선으로 엮는 PDF예요. 종이책은 따로 주문할 수 있게 준비해요.</p></div>
+  <div class="launch-paper"><div><p class="eyebrow">곁에 두고, 소중한 사람에게 건네고</p><h3>당신을 알아보는 책,<br>나를 당신에게 전하는 책.</h3><p>같은 기록을 두 시선으로 엮은 이야기책 두 권.<br>구독 없이도 따로 주문할 수 있게 준비해요.</p></div><div class="launch-paper-price"><p>종이책 2권 · 한 세트</p><strong>{POLICY['paperBook']['price']:,}<span>원</span></strong><p class="launch-caption">주문 준비 중 · 사양과 배송은 주문 전에 먼저 알려 드려요.</p><a class="launch-detail-link" href="/keepsakes/">두 시선의 구성 예시 보기 ↗</a></div></div>
+  <aside class="launch-beta" aria-labelledby="beta-title"><h3 id="beta-title">약속드린 90일 무료 체험은 그대로예요.</h3><p>내게 적용되는 기능과 종료일은 앱에서 확인할 수 있어요.{' 책 이벤트 응모 기간과 체험 기간은 별개예요.' if EVENT_ON else ''}</p></aside>
 </section>'''
 
 
 def launch_faq():
     pairs = [
-        ('지금은 무엇부터 시작할 수 있나요?', '앱에서 마음에 남은 장면을 쓰고, 가입하거나 로그인해 저장할 수 있어요. 이 페이지의 이야기·카드·책은 가상 예시이며, 실제 사용할 수 있는 기능은 앱의 안내를 따라주세요. 자동 책 제작과 종이책 주문, 함께 쓰기는 준비하고 있어요.'),
-        ('무료 체험이 끝나면 자동 결제되나요?', '유료 이용은 가격과 제공 범위를 확인한 뒤 직접 선택하는 방식으로 준비해요. 무료 체험이 끝났다는 이유만으로 결제하지 않아요. 기존 90일 혜택의 적용 범위와 종료일은 초대 안내와 앱에서 확인해 주세요.'),
-        ('연간 혜택은 얼마이며, 언제 시작하나요?', f"베타 참여자의 첫 연간 결제는 기본 {PLAN_BY_KEY['basic']['annualPromotionPrice']:,}원, 프리미엄 {PLAN_BY_KEY['premium']['annualPromotionPrice']:,}원을 한 번에 결제하는 방식으로 준비해요. 월 환산액은 각각 {PLAN_BY_KEY['basic']['annualPromotionPrice'] // 12:,}원, {PLAN_BY_KEY['premium']['annualPromotionPrice'] // 12:,}원이에요. 지금은 결제나 예약금을 받지 않아요. 90일 체험 종료와 판매 개시 이후, 원할 때 직접 결제한 날부터 별도 12개월을 이용해요. 적용 대상과 신청 기간은 판매 시작 전에 안내해요."),
-        ('1년 이용이 끝나면 어떻게 되나요?', '이번 혜택은 자동갱신 없는 1년 이용권으로 준비해요. 이용 기간이 끝나기 전에 안내하고, 이어갈 때의 요금은 다시 확인한 뒤 직접 선택해요. 무료 이용을 선택해도 기존 기록을 다시 읽을 수 있도록 유지해요.'),
-        ('1년치 AI와 책 제작권을 한 번에 받나요?', '연간 결제여도 AI 이용량과 책 제작권은 매달 제공해요. 프리미엄 디지털 책은 월 1권이며 종이책은 별도예요. 제공량과 사용 기한, 남은 제공량의 처리 방식은 결제 전에 안내해요.'),
+        ('지금은 무엇부터 시작할 수 있나요?', '앱에서 마음에 남은 장면을 쓰고, 가입하면 내 기록으로 저장돼요. 다시 읽고 내 말로 돌아보기, 카드와 대표 장 만들기, 함께에서 고른 글 나누기까지 지금 할 수 있어요. 이 페이지의 이야기와 책 이미지는 가상 예시이고, 종이책 주문은 준비하고 있어요.'),
+        ('무료 체험이 끝나면 자동 결제되나요?', '아니요. 체험이 끝났다는 이유만으로 결제되지 않아요. 유료 이용이 열리면 요금과 제공 범위를 먼저 보여 드리고, 그때 직접 골라요. 내 90일 체험의 종료일은 앱에서 확인할 수 있어요.'),
+        ('1년 이용권은 얼마이며, 언제 시작하나요?', f"기본 {PLAN_BY_KEY['basic']['annualPromotionPrice']:,}원, 프리미엄 {PLAN_BY_KEY['premium']['annualPromotionPrice']:,}원을 한 번에 결제하는 12개월 이용권으로 준비해요. 월로 나누면 각각 {PLAN_BY_KEY['basic']['annualPromotionPrice'] // 12:,}원, {PLAN_BY_KEY['premium']['annualPromotionPrice'] // 12:,}원이에요. 지금은 결제나 예약금을 받지 않아요. 유료 이용이 열린 뒤 원할 때 직접 결제한 날부터 12개월이에요."),
+        ('1년 이용이 끝나면 어떻게 되나요?', '자동 갱신 없이 끝나요. 끝나기 전에 먼저 알려 드리고, 이어갈지는 그때 직접 골라요. 무료로 돌아가도 남긴 기록은 그대로 다시 읽을 수 있어요.'),
+        ('1년치 AI와 책 제작권을 한 번에 받나요?', '1년 이용권이어도 AI 이용량과 책은 매달 나눠 드려요. 프리미엄 디지털 책은 월 1권이고, 종이책은 따로예요. 제공량 · 사용 기한 · 남은 양의 처리는 결제 전에 먼저 알려 드려요.'),
         ('책 선물 이벤트에는 지금 응모할 수 있나요?', '아직 응모 전이에요. 참여 기간과 제작·배송 조건이 확정되면 응모 방법을 안내해요. 지금은 먼저 기록을 남기며 온순간을 경험할 수 있어요.'),
         ('책을 받으려면 매일 쓰거나 결제해야 하나요?', '서로 다른 3일의 기록, 한 번의 돌아보기, 한 번의 솔직한 의견을 나누고 응모하는 방식을 준비하고 있어요. 연속 출석이나 유료 결제, 친구 초대를 조건으로 두지 않아요. 최종 조건은 응모 시작 전에 안내해요.'),
         ('디지털 책과 종이책은 어떻게 다른가요?', '프리미엄에 포함할 디지털 책은 한 시선의 PDF 1종이에요. 별도 종이책 상품은 ‘당신을 알아보는 책’과 ‘나를 당신에게 전하는 책’, 두 시선의 소책자 2권 한 세트, 49,000원으로 준비하고 있어요. 이 페이지의 천 표지 이미지는 방향을 보여주는 시안이에요.'),
