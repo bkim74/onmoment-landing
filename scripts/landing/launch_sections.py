@@ -19,7 +19,9 @@ EVENT_ON = POLICY.get('event', {}).get('published') is True
 PLAN_BY_KEY = {plan['key']: plan for plan in POLICY['plans']}
 if POLICY.get('commercialMode') != 'pre_registration_validation' or POLICY.get('paymentsEnabled') is not False:
     raise ValueError('This handoff only supports non-binding demand validation; live billing requires a separate reviewed release.')
-if POLICY['status'] != 'planned' or POLICY['event']['status'] != 'planned':
+# 책 이벤트는 앱 응모(운영 응모 · 1행 확인 11-13)와 날짜가 정해졌을 때만 'open' 으로 연다 — 요금 · 결제는 그대로 'planned'
+EVENT_OPEN_OK = POLICY['event']['status'] == 'open' and all(POLICY['event'].get(k) for k in ('entry', 'record', 'draw'))
+if POLICY['status'] != 'planned' or not (POLICY['event']['status'] == 'planned' or EVENT_OPEN_OK):
     raise ValueError('Live launch requires verified app entitlements, event entry and dated terms. See docs/claude-landing-handoff-20261111.md.')
 if POLICY['annualPromotion']['status'] != 'planned':
     raise ValueError('Annual promotion launch requires verified eligibility, payments, grants and refund terms.')
@@ -40,13 +42,32 @@ def event_section():
     if not EVENT_ON:
         return ''
     winners = esc(POLICY['event']['winnerCount'])
+    # 두괄식(범님 11-13) — 무엇 · 누구 · 언제 · 어떻게를 먼저 한눈에, 본론은 그 아래에 충실히. 문구는 확정 공지문 그대로.
     return f'''<section class="launch-event section" id="book-event" aria-labelledby="event-title"><div class="wrap launch-event-layout">
-  <div class="launch-event-copy"><p class="eyebrow">첫 참여자를 위한 책 선물 · 준비 중</p><h2 id="event-title">내 이야기를<br>책으로 만나는 시간.</h2><p>오늘 남긴 작은 장면이,<br>나와 소중한 사람에게 건네는 이야기가 되도록.</p><p class="launch-event-offer">참여자 <strong>{winners}분께 두 시선의 책 2권 한 세트</strong>를<br>추첨으로 선물하는 이벤트를 준비하고 있어요.</p><p class="launch-caption">참여 기간·제작 사양·배송 범위 확정 후 응모를 열어요.<br>지금은 이벤트 응모를 받기 전입니다.</p><a class="button primary" href="__APP__/start?src=book-event" data-app-link data-story-link>먼저 내 한 줄 남기기 ↗</a></div>
-  <div class="launch-event-guide"><p class="launch-guide-label">이런 경험을 함께 나누려 해요</p><ol>
-    <li><span aria-hidden="true">01</span><div><h3>서로 다른 3일, 한 장면씩</h3><p>연속으로 쓰지 않아도 괜찮아요.</p></div></li>
-    <li><span aria-hidden="true">02</span><div><h3>한 번 돌아보고, 내 말 남기기</h3><p>AI와 함께해도, 스스로 돌아봐도 좋아요.</p></div></li>
-    <li><span aria-hidden="true">03</span><div><h3>써 본 느낌, 솔직하게</h3><p>좋았던 점도, 어려웠던 점도 들려주세요.</p></div></li>
-  </ol><details class="launch-details"><summary>예정된 참여 방식 자세히 보기</summary><div><p>위 세 가지를 경험하고 직접 응모한 분 중 {winners}분을 추첨할 예정이에요. 유료 결제나 친구 초대 없이도 같은 기회로 참여하도록 준비하고 있어요.</p><p>책 원고는 당첨 후, 간직하고 싶은 기록이 준비되었을 때 함께 엮어요. 인쇄 전 최종 내용은 내가 확인해요.</p><p>응모 기간, 당첨 안내일, 제작권 기한과 배송 조건은 정식 이벤트 안내에서 알려드릴게요. 지금의 기록이 참여 조건에 포함되는지도 그때 확인해 주세요.</p></div></details></div>
+  <div class="launch-event-copy"><p class="eyebrow">온순간 첫 책 선물 이벤트 · 11월 13일 ~ 26일</p><h2 id="event-title">내가 쓴 하루가,<br>나에게 돌아오는 선물.</h2><p>11월 13일부터 26일까지 온순간에 남긴 작은 장면들을 모아<br><strong>{winners}분께 맞춤 선물책</strong>을 만들어 드려요.</p><p class="launch-event-offer"><strong>나를 알아보고, 당신에게 건네는 책.</strong><br>두 시선을 양장본 한 권에 담아요.</p>
+  <dl class="launch-event-facts">
+    <div><dt>응모</dt><dd>11/13 ~ 19 · 온순간 ‘오늘’의 이벤트 카드</dd></div>
+    <div><dt>조건</dt><dd>11/13 ~ 19 중 서로 다른 3일 이상 기록 + 제작 동의 + 편집본 확인 참여</dd></div>
+    <div><dt>추첨</dt><dd>11/20 · {winners}명 · 앱과 이메일로 알려드려요</dd></div>
+    <div><dt>확인</dt><dd>편집본 11/25 ~ 26 · 최종 승인 11/27</dd></div>
+  </dl>
+  <a class="button primary" href="__APP__/start?src=book-event" data-app-link data-story-link>오늘의 한 장면 남기기 ↗</a><p class="launch-caption">책에 실을 장면은 직접 고르고, 내가 승인한 원고만 인쇄합니다.</p></div>
+  <div class="launch-event-guide"><p class="launch-guide-label">나에게 한 번, 당신에게 한 번</p><ol>
+    <li><span aria-hidden="true">나</span><div><h3>그때의 나를 알아보는 이야기</h3><p>그날 내가 남긴 말과 사진, 다시 읽으며 알아차린 내 마음. 지나온 장면들을 펼쳐 놓고 그 안에 있던 나를 만나봅니다.</p></div></li>
+    <li><span aria-hidden="true">너</span><div><h3>나를 당신에게 전하는 이야기</h3><p>“이 장면을 당신에게 보여주고 싶었어요.” 내가 살아낸 시간 중 한 사람에게 건네고 싶은 이야기를 고릅니다.</p></div></li>
+  </ol><p class="launch-caption">두 이야기는 양장본 한 권, 두 부로 담아요. 건넬 이야기가 충분하다면 얇은 별책으로 따로 엮을 수도 있어요. 편집본을 받을 때, 두 가지 가운데 내가 골라요.</p>
+  <details class="launch-details"><summary>참여 방법과 일정 자세히 보기</summary><div>
+    <h3>시작은, 오늘의 한 장면이면 충분해요</h3>
+    <p><strong>① 하루의 장면 남기기</strong> — 온순간 ‘오늘’에서 글 한 줄이나 사진 한 장을 남겨 주세요.</p>
+    <p><strong>② 11월 19일까지 응모하기</strong> — ‘오늘’의 이벤트 카드에서 제작 안내와 동의 내용을 확인하고 응모해 주세요.</p>
+    <p><strong>③ 서로 다른 날, 세 번 만나기</strong> — 11월 13~19일 중 서로 다른 3일 이상 기록하고, 제작에 동의하며 편집본 확인에 참여할 수 있는 분 가운데 {winners}분을 추첨합니다. 기록한 날은 한국 시각을 기준으로 계산해요. 선정된 뒤에도 26일까지 기록을 이어갈 수 있고, 책에 담을 장면은 그중에서 직접 고릅니다.</p>
+    <h3>함께 책을 완성하는 시간</h3>
+    <p>11/13~19 기록하고 응모해요 · 11/20 {winners}분을 추첨해 앱과 이메일로 알려드려요 · 11/21~24 남긴 장면으로 편집본을 만들어요 · 11/25~26 편집본을 읽고, 고치고, 마지막 장면을 더해요 · 11/27 최종 원고를 확인하고 승인해요. 승인한 원고로 인쇄를 진행하고, 실물 책의 제작·배송 일정은 선정된 분께 따로 안내드려요.</p>
+    <h3>내 이야기의 마지막 결정은, 내가 합니다</h3>
+    <p>AI가 책 제작에 허락한 2주의 기록을 읽고 구성을 제안하며 편집합니다. 원문 인용에는 날짜를 담고, AI가 엮은 글은 편집 제안으로 구분해요. 책에 실을 기록을 고르고, 문장을 빼거나 고치고, 순서를 바꿀 수 있어요. 본인이 최종 승인한 원고만 인쇄하며, 승인 후 내용이 달라지면 다시 확인받습니다. 이번 선물책은 AI 편집과 제작 지원을 거쳐 완성하는 시범 제작 도서이고, 분량은 남긴 기록에 따라 달라집니다.</p>
+    <h3>내 기록은 내 곁에, 공개는 내 선택으로</h3>
+    <p>앱에 남긴 원래 기록은 책 제작 때문에 삭제되지 않아요. 완성된 책 파일도 참여자께 드립니다. 동의 없이 공개하거나 홍보에 사용하지 않아요. 편집용 작업 사본과 배송 정보의 이용 범위·보관기간·삭제 시점은 제작 안내에서 알려드립니다.</p>
+  </div></details></div>
 </div></section>'''
 
 
@@ -178,8 +199,8 @@ def launch_faq(scope='home'):
         ('1년 이용권은 얼마이며, 언제 시작하나요?', f"기본 {PLAN_BY_KEY['basic']['annualPromotionPrice']:,}원, 프리미엄 {PLAN_BY_KEY['premium']['annualPromotionPrice']:,}원을 한 번에 결제하는 12개월 이용권으로 준비해요. 월로 나누면 각각 {PLAN_BY_KEY['basic']['annualPromotionPrice'] // 12:,}원, {PLAN_BY_KEY['premium']['annualPromotionPrice'] // 12:,}원이에요. 지금은 결제나 예약금을 받지 않아요. 유료 이용이 열린 뒤 원할 때 직접 결제한 날부터 12개월이에요."),
         ('1년 이용이 끝나면 어떻게 되나요?', '자동 갱신 없이 끝나요. 끝나기 전에 먼저 알려 드리고, 이어갈지는 그때 직접 골라요. 무료로 돌아가도 남긴 기록은 그대로 다시 읽을 수 있어요.'),
         ('1년치 AI와 책 제작권을 한 번에 받나요?', '1년 이용권이어도 AI 이용량과 책은 매달 나눠 드려요. 프리미엄 디지털 책은 월 1권이고, 종이책은 따로예요. 제공량 · 사용 기한 · 남은 양의 처리는 결제 전에 먼저 알려 드려요.'),
-        ('책 선물 이벤트에는 지금 응모할 수 있나요?', '아직 응모 전이에요. 참여 기간과 제작·배송 조건이 확정되면 응모 방법을 안내해요. 지금은 먼저 기록을 남기며 온순간을 경험할 수 있어요.'),
-        ('책을 받으려면 매일 쓰거나 결제해야 하나요?', '서로 다른 3일의 기록, 한 번의 돌아보기, 한 번의 솔직한 의견을 나누고 응모하는 방식을 준비하고 있어요. 연속 출석이나 유료 결제, 친구 초대를 조건으로 두지 않아요. 최종 조건은 응모 시작 전에 안내해요.'),
+        ('책 선물 이벤트에는 어떻게 응모하나요?', '11월 13일부터 19일까지 온순간 ‘오늘’의 이벤트 카드에서 제작 안내와 동의 내용을 확인하고 응모해요. 11월 13~19일 중 서로 다른 3일 이상 기록하고, 제작에 동의하며 편집본 확인에 참여할 수 있는 분 가운데 세 분을 11월 20일에 추첨해요.'),
+        ('책을 받으려면 매일 쓰거나 결제해야 하나요?', '서로 다른 3일이면 충분해요. 연속으로 쓰지 않아도 되고, 결제나 친구 초대는 응모 조건이 아니에요. 글 한 줄이나 사진 한 장도 하루의 장면이에요.'),
         ('디지털 책과 종이책은 어떻게 다른가요?', '프리미엄에 포함할 디지털 책은 한 시선의 PDF 1종이에요. 별도 종이책 상품은 ‘당신을 알아보는 책’과 ‘나를 당신에게 전하는 책’, 두 시선의 소책자 2권 한 세트, 49,000원으로 준비하고 있어요. 이 페이지의 천 표지 이미지는 방향을 보여주는 시안이에요.'),
         ('온순간을 초대하면 내 기록도 공개되나요?', '아래 초대 버튼은 온순간의 공개 소개 주소만 건네요. 내 기록이나 개인 초대 코드는 함께 보내지 않아요. 개인 이야기를 건네는 일은 앱에서 별도로 선택해요.'),
     ]

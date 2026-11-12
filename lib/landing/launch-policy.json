@@ -46,9 +46,12 @@
     "copies": 2
   },
   "event": {
-    "status": "planned",
-    "winnerCount": 10,
-    "published": false
+    "status": "open",
+    "winnerCount": 3,
+    "published": true,
+    "entry": "2026-11-13~19",
+    "record": "2026-11-13~26",
+    "draw": "2026-11-20"
   },
   "annualPromotion": {
     "status": "planned",

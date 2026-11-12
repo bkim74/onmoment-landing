@@ -16,6 +16,11 @@
 .launch-event-copy .launch-event-offer{font-size:18px}
 .launch-event-offer strong{font-weight:500;color:var(--wine)}
 .launch-event-copy .button{margin-top:28px}
+.launch-event-facts{margin:26px 0 0;display:grid;gap:10px;font-size:16px}
+.launch-event-facts div{display:grid;grid-template-columns:3.2em 1fr;gap:12px;padding-bottom:10px;border-bottom:1px solid var(--line)}
+.launch-event-facts dt{color:var(--wine);font-weight:500}
+.launch-event-facts dd{margin:0}
+.launch-details h3{font-size:19px;margin:22px 0 6px}
 .launch-event-guide{background:#faf4e9;padding:36px;border:1px solid #d5bea5;box-shadow:9px 9px 0 #e1d0bc}
 .launch-guide-label{font-size:14px;color:var(--wine);letter-spacing:.04em}
 .launch-event-guide ol{list-style:none;margin:12px 0 20px;padding:0}
