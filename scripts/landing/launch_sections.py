@@ -88,9 +88,9 @@ def pricing_section():
     return f'''<section class="launch-pricing section wrap" id="pricing" aria-labelledby="pricing-title">
   <div class="section-heading"><p class="eyebrow">정식 출시 예정 요금</p><h2 id="pricing-title">내게 맞는 만큼,<br>온순간과 함께해요.</h2><p>기록하고 다시 읽는 일은 늘 무료예요. <br>더 자주, 더 깊이 만나고 싶을 때 골라요.</p></div>
   <div class="launch-plans">{''.join(cards)}</div>
-  <div class="launch-plan-notes" id="plan-details"><p><strong>지금은 결제 없이, 무료로 써요.</strong> 결제 · 예약금 · 카드 등록이 없고, 마음을 남겨도 구매 의무가 생기지 않아요.</p><p>90일 무료 체험이 끝나도 자동으로 결제되지 않아요. 유료 이용이 열리기 전에 앱에서 먼저 알려 드리고, 그때 직접 골라요. 기록하고 다시 읽는 일은 계속 무료예요.</p><p>1년 이용권은 12개월을 한 번에, 자동 갱신 없이 준비해요. AI 이용량과 책은 매달 나눠 드려요. 제공량 · 중도 해지 · 환불 기준은 열리기 전에 알려 드려요.</p><p>프리미엄의 디지털 책은 한 시선으로 엮는 PDF예요. 종이책은 따로 주문할 수 있게 준비해요.</p></div>
+  <div class="launch-plan-notes" id="plan-details"><p><strong>지금은 결제 없이, 무료로 써요.</strong> 결제 · 예약금 · 카드 등록이 없고, 마음을 남겨도 구매 의무가 생기지 않아요.</p><p>유료 이용이 열려도 자동으로 결제되지 않아요. 열리기 전에 앱에서 먼저 알려 드리고, 그때 직접 골라요. 기록하고 다시 읽는 일은 계속 무료예요.</p><p>1년 이용권은 12개월을 한 번에, 자동 갱신 없이 준비해요. AI 이용량과 책은 매달 나눠 드려요. 제공량 · 중도 해지 · 환불 기준은 열리기 전에 알려 드려요.</p><p>프리미엄의 디지털 책은 한 시선으로 엮는 PDF예요. 종이책은 따로 주문할 수 있게 준비해요.</p></div>
   <div class="launch-paper"><div><p class="eyebrow">곁에 두고, 소중한 사람에게 건네고</p><h3>당신을 알아보는 책,<br>나를 당신에게 전하는 책.</h3><p>같은 기록을 두 시선으로 엮은 이야기책 두 권.<br>구독 없이도 따로 주문할 수 있게 준비해요.</p></div><div class="launch-paper-price"><p>종이책 2권 · 한 세트</p><strong>{POLICY['paperBook']['price']:,}<span>원</span></strong><p class="launch-caption">주문 준비 중 · 사양과 배송은 주문 전에 먼저 알려 드려요.</p><a class="launch-detail-link" href="/keepsakes/">두 시선의 구성 예시 보기 ↗</a></div></div>
-  <aside class="launch-beta" aria-labelledby="beta-title"><h3 id="beta-title">약속드린 90일 무료 체험은 그대로예요.</h3><p>내게 적용되는 기능과 종료일은 앱에서 확인할 수 있어요.{' 책 이벤트 응모 기간과 체험 기간은 별개예요.' if EVENT_ON else ''}</p></aside>
+  <aside class="launch-beta" aria-labelledby="beta-title"><h3 id="beta-title">지금은 결제 없이 모두 써요.</h3><p>유료가 열리기 전에 먼저 알려 드리고, 자동으로 결제되지 않아요.{' 책 이벤트도 결제 없이 응모해요.' if EVENT_ON else ''}</p></aside>
 </section>'''
 
 
@@ -163,7 +163,7 @@ def value_section():
         '<section class="value-promise section wrap" aria-labelledby="value-promise-title">'
         '<h2 id="value-promise-title">지금 드리는 약속</h2><ul>'
         '<li><strong>지금은 결제 없이 무료로 써요.</strong> 결제 · 예약금 · 카드 등록이 없어요.</li>'
-        '<li><strong>약속드린 90일 무료 체험은 그대로예요.</strong> 체험이 끝나도 자동으로 결제되지 않고, 동참은 그때 직접 골라요.</li>'
+        '<li><strong>유료가 열려도 자동으로 결제되지 않아요.</strong> 열리기 전에 먼저 알려 드리고, 동참은 그때 직접 골라요.</li>'
         '<li><strong>1년 동참은 12개월 한 번, 자동 갱신 없이.</strong> AI 이용량과 책은 매달 나눠 드려요.</li>'
         '<li><strong>무료로 돌아가도 내 기록은 그대로예요.</strong> 언제든 다시 읽고, 내보내고, 지울 수 있어요.</li>'
         '</ul></section>'
@@ -189,13 +189,13 @@ def pricing_teaser():
 </section>'''
 
 
-PRICING_QS = ('무료 체험이 끝나면', '1년 이용권은 얼마', '1년 이용이 끝나면', '1년치 AI', '디지털 책과 종이책')
+PRICING_QS = ('유료가 열리면 자동으로', '1년 이용권은 얼마', '1년 이용이 끝나면', '1년치 AI', '디지털 책과 종이책')
 
 
 def launch_faq(scope='home'):
     pairs = [
         ('지금은 무엇부터 시작할 수 있나요?', '앱에서 마음에 남은 장면을 쓰고, 가입하면 내 기록으로 저장돼요. 다시 읽고 내 말로 돌아보기, 카드와 대표 장 만들기, 함께에서 고른 글 나누기까지 지금 할 수 있어요. 이 페이지의 이야기와 책 이미지는 가상 예시이고, 종이책 주문은 준비하고 있어요.'),
-        ('무료 체험이 끝나면 자동 결제되나요?', '아니요. 체험이 끝났다는 이유만으로 결제되지 않아요. 유료 이용이 열리면 요금과 제공 범위를 먼저 보여 드리고, 그때 직접 골라요. 내 90일 체험의 종료일은 앱에서 확인할 수 있어요.'),
+        ('유료가 열리면 자동으로 결제되나요?', '아니요. 유료 이용이 열리면 요금과 제공 범위를 먼저 알려 드리고, 쓰고 싶은 분만 그때 직접 골라요.'),
         ('1년 이용권은 얼마이며, 언제 시작하나요?', f"기본 {PLAN_BY_KEY['basic']['annualPromotionPrice']:,}원, 프리미엄 {PLAN_BY_KEY['premium']['annualPromotionPrice']:,}원을 한 번에 결제하는 12개월 이용권으로 준비해요. 월로 나누면 각각 {PLAN_BY_KEY['basic']['annualPromotionPrice'] // 12:,}원, {PLAN_BY_KEY['premium']['annualPromotionPrice'] // 12:,}원이에요. 지금은 결제나 예약금을 받지 않아요. 유료 이용이 열린 뒤 원할 때 직접 결제한 날부터 12개월이에요."),
         ('1년 이용이 끝나면 어떻게 되나요?', '자동 갱신 없이 끝나요. 끝나기 전에 먼저 알려 드리고, 이어갈지는 그때 직접 골라요. 무료로 돌아가도 남긴 기록은 그대로 다시 읽을 수 있어요.'),
         ('1년치 AI와 책 제작권을 한 번에 받나요?', '1년 이용권이어도 AI 이용량과 책은 매달 나눠 드려요. 프리미엄 디지털 책은 월 1권이고, 종이책은 따로예요. 제공량 · 사용 기한 · 남은 양의 처리는 결제 전에 먼저 알려 드려요.'),
