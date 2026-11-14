@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
 import Script from "next/script";
-import GiftInquiryForm from "../../components/GiftInquiryForm";
 import "../v4.css";
 import "../gift.css";
 
 const APP = process.env.NEXT_PUBLIC_APP_ORIGIN ?? "https://app.onmoment.kr";
 
 const TITLE = "칠순·환갑 이야기 선물 — 온순간";
-const DESC = "가족이 저마다 기억하는 한 장면씩. 그 말들을 모아 칠순·환갑에 건네는 한 권의 이야기 선물. 지금은 시범 제작으로, 가격은 상담 뒤 안내해요.";
+const DESC = "가족이 저마다 기억하는 한 장면씩. 그 말들을 모아 칠순·환갑에 건네는 한 권의 이야기 선물. 지금은 디지털본을 무료로 시범 운영해요.";
+const START = `${APP}/start?src=gift-page&next=%2Fprepare`;
 
 export const metadata: Metadata = {
   title: TITLE,
@@ -40,19 +40,19 @@ const VOICES = [
 ];
 
 const STEPS = [
-  { n: "01", h: "상담", p: "누구의 어떤 날인지, 그날이 언제인지, 몇 분이 함께 쓰는지 들어요. 가능한 형태와 일정을 함께 정해요." },
-  { n: "02", h: "가족에게 링크 하나", p: "준비하시는 분이 가족에게 링크를 나눠요. 각자 편한 때에, 휴대폰에서 한 장면씩 남겨요." },
-  { n: "03", h: "원문 그대로 엮기", p: "모인 장면을 쓴 사람의 말 그대로 모아 순서와 구성을 엮어요. 표현을 고칠 때는 쓴 사람이 직접 확인해요." },
-  { n: "04", h: "확인하고 건네기", p: "준비하시는 분이 최종본을 확인한 뒤에 만들어요. 그날, 한 권으로 건네요." },
+  { n: "01", h: "받는 분과 그날", p: "받는 분 이름과 그날만 정하면 준비 공간이 생겨요. 원고 마감은 그날에 맞춰 자동으로 잡혀요." },
+  { n: "02", h: "가족에게 링크 하나", p: "단톡방에 붙일 글이 함께 만들어져요. 가족은 가입 없이, 각자 편한 때에 휴대폰에서 한 장면씩 남겨요." },
+  { n: "03", h: "원문 그대로 엮기", p: "모인 장면이 쓴 사람의 말 그대로 한 권으로 엮여요. 준비하시는 분은 넣고 빼기만 하고, 글은 쓴 사람만 고쳐요." },
+  { n: "04", h: "완성하고 건네기", p: "책으로 미리 보고 완성하면 받는 분께 드릴 링크가 생겨요. 그날, 그 링크를 건네요." },
 ];
 
 const FAQ = [
   ["부모님이 직접 쓰셔야 하나요?", "아니요. 가족이 함께 겪고 기억하는 장면으로 한 권을 만들어요. 부모님은 받는 날 편히 읽으시면 돼요."],
   ["글을 잘 못 써도 괜찮을까요?", "네. 한두 문장이어도 좋아요. 물음을 따라 떠오른 그대로 남기면 돼요. 잘 쓴 문장보다 그 집만 아는 장면이 더 오래 남아요."],
-  ["가격은 얼마인가요?", "모인 이야기의 양과 책의 형태, 날짜에 따라 달라서 상담 뒤에 안내해요. 안내를 듣고 정하실 때까지 비용은 들지 않아요."],
-  ["언제쯤 신청하면 좋을까요?", "가족이 쓰고, 엮고, 확인하고, 만드는 시간이 필요해요. 그날까지 남은 시간에 맞춰 가능한 형태를 상담에서 함께 정해요."],
-  ["혼자 준비해도 되나요?", "네. 혼자 쓰셔도 한 권이 될 수 있어요. 분량에 맞는 형태를 상담에서 안내해요."],
-  ["사진도 넣을 수 있나요?", "네, 글과 함께 넣을 수 있어요. 사진이 없어도 기억하는 장면이면 시작할 수 있어요."],
+  ["가격은 얼마인가요?", "지금은 디지털본(링크로 읽는 책)을 무료로 시범 운영해요. 종이책은 준비하고 있어요."],
+  ["언제쯤 시작하면 좋을까요?", "가족이 쓸 시간이 있으면 좋아요. 그날 2~3주 전이면 넉넉하고, 원고 마감은 그날 사흘 전으로 자동으로 잡혀요."],
+  ["혼자 준비해도 되나요?", "네. 준비하시는 분도 같은 링크로 장면을 남길 수 있어요. 한 장면으로도 한 권이 돼요."],
+  ["받는 분도 가입해야 하나요?", "아니요. 링크를 열면 바로 읽어요. 답장이나 가입을 요청하지 않아요."],
 ];
 
 export default function GiftPage() {
@@ -65,14 +65,14 @@ export default function GiftPage() {
         </a>
         <nav aria-label="주 메뉴">
           <a href="#how">만드는 순서</a>
-          <a className="nav-cta" href="#apply">상담 신청</a>
+          <a className="nav-cta" href={START} data-app-link>선물 준비 시작 ↗</a>
         </nav>
       </header>
 
       <main id="main">
         <section className="gift-hero wrap">
           <div className="gift-hero-copy">
-            <p className="eyebrow">칠순 · 환갑 이야기 선물 · 시범 제작</p>
+            <p className="eyebrow">칠순 · 환갑 이야기 선물 · 디지털본 시범</p>
             <h1>
               가족이 저마다 기억하는
               <br />
@@ -85,14 +85,14 @@ export default function GiftPage() {
               <br />그 말들을 모아 한 권의 이야기로 엮어요.
             </p>
             <div className="gift-hero-actions">
-              <a className="button primary" href="#apply">
-                시범 제작 상담 신청 <span aria-hidden="true">↓</span>
+              <a className="button primary" href={START} data-app-link>
+                선물 준비 시작하기 <span aria-hidden="true">↗</span>
               </a>
               <a className="text-button" href="#how">
                 어떻게 만들어지나요
               </a>
             </div>
-            <p className="fine">지금은 시범 제작이에요. 가격과 형태는 모인 이야기와 날짜에 맞춰 상담 뒤 안내해요.</p>
+            <p className="fine">지금은 디지털본을 무료로 시범 운영해요. 준비하시는 분만 로그인하고, 가족과 받는 분은 링크로 바로 들어와요.</p>
           </div>
           <figure className="gift-hero-photo">
             <img src="/assets/journey-parents.webp" alt="오래된 사진을 함께 보는 가족의 손" width={1536} height={1024} />
@@ -113,7 +113,7 @@ export default function GiftPage() {
                 가족에게는 링크 하나가 가요. 휴대폰에서 세 가지 물음을 따라, 그때의 장면을 자기 말로 남겨요.
               </p>
               <p className="gift-body">
-                문장은 각자의 말 그대로 담아요. 원할 때만, 떠올리기 쉬운 물음 하나를 더 건네요.
+                문장은 각자의 말 그대로 담아요. 가입하지 않아도 되고, 다른 가족의 글은 보이지 않아요.
               </p>
             </div>
             <ol className="gift-prompts" aria-label="한 장면을 떠올리는 세 물음">
@@ -158,7 +158,7 @@ export default function GiftPage() {
         <section className="section gift-how" id="how">
           <div className="wrap">
             <p className="eyebrow">만드는 순서</p>
-            <h2>상담에서 건네는 날까지.</h2>
+            <h2>정하는 날에서 건네는 날까지.</h2>
             <ol className="gift-steps">
               {STEPS.map((s) => (
                 <li key={s.n}>
@@ -177,23 +177,24 @@ export default function GiftPage() {
           <ul>
             <li>각자의 글은 쓴 사람의 말 그대로 담아요.</li>
             <li>준비하시는 분은 가족이 건네기로 한 글만 봐요.</li>
-            <li>모인 글이 적으면 얇은 책자로 엮어요. 빈 쪽을 지어서 채우지 않아요.</li>
+            <li>모인 장면만으로 엮어요. 빈 쪽을 지어서 채우지 않아요.</li>
             <li>내가 쓴 장면은 원하면 내 온순간 기록으로도 간직해요.</li>
           </ul>
         </section>
 
-        <section className="section gift-apply" id="apply" aria-labelledby="apply-h">
-          <div className="wrap gift-apply-inner">
-            <div className="gift-apply-copy">
-              <p className="eyebrow">시범 제작 상담 신청</p>
-              <h2 id="apply-h">
-                그날을,
-                <br />
-                함께 준비해요.
-              </h2>
-              <p className="gift-body">몇 가지만 알려 주시면, 적어 주신 메일로 상담 안내를 보내 드려요.</p>
-            </div>
-            <GiftInquiryForm />
+        <section className="section gift-apply" id="start" aria-labelledby="start-h">
+          <div className="wrap gift-start">
+            <p className="eyebrow">디지털본 무료 시범</p>
+            <h2 id="start-h">
+              그날을,
+              <br />
+              지금 준비해요.
+            </h2>
+            <p className="gift-body">받는 분과 그날만 정하면, 가족에게 건넬 링크가 바로 생겨요.</p>
+            <a className="button primary" href={START} data-app-link>
+              선물 준비 시작하기 <span aria-hidden="true">↗</span>
+            </a>
+            <p className="fine">준비하시는 분만 로그인해요 · 종이책은 준비하고 있어요</p>
           </div>
         </section>
 
@@ -236,7 +237,7 @@ export default function GiftPage() {
           <br />
           <a href="/principles/">기록을 대하는 방식 →</a>
         </div>
-        <p className="fine">시범 제작 안내 · 이 페이지의 글과 이미지는 가상 예시예요.</p>
+        <p className="fine">디지털본 시범 운영 · 이 페이지의 글과 이미지는 가상 예시예요.</p>
         <p className="fine">
           © 2026 OnMoment · <a href="/privacy/">개인정보 처리방침</a> · <a href="/terms/">이용약관</a>
         </p>

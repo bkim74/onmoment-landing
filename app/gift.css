@@ -90,3 +90,5 @@
 .gift-voices>.fine{margin-top:28px}
 .gift-keep li{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:baseline}.gift-keep li:before{margin-right:0}
 @media(max-width:760px){.gift-page nav a.nav-cta{display:inline-block}}
+
+.gift-start{display:flex;flex-direction:column;align-items:center;text-align:center;gap:6px}.gift-start .gift-body{margin-inline:auto}.gift-start .button{margin-top:24px}
