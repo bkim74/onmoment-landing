@@ -10,7 +10,7 @@ const SITE_URL = "https://onmoment.kr";
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
 
-  const staticPaths = ["", "/story", "/journal", "/principles", "/value", "/gift", "/privacy", "/terms"];
+  const staticPaths = ["", "/story", "/journal", "/principles", "/value", "/privacy", "/terms"];
   const staticEntries: MetadataRoute.Sitemap = staticPaths.map((path) => ({
     url: `${SITE_URL}${path}/`,
     lastModified: now,
