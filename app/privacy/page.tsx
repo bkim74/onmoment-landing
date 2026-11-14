@@ -93,6 +93,13 @@ export default function PrivacyPage() {
               <p>초대 베타 안내를 보내기 위해 신청한 이메일 주소를 저장합니다. 다른 목적으로 쓰지 않습니다.</p>
             </div>
             <div>
+              <p className="mb-1 font-medium text-coffee-deep">이야기 선물 상담 신청</p>
+              <p>
+                칠순·환갑 등 이야기 선물 시범 제작 상담을 안내하기 위해 신청한 이메일 주소와 신청서에 고르거나 적은 내용(누구의 어떤 날인지, 그날의 시기, 함께 쓸 인원, 남긴 말)을 저장합니다.
+                상담 안내 외의 목적으로 쓰지 않으며, 신청일로부터 1년이 지나거나 삭제를 요청하시면 파기합니다.
+              </p>
+            </div>
+            <div>
               <p className="mb-1 font-medium text-coffee-deep">사용자가 남긴 기록</p>
               <p>
                 하루의 문장, 조각(텍스트·음성 변환 텍스트), 감정 위치, AI 비춤 결과,
