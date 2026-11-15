@@ -81,3 +81,11 @@
 [data-one-main] .journey-card-body small { font-size: 14px; line-height: 1.5; }
 [data-one-main] .journey-card-body .card-desire { font-size: 16px; }
 [data-one-main] .fine, [data-one-main] .eyebrow { font-size: 14px; }
+/* 독서모임 전용 페이지(11-16) */
+[data-reading-page] .om-steps-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 28px; }
+@container (max-width: 900px) { [data-reading-page] .om-steps-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@container (max-width: 560px) { [data-reading-page] .om-steps-4 { grid-template-columns: 1fr; } }
+[data-reading-page] .om-scope p { font-size: 16px; line-height: 1.7; color: var(--ink); }
+[data-reading-page] .eyebrow a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
+[data-reading-page] .cta-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 18px; }
+[data-one-main] .om-reading-link { display: inline-flex; align-items: center; min-height: 48px; color: var(--wine); text-decoration: underline; text-underline-offset: 3px; }

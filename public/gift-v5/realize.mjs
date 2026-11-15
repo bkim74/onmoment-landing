@@ -63,10 +63,13 @@ export function startHref(app, j, o, t) {
 }
 
 /** 시안 HTML → 운영 HTML */
+const READING_ENTRY = `<section class="wrap reading-entry" data-reading-entry><p class="eyebrow">모임 · 독서모임 · 여행</p><h2>독서모임에서 함께 쓰기</h2><p>같은 책을 읽고, 서로 다른 삶의 이야기를 만나요. 책을 읽으며 떠오른 내 경험을 남기고, 나누고 싶은 만큼만 모임에 전해요.</p><a class="button primary" href="/gift/together/reading/">독서모임에서 함께 쓰기 <span aria-hidden="true">→</span></a></section>`;
 export function realize(html, { app = "https://app.onmoment.kr", page = "hub" } = {}) {
   let s = html;
   for (const [a, b] of SAY) s = s.split(a).join(b);
   s = s.replace(DECISION_ASIDE, NOW_ASIDE).replace(SCOPE, NOW_SCOPE).replace(CONTINUITY, NOW_CONTINUITY);
+  // 독서모임 입구(11-16) — '우리의 시간을 남기기' 안에서만. 메인에 여덟째 카드 · 별도 메뉴는 두지 않는다
+  if (page === "together") s = s.replace('<section class="occasion-panel wrap" id="journey-occasion">', `${READING_ENTRY}<section class="occasion-panel wrap" id="journey-occasion">`);
   if (page === "hub") s = s.replace(/(<section class="section wrap">(?:(?!<\/section>)[\s\S])*?한 장면에서, 한 권까지[\s\S]*?)(<\/section>)/, `$1${HOW_ENTRY}$2`);
   else s = s.replace(/(<section class="section wrap campaign-process">[\s\S]*?)(<\/section>)/, `$1${HOW_ENTRY}$2`);
   // 사진: 시안의 assets/journeys/journey-*.webp = 랜딩의 /assets/journey-*.webp (같은 파일)

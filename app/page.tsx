@@ -114,6 +114,7 @@ export default function Home() {
                 ))}
               </div>
               <p className="om-note">사진은 분위기를 돕는 이미지예요. 내 선물에는 사진 없이 한 문장만 써도 돼요.</p>
+              <p className="om-note">독서모임은 ‘우리의 시간을 남기기’ 안에서 시작해요. <a className="om-reading-link" href="/gift/together/reading/">독서모임에서 함께 쓰기 →</a></p>
             </section>
 
             {/* 4 만드는 방법 */}
