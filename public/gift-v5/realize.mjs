@@ -42,6 +42,9 @@ const CONTINUITY = /<section class="section wrap continuity-section">[\s\S]*?<\/
 const NOW_CONTINUITY = `<section class="section wrap continuity-section"><p class="eyebrow">선물 뒤에도, 내 삶에 남는 한 장면</p><h2>이번 선물의 한 장면이,<br>내 이름의 책으로 이어질 수도 있어요.</h2><p class="lead">내가 쓴 이야기를 간직하고, 다른 날의 기록과 함께 모아<br>나만의 이야기로 엮어가세요.</p><ol class="continuity-steps"><li><strong>간직하기</strong><span>선물에 건넨 장면을 내 기록에도 사본으로 남겨요. 선물에 건넨 글은 그대로예요.</span></li><li><strong>엮어보기</strong><span>내 기록에서 원하는 글을 골라 제목 · 순서 · 이어지는 말을 직접 다듬고, 원고 파일로 내려받아요.</span></li><li><strong>발표 준비하기</strong><span>원고와 출처 · AI 활용 정보를 정리해 두고, 출판이나 저작권 등록은 공식 기관 안내를 보며 직접 진행해요. 등록 수수료는 기관에 따로 들 수 있어요.</span></li></ol><a class="text-button" href="/gift/self/">나에게 건네는 여정 살펴보기 →</a></section>`;
 const NOW_SCOPE = `<section class="wrap scope-note scope-bottom"><strong>디지털본 무료 시범</strong><p>준비 · 초대 링크 · 한 장면과 사진 한 장 · 책으로 미리 보기 · 받는 링크까지 실제로 쓸 수 있어요. 이 페이지의 예시 장면은 가상이에요. 종이책은 준비하고 있어요.</p></section>`;
 
+// 역할별 안내(/gift/how/)로 가는 입구 — 허브의 '한 장면에서, 한 권까지' 아래 · 여정마다 '첫 한 쪽부터' 아래(11-15 범님)
+const HOW_ENTRY = `<div class="how-entry"><p><strong>누가, 무엇을 하나요?</strong>준비하는 분 · 함께 쓰는 사람 · 받는 분의 화면과 신청 방법을 한눈에 봐요.</p><a class="button" href="/gift/how/">역할별로 자세히 보기<span aria-hidden="true">→</span></a></div>`;
+
 /** 앱 주소 — 운영은 app.onmoment.kr. 시범 화면(*.vercel.app)에서만 ?app= 으로 바꾼다(app-origin.js 와 같은 규칙) */
 export function appOrigin() {
   const prod = "https://app.onmoment.kr";
@@ -64,6 +67,8 @@ export function realize(html, { app = "https://app.onmoment.kr", page = "hub" } 
   let s = html;
   for (const [a, b] of SAY) s = s.split(a).join(b);
   s = s.replace(DECISION_ASIDE, NOW_ASIDE).replace(SCOPE, NOW_SCOPE).replace(CONTINUITY, NOW_CONTINUITY);
+  if (page === "hub") s = s.replace(/(<section class="section wrap">(?:(?!<\/section>)[\s\S])*?한 장면에서, 한 권까지[\s\S]*?)(<\/section>)/, `$1${HOW_ENTRY}$2`);
+  else s = s.replace(/(<section class="section wrap campaign-process">[\s\S]*?)(<\/section>)/, `$1${HOW_ENTRY}$2`);
   // 사진: 시안의 assets/journeys/journey-*.webp = 랜딩의 /assets/journey-*.webp (같은 파일)
   s = s.replace(/src="[^"]*?assets\/(?:journeys\/)?([a-z0-9-]+\.(?:webp|svg|png|jpg))"/g, 'src="/assets/$1"');
   // 주소
@@ -74,5 +79,5 @@ export function realize(html, { app = "https://app.onmoment.kr", page = "hub" } 
   return s;
 }
 
-export const header = () => `<header class="site-header wrap"><a class="brand" href="/gift/"><span class="brand-mark" aria-hidden="true">✳︎</span><span>온순간</span><small>ONMOMENT</small></a><nav class="header-links" aria-label="서비스 안내"><a href="/gift/#journeys">일곱 여정</a><a class="active" href="/gift/#journeys">나의 소중한 날 찾기 ↗</a></nav></header>`;
+export const header = () => `<header class="site-header wrap"><a class="brand" href="/gift/"><span class="brand-mark" aria-hidden="true">✳︎</span><span>온순간</span><small>ONMOMENT</small></a><nav class="header-links" aria-label="서비스 안내"><a href="/gift/#journeys">일곱 여정</a><a href="/gift/how/">만드는 방법</a><a class="active" href="/gift/#journeys">나의 소중한 날 찾기 ↗</a></nav></header>`;
 export const footer = () => `<footer class="footer wrap"><p>온순간, 가장 나답게.</p><p>디지털본 무료 시범 · 예시 장면은 가상이에요 · <a href="/privacy/">개인정보 처리방침</a> · <a href="/terms/">이용약관</a> · <a href="/">온순간 처음으로</a></p></footer>`;

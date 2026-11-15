@@ -7,12 +7,14 @@ const pub = new URL("../../public/gift-v5/", import.meta.url);
 const { hubHTML, journeyHTML } = await import(new URL("landing.mjs", pub));
 const { JOURNEY_LIST } = await import(new URL("journeys.mjs", pub));
 const { realize, header, footer } = await import(new URL("realize.mjs", pub));
+const { howHTML } = await import(new URL("how.mjs", pub));
 
-const out = { header: header(), footer: footer(), hub: realize(hubHTML(), { page: "hub" }), journeys: {}, meta: {} };
+const out = { header: header(), footer: footer(), hub: realize(hubHTML(), { page: "hub" }), how: howHTML(), journeys: {}, meta: {} };
 for (const j of JOURNEY_LIST) {
   out.journeys[j.id] = realize(journeyHTML(j.id, {}), { page: j.id });
   out.meta[j.id] = { title: `${j.label} | 온순간`, description: j.short, number: j.number };
 }
+if ((out.hub.match(/how-entry/g) || []).length !== 1 || Object.values(out.journeys).some((h) => (h.match(/how-entry/g) || []).length !== 1)) { console.error("역할별 안내 입구가 한 곳씩 들어가지 않았어요"); process.exit(1); }
 const left = JSON.stringify(out).match(/#journey\/|#conditions|#mine|file:\/\/|사진과 글|결제되지 않아요|체험해 주세요/g);
 if (left) { console.error("남은 시안 표현:", [...new Set(left)]); process.exit(1); }
 writeFileSync(fileURLToPath(new URL("../../lib/landing/giftV5.json", import.meta.url)), JSON.stringify(out));
