@@ -1,18 +1,21 @@
 import type { Metadata } from "next";
 import Script from "next/script";
-import { homeHtml } from "@/lib/landing/homeHtml";
-import "./v4.css";
-import "./launch.css";
+import { MAIN_JOURNEYS, RECORD_TOPICS } from "@/lib/landing/oneMain";
 
+// 하나의 메인(2026-11-16 전달서) — 이야기 선물을 앞에, 예전 메인의 개인 기록 · 이벤트 · 권리 안내를 같은 브랜드 안에 흡수한다.
+//   순서: 선물의 모습 → 이야기 한 쪽 → 일곱 여정 → 만드는 방법 → 지금 제공 범위 → 나에게도 남는 기록 → 이벤트 · FAQ → 마무리.
+//   예전 앵커(#journeys · #book-event · #first-page · #first-experience · #gifts)를 그대로 둔다 — 외부 링크 · 북마크 보존. 예전 메인 전체는 /record/.
+//   스타일은 이야기 선물 시안 v5(public/gift-v5) + 흡수한 구역용 main.css.
 const APP = process.env.NEXT_PUBLIC_APP_ORIGIN ?? "https://app.onmoment.kr";
+const RECORDS = `${APP}/?tab=history`; // 앱이 지원하는 주소(기록 탭 바로 열기 · 로그인 왕복에도 유지) — onmoment-recovery feat/one-main
+const START = (src: string) => `${APP}/start?src=${src}`;
 
 export const metadata: Metadata = {
-  title: "온순간 — 오늘을 담아, 나에게 선물하세요.",
-  description: "벅차게 좋았던 날도, 마음이 쓰인 날도. 온순간에서 한 줄씩 담고 나의 이야기를 다시 펼쳐보세요. 가입 없이 첫 한 쪽을 미리 만들어볼 수 있습니다.",
+  title: "온순간 — 함께한 날들을 모아, 소중한 분에게만 줄 수 있는 한 권",
+  description: "내 이야기를 남기고, 원하는 만큼 선물하는 온순간. 함께한 장면에 그때의 마음을 더해, 오래 간직할 이야기 선물을 준비해보세요.",
   openGraph: {
-    title: "온순간 — 오늘을 담아, 나에게 선물하세요.",
-    description: "한 줄 기록으로 시작하는 나만의 이야기책. 좋은 날도, 애쓴 날도 당신의 이야기입니다.",
-    // 페이지가 openGraph 를 정하면 공통 이미지가 덮인다 — 카카오톡 미리보기용으로 다시 넣는다
+    title: "함께한 날들을 모아, 소중한 분에게만 줄 수 있는 한 권 — 온순간",
+    description: "내 이야기를 남기고, 원하는 만큼 선물하는 온순간.",
     images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "온순간" }],
   },
 };
@@ -20,8 +23,257 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <>
-      <div className="home" dangerouslySetInnerHTML={{ __html: homeHtml(APP) }} />
-      <Script src="/landing/v4.js" strategy="afterInteractive" />
+      <link rel="stylesheet" href="/gift-v5/styles.css" precedence="default" />
+      <link rel="stylesheet" href="/gift-v5/campaign.css" precedence="default" />
+      <link rel="stylesheet" href="/gift-v5/operate.css" precedence="default" />
+      <link rel="stylesheet" href="/gift-v5/main.css" precedence="default" />
+      <a className="skip" href="#content">본문으로 바로가기</a>
+      <div id="stage">
+        <div id="app" data-one-main>
+          <header className="site-header wrap">
+            <a className="brand" href="/"><span className="brand-mark" aria-hidden="true">✳︎</span><span>온순간</span><small>ONMOMENT</small></a>
+            <nav className="header-links" aria-label="서비스 안내">
+              <a href="#journeys">일곱 여정</a>
+              <a href="#book-event">책 선물 이벤트</a>
+              <a href={RECORDS} data-app-link>내 기록</a>
+            </nav>
+          </header>
+
+          <main id="content" className="campaign-hub one-main" tabIndex={-1}>
+            {/* 1 선물의 모습 */}
+            <section className="hero wrap journey-hub">
+              <div>
+                <p className="eyebrow">내 이야기를 남기고, 원하는 만큼 선물하는 온순간</p>
+                <h1>함께한 날들을 모아,<br />소중한 분에게만 줄 수 있는 한 권.</h1>
+                <p className="lead">함께한 장면에 그때의 마음을 더해,<br />오래 간직할 이야기 선물을 준비해보세요.</p>
+                <div className="cta-row">
+                  <a className="button primary" href="#journeys">이야기 선물 준비하기 <span>↗</span></a>
+                  <a className="button" href={RECORDS} data-app-link>내 기록</a>
+                </div>
+                <p className="fine">한 문장부터 · 내 말 그대로 · 원할 때 책으로</p>
+              </div>
+              <figure className="hero-figure">
+                <img src="/assets/books-hero.webp" width={760} height={780} alt="온순간 이야기 선물의 책 제작 방향 이미지" />
+                <div className="image-note"><p>너를 이야기하다 나를 알게 되고,<br />네 이야기를 읽다가 나를 만난다.</p><span>찬연한 너와 나의 이야기.</span></div>
+                <figcaption>제작 방향 이미지 · 실제 사양은 별도 확인</figcaption>
+              </figure>
+            </section>
+
+            {/* 2 이야기 한 쪽 — 같은 장면, 두 시선 */}
+            <section id="first-page" className="section wrap">
+              <div className="section-head">
+                <div><p className="eyebrow">이야기 한 쪽</p><h2>같은 장면이,<br />두 가지 한 쪽이 돼요.</h2></div>
+                <p>소중한 분께 건네는 한 쪽,<br />그리고 나에게 남기는 한 쪽.<br />아래는 이해를 돕는 가상 예시예요.</p>
+              </div>
+              <div className="om-pages">
+                <article className="om-page">
+                  <p className="om-page-by">엄마에게 · 서연이</p>
+                  <h3>그 전화가 참 좋았어요</h3>
+                  <p>처음 혼자 살던 때,<br />찌개가 너무 짜서 엄마에게 전화했어요.<br />같이 웃으며 물을 더 붓다 보니,<br />혼자 있던 부엌이 덜 낯설었어요.</p>
+                  <p>엄마, 그날은 찌개보다<br />엄마랑 통화한 게 더 좋았어요.</p>
+                  <span className="om-page-tag">건네는 한 쪽</span>
+                </article>
+                <article className="om-page om-page-self">
+                  <p className="om-page-by">그때의 나를 · 오늘의 내가</p>
+                  <h3>혼자 해내지 않아도 됐던 날</h3>
+                  <p>그날 엄마에게 전화를 건 건<br />찌개 때문이었다.</p>
+                  <p>쓰다 보니, 나는 조리법보다<br />같이 웃었던 목소리를 기억하고 있었다.<br />혼자 해내야 한다고 생각하던 때에도<br />이렇게 물어볼 사람이 있었구나.</p>
+                  <span className="om-page-tag">나에게 남기는 한 쪽</span>
+                </article>
+              </div>
+              <details className="om-more">
+                <summary>이 한 쪽은 어떤 기록에서 시작됐나요?</summary>
+                <ol className="om-flow">
+                  <li><strong>내가 남긴 장면</strong><span>처음 혼자 살던 때, 찌개가 너무 짜서 엄마에게 전화했다.</span></li>
+                  <li><strong>다시 바라보는 물음</strong><span>그날 정말 좋았던 건 무엇이었나요?</span></li>
+                  <li><strong>내가 고른 말</strong><span>그날은 찌개보다 엄마랑 통화한 게 더 좋았어요.</span></li>
+                </ol>
+                <p>내가 쓴 원문은 그대로 두고, 나중에 덧붙인 마음은 따로 표시돼요. 무엇을 발견하고 고를지는 내가 정해요.</p>
+              </details>
+              <p className="om-note">한 문장으로 간직해도, 카드로 모아도, 책으로 엮어도 좋아요. 깊이는 원하는 만큼만. <a href="/keepsakes/">한 문장 · 카드 · 책 살펴보기 →</a></p>
+            </section>
+
+            {/* 3 일곱 여정 — 모두 사진 */}
+            <section id="journeys" className="section wrap journey-directory">
+              <div className="section-head">
+                <div><p className="eyebrow">일곱 가지 이야기 선물</p><h2>선물하고 싶은 분이<br />떠오르셨나요?</h2></div>
+                <p>소중한 날마다, 다른 마음으로.<br />여정을 고르면 그날에 맞는 물음과 예시로<br />첫 장면을 쓸 수 있어요.</p>
+              </div>
+              <div className="journey-card-grid">
+                {MAIN_JOURNEYS.map((j, i) => (
+                  <a key={j.key} href={`/gift/${j.key}/`} className={`journey-card tone-${j.tone}`} data-journey={j.key}>
+                    <figure><img src={`/assets/${j.image}`} width={768} height={512} loading="lazy" alt={j.alt} /><span className="journey-card-number">{String(i + 1).padStart(2, "0")}</span></figure>
+                    <div className="journey-card-body">
+                      <p>{j.moments}</p>
+                      <h3>{j.name}<span aria-hidden="true">↗</span></h3>
+                      <p className="card-desire">{j.episode}</p>
+                      <small>{j.who}</small>
+                      <span className="om-card-more">살펴보기 →</span>
+                    </div>
+                  </a>
+                ))}
+              </div>
+              <p className="om-note">사진은 분위기를 돕는 이미지예요. 내 선물에는 사진 없이 한 문장만 써도 돼요.</p>
+            </section>
+
+            {/* 4 만드는 방법 */}
+            <section id="how" className="section wrap">
+              <div className="section-head">
+                <div><p className="eyebrow">한 장면에서, 한 권까지</p><h2>마음은 각자의 말로,<br />준비는 한곳에서.</h2></div>
+                <p>함께 쓸 때도, 혼자 쓸 때도.<br />내가 확인한 이야기로 선물을 완성해요.</p>
+              </div>
+              <div className="steps">
+                <article><span className="number">01</span><h3>기억나는 장면 하나</h3><p>한 문장으로 시작해요. 막힐 때만 물음을 꺼내세요.</p></article>
+                <article><span className="number">02</span><h3>내 말이 담긴 한 쪽</h3><p>글·사진·이름을 직접 확인해요. 함께 쓸 때는 모인 이야기를 한곳에서 살펴봐요.</p></article>
+                <article><span className="number">03</span><h3>확인한 대로 건네기</h3><p>책 전체를 미리 보고 완성하면, 받는 분께 드릴 링크가 생겨요.</p></article>
+              </div>
+              <div className="how-entry"><p><strong>누가, 무엇을 하나요?</strong>준비하는 분 · 함께 쓰는 사람 · 받는 분의 화면을 한눈에 봐요.</p><a className="button" href="/gift/how/">역할별로 자세히 보기<span aria-hidden="true">→</span></a></div>
+            </section>
+
+            {/* 5 지금 제공 범위 — 기능별 상태를 한곳에서 */}
+            <section id="offering" className="section wrap">
+              <div className="section-head"><div><p className="eyebrow">지금 제공 범위</p><h2>지금 쓸 수 있는 것과,<br />준비하고 있는 것.</h2></div></div>
+              <div className="om-scope">
+                <div className="om-scope-now">
+                  <h3>지금 쓸 수 있어요 · 무료 시범</h3>
+                  <ul>
+                    <li><strong>나에게 남기기</strong> 한 문장이나 사진 한 장으로 내 기록을 남기고, 다시 읽고, 원할 때 다른 시선으로 돌아봐요.</li>
+                    <li><strong>이야기 선물 디지털본</strong> 준비 · 초대 링크로 함께 쓰기 · 한 장면과 사진 한 장 · 책으로 미리 보기 · 받는 링크까지.</li>
+                    <li><strong>내 기록 엮기</strong> 내 기록에서 글을 골라 직접 엮고 원고 파일로 내려받아요.</li>
+                  </ul>
+                </div>
+                <div className="om-scope-later">
+                  <h3>준비하고 있어요</h3>
+                  <ul>
+                    <li>종이책 주문</li>
+                    <li>유료 요금제 — <a href={`${APP}/plan`} data-app-link>가격 · 제작 안내</a></li>
+                    <li>각자의 책 교환 · 기록 모임</li>
+                  </ul>
+                  <p>확정 조건은 시작 전에 안내해요.</p>
+                </div>
+              </div>
+            </section>
+
+            {/* 6 나에게도 남는 기록 */}
+            <section id="my-story" className="section wrap om-my-story">
+              <span id="first-experience" className="om-anchor" aria-hidden="true" />
+              <span id="gifts" className="om-anchor" aria-hidden="true" />
+              <div className="section-head">
+                <div><p className="eyebrow">선물 뒤에도, 나에게 남는 기록</p><h2>온순간, 가장 나답게.</h2></div>
+                <p>선물을 준비하며 쓴 장면도,<br />오늘 문득 떠오른 하루도.<br />기본은 나만 보는 내 기록이에요.</p>
+              </div>
+              <div className="steps">
+                <article><span className="number">01</span><h3>흘려보내고 싶지 않은 하루</h3><p>짧게 남긴 내 말 그대로, 다시 펼칠 한 쪽이 돼요.</p></article>
+                <article><span className="number">02</span><h3>미처 보지 못했던 소중함</h3><p>시간과 거리, 다른 기록을 통해 내 이야기를 여러 방향에서 만나요.</p></article>
+                <article><span className="number">03</span><h3>내가 고르는 다음 하루</h3><p>새롭게 보인 마음을, 원한다면 작은 선택으로 이어봐요.</p></article>
+              </div>
+              <div className="cta-row">
+                <a className="button primary" href={START("my-story")} data-app-link>나에게 남기기 <span>↗</span></a>
+                <a className="button" href={RECORDS} data-app-link>내 기록 다시 읽기</a>
+              </div>
+              <p className="fine">먼저 써 보고, 저장할 때 가입해요. 이미 쓰고 계신 분은 같은 계정으로 이어져요.</p>
+              <div className="om-care">
+                <h3>온순간이 기록을 대하는 방식</h3>
+                <ul>
+                  <li>처음부터 나만의 공간으로 시작해요.</li>
+                  <li>오늘의 마음을 있는 그대로 담아요.</li>
+                  <li>오늘의 문장은 점수가 아니라 이야기로 남아요.</li>
+                  <li>무엇을 남기고 누구에게 건넬지는 내가 정해요.</li>
+                </ul>
+              </div>
+              <details className="om-more">
+                <summary>개인 기록의 주제 더 살펴보기</summary>
+                <ul className="om-topics">
+                  {RECORD_TOPICS.map((t) => <li key={t.key}><a href={`/journeys/${t.key}/`}><strong>{t.name}</strong><span>{t.line}</span></a></li>)}
+                </ul>
+                <p><a href="/record/">나에게 남기는 기록, 더 자세히 →</a></p>
+              </details>
+            </section>
+
+            {/* 7 이벤트 — 일반 종이책 주문과 상태를 나눈다 */}
+            <section id="book-event" className="section wrap om-event">
+              <p className="eyebrow">온순간 첫 책 선물 이벤트 · 11월 13일 ~ 26일</p>
+              <h2>내가 쓴 하루가,<br />나에게 돌아오는 선물.</h2>
+              <p className="lead">11월 13일부터 26일까지 온순간에 남긴 작은 장면들을 모아, 추첨으로 3분께 맞춤 선물책을 만들어 드려요. 두 시선을 한 권에 담아요.</p>
+              <dl className="om-event-facts">
+                <div><dt>응모</dt><dd>11/13 ~ 19 · 앱 ‘오늘’의 이벤트 카드</dd></div>
+                <div><dt>조건</dt><dd>11/13 ~ 19 중 서로 다른 3일 이상 기록 + 제작 동의 + 편집본 확인 참여</dd></div>
+                <div><dt>추첨</dt><dd>11/20 · 3분 · 앱과 이메일로 알려드려요</dd></div>
+                <div><dt>확인</dt><dd>편집본 11/25 ~ 26 · 최종 승인 11/27</dd></div>
+              </dl>
+              <details className="om-more">
+                <summary>참여 방법 · 책 형식 · 내 기록의 보호 자세히</summary>
+                <h3>시작은, 오늘의 한 장면이면 충분해요</h3>
+                <ol className="om-list">
+                  <li>온순간 ‘오늘’에서 글 한 줄이나 사진 한 장을 남겨 주세요.</li>
+                  <li>11월 19일까지 ‘오늘’의 이벤트 카드에서 제작 안내와 동의 내용을 확인하고 응모해 주세요.</li>
+                  <li>11월 13~19일 중 서로 다른 3일 이상 기록하고, 제작에 동의하며 편집본 확인에 참여할 수 있는 분 가운데 3분을 추첨합니다. 기록한 날은 한국 시각 기준이에요. 선정된 뒤에도 26일까지 기록을 이어갈 수 있고, 책에 담을 장면은 그중에서 직접 고릅니다.</li>
+                </ol>
+                <h3>책의 형식</h3>
+                <p>나를 알아보는 이야기와 당신에게 전하는 이야기, 두 이야기를 합쳐 48쪽 이상이면 양장본 한 권에 두 부로 담아요. 48쪽에 못 미치면 소책자 두 권으로 나누어 엮어요. 쪽수는 편집본에서 함께 보고, 장면을 더해 채울 수도 있어요.</p>
+                <h3>내 이야기의 마지막 결정은, 내가 합니다</h3>
+                <p>AI가 책 제작에 허락한 2주의 기록을 읽고 구성을 제안하며 편집합니다. 원문 인용에는 날짜를 담고, AI가 엮은 글은 편집 제안으로 구분해요. 책에 실을 기록을 고르고, 문장을 빼거나 고치고, 순서를 바꿀 수 있어요. 본인이 최종 승인한 원고만 인쇄하며, 승인 후 내용이 달라지면 다시 확인받습니다.</p>
+                <h3>내 기록은 내 곁에, 공개는 내 선택으로</h3>
+                <p>앱에 남긴 원래 기록은 책 제작 때문에 삭제되지 않아요. 완성된 책 파일도 참여자께 드립니다. 동의 없이 공개하거나 홍보에 사용하지 않아요. 편집용 작업 사본과 배송 정보의 이용 범위 · 보관기간 · 삭제 시점은 제작 안내에서 알려드립니다.</p>
+              </details>
+              <div className="cta-row"><a className="button primary" href={START("book-event")} data-app-link>오늘의 한 장면 남기기 <span>↗</span></a></div>
+              <p className="fine">이벤트 책은 추첨으로 만드는 시범 제작이에요. 일반 종이책 주문은 준비하고 있어요.</p>
+            </section>
+
+            {/* 8 FAQ */}
+            <section id="faq" className="section wrap om-faq">
+              <p className="eyebrow">마음 편히 시작하도록</p>
+              <h2>작은 궁금함에, 작은 답을.</h2>
+              <details><summary>지금은 무엇부터 할 수 있나요?</summary><p>나에게 한 장면을 남기거나, 일곱 여정 가운데 하나를 골라 이야기 선물 디지털본을 준비할 수 있어요. 둘 다 같은 온순간 계정으로 이어져요. 종이책 주문과 유료 요금제는 준비하고 있어요.</p></details>
+              <details><summary>매일 써야 하나요?</summary><p>아니요. 떠오른 날에 한 장면이면 충분해요. 글 한 줄이나 사진 한 장도 하루의 장면이에요.</p></details>
+              <details><summary>돈이 드나요?</summary><p>지금 기록과 이야기 선물 디지털본은 무료 시범이에요. 유료 요금제와 종이책 주문은 준비하고 있고, 확정 조건은 시작 전에 안내해요. 책 선물 이벤트도 결제나 친구 초대가 응모 조건이 아니에요.</p></details>
+              <details><summary>내가 쓴 기록은 누가 보나요?</summary><p>내 기록은 기본적으로 나만 봐요. 일부를 선물로 고를 때는 보낼 내용을 한 번 더 확인해요.</p></details>
+              <details><summary>초대받아 쓴 글은 누가 읽나요?</summary><p>선물을 준비하는 분이 모인 글을 함께 읽고 엮어요. 완성한 책은 받는 링크를 가진 분이 읽어요. 링크는 다시 전달될 수 있으니, 꼭 필요한 이야기만 담아 주세요.</p></details>
+              <details><summary>초대받은 사람도 가입해야 하나요?</summary><p>초대 링크로 바로 쓸 수 있어요. 쓴 글을 내 기록에도 간직하고 싶을 때만 로그인해요.</p></details>
+              <details><summary>사진이 꼭 있어야 하나요?</summary><p>아니요. 한 문장이면 충분해요. 사진과 더 전하고 싶은 마음은 원할 때 더해요.</p></details>
+              <details><summary>온순간을 소개하면 내 기록도 공개되나요?</summary><p>아래 소개 버튼은 온순간의 공개 소개 주소만 건네요. 내 기록이나 개인 초대 코드는 함께 보내지 않아요. 개인 이야기를 건네는 일은 앱에서 따로 선택해요.</p></details>
+            </section>
+
+            {/* 9 마무리 */}
+            <section className="hub-meaning om-closing">
+              <div className="wrap">
+                <p className="eyebrow">찬연한 너와 나의 이야기.</p>
+                <h2>오늘 떠오른 한 장면이면,<br />충분해요.</h2>
+                <div className="cta-row">
+                  <a className="button primary" href="#journeys">이야기 선물 준비하기 <span>↗</span></a>
+                  <a className="button" href={START("closing")} data-app-link>나에게 남기기</a>
+                </div>
+              </div>
+            </section>
+
+            <section className="section wrap om-share">
+              <h2>이런 시간이 생각나는 분께,<br />온순간을 건네주세요.</h2>
+              <p>잘 쓰거나 매일 쓰지 않아도 괜찮은 곳. 개인 기록 없이, 온순간 소개 주소만 전해요.</p>
+              <div className="cta-row">
+                <button type="button" className="button" data-launch-share hidden>소개 링크 공유하기 ↗</button>
+                <button type="button" className="button" data-launch-copy>소개 링크 복사</button>
+              </div>
+              <p className="fine" data-launch-status aria-live="polite" />
+              <p data-launch-fallback hidden><input readOnly value="https://onmoment.kr/?src=invite" aria-label="온순간 소개 주소" /></p>
+            </section>
+          </main>
+
+          <footer className="footer wrap om-footer">
+            <p>온순간, 가장 나답게.</p>
+            <nav aria-label="온순간 더 알아보기">
+              <a href="/story/">온순간의 이야기</a>
+              <a href="/journal/">온순간 저널</a>
+              <a href="/principles/">기록을 대하는 방식</a>
+              <a href="/value/">온순간 가치 동참</a>
+              <a href={`${APP}/plan`} data-app-link>가격 · 제작 안내</a>
+              <a href="/privacy/">개인정보 처리방침</a>
+              <a href="/terms/">이용약관</a>
+              <button type="button" className="om-link" data-om-feedback="stuck">의견 남기기</button>
+            </nav>
+            <p className="fine">지금은 누구나 시작할 수 있는 무료 시범 운영 중이에요. 이 페이지의 이야기와 이미지는 가상 예시예요. 유료 요금제와 종이책 주문은 준비하고 있으며, 확정 조건은 시작 전에 안내해요. © 2026 OnMoment</p>
+          </footer>
+        </div>
+      </div>
       <Script src="/landing/app-origin.js" strategy="afterInteractive" />
       <Script src="/landing/launch.js" strategy="afterInteractive" />
     </>

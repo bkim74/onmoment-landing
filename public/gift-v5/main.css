@@ -1,0 +1,83 @@
+/* 하나의 메인(2026-11-16) — 이야기 선물 시안 v5 위에 흡수한 구역(두 시선 한 쪽 · 제공 범위 · 나에게도 남는 기록 · 이벤트 · FAQ · 소개 공유)
+   본문 16~18px · 누를 곳 48px 이상 · 360/390px 에서 가로 넘침 없음. 색은 v5 토큰(--wine · --green · --paper · --ink · --muted · --line)만 쓴다. */
+[data-one-main] { font-size: 17px; }
+[data-one-main] .journey-card-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 40px 24px; }
+@container (max-width: 1050px) { [data-one-main] .journey-card-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@container (max-width: 760px) { [data-one-main] .journey-card-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@container (max-width: 560px) { [data-one-main] .journey-card-grid { grid-template-columns: 1fr; } }
+[data-one-main] .journey-card-body p, [data-one-main] .journey-card-body small { overflow-wrap: anywhere; }
+.om-card-more { display: inline-block; margin-top: 10px; font-size: 15px; color: var(--wine); }
+.om-note { margin-top: 22px; font-size: 16px; color: var(--muted); line-height: 1.7; }
+.om-note a, .om-more a, .om-scope a { color: var(--wine); text-decoration: underline; text-underline-offset: 3px; }
+.om-anchor { display: block; position: relative; top: -80px; height: 0; }
+
+.om-pages { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; }
+@container (max-width: 760px) { .om-pages { grid-template-columns: 1fr; } }
+.om-page { position: relative; padding: 34px 30px 52px; background: var(--sheet, #fffaf1); border: 1px solid var(--line); border-radius: 6px; font-family: var(--serif); line-height: 1.9; font-size: 17px; color: var(--ink); }
+.om-page h3 { font-size: 22px; margin: 6px 0 16px; }
+.om-page p + p { margin-top: 14px; }
+.om-page-by { font-family: var(--sans); font-size: 14px; color: var(--muted); }
+.om-page-self { background: #f4efe4; }
+.om-page-tag { position: absolute; left: 30px; bottom: 18px; font-family: var(--sans); font-size: 13px; color: var(--green); }
+
+.om-more { margin-top: 26px; border-top: 1px solid var(--line); padding-top: 6px; }
+.om-more > summary { min-height: 48px; display: flex; align-items: center; cursor: pointer; font-size: 17px; color: var(--ink); list-style: none; }
+.om-more > summary::before { content: "＋"; margin-right: 10px; color: var(--wine); }
+.om-more[open] > summary::before { content: "－"; }
+.om-more > summary::-webkit-details-marker { display: none; }
+.om-more h3 { font-size: 18px; margin: 18px 0 8px; }
+.om-more p, .om-more li { font-size: 16px; line-height: 1.75; color: var(--ink); }
+.om-flow, .om-list { display: grid; gap: 12px; margin: 10px 0 14px; padding-left: 0; list-style: none; counter-reset: om; }
+.om-flow li, .om-list li { counter-increment: om; display: grid; grid-template-columns: 34px 1fr; gap: 4px 10px; }
+.om-flow li::before, .om-list li::before { content: "0" counter(om); grid-row: span 2; color: var(--wine); font-size: 14px; padding-top: 3px; }
+.om-flow li strong { font-size: 15px; color: var(--muted); font-weight: 500; }
+
+.om-scope { display: grid; grid-template-columns: 1.4fr 1fr; gap: 28px; }
+@container (max-width: 760px) { .om-scope { grid-template-columns: 1fr; } }
+.om-scope > div { padding: 26px 26px 22px; border: 1px solid var(--line); border-radius: 6px; }
+.om-scope-now { background: #f1f4ec; }
+.om-scope h3 { font-size: 18px; margin-bottom: 12px; }
+.om-scope ul { display: grid; gap: 12px; padding: 0; list-style: none; }
+.om-scope li { font-size: 16px; line-height: 1.7; }
+.om-scope li strong { display: block; font-size: 16px; }
+.om-scope p { margin-top: 12px; font-size: 15px; color: var(--muted); }
+
+.om-my-story .steps { margin-bottom: 30px; }
+.om-my-story .cta-row, .om-event .cta-row, .om-closing .cta-row, .om-share .cta-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 18px; }
+.om-care { margin-top: 30px; padding: 24px 26px; background: #f4efe4; border-radius: 6px; }
+.om-care h3 { font-size: 17px; margin-bottom: 10px; }
+.om-care ul { display: grid; gap: 6px; padding-left: 18px; }
+.om-care li { font-size: 16px; line-height: 1.7; }
+.om-topics { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; padding: 0; list-style: none; margin: 8px 0 14px; }
+@container (max-width: 560px) { .om-topics { grid-template-columns: 1fr; } }
+.om-topics a { display: grid; gap: 2px; min-height: 48px; padding: 10px 14px; border: 1px solid var(--line); border-radius: 6px; text-decoration: none !important; color: var(--ink) !important; }
+.om-topics span { font-size: 15px; color: var(--muted); }
+
+.om-event .lead { max-width: 640px; margin-top: 14px; }
+.om-event-facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 28px; margin-top: 22px; }
+@container (max-width: 650px) { .om-event-facts { grid-template-columns: 1fr; } }
+.om-event-facts div { display: grid; grid-template-columns: 52px 1fr; gap: 10px; font-size: 16px; line-height: 1.6; }
+.om-event-facts dt { color: var(--wine); }
+
+.om-faq h2 { margin: 8px 0 18px; }
+.om-faq details { border-top: 1px solid var(--line); }
+.om-faq details:last-of-type { border-bottom: 1px solid var(--line); }
+.om-faq summary { min-height: 56px; display: flex; align-items: center; cursor: pointer; font-size: 17px; list-style: none; padding: 8px 0; }
+.om-faq summary::-webkit-details-marker { display: none; }
+.om-faq summary::after { content: "＋"; margin-left: auto; padding-left: 12px; color: var(--wine); }
+.om-faq details[open] summary::after { content: "－"; }
+.om-faq details p { padding: 0 0 18px; font-size: 16px; line-height: 1.75; color: var(--ink); max-width: 720px; }
+
+.om-closing .cta-row { justify-content: center; }
+.om-share p { font-size: 16px; color: var(--muted); margin-top: 10px; }
+.om-share input { width: 100%; max-width: 360px; min-height: 48px; padding: 0 12px; border: 1px solid var(--line); border-radius: 4px; font-size: 16px; }
+
+.om-footer nav { display: flex; flex-wrap: wrap; gap: 6px 18px; margin: 14px 0; }
+.om-footer nav a, .om-link { min-height: 44px; display: inline-flex; align-items: center; font-size: 15px; color: var(--ink); background: none; border: 0; padding: 0; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
+.om-footer .fine { font-size: 14px; color: var(--muted); line-height: 1.7; }
+[data-one-main] .cta-row .button { min-height: 52px; }
+/* 상황 글씨는 어르신도 읽게 14px */
+[data-one-main] .journey-card-body > p:first-child { font-size: 14px; line-height: 1.5; }
+[data-one-main] .journey-card-body small { font-size: 14px; line-height: 1.5; }
+[data-one-main] .journey-card-body .card-desire { font-size: 16px; }
+[data-one-main] .fine, [data-one-main] .eyebrow { font-size: 14px; }
