@@ -3,7 +3,7 @@ import Script from "next/script";
 import { MAIN_JOURNEYS, RECORD_TOPICS } from "@/lib/landing/oneMain";
 
 // 하나의 메인(2026-11-16 전달서) — 이야기 선물을 앞에, 예전 메인의 개인 기록 · 이벤트 · 권리 안내를 같은 브랜드 안에 흡수한다.
-//   순서: 선물의 모습 → 이야기 한 쪽 → 일곱 여정 → 만드는 방법 → 지금 제공 범위 → 나에게도 남는 기록 → 이벤트 · FAQ → 마무리.
+//   순서: 선물의 모습 → 각자의 자리에서 할 일(가장 먼저) → 이야기 한 쪽 → 일곱 여정 → 지금 제공 범위 → 나에게도 남는 기록 → 이벤트 · FAQ → 마무리.
 //   예전 앵커(#journeys · #book-event · #first-page · #first-experience · #gifts)를 그대로 둔다 — 외부 링크 · 북마크 보존. 예전 메인 전체는 /record/.
 //   스타일은 이야기 선물 시안 v5(public/gift-v5) + 흡수한 구역용 main.css.
 const APP = process.env.NEXT_PUBLIC_APP_ORIGIN ?? "https://app.onmoment.kr";
@@ -59,7 +59,37 @@ export default function Home() {
               </figure>
             </section>
 
-            {/* 2 이야기 한 쪽 — 같은 장면, 두 시선 */}
+            {/* 2 각자의 자리에서 할 일 — 가장 먼저(범님 11-16: 효능감은 '내가 무엇을 하면 되는지'에서 시작한다) */}
+            <section id="how" className="section wrap om-roles">
+              <div className="section-head">
+                <div><p className="eyebrow">각자의 자리에서</p><h2>나는 무엇을 하면 되나요?</h2></div>
+                <p>준비하는 분도, 함께 쓰는 분도, 받는 분도.<br />할 일은 한 장면이면 충분해요.</p>
+              </div>
+              <div className="om-role-grid">
+                <article className="om-role" data-role="prepare">
+                  <h3>선물을 준비하는 분</h3>
+                  <ol><li>여정을 고르고, 첫 장면 하나를 써요.</li><li>초대 링크를 가족이나 함께한 분들께 보내요.</li><li>모인 이야기를 미리 보고, 받는 분께 건네요.</li></ol>
+                  <a className="button primary" href="#journeys">여정 고르기 <span>↓</span></a>
+                </article>
+                <article className="om-role" data-role="write">
+                  <h3>초대받아 쓰는 분</h3>
+                  <ol><li>받은 링크를 열어요. 가입하지 않아도 돼요.</li><li>떠오르는 한 장면을 한 문장이라도 써요.</li><li>보내면 준비하는 분께 전해져요.</li></ol>
+                  <p className="om-role-note">받은 링크가 있다면, 그 링크를 열면 바로 쓸 수 있어요.</p>
+                </article>
+                <article className="om-role" data-role="receive">
+                  <h3>선물을 받는 분</h3>
+                  <ol><li>받은 링크를 열어 천천히 읽어요.</li><li>답장이나 다른 할 일은 없어요. 읽는 것으로 충분해요.</li></ol>
+                </article>
+                <article className="om-role" data-role="self">
+                  <h3>나에게 남기는 분</h3>
+                  <ol><li>오늘 떠오른 한 장면을 한 줄로 남겨요.</li><li>내 기록에서 언제든 다시 읽어요. 기본은 나만 봐요.</li></ol>
+                  <a className="button" href={START("roles")} data-app-link>나에게 남기기 <span>↗</span></a>
+                </article>
+              </div>
+              <div className="how-entry"><p><strong>더 자세히 알고 싶다면</strong>준비하는 분 · 함께 쓰는 분 · 받는 분의 화면을 한눈에 봐요. 독서모임이라면 <a href="/gift/together/reading/">독서모임에서 함께 쓰기</a>를 보세요.</p><a className="button" href="/gift/how/">역할별로 자세히 보기<span aria-hidden="true">→</span></a></div>
+            </section>
+
+            {/* 3 이야기 한 쪽 — 같은 장면, 두 시선 */}
             <section id="first-page" className="section wrap">
               <div className="section-head">
                 <div><p className="eyebrow">이야기 한 쪽</p><h2>같은 장면이,<br />두 가지 한 쪽이 돼요.</h2></div>
@@ -117,20 +147,6 @@ export default function Home() {
               <p className="om-note">독서모임은 ‘우리의 시간을 남기기’ 안에서 시작해요. <a className="om-reading-link" href="/gift/together/reading/">독서모임에서 함께 쓰기 →</a></p>
             </section>
 
-            {/* 4 만드는 방법 */}
-            <section id="how" className="section wrap">
-              <div className="section-head">
-                <div><p className="eyebrow">한 장면에서, 한 권까지</p><h2>마음은 각자의 말로,<br />준비는 한곳에서.</h2></div>
-                <p>함께 쓸 때도, 혼자 쓸 때도.<br />내가 확인한 이야기로 선물을 완성해요.</p>
-              </div>
-              <div className="steps">
-                <article><span className="number">01</span><h3>기억나는 장면 하나</h3><p>한 문장으로 시작해요. 막힐 때만 물음을 꺼내세요.</p></article>
-                <article><span className="number">02</span><h3>내 말이 담긴 한 쪽</h3><p>글·사진·이름을 직접 확인해요. 함께 쓸 때는 모인 이야기를 한곳에서 살펴봐요.</p></article>
-                <article><span className="number">03</span><h3>확인한 대로 건네기</h3><p>책 전체를 미리 보고 완성하면, 받는 분께 드릴 링크가 생겨요.</p></article>
-              </div>
-              <div className="how-entry"><p><strong>누가, 무엇을 하나요?</strong>준비하는 분 · 함께 쓰는 사람 · 받는 분의 화면을 한눈에 봐요.</p><a className="button" href="/gift/how/">역할별로 자세히 보기<span aria-hidden="true">→</span></a></div>
-            </section>
-
             {/* 5 지금 제공 범위 — 기능별 상태를 한곳에서 */}
             <section id="offering" className="section wrap">
               <div className="section-head"><div><p className="eyebrow">지금 제공 범위</p><h2>지금 쓸 수 있는 것과,<br />준비하고 있는 것.</h2></div></div>
@@ -147,7 +163,7 @@ export default function Home() {
                   <h3>준비하고 있어요</h3>
                   <ul>
                     <li>종이책 주문</li>
-                    <li>유료 요금제 — <a href={`${APP}/plan`} data-app-link>가격 · 제작 안내</a></li>
+                    <li>유료 동참 — <a href="/value/#value-levels">가치 동참 · 가격 안내</a></li>
                     <li>각자의 책 교환 · 기록 모임</li>
                   </ul>
                   <p>확정 조건은 시작 전에 안내해요.</p>
@@ -265,8 +281,7 @@ export default function Home() {
               <a href="/story/">온순간의 이야기</a>
               <a href="/journal/">온순간 저널</a>
               <a href="/principles/">기록을 대하는 방식</a>
-              <a href="/value/">온순간 가치 동참</a>
-              <a href={`${APP}/plan`} data-app-link>가격 · 제작 안내</a>
+              <a href="/value/">온순간 가치 동참 · 가격 안내</a>
               <a href="/privacy/">개인정보 처리방침</a>
               <a href="/terms/">이용약관</a>
               <button type="button" className="om-link" data-om-feedback="stuck">의견 남기기</button>

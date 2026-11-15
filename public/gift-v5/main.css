@@ -6,6 +6,17 @@
 @container (max-width: 760px) { [data-one-main] .journey-card-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @container (max-width: 560px) { [data-one-main] .journey-card-grid { grid-template-columns: 1fr; } }
 [data-one-main] .journey-card-body p, [data-one-main] .journey-card-body small { overflow-wrap: anywhere; }
+/* 일곱 여정 카드(11-16 범님) — 같은 줄은 같은 높이 · 아래 마침선과 '살펴보기'를 한 높이에 · 일곱째는 남은 두 칸을 채워 줄을 완성 */
+[data-one-main] .journey-card { display: flex; flex-direction: column; }
+[data-one-main] .journey-card-body { flex: 1; display: flex; flex-direction: column; }
+[data-one-main] .journey-card-body .om-card-more { margin-top: auto; padding-top: 12px; }
+[data-one-main] .journey-card-body h3 { font-size: 24px; }
+[data-one-main] .journey-card:last-child { grid-column: span 2; display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: stretch; }
+[data-one-main] .journey-card:last-child > figure { height: 100%; }
+[data-one-main] .journey-card:last-child > figure img { height: 100%; aspect-ratio: auto; }
+[data-one-main] .journey-card:last-child .journey-card-body { border-bottom: 1px solid var(--line); padding-top: 20px; }
+@container (max-width: 1050px) { [data-one-main] .journey-card:last-child { grid-column: 1 / -1; } }
+@container (max-width: 560px) { [data-one-main] .journey-card:last-child { grid-column: auto; display: flex; } [data-one-main] .journey-card:last-child > figure img { aspect-ratio: 1.55; height: auto; } }
 .om-card-more { display: inline-block; margin-top: 10px; font-size: 15px; color: var(--wine); }
 .om-note { margin-top: 22px; font-size: 16px; color: var(--muted); line-height: 1.7; }
 .om-note a, .om-more a, .om-scope a { color: var(--wine); text-decoration: underline; text-underline-offset: 3px; }
@@ -89,3 +100,16 @@
 [data-reading-page] .eyebrow a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
 [data-reading-page] .cta-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 18px; }
 [data-one-main] .om-reading-link { display: inline-flex; align-items: center; min-height: 48px; color: var(--wine); text-decoration: underline; text-underline-offset: 3px; }
+/* 각자의 자리에서 할 일(11-16) — 첫 화면 바로 아래 */
+.om-role-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; }
+@container (max-width: 1050px) { .om-role-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@container (max-width: 560px) { .om-role-grid { grid-template-columns: 1fr; } }
+.om-role { display: flex; flex-direction: column; gap: 12px; padding: 24px 22px; border: 1px solid var(--line); border-radius: 6px; background: var(--sheet, #fffaf1); }
+.om-role h3 { font-size: 20px; }
+.om-role ol { display: grid; gap: 8px; padding-left: 20px; margin: 0; }
+.om-role li { font-size: 16px; line-height: 1.65; }
+.om-role .button { align-self: flex-start; margin-top: auto; min-height: 52px; }
+.om-role-note { font-size: 15px; color: var(--muted); line-height: 1.6; margin-top: auto; }
+.om-roles .how-entry a:not(.button) { color: var(--wine); text-decoration: underline; text-underline-offset: 3px; }
+.om-role ol { list-style: decimal; }
+.om-role li::marker { color: var(--wine); font-size: 15px; }
