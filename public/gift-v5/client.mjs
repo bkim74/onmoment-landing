@@ -13,7 +13,7 @@ if (root) {
 
   const q = new URLSearchParams(location.search);
   const choice = {};
-  if (page !== "hub") {
+  if (page !== "hub" && page !== "how") {
     const j = getJourney(page);
     const o = q.get("o");
     if (o && j.moments.some((m) => m.id === o)) choice.moment = o;
