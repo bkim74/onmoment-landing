@@ -30,7 +30,6 @@ const SAY = [
   ["네. 개인 기록으로 간직하고 다시 읽는 흐름을 선택할 수 있어요. 책 제작은 원할 때 별도로 결정해요.", "네. 온순간 기록에 날마다 한 장면씩 남기고 다시 읽을 수 있어요. 나에게 건네는 책은 원할 때 만들어요."],
   ["시안에서 직접 간직한 이야기는 골라 다시 준비할 수 있어요. 기존 운영 계정의 전체 기록 검색·가져오기는 연결 전이에요.", "지난 기록을 골라 책에 넣는 기능은 준비하고 있어요. 지금은 다시 보고 싶은 장면을 새로 써서 담아요."],
   ["그 이야기는, 내 삶의 한 장면이기도 해요.<br>원하면 내 기록에도 따로 간직하세요.", "그 이야기는, 내 삶의 한 장면이기도 해요.<br>원하면 온순간에서 나만의 기록도 이어 갈 수 있어요."],
-  ["원하면 내 기록에도 간직하세요.<br>다시 읽고 떠오른 생각을 더하고,<br>다른 소중한 날에 꺼낼 이야기를 쌓아가요.", "원하면 온순간에서 나만의 기록도 이어 가요.<br>오늘의 한 장면을 남기고,<br>다시 읽으며 떠오른 생각을 더해요."],
   ["지금 어디까지 체험할 수 있나요?", "지금 무엇까지 할 수 있나요?"],
   ["내 글·사진 작성과 한 쪽 확인, 준비·책 미리보기 흐름을 체험할 수 있어요. 실제 공동 참여·AI·결제·인쇄·배송은 연결 전입니다. 가상 자료로 사용해 주세요.", "준비 · 초대 링크 · 한 장면과 사진 한 장 · 책으로 미리 보기 · 받는 링크까지 실제로 쓸 수 있어요. 지금은 디지털본을 무료로 시범 운영하고, 종이책은 준비하고 있어요."],
 ];
@@ -38,6 +37,9 @@ const SAY = [
 const DECISION_ASIDE = /<aside><p class="eyebrow">제작 전, 세 가지를 함께 확인해요<\/p>[\s\S]*?<\/aside>/;
 const NOW_ASIDE = `<aside><p class="eyebrow">지금 건네는 모습</p><ol><li><span>01</span><div><strong>링크로 읽는 디지털본</strong><p>표지 · 쓴 사람 · 원문 그대로의 장면</p></div></li><li><span>02</span><div><strong>무료 시범 운영</strong><p>준비부터 건네기까지 비용이 들지 않아요</p></div></li><li><span>03</span><div><strong>받는 분은 링크로 바로</strong><p>가입 · 답장 · 반응을 요구하지 않아요</p></div></li></ol><p class="fine">종이책은 준비하고 있어요.</p></aside>`;
 const SCOPE = /<section class="wrap scope-note scope-bottom">[\s\S]*?<\/section>/;
+// '선물 뒤에도, 내 삶에 남는 한 장면'(허브) — 실제로 되는 것만: 간직하기 · 엮어보기 · 발표 준비 안내(11-15 범님)
+const CONTINUITY = /<section class="section wrap continuity-section">[\s\S]*?<\/section>/;
+const NOW_CONTINUITY = `<section class="section wrap continuity-section"><p class="eyebrow">선물 뒤에도, 내 삶에 남는 한 장면</p><h2>이번 선물의 한 장면이,<br>내 이름의 책으로 이어질 수도 있어요.</h2><p class="lead">내가 쓴 이야기를 간직하고, 다른 날의 기록과 함께 모아<br>나만의 이야기로 엮어가세요.</p><ol class="continuity-steps"><li><strong>간직하기</strong><span>선물에 건넨 장면을 내 기록에도 사본으로 남겨요. 선물에 건넨 글은 그대로예요.</span></li><li><strong>엮어보기</strong><span>내 기록에서 원하는 글을 골라 제목 · 순서 · 이어지는 말을 직접 다듬고, 원고 파일로 내려받아요.</span></li><li><strong>발표 준비하기</strong><span>원고와 출처 · AI 활용 정보를 정리해 두고, 출판이나 저작권 등록은 공식 기관 안내를 보며 직접 진행해요. 등록 수수료는 기관에 따로 들 수 있어요.</span></li></ol><a class="text-button" href="/gift/self/">나에게 건네는 여정 살펴보기 →</a></section>`;
 const NOW_SCOPE = `<section class="wrap scope-note scope-bottom"><strong>디지털본 무료 시범</strong><p>준비 · 초대 링크 · 한 장면과 사진 한 장 · 책으로 미리 보기 · 받는 링크까지 실제로 쓸 수 있어요. 이 페이지의 예시 장면은 가상이에요. 종이책은 준비하고 있어요.</p></section>`;
 
 /** 앱 주소 — 운영은 app.onmoment.kr. 시범 화면(*.vercel.app)에서만 ?app= 으로 바꾼다(app-origin.js 와 같은 규칙) */
@@ -61,7 +63,7 @@ export function startHref(app, j, o, t) {
 export function realize(html, { app = "https://app.onmoment.kr", page = "hub" } = {}) {
   let s = html;
   for (const [a, b] of SAY) s = s.split(a).join(b);
-  s = s.replace(DECISION_ASIDE, NOW_ASIDE).replace(SCOPE, NOW_SCOPE);
+  s = s.replace(DECISION_ASIDE, NOW_ASIDE).replace(SCOPE, NOW_SCOPE).replace(CONTINUITY, NOW_CONTINUITY);
   // 사진: 시안의 assets/journeys/journey-*.webp = 랜딩의 /assets/journey-*.webp (같은 파일)
   s = s.replace(/src="[^"]*?assets\/(?:journeys\/)?([a-z0-9-]+\.(?:webp|svg|png|jpg))"/g, 'src="/assets/$1"');
   // 주소

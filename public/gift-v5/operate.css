@@ -1,0 +1,8 @@
+/* 운영 범위에 맞춘 덧붙임 — 시안 v5 원본(styles.css · campaign.css)은 그대로 두고 여기에만 더한다 */
+/* 온순간 운영 — '선물 뒤에도' 영역의 세 걸음(실제로 되는 것만, 11-15) */
+.continuity-steps{list-style:none;margin:28px auto 22px;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:18px;max-width:980px;text-align:left}
+.continuity-steps li{border-top:1px solid var(--line);padding-top:16px;display:flex;flex-direction:column;gap:6px}
+.continuity-steps strong{font-family:var(--serif);font-weight:400;font-size:21px}
+.continuity-steps span{font-size:14px;line-height:1.8;color:var(--muted)}
+@container (max-width:760px){.continuity-steps{grid-template-columns:1fr}}
+@media (max-width:760px){.continuity-steps{grid-template-columns:1fr}}

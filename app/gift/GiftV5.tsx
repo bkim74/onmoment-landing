@@ -8,6 +8,7 @@ export default function GiftV5({ page }: { page: string }) {
     <>
       <link rel="stylesheet" href="/gift-v5/styles.css" precedence="default" />
       <link rel="stylesheet" href="/gift-v5/campaign.css" precedence="default" />
+      <link rel="stylesheet" href="/gift-v5/operate.css" precedence="default" />
       <a className="skip" href="#content">본문으로 바로가기</a>
       <div id="stage">
         <div id="app" data-gift-root data-page={page} dangerouslySetInnerHTML={{ __html: data.header + body + data.footer }} />
