@@ -93,6 +93,13 @@ export default function PrivacyPage() {
               <p>초대 베타 안내를 보내기 위해 신청한 이메일 주소를 저장합니다. 다른 목적으로 쓰지 않습니다.</p>
             </div>
             <div>
+              <p className="mb-1 font-medium text-coffee-deep">함께 만드는 이야기 선물</p>
+              <p>
+                준비하는 분이 만든 이야기 선물에, 초대 링크로 들어온 가족이 남긴 이름과 글을 저장합니다. 글은 준비하는 분의 키로 암호화해 보관하며,
+                준비하는 분과 완성된 링크를 받은 분만 읽을 수 있습니다. 글을 쓴 분은 완성 전까지 같은 기기에서 고칠 수 있고, 준비하는 분이 계정을 삭제하면 함께 삭제됩니다.
+              </p>
+            </div>
+            <div>
               <p className="mb-1 font-medium text-coffee-deep">사용자가 남긴 기록</p>
               <p>
                 하루의 문장, 조각(텍스트·음성 변환 텍스트), 감정 위치, AI 비춤 결과,
