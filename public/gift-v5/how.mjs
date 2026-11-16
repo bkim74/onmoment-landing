@@ -5,7 +5,7 @@
 
 const phone = (label, inner) => `<figure class="how-phone"><div class="how-screen">${inner}</div><figcaption>${label}</figcaption></figure>`;
 
-const SCREEN_START = `<p class="hs-brand">✳︎ 온순간</p><p class="hs-meta">이야기 선물 준비 · 부모님께 감사하기 · 1 / 3</p><p class="hs-title">먼저, 그 장면 하나를<br>써 보세요.</p><p class="hs-sub">로그인은 준비 공간을 만들 때만 해요.</p><div class="hs-chips"><span class="on">칠순</span><span>환갑</span><span>팔순</span></div><p class="hs-label">그분과의 한 장면</p><div class="hs-field">아버지는 별말 없이 늘 과일 한 접시를 내어 주셨다.</div><p class="hs-link">막힐 때, 물음을 따라 쓰기</p><div class="hs-btn">한 쪽으로 보기</div>`;
+const SCREEN_START = `<p class="hs-brand">✳︎ 온순간</p><p class="hs-meta">이야기 선물 준비 · 부모님께 감사하기 · 1 / 3</p><p class="hs-title">먼저, 그 장면 하나를<br>써 보세요.</p><p class="hs-sub">로그인은 준비 공간을 만들 때만 해요.</p><div class="hs-chips"><span class="on">칠순</span><span>환갑</span><span>팔순</span></div><p class="hs-label">소중한 분과의 한 장면</p><div class="hs-field">아버지는 별말 없이 늘 과일 한 접시를 내어 주셨다.</div><p class="hs-link">막힐 때, 물음을 따라 쓰기</p><div class="hs-btn">한 쪽으로 보기</div>`;
 
 const SCREEN_DASH = `<p class="hs-meta">← 준비 중인 선물</p><p class="hs-title">김영수님께</p><p class="hs-meta">칠순 · 12월 15일 · 원고 마감 12월 12일</p><div class="hs-card"><p class="hs-card-t">함께 쓸 사람들에게 건넬 링크</p><div class="hs-quote">김영수님의 칠순에 가족이 기억하는 장면을 모아 한 권으로 드리려 해요. 잘 쓰지 않아도 돼요.<br><u>app.onmoment.kr/w/…</u></div><div class="hs-btn ghost">글 복사하기</div></div><p class="hs-label">모인 장면 3</p><div class="hs-scene"><small>큰딸 민지 · 학창 시절</small>아버지는 별말 없이 늘 과일 한 접시를…</div><div class="hs-btn">이대로 완성하기</div>`;
 
@@ -65,7 +65,7 @@ export function howHTML() {
     <p class="how-intro">가족 · 동료 · 친구 누구나요. 단톡방의 링크를 누르면 바로 쓰는 화면이 열려요.</p>
     <ol class="how-steps">
       ${step("1", "링크를 열어요", "누가 무엇을 준비하는지, 이 글을 누가 읽는지 먼저 보여요.")}
-      ${step("2", "한두 문장이면 충분해요", "막히면 '그때 그분이 한 말' 같은 물음을 따라 써요. 사진 한 장도 더할 수 있어요. 위치 정보는 지우고 담아요.")}
+      ${step("2", "한두 문장이면 충분해요", "막히면 '그때 소중한 분이 한 말' 같은 물음을 따라 써요. 사진 한 장도 더할 수 있어요. 위치 정보는 지우고 담아요.")}
       ${step("3", "책에 담길 모습을 보고 건네요", "쓴 그대로 담겨요. 완성 전까지는 같은 기기에서 다시 고칠 수 있어요.")}
       ${step("4", "원하면 내 기록에도 간직해요", "선물에 건넨 글은 그대로 두고, 내 기록에 사본을 남겨요. 나만 봐요.")}
     </ol>
@@ -109,7 +109,7 @@ export function howHTML() {
   <details><summary>쓴 글을 고칠 수 있나요?</summary><p>완성 전까지는 쓴 사람이 같은 기기에서 다시 고칠 수 있어요. 준비하는 분은 장면을 이번 책에서 빼거나 다시 넣을 수 있어요. 완성하면 글은 그대로 고정돼요.</p></details>
   <details><summary>누가 읽을 수 있나요?</summary><p>쓰는 화면에서 이 글을 누가 읽는지 먼저 알려 드려요. 완성된 책은 받는 링크를 가진 사람만 열 수 있고, 글은 암호화해 보관해요.</p></details>
   <details><summary>날짜가 아직 정해지지 않았어요.</summary><p>날짜를 비워 두고 시작할 수 있어요. 원고는 3주 동안 넉넉히 받아요.</p></details>
-  <details><summary>혼자서도 만들 수 있나요?</summary><p>네. '우리 둘의 마음 전하기'와 '나에게 건네기'는 혼자 완성해도 한 권이 돼요.</p></details>
+  <details><summary>혼자서도 만들 수 있나요?</summary><p>네. '부부·연인에게 마음 전하기'와 '나에게 건네기'는 혼자 완성해도 한 권이 돼요.</p></details>
 </section>
 
 <section class="wrap how-closing">

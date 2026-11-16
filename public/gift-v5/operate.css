@@ -85,3 +85,8 @@
 .how-entry a{white-space:nowrap}
 @container (max-width:950px){.how-role{grid-template-columns:1fr;gap:40px}.how-role.flip .how-copy{order:0}.how-order-steps{grid-template-columns:1fr 1fr}.how-timeline ol{grid-template-columns:1fr 1fr 1fr;row-gap:20px}.how-timeline li:nth-child(4){border-left:0;padding-left:0}}
 @container (max-width:650px){.how-hero{padding-block:44px 28px}.how-timeline ol{grid-template-columns:1fr;row-gap:14px}.how-timeline li,.how-timeline li+li,.how-timeline li:nth-child(4){padding:0 0 0 16px;border-left:2px solid var(--line)}.how-shots{gap:12px}.how-phone{width:auto;flex:1 1 0}.how-shots .how-phone:nth-child(2){margin-top:32px}.how-screen{border-width:6px;border-radius:22px;padding:16px 11px;min-height:360px;font-size:10px}.hs-title{font-size:15.5px}.hs-cover{font-size:19px}.how-shots.one .how-phone{width:240px;flex:0 1 240px}.how-order-steps,.how-price{grid-template-columns:1fr}.how-entry{padding:18px}}
+/* 독서모임 입구(11-16) — 우리의 시간을 남기기 상세 안 */
+.reading-entry{margin-top:36px;margin-bottom:12px;padding:26px 26px 24px;border:1px solid var(--line);border-radius:6px;background:#f1f4ec;display:grid;gap:10px}
+.reading-entry h2{font-size:24px}
+.reading-entry p{font-size:16px;line-height:1.7;max-width:640px}
+.reading-entry .button{justify-self:start;min-height:52px}

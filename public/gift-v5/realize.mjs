@@ -63,10 +63,14 @@ export function startHref(app, j, o, t) {
 }
 
 /** 시안 HTML → 운영 HTML */
+const READING_ENTRY = `<section class="wrap reading-entry" data-reading-entry><p class="eyebrow">모임 · 독서모임 · 여행</p><h2>독서모임에서 함께 쓰기</h2><p>같은 책을 읽고, 서로 다른 삶의 이야기를 만나요. 책을 읽으며 떠오른 내 경험을 남기고, 나누고 싶은 만큼만 모임에 전해요.</p><a class="button primary" href="/gift/together/reading/">독서모임에서 함께 쓰기 <span aria-hidden="true">→</span></a></section>`;
 export function realize(html, { app = "https://app.onmoment.kr", page = "hub" } = {}) {
   let s = html;
   for (const [a, b] of SAY) s = s.split(a).join(b);
   s = s.replace(DECISION_ASIDE, NOW_ASIDE).replace(SCOPE, NOW_SCOPE).replace(CONTINUITY, NOW_CONTINUITY);
+  // 독서모임 입구(11-16) — '우리의 시간을 남기기' 안에서만. 메인에 여덟째 카드 · 별도 메뉴는 두지 않는다
+  // 11-16 지시서 D3: 이번 배포에서 독서모임 입구를 뺀다(READING_ENTRY · /gift/together/reading/ 소스는 보존). 다시 켜려면 아래 false 를 지운다
+  if (false && page === "together") s = s.replace('<section class="occasion-panel wrap" id="journey-occasion">', `${READING_ENTRY}<section class="occasion-panel wrap" id="journey-occasion">`);
   if (page === "hub") s = s.replace(/(<section class="section wrap">(?:(?!<\/section>)[\s\S])*?한 장면에서, 한 권까지[\s\S]*?)(<\/section>)/, `$1${HOW_ENTRY}$2`);
   else s = s.replace(/(<section class="section wrap campaign-process">[\s\S]*?)(<\/section>)/, `$1${HOW_ENTRY}$2`);
   // 사진: 시안의 assets/journeys/journey-*.webp = 랜딩의 /assets/journey-*.webp (같은 파일)
@@ -79,5 +83,5 @@ export function realize(html, { app = "https://app.onmoment.kr", page = "hub" } 
   return s;
 }
 
-export const header = () => `<header class="site-header wrap"><a class="brand" href="/gift/"><span class="brand-mark" aria-hidden="true">✳︎</span><span>온순간</span><small>ONMOMENT</small></a><nav class="header-links" aria-label="서비스 안내"><a href="/gift/#journeys">일곱 여정</a><a href="/gift/how/">만드는 방법</a><a class="active" href="/gift/#journeys">나의 소중한 날 찾기 ↗</a></nav></header>`;
+export const header = () => `<header class="site-header wrap"><a class="brand" href="/"><span class="brand-mark" aria-hidden="true">✳︎</span><span>온순간</span><small>ONMOMENT</small></a><nav class="header-links" aria-label="서비스 안내"><a href="/#journeys">일곱 여정</a><a href="/gift/how/">만드는 방법</a><a class="active" href="/#journeys">나의 소중한 날 찾기 ↗</a></nav></header>`;
 export const footer = () => `<footer class="footer wrap"><p>온순간, 가장 나답게.</p><p>디지털본 무료 시범 · 예시 장면은 가상이에요 · <a href="/privacy/">개인정보 처리방침</a> · <a href="/terms/">이용약관</a> · <a href="/">온순간 처음으로</a></p></footer>`;
