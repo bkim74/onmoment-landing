@@ -21,6 +21,10 @@ export const metadata: Metadata = {
 export default function RecordGuide() {
   return (
     <>
+      {/* 여정은 하나(11-16) — 이 페이지는 예전 안내를 보존한 것. 여정 이름은 메인의 일곱 여정이 정본 */}
+      <p data-journey-now style={{ margin: 0, padding: "14px max(16px, env(safe-area-inset-left, 0px))", background: "#f1f4ec", color: "#2f2a24", fontSize: 16, lineHeight: 1.6, textAlign: "center" }}>
+        여정은 이제 <strong>일곱 이야기 여정</strong> 하나로 이어져요. 나에게 남길 때도, 건넬 때도 같은 여정이에요. <a href="/#journeys" style={{ color: "#6f2f2a", textDecoration: "underline", textUnderlineOffset: 3 }}>일곱 여정 보기 →</a>
+      </p>
       <div className="home" dangerouslySetInnerHTML={{ __html: homeHtml(APP) }} />
       <Script src="/landing/v4.js" strategy="afterInteractive" />
       <Script src="/landing/app-origin.js" strategy="afterInteractive" />

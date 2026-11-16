@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Script from "next/script";
-import { MAIN_JOURNEYS, RECORD_TOPICS } from "@/lib/landing/oneMain";
+import { MAIN_JOURNEYS, SELF_SIDE } from "@/lib/landing/oneMain";
 
 // 하나의 메인(2026-11-16 전달서) — 이야기 선물을 앞에, 예전 메인의 개인 기록 · 이벤트 · 권리 안내를 같은 브랜드 안에 흡수한다.
 //   순서: 선물의 모습 → 각자의 자리에서 할 일(가장 먼저) → 이야기 한 쪽 → 일곱 여정 → 지금 제공 범위 → 나에게도 남는 기록 → 이벤트 · FAQ → 마무리.
@@ -199,9 +199,10 @@ export default function Home() {
                 </ul>
               </div>
               <details className="om-more">
-                <summary>개인 기록의 주제 더 살펴보기</summary>
+                <summary>여정마다, 나에게 남기기</summary>
+                <p>일곱 여정은 소중한 분께 건넬 때도, 나에게 남길 때도 같아요.</p>
                 <ul className="om-topics">
-                  {RECORD_TOPICS.map((t) => <li key={t.key}><a href={`/journeys/${t.key}/`}><strong>{t.name}</strong><span>{t.line}</span></a></li>)}
+                  {SELF_SIDE.map((t) => { const j = MAIN_JOURNEYS.find((m) => m.key === t.key)!; return <li key={t.key}><a href={t.href}><strong>{j.name}</strong><span>{t.line}</span></a></li>; })}
                 </ul>
                 <p><a href="/record/">나에게 남기는 기록, 더 자세히 →</a></p>
               </details>
