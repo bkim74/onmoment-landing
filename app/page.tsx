@@ -11,10 +11,10 @@ const RECORDS = `${APP}/?tab=history`; // 앱이 지원하는 주소(기록 탭 
 const START = (src: string) => `${APP}/start?src=${src}`;
 
 export const metadata: Metadata = {
-  title: "온순간 — 함께한 날들을 모아, 소중한 분에게만 줄 수 있는 한 권",
+  title: "온순간 — 함께한 날들을 모아, 소중한 분에게만 드릴 수 있는 한 권",
   description: "내 이야기를 남기고, 원하는 만큼 선물하는 온순간. 함께한 장면에 그때의 마음을 더해, 오래 간직할 이야기 선물을 준비해보세요.",
   openGraph: {
-    title: "함께한 날들을 모아, 소중한 분에게만 줄 수 있는 한 권 — 온순간",
+    title: "함께한 날들을 모아, 소중한 분에게만 드릴 수 있는 한 권 — 온순간",
     description: "내 이야기를 남기고, 원하는 만큼 선물하는 온순간.",
     images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "온순간" }],
   },
@@ -44,7 +44,7 @@ export default function Home() {
             <section className="hero wrap journey-hub">
               <div>
                 <p className="eyebrow">내 이야기를 남기고, 원하는 만큼 선물하는 온순간</p>
-                <h1>함께한 날들을 모아,<br />소중한 분에게만 줄 수 있는 한 권.</h1>
+                <h1>함께한 날들을 모아,<br />소중한 분에게만 드릴 수 있는 한 권.</h1>
                 <p className="lead">함께한 장면에 그때의 마음을 더해,<br />오래 간직할 이야기 선물을 준비해보세요.</p>
                 <div className="cta-row">
                   <a className="button primary" href="#journeys">이야기 선물 준비하기 <span>↗</span></a>
@@ -143,9 +143,9 @@ export default function Home() {
                     <div className="journey-card-body">
                       <p>{j.moments}</p>
                       <h3>{j.name}<span aria-hidden="true">↗</span></h3>
-                      <p className="card-desire">{j.episode}</p>
+                      <p className="card-desire">“{j.episode.replace(/^“|”$/g, "")}”</p>
                       <small>{j.who}</small>
-                      <span className="om-card-more">살펴보기 →</span>
+                      <span className="om-card-more">이 여정으로 한 권 만들기 →</span>
                     </div>
                   </a>
                 ))}
