@@ -89,44 +89,84 @@ export default function Home() {
               <div className="how-entry"><p><strong>더 자세히 알고 싶다면</strong>준비하는 분 · 함께 쓰는 분 · 받는 분의 화면을 한눈에 봐요. 독서모임이라면 <a href="/gift/together/reading/">독서모임에서 함께 쓰기</a>를 보세요.</p><a className="button" href="/gift/how/">역할별로 자세히 보기<span aria-hidden="true">→</span></a></div>
             </section>
 
-            {/* 3 완성될 한 권 펼쳐 보기 — 사고 싶은 마음은 '받게 될 물건'에서 생긴다. 앱의 엮은 책(클래식)과 같은 모습 · 가상 예시 */}
-            <section id="book" className="section wrap om-book-sec">
+            {/* 3 완성될 한 권 — 온순간 편집 엔진이 실제로 엮은 결과(11-16 실측 · 가상 가족 · 칠순). 원문은 그대로, 편집 글은 '편집 도움'으로 구분 */}
+            <section id="book" className="section wrap om-bk-sec">
               <div className="section-head">
-                <div><p className="eyebrow">완성될 한 권</p><h2>한 문장들이 모여,<br />이렇게 한 권이 돼요.</h2></div>
-                <p>표지를 눌러 펼쳐 보세요.<br />가족이 쓴 문장은 그대로, 장 제목과 차례만 엮어요.<br />아래는 이해를 돕는 가상 예시예요.</p>
+                <div><p className="eyebrow">완성될 한 권</p><h2>여섯 장면이,<br />이렇게 한 권이 됐어요.</h2></div>
+                <p>온순간이 실제로 엮은 결과예요.<br />가족과 장면은 가상이에요.<br />가족이 쓴 문장은 한 글자도 고치지 않았어요.</p>
               </div>
-              <details className="om-book">
-                <summary aria-label="책 펼쳐 보기">
-                  <span className="om-book-cover">
-                    <img src="/assets/journey-parents.webp" width={768} height={512} alt="" loading="lazy" />
-                    <span className="om-book-cover-text">
-                      <span className="om-book-title">엄마, 그 전화가<br />참 좋았어요</span>
-                      <span className="om-book-sub">환갑을 맞은 엄마께, 세 사람이 기억하는 장면들</span>
-                    </span>
-                    <span className="om-book-open">펼쳐 보기 →</span>
-                  </span>
-                </summary>
-                <div className="om-book-spread">
-                  <div className="om-book-page om-book-left">
-                    <p className="om-book-chapter">첫째 이야기</p>
-                    <h3>찌개와 전화</h3>
-                    <figure><img src="/assets/journey-parents.webp" width={768} height={512} alt="따뜻한 식탁에서 옛 사진을 함께 바라보는 두 세대의 손" loading="lazy" /></figure>
-                    <p className="om-book-pull">“엄마, 그날은 찌개보다<br />엄마랑 통화한 게 더 좋았어요.”</p>
-                  </div>
-                  <div className="om-book-page om-book-right">
-                    <p className="om-book-by">서연이</p>
-                    <p>처음 혼자 살던 때, 찌개가 너무 짜서 엄마에게 전화했어요. 엄마는 냄비에 뭘 넣었는지 하나씩 물어봐 주셨죠.</p>
-                    <p>같이 웃으며 물을 더 붓다 보니, 혼자 있던 부엌이 덜 낯설었어요.</p>
-                    <p className="om-book-by om-book-next">막내아들 · 다음 장면</p>
-                    <p>시험 보던 날 아침, 엄마는 도시락 뚜껑에 작은 쪽지를 붙여 주셨어요. “천천히 해도 돼.”</p>
-                    <p className="om-book-folio">12</p>
-                  </div>
+              <div className="om-bk" data-bk>
+                <div className="om-bk-strip" data-bk-strip tabIndex={0} aria-label="책 넘겨 보기 — 옆으로 밀거나 화살표를 눌러요">
+                  <article className="om-bk-page om-bk-cover" aria-label="표지">
+                    <p className="om-bk-cover-kicker">칠순을 맞은 김영수님께</p>
+                    <h3 className="om-bk-cover-title">포크 두 개,<br />포크 다섯 개</h3>
+                    <p className="om-bk-cover-sub">다섯 사람이 기억하는 장면들</p>
+                    <span className="om-bk-cover-mark" aria-hidden="true">✳︎</span>
+                  </article>
+                  <article className="om-bk-page om-bk-center" aria-label="제사">
+                    <p className="om-bk-epigraph">“늦지 마라.”</p>
+                    <p className="om-bk-by">막내아들이 기억하는 아버지의 말</p>
+                  </article>
+                  <article className="om-bk-page" aria-label="여는 글">
+                    <p className="om-bk-label">여는 글 <span>· 편집 도움</span></p>
+                    <p>김영수님의 칠순을 위해 큰딸 민지가 이 책을 준비했다. 아내 순자, 큰딸 민지, 막내아들, 사위 준호, 손녀 지우. 다섯 사람이 여섯 장면을 썼다.</p>
+                    <p>장면은 1978년 겨울에서 시작해 작년 추석에 닿는다. 큰딸의 두 장면에는 사과와 포크가 있다. 두 장면 사이에 다른 가족의 기억이 놓인다.</p>
+                  </article>
+                  <article className="om-bk-page" aria-label="차례">
+                    <p className="om-bk-label">차례</p>
+                    <ol className="om-bk-toc">
+                      <li><span>첫째 이야기</span>이불과 과일 한 접시</li>
+                      <li><span>둘째 이야기</span>구두와 물 한 잔</li>
+                      <li><span>셋째 이야기</span>냉장고의 그림</li>
+                    </ol>
+                    <p className="om-bk-small">그분의 말 · 함께 쓴 사람들</p>
+                  </article>
+                  <article className="om-bk-page om-bk-chapter" aria-label="첫째 이야기">
+                    <p className="om-bk-label">첫째 이야기</p>
+                    <h3>이불과<br />과일 한 접시</h3>
+                    <p className="om-bk-opener">아이들이 어리던 때의 장면 둘. 1978년 겨울의 이불, 학창 시절의 사과. <span>· 편집 도움</span></p>
+                  </article>
+                  <article className="om-bk-page" aria-label="아내 순자의 장면">
+                    <p className="om-bk-quote">“애들 춥다.”</p>
+                    <p className="om-bk-by">아내 순자 · 1978년 겨울</p>
+                    <p>연탄 배달을 마치고 들어온 날, 당신은 손이 언 줄도 모르고 아이들 이불부터 덮어 주었다.</p>
+                    <p className="om-bk-now">여보, 칠순 축하해요. 이번 겨울은 내가 이불 덮어 줄게요.</p>
+                  </article>
+                  <article className="om-bk-page" aria-label="큰딸 민지의 장면">
+                    <p className="om-bk-by">큰딸 민지 · 학창 시절</p>
+                    <p className="om-bk-drop">늦게 집에 돌아오면 아버지는 별말 없이 늘 과일 한 접시를 내어 주셨다. 깎은 사과 옆에는 꼭 포크가 두 개 있었다.</p>
+                    <p className="om-bk-pull">깎은 사과 옆에는<br />꼭 포크가 두 개 있었다.</p>
+                  </article>
+                  <article className="om-bk-page om-bk-photo" aria-label="작년 추석, 큰딸 민지의 두 번째 장면">
+                    <figure><img src="/assets/journey-teen.webp" width={768} height={512} alt="과일과 찻잔이 놓인 햇살 드는 식탁" loading="lazy" /></figure>
+                    <p className="om-bk-bridge">그리고 작년 추석. 큰딸의 두 번째 장면이다. <span>· 편집 도움</span></p>
+                    <p>설거지를 하다 돌아보니 아버지가 식탁에 앉아 사과를 깎고 계셨다. 이번엔 포크가 다섯 개였다.</p>
+                    <p className="om-bk-now">아빠, 이번엔 제가 깎을게요.</p>
+                  </article>
+                  <article className="om-bk-page" aria-label="그분의 말">
+                    <p className="om-bk-label">그분의 말</p>
+                    <ul className="om-bk-sayings">
+                      <li>“애들 춥다.”<span>아내 순자</span></li>
+                      <li>“늦지 마라.”<span>막내아들</span></li>
+                      <li>“밥은 먹고 다니나.”<span>사위 준호</span></li>
+                    </ul>
+                  </article>
+                  <article className="om-bk-page om-bk-center om-bk-colophon" aria-label="책을 엮은 방식">
+                    <p>가족이 쓴 문장은 고치지 않고<br />그대로 실었어요.</p>
+                    <p>장 제목과 잇는 글은<br />온순간의 편집 도움을 받아 엮었어요.</p>
+                    <p className="om-bk-small">다섯 사람 · 여섯 장면 · 2026</p>
+                  </article>
                 </div>
-              </details>
+                <div className="om-bk-nav">
+                  <button type="button" className="om-bk-btn" data-bk-prev aria-label="앞 쪽">←</button>
+                  <span className="om-bk-count" data-bk-count aria-live="polite">1 / 10</span>
+                  <button type="button" className="om-bk-btn" data-bk-next aria-label="다음 쪽">→</button>
+                </div>
+              </div>
               <ul className="om-book-facts">
-                <li><strong>원문 그대로</strong>가족이 쓴 문장은 고치지 않아요.</li>
-                <li><strong>장면마다 한 쪽</strong>사진이 있으면 사진과 함께, 없으면 글만으로도.</li>
-                <li><strong>쓴 사람 이름</strong>누가 기억한 장면인지 함께 남아요.</li>
+                <li><strong>원문 그대로</strong>가족이 쓴 문장은 한 글자도 고치지 않아요.</li>
+                <li><strong>편집 기획</strong>차례 · 장 제목 · 여는 글 · 잇는 말을 장면 속 사물과 말에서 지어요.</li>
+                <li><strong>처음과 끝이 이어지게</strong>포크 두 개로 시작해, 포크 다섯 개로 닫혀요.</li>
               </ul>
             </section>
 
@@ -145,7 +185,7 @@ export default function Home() {
                       <h3>{j.name}<span aria-hidden="true">↗</span></h3>
                       <p className="card-desire">“{j.episode.replace(/^“|”$/g, "")}”</p>
                       <small>{j.who}</small>
-                      <span className="om-card-more">이 여정으로 한 권 만들기 →</span>
+                      <span className="om-card-more">살펴보기 →</span>
                     </div>
                   </a>
                 ))}
@@ -204,9 +244,8 @@ export default function Home() {
               <div className="om-receive-grid">
                 <figure className="om-phone" aria-hidden="true">
                   <span className="om-phone-screen">
-                    <img src="/assets/journey-parents.webp" width={768} height={512} alt="" loading="lazy" />
-                    <span className="om-phone-title">엄마, 그 전화가<br />참 좋았어요</span>
-                    <span className="om-phone-sub">세 사람이 기억하는 장면들</span>
+                    <span className="om-phone-cover"><span className="om-phone-kicker">칠순을 맞은 김영수님께</span><span className="om-phone-title">포크 두 개,<br />포크 다섯 개</span><span className="om-phone-sub">다섯 사람이 기억하는 장면들</span></span>
+                    <span className="om-phone-hint">눌러서 펼쳐 읽기</span>
                   </span>
                 </figure>
                 <ol className="om-receive-steps">
@@ -367,6 +406,7 @@ export default function Home() {
           </footer>
         </div>
       </div>
+      <Script id="book-pages" strategy="afterInteractive">{`(()=>{const s=document.querySelector('[data-bk-strip]');if(!s)return;const pages=[...s.children],c=document.querySelector('[data-bk-count]');const pos=(p)=>p.getBoundingClientRect().left-s.getBoundingClientRect().left+s.scrollLeft-4;const cur=()=>{if(s.scrollLeft>=s.scrollWidth-s.clientWidth-2&&s.scrollLeft>0)return pages.length-1;let i=0,b=1e9;pages.forEach((p,k)=>{const d=Math.abs(pos(p)-s.scrollLeft);if(d<b){b=d;i=k}});return i};const show=()=>{if(c)c.textContent=(cur()+1)+' / '+pages.length};const go=(d)=>{const i=Math.max(0,Math.min(pages.length-1,cur()+d));s.scrollTo({left:pos(pages[i])})};document.querySelector('[data-bk-prev]')?.addEventListener('click',()=>go(-1));document.querySelector('[data-bk-next]')?.addEventListener('click',()=>go(1));s.addEventListener('keydown',(e)=>{if(e.key==='ArrowRight'){e.preventDefault();go(1)}if(e.key==='ArrowLeft'){e.preventDefault();go(-1)}});s.addEventListener('scroll',()=>requestAnimationFrame(show),{passive:true});show();})();`}</Script>
       <Script src="/landing/app-origin.js" strategy="afterInteractive" />
       <Script src="/landing/launch.js" strategy="afterInteractive" />
     </>
