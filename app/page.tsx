@@ -406,7 +406,6 @@ export default function Home() {
               <a href="/story/">온순간의 이야기</a>
               <a href="/journal/">온순간 저널</a>
               <a href="/principles/">기록을 대하는 방식</a>
-              <a href="/value/">온순간 가치 동참 · 가격 안내</a>
               <a href="/privacy/">개인정보 처리방침</a>
               <a href="/terms/">이용약관</a>
               <button type="button" className="om-link" data-om-feedback="stuck">의견 남기기</button>
