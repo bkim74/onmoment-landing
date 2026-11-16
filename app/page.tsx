@@ -13,10 +13,10 @@ const START = (src: string) => `${APP}/start?src=${src}`;
 const SHOW_BOOK = false;
 
 export const metadata: Metadata = {
-  title: "온순간 — 함께한 날들을 모아, 소중한 분에게만 드릴 수 있는 한 권",
-  description: "내 이야기를 남기고, 원하는 만큼 선물하는 온순간. 함께한 장면에 그때의 마음을 더해, 오래 간직할 이야기 선물을 준비해보세요.",
+  title: "온순간 — 함께한 날들을 모아, 소중한 분에게 건네는 나의 이야기",
+  description: "내 이야기를 남기고, 원하는 만큼 선물하는 온순간. 함께한 장면과 그때의 마음을 내 말로 남기고, 그중 전하고 싶은 만큼 골라 이야기 선물로 건네세요.",
   openGraph: {
-    title: "함께한 날들을 모아, 소중한 분에게만 드릴 수 있는 한 권 — 온순간",
+    title: "함께한 날들을 모아, 소중한 분에게 건네는 나의 이야기 — 온순간",
     description: "내 이야기를 남기고, 원하는 만큼 선물하는 온순간.",
     images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "온순간" }],
   },
@@ -46,8 +46,8 @@ export default function Home() {
             <section className="hero wrap journey-hub">
               <div>
                 <p className="eyebrow">내 이야기를 남기고, 원하는 만큼 선물하는 온순간</p>
-                <h1>함께한 날들을 모아,<br />소중한 분에게만 드릴 수 있는 한 권.</h1>
-                <p className="lead">함께한 장면에 그때의 마음을 더해,<br />오래 간직할 이야기 선물을 준비해보세요.</p>
+                <h1>함께한 날들을 모아,<br />소중한 분에게 건네는 나의 이야기.</h1>
+                <p className="lead">함께한 장면과 그때의 마음을 내 말로 남겨보세요.<br />그중 전하고 싶은 만큼 골라, 이야기 선물로 건네세요.</p>
                 <div className="cta-row">
                   <a className="button primary" href="#journeys">이야기 선물 준비하기 <span>↗</span></a>
                   <a className="button" href={RECORDS} data-app-link>내 기록</a>
