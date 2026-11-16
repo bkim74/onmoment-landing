@@ -3,7 +3,7 @@ import Script from "next/script";
 import { MAIN_JOURNEYS, SELF_SIDE } from "@/lib/landing/oneMain";
 
 // 하나의 메인(2026-11-16 전달서) — 이야기 선물을 앞에, 예전 메인의 개인 기록 · 이벤트 · 권리 안내를 같은 브랜드 안에 흡수한다.
-//   순서: 선물의 모습 → 각자의 자리에서 할 일(가장 먼저) → 이야기 한 쪽 → 일곱 여정 → 지금 제공 범위 → 나에게도 남는 기록 → 이벤트 · FAQ → 마무리.
+//   순서(11-16 하나의 이야기): 선물의 모습 → 할 일 → 완성될 한 권 → 일곱 여정 → 건네는 한 쪽 · 나에게 남는 한 쪽 → 받는 날 → 지금 쓸 수 있는 것 · 가격 → 나에게도 남는 기록 → 이벤트 · FAQ → 마무리.
 //   예전 앵커(#journeys · #book-event · #first-page · #first-experience · #gifts)를 그대로 둔다 — 외부 링크 · 북마크 보존. 예전 메인 전체는 /record/.
 //   스타일은 이야기 선물 시안 v5(public/gift-v5) + 흡수한 구역용 main.css.
 const APP = process.env.NEXT_PUBLIC_APP_ORIGIN ?? "https://app.onmoment.kr";
@@ -89,41 +89,48 @@ export default function Home() {
               <div className="how-entry"><p><strong>더 자세히 알고 싶다면</strong>준비하는 분 · 함께 쓰는 분 · 받는 분의 화면을 한눈에 봐요. 독서모임이라면 <a href="/gift/together/reading/">독서모임에서 함께 쓰기</a>를 보세요.</p><a className="button" href="/gift/how/">역할별로 자세히 보기<span aria-hidden="true">→</span></a></div>
             </section>
 
-            {/* 3 이야기 한 쪽 — 같은 장면, 두 시선 */}
-            <section id="first-page" className="section wrap">
+            {/* 3 완성될 한 권 펼쳐 보기 — 사고 싶은 마음은 '받게 될 물건'에서 생긴다. 앱의 엮은 책(클래식)과 같은 모습 · 가상 예시 */}
+            <section id="book" className="section wrap om-book-sec">
               <div className="section-head">
-                <div><p className="eyebrow">이야기 한 쪽</p><h2>같은 장면이,<br />두 가지 한 쪽이 돼요.</h2></div>
-                <p>소중한 분께 건네는 한 쪽,<br />그리고 나에게 남기는 한 쪽.<br />아래는 이해를 돕는 가상 예시예요.</p>
+                <div><p className="eyebrow">완성될 한 권</p><h2>한 문장들이 모여,<br />이렇게 한 권이 돼요.</h2></div>
+                <p>표지를 눌러 펼쳐 보세요.<br />가족이 쓴 문장은 그대로, 장 제목과 차례만 엮어요.<br />아래는 이해를 돕는 가상 예시예요.</p>
               </div>
-              <div className="om-pages">
-                <article className="om-page">
-                  <p className="om-page-by">엄마에게 · 서연이</p>
-                  <h3>그 전화가 참 좋았어요</h3>
-                  <p>처음 혼자 살던 때,<br />찌개가 너무 짜서 엄마에게 전화했어요.<br />같이 웃으며 물을 더 붓다 보니,<br />혼자 있던 부엌이 덜 낯설었어요.</p>
-                  <p>엄마, 그날은 찌개보다<br />엄마랑 통화한 게 더 좋았어요.</p>
-                  <span className="om-page-tag">건네는 한 쪽</span>
-                </article>
-                <article className="om-page om-page-self">
-                  <p className="om-page-by">그때의 나를 · 오늘의 내가</p>
-                  <h3>혼자 해내지 않아도 됐던 날</h3>
-                  <p>그날 엄마에게 전화를 건 건<br />찌개 때문이었다.</p>
-                  <p>쓰다 보니, 나는 조리법보다<br />같이 웃었던 목소리를 기억하고 있었다.<br />혼자 해내야 한다고 생각하던 때에도<br />이렇게 물어볼 사람이 있었구나.</p>
-                  <span className="om-page-tag">나에게 남기는 한 쪽</span>
-                </article>
-              </div>
-              <details className="om-more">
-                <summary>이 한 쪽은 어떤 기록에서 시작됐나요?</summary>
-                <ol className="om-flow">
-                  <li><strong>내가 남긴 장면</strong><span>처음 혼자 살던 때, 찌개가 너무 짜서 엄마에게 전화했다.</span></li>
-                  <li><strong>다시 바라보는 물음</strong><span>그날 정말 좋았던 건 무엇이었나요?</span></li>
-                  <li><strong>내가 고른 말</strong><span>그날은 찌개보다 엄마랑 통화한 게 더 좋았어요.</span></li>
-                </ol>
-                <p>내가 쓴 원문은 그대로 두고, 나중에 덧붙인 마음은 따로 표시돼요. 무엇을 발견하고 고를지는 내가 정해요.</p>
+              <details className="om-book">
+                <summary aria-label="책 펼쳐 보기">
+                  <span className="om-book-cover">
+                    <img src="/assets/journey-parents.webp" width={768} height={512} alt="" loading="lazy" />
+                    <span className="om-book-cover-text">
+                      <span className="om-book-title">엄마, 그 전화가<br />참 좋았어요</span>
+                      <span className="om-book-sub">환갑을 맞은 엄마께, 세 사람이 기억하는 장면들</span>
+                    </span>
+                    <span className="om-book-open">펼쳐 보기 →</span>
+                  </span>
+                </summary>
+                <div className="om-book-spread">
+                  <div className="om-book-page om-book-left">
+                    <p className="om-book-chapter">첫째 이야기</p>
+                    <h3>찌개와 전화</h3>
+                    <figure><img src="/assets/journey-parents.webp" width={768} height={512} alt="따뜻한 식탁에서 옛 사진을 함께 바라보는 두 세대의 손" loading="lazy" /></figure>
+                    <p className="om-book-pull">“엄마, 그날은 찌개보다<br />엄마랑 통화한 게 더 좋았어요.”</p>
+                  </div>
+                  <div className="om-book-page om-book-right">
+                    <p className="om-book-by">서연이</p>
+                    <p>처음 혼자 살던 때, 찌개가 너무 짜서 엄마에게 전화했어요. 엄마는 냄비에 뭘 넣었는지 하나씩 물어봐 주셨죠.</p>
+                    <p>같이 웃으며 물을 더 붓다 보니, 혼자 있던 부엌이 덜 낯설었어요.</p>
+                    <p className="om-book-by om-book-next">막내아들 · 다음 장면</p>
+                    <p>시험 보던 날 아침, 엄마는 도시락 뚜껑에 작은 쪽지를 붙여 주셨어요. “천천히 해도 돼.”</p>
+                    <p className="om-book-folio">12</p>
+                  </div>
+                </div>
               </details>
-              <p className="om-note">한 문장으로 간직해도, 카드로 모아도, 책으로 엮어도 좋아요. 깊이는 원하는 만큼만. <a href="/keepsakes/">한 문장 · 카드 · 책 살펴보기 →</a></p>
+              <ul className="om-book-facts">
+                <li><strong>원문 그대로</strong>가족이 쓴 문장은 고치지 않아요.</li>
+                <li><strong>장면마다 한 쪽</strong>사진이 있으면 사진과 함께, 없으면 글만으로도.</li>
+                <li><strong>쓴 사람 이름</strong>누가 기억한 장면인지 함께 남아요.</li>
+              </ul>
             </section>
 
-            {/* 3 일곱 여정 — 모두 사진 */}
+            {/* 4 일곱 여정 — 모두 사진 */}
             <section id="journeys" className="section wrap journey-directory">
               <div className="section-head">
                 <div><p className="eyebrow">일곱 가지 이야기 선물</p><h2>선물하고 싶은 분이<br />떠오르셨나요?</h2></div>
@@ -147,31 +154,100 @@ export default function Home() {
               <p className="om-note">독서모임은 ‘우리의 시간을 남기기’ 안에서 시작해요. <a className="om-reading-link" href="/gift/together/reading/">독서모임에서 함께 쓰기 →</a></p>
             </section>
 
-            {/* 5 지금 제공 범위 — 기능별 상태를 한곳에서 */}
+            {/* 5 건네는 한 쪽, 나에게 남는 한 쪽 — 선물은 곧 나에게 주는 선물(말이 아니라 구조로). 보낼 문장은 내가 고른다 */}
+            <section id="first-page" className="section wrap">
+              <div className="section-head">
+                <div><p className="eyebrow">건네는 동안, 나에게도</p><h2>건네는 한 쪽,<br />나에게 남는 한 쪽.</h2></div>
+                <p>같은 장면이 소중한 분께 가는 한 쪽과<br />나에게 남는 한 쪽이 돼요.<br />보낼 문장은 내가 골라요.</p>
+              </div>
+              <div className="om-pick" aria-label="보낼 문장 고르기 예시">
+                <p className="om-pick-title">보낼 문장 고르기 · 가상 예시</p>
+                <p className="om-pick-row is-on"><span aria-hidden="true">✓</span>처음 혼자 살던 때, 찌개가 너무 짜서 엄마에게 전화했어요.</p>
+                <p className="om-pick-row is-on"><span aria-hidden="true">✓</span>엄마, 그날은 찌개보다 엄마랑 통화한 게 더 좋았어요.</p>
+                <p className="om-pick-row"><span aria-hidden="true">○</span>사실 그때 많이 외로웠다는 건, 아직 나만 알고 싶어요.</p>
+                <p className="om-pick-note">빼 둔 문장은 보내지 않아요. 나에게만 남아요.</p>
+              </div>
+              <div className="om-pages">
+                <article className="om-page">
+                  <p className="om-page-by">엄마에게 · 서연이</p>
+                  <h3>그 전화가 참 좋았어요</h3>
+                  <p>처음 혼자 살던 때,<br />찌개가 너무 짜서 엄마에게 전화했어요.<br />같이 웃으며 물을 더 붓다 보니,<br />혼자 있던 부엌이 덜 낯설었어요.</p>
+                  <p>엄마, 그날은 찌개보다<br />엄마랑 통화한 게 더 좋았어요.</p>
+                  <span className="om-page-tag">소중한 분께 건네는 한 쪽</span>
+                </article>
+                <article className="om-page om-page-self">
+                  <p className="om-page-by">그때의 나를 · 오늘의 내가</p>
+                  <h3>혼자 해내지 않아도 됐던 날</h3>
+                  <p>사실 그때 많이 외로웠다.</p>
+                  <p>쓰다 보니, 나는 조리법보다<br />같이 웃었던 목소리를 기억하고 있었다.<br />혼자 해내야 한다고 생각하던 때에도<br />이렇게 물어볼 사람이 있었구나.</p>
+                  <span className="om-page-tag">나에게 남는 한 쪽</span>
+                </article>
+              </div>
+              <details className="om-more">
+                <summary>이 한 쪽은 어떤 기록에서 시작됐나요?</summary>
+                <ol className="om-flow">
+                  <li><strong>내가 남긴 장면</strong><span>처음 혼자 살던 때, 찌개가 너무 짜서 엄마에게 전화했다.</span></li>
+                  <li><strong>다시 바라보는 물음</strong><span>그날 정말 좋았던 건 무엇이었나요?</span></li>
+                  <li><strong>내가 고른 말</strong><span>그날은 찌개보다 엄마랑 통화한 게 더 좋았어요.</span></li>
+                </ol>
+                <p>내가 쓴 원문은 그대로 두고, 나중에 덧붙인 마음은 따로 표시돼요. 무엇을 보내고 무엇을 남길지는 내가 정해요.</p>
+              </details>
+              <p className="om-note">한 문장으로 간직해도, 카드로 모아도, 책으로 엮어도 좋아요. 깊이는 원하는 만큼만. <a href="/keepsakes/">한 문장 · 카드 · 책 살펴보기 →</a></p>
+            </section>
+
+            {/* 6 받는 날 — 받는 분이 어떻게 펼쳐 읽는지(전달 방식 · 제공 범위) */}
+            <section id="receive" className="section wrap om-receive">
+              <div className="section-head">
+                <div><p className="eyebrow">받는 날</p><h2>받는 분은,<br />링크 하나로 펼쳐요.</h2></div>
+                <p>연구에서는, 마음을 전하는 사람이<br />받는 사람의 기쁨을 실제보다<br />작게 예상하는 경우가 많았어요.</p>
+              </div>
+              <div className="om-receive-grid">
+                <figure className="om-phone" aria-hidden="true">
+                  <span className="om-phone-screen">
+                    <img src="/assets/journey-parents.webp" width={768} height={512} alt="" loading="lazy" />
+                    <span className="om-phone-title">엄마, 그 전화가<br />참 좋았어요</span>
+                    <span className="om-phone-sub">세 사람이 기억하는 장면들</span>
+                  </span>
+                </figure>
+                <ol className="om-receive-steps">
+                  <li><strong>링크를 열면 표지부터</strong>가입하지 않아도 바로 열려요. 한 장씩 넘기며 읽어요.</li>
+                  <li><strong>글씨는 크게</strong>읽기 편한 크기로 바꿔 볼 수 있어요.</li>
+                  <li><strong>답장은 안 해도 돼요</strong>읽는 것으로 충분해요. 다시 열어 읽을 수도 있어요.</li>
+                  <li><strong>종이책은 준비하고 있어요</strong>지금은 디지털 한 권으로 건네요.</li>
+                </ol>
+              </div>
+              <p className="om-note">링크는 받은 분이 다른 가족에게 다시 전할 수 있어요. 꼭 담고 싶은 이야기만 골라 주세요. <span className="om-cite">(Kumar &amp; Epley, 2018, Psychological Science)</span></p>
+            </section>
+
+            {/* 7 지금 쓸 수 있는 것 · 가격 — 사고 싶어진 순간 바로 옆에, 지금의 범위와 열릴 가격을 한 상자로 */}
             <section id="offering" className="section wrap">
-              <div className="section-head"><div><p className="eyebrow">지금 제공 범위</p><h2>지금 쓸 수 있는 것과,<br />준비하고 있는 것.</h2></div></div>
+              <div className="section-head"><div><p className="eyebrow">지금 쓸 수 있는 것 · 가격</p><h2>지금은 무료로 시작하고,<br />원할 때 동참해요.</h2></div></div>
               <div className="om-scope">
                 <div className="om-scope-now">
                   <h3>지금 쓸 수 있어요 · 무료 시범</h3>
                   <ul>
+                    <li><strong>이야기 선물 디지털본</strong> 준비 · 초대 링크로 함께 쓰기 · 보낼 문장 고르기 · 사진 한 장 · 책으로 미리 보기 · 받는 링크까지.</li>
                     <li><strong>나에게 남기기</strong> 한 문장이나 사진 한 장으로 내 기록을 남기고, 다시 읽고, 원할 때 다른 시선으로 돌아봐요.</li>
-                    <li><strong>이야기 선물 디지털본</strong> 준비 · 초대 링크로 함께 쓰기 · 한 장면과 사진 한 장 · 책으로 미리 보기 · 받는 링크까지.</li>
                     <li><strong>내 기록 엮기</strong> 내 기록에서 글을 골라 직접 엮고 원고 파일로 내려받아요.</li>
                   </ul>
                 </div>
                 <div className="om-scope-later">
-                  <h3>준비하고 있어요</h3>
-                  <ul>
-                    <li>종이책 주문</li>
-                    <li>유료 동참 — <a href="/value/#value-levels">가치 동참 · 가격 안내</a></li>
-                    <li>각자의 책 교환 · 기록 모임</li>
+                  <h3>열릴 예정 · 지금은 결제 없음</h3>
+                  <ul className="om-price">
+                    <li><span>기본</span><strong>월 9,900원</strong></li>
+                    <li><span>프리미엄 · 디지털 이야기책 월 1권</span><strong>월 19,900원</strong></li>
+                    <li><span>종이책 · 두 시선 한 세트</span><strong>49,000원</strong></li>
                   </ul>
-                  <p>확정 조건은 시작 전에 안내해요.</p>
+                  <p>유료가 열려도 자동으로 결제되지 않아요. 열리기 전에 먼저 알려 드려요. <a href="/value/#value-levels">가치 동참 · 가격 자세히 →</a></p>
                 </div>
+              </div>
+              <div className="cta-row om-offer-cta">
+                <a className="button primary" href="#journeys">이야기 선물 준비하기 <span>↗</span></a>
+                <a className="button" href={START("offering")} data-app-link>나에게 남기기</a>
               </div>
             </section>
 
-            {/* 6 나에게도 남는 기록 */}
+            {/* 8 나에게도 남는 기록 */}
             <section id="my-story" className="section wrap om-my-story">
               <span id="first-experience" className="om-anchor" aria-hidden="true" />
               <span id="gifts" className="om-anchor" aria-hidden="true" />
@@ -208,7 +284,7 @@ export default function Home() {
               </details>
             </section>
 
-            {/* 7 이벤트 — 일반 종이책 주문과 상태를 나눈다 */}
+            {/* 9 이벤트 — 일반 종이책 주문과 상태를 나눈다 */}
             <section id="book-event" className="section wrap om-event">
               <p className="eyebrow">온순간 첫 책 선물 이벤트 · 11월 13일 ~ 26일</p>
               <h2>내가 쓴 하루가,<br />나에게 돌아오는 선물.</h2>
@@ -238,7 +314,7 @@ export default function Home() {
               <p className="fine">이벤트 책은 추첨으로 만드는 시범 제작이에요. 일반 종이책 주문은 준비하고 있어요.</p>
             </section>
 
-            {/* 8 FAQ */}
+            {/* 10 FAQ */}
             <section id="faq" className="section wrap om-faq">
               <p className="eyebrow">마음 편히 시작하도록</p>
               <h2>작은 궁금함에, 작은 답을.</h2>
@@ -252,7 +328,7 @@ export default function Home() {
               <details><summary>온순간을 소개하면 내 기록도 공개되나요?</summary><p>아래 소개 버튼은 온순간의 공개 소개 주소만 건네요. 내 기록이나 개인 초대 코드는 함께 보내지 않아요. 개인 이야기를 건네는 일은 앱에서 따로 선택해요.</p></details>
             </section>
 
-            {/* 9 마무리 */}
+            {/* 11 마무리 */}
             <section className="hub-meaning om-closing">
               <div className="wrap">
                 <p className="eyebrow">찬연한 너와 나의 이야기.</p>
