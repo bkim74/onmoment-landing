@@ -9,6 +9,8 @@ import { MAIN_JOURNEYS, SELF_SIDE } from "@/lib/landing/oneMain";
 const APP = process.env.NEXT_PUBLIC_APP_ORIGIN ?? "https://app.onmoment.kr";
 const RECORDS = `${APP}/?tab=history`; // 앱이 지원하는 주소(기록 탭 바로 열기 · 로그인 왕복에도 유지) — onmoment-recovery feat/one-main
 const START = (src: string) => `${APP}/start?src=${src}`;
+// 완성될 한 권(#book) — 실제 동의받은 책으로 다시 만들 때까지 끈다(11-16 지시서 · 범님 11-16 "이 품질이면" 판단)
+const SHOW_BOOK = false;
 
 export const metadata: Metadata = {
   title: "온순간 — 함께한 날들을 모아, 소중한 분에게만 드릴 수 있는 한 권",
@@ -86,10 +88,11 @@ export default function Home() {
                   <a className="button" href={START("roles")} data-app-link>나에게 남기기 <span>↗</span></a>
                 </article>
               </div>
-              <div className="how-entry"><p><strong>더 자세히 알고 싶다면</strong>준비하는 분 · 함께 쓰는 분 · 받는 분의 화면을 한눈에 봐요. 독서모임이라면 <a href="/gift/together/reading/">독서모임에서 함께 쓰기</a>를 보세요.</p><a className="button" href="/gift/how/">역할별로 자세히 보기<span aria-hidden="true">→</span></a></div>
+              <div className="how-entry"><p><strong>더 자세히 알고 싶다면</strong>준비하는 분 · 함께 쓰는 분 · 받는 분의 화면을 한눈에 봐요.</p><a className="button" href="/gift/how/">역할별로 자세히 보기<span aria-hidden="true">→</span></a></div>
             </section>
 
-            {/* 3 완성될 한 권 — 온순간 편집 엔진이 실제로 엮은 결과(11-16 실측 · 가상 가족 · 칠순). 원문은 그대로, 편집 글은 '편집 도움'으로 구분 */}
+            {/* 3 완성될 한 권 — 11-16 지시서: 실제 동의받은 책이 생길 때까지 운영에서 감춘다(소스 보존 · SHOW_BOOK 로 다시 켬). 이전 설명: — 온순간 편집 엔진이 실제로 엮은 결과(11-16 실측 · 가상 가족 · 칠순). 원문은 그대로, 편집 글은 '편집 도움'으로 구분 */}
+            {SHOW_BOOK && (
             <section id="book" className="section wrap om-bk-sec">
               <div className="section-head">
                 <div><p className="eyebrow">완성될 한 권</p><h2>여섯 장면이,<br />이렇게 한 권이 됐어요.</h2></div>
@@ -169,6 +172,7 @@ export default function Home() {
                 <li><strong>처음과 끝이 이어지게</strong>포크 두 개로 시작해, 포크 다섯 개로 닫혀요.</li>
               </ul>
             </section>
+            )}
 
             {/* 4 일곱 여정 — 모두 사진 */}
             <section id="journeys" className="section wrap journey-directory">
@@ -191,7 +195,6 @@ export default function Home() {
                 ))}
               </div>
               <p className="om-note">사진은 분위기를 돕는 이미지예요. 내 선물에는 사진 없이 한 문장만 써도 돼요.</p>
-              <p className="om-note">독서모임은 ‘우리의 시간을 남기기’ 안에서 시작해요. <a className="om-reading-link" href="/gift/together/reading/">독서모임에서 함께 쓰기 →</a></p>
             </section>
 
             {/* 5 건네는 한 쪽, 나에게 남는 한 쪽 — 선물은 곧 나에게 주는 선물(말이 아니라 구조로). 보낼 문장은 내가 고른다 */}

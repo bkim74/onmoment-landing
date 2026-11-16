@@ -1,3 +1,4 @@
+// 11-16 지시서 D3: 이번 배포에서 독서모임 페이지를 라우트에서 뺀다(밑줄 폴더 = Next 비공개 폴더, 소스 보존). 다시 열려면 폴더 이름을 reading 으로 되돌린다.
 import type { Metadata } from "next";
 import Script from "next/script";
 import data from "@/lib/landing/giftV5.json";
