@@ -263,7 +263,7 @@ export default function Home() {
 
             {/* 7 지금 쓸 수 있는 것 · 가격 — 사고 싶어진 순간 바로 옆에, 지금의 범위와 열릴 가격을 한 상자로 */}
             <section id="offering" className="section wrap">
-              <div className="section-head"><div><p className="eyebrow">지금 쓸 수 있는 것 · 가격</p><h2>지금은 무료로 시작하고,<br />원할 때 동참해요.</h2></div></div>
+              <div className="section-head"><div><p className="eyebrow">지금 쓸 수 있는 것 · 가격</p><h2>이야기 선물은 한 번,<br />함께 쓰는 가족은 그대로.</h2></div></div>
               <div className="om-scope">
                 <div className="om-scope-now">
                   <h3>지금 쓸 수 있어요 · 무료 시범</h3>
@@ -274,13 +274,19 @@ export default function Home() {
                   </ul>
                 </div>
                 <div className="om-scope-later">
-                  <h3>열릴 예정 · 지금은 결제 없음</h3>
+                  {/* 11-16 범님: 선물은 한 번 — 준비하는 분 한 분이 결제하고 가족은 함께 쓴다. 월 요금은 모든 과정을 겪은 뒤 원하는 분께 따로 안내(랜딩에 두지 않음) */}
+                  <h3>이야기 선물 · 한 번 결제 <span className="om-price-note">가안 · 지금은 결제 없음</span></h3>
                   <ul className="om-price">
-                    <li><span>기본</span><strong>월 9,900원</strong></li>
-                    <li><span>프리미엄 · 디지털 이야기책 월 1권</span><strong>월 19,900원</strong></li>
-                    <li><span>종이책 · 두 시선 한 세트</span><strong>49,000원</strong></li>
+                    <li><span>디지털 이야기책 1권</span><strong>29,900원</strong></li>
+                    <li><span>양장본 이야기책 1권 · 디지털본 포함</span><strong>49,000원</strong></li>
                   </ul>
-                  <p>유료가 열려도 자동으로 결제되지 않아요. 열리기 전에 먼저 알려 드려요. <a href="/value/#value-levels">가치 동참 · 가격 자세히 →</a></p>
+                  <ul>
+                    <li><strong>준비하는 분 한 분이 결제</strong> 초대받은 가족은 가입이나 결제 없이 링크 하나로 함께 써요.</li>
+                    <li><strong>함께 준비하는 시간</strong> 최대 90일, 마감은 준비하는 분이 정해요.</li>
+                    <li><strong>막막할 때의 도움</strong> 질문을 따라 떠올리기 · 다시 읽어 보기 · 받는 분이 알 수 있게 다듬기.</li>
+                    <li><strong>선물을 건넨 뒤</strong> 쓴 이야기는 내 기록에 남아요. 원하면 나를 위해 이어 쓰기로 AI 도움을 30일 동안 써 볼 수 있어요. 자동 결제는 없어요.</li>
+                  </ul>
+                  <p>지금은 무료 시범 운영이에요. 결제가 열리기 전에 먼저 알려 드려요.</p>
                 </div>
               </div>
               <div className="cta-row om-offer-cta">
@@ -362,7 +368,7 @@ export default function Home() {
               <h2>작은 궁금함에, 작은 답을.</h2>
               <details><summary>지금은 무엇부터 할 수 있나요?</summary><p>나에게 한 장면을 남기거나, 일곱 여정 가운데 하나를 골라 이야기 선물 디지털본을 준비할 수 있어요. 둘 다 같은 온순간 계정으로 이어져요. 종이책 주문과 유료 요금제는 준비하고 있어요.</p></details>
               <details><summary>매일 써야 하나요?</summary><p>아니요. 떠오른 날에 한 장면이면 충분해요. 글 한 줄이나 사진 한 장도 하루의 장면이에요.</p></details>
-              <details><summary>돈이 드나요?</summary><p>지금 기록과 이야기 선물 디지털본은 무료 시범이에요. 유료 요금제와 종이책 주문은 준비하고 있고, 확정 조건은 시작 전에 안내해요. 책 선물 이벤트도 결제나 친구 초대가 응모 조건이 아니에요.</p></details>
+              <details><summary>돈이 드나요?</summary><p>지금 기록과 이야기 선물 디지털본은 무료 시범이에요. 결제가 열리면 이야기 선물은 준비하는 분이 한 번 결제하고(디지털 이야기책 29,900원 · 양장본 49,000원, 가안), 초대받은 가족은 결제 없이 함께 써요. 확정 조건은 시작 전에 안내해요. 책 선물 이벤트도 결제나 친구 초대가 응모 조건이 아니에요.</p></details>
               <details><summary>내가 쓴 기록은 누가 보나요?</summary><p>내 기록은 기본적으로 나만 봐요. 일부를 선물로 고를 때는 보낼 내용을 한 번 더 확인해요.</p></details>
               <details><summary>초대받아 쓴 글은 누가 읽나요?</summary><p>선물을 준비하는 분이 모인 글을 함께 읽고 엮어요. 완성한 책은 받는 링크를 가진 분이 읽어요. 링크는 다시 전달될 수 있으니, 꼭 필요한 이야기만 담아 주세요.</p></details>
               <details><summary>초대받은 사람도 가입해야 하나요?</summary><p>초대 링크로 바로 쓸 수 있어요. 쓴 글을 내 기록에도 간직하고 싶을 때만 로그인해요.</p></details>
