@@ -46,7 +46,7 @@ export default function Home() {
             <section className="hero wrap journey-hub">
               <div>
                 <p className="eyebrow">내 이야기를 남기고, 원하는 만큼 선물하는 온순간</p>
-                <h1>함께한 날들을 모아,<br />소중한 분에게 건네는 나의 이야기.</h1>
+                <h1>함께한 날들을 모아,<br />소중한 분에게 건네는 <span style={{ whiteSpace: "nowrap" }}>나의 이야기.</span></h1>
                 <p className="lead">함께한 장면과 그때의 마음을 내 말로 남겨보세요.<br />그중 전하고 싶은 만큼 골라, 이야기 선물로 건네세요.</p>
                 <div className="cta-row">
                   <a className="button primary" href="#journeys">이야기 선물 준비하기 <span>↗</span></a>
