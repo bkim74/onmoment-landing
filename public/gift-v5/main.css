@@ -239,3 +239,5 @@
 .om-phone-cover .om-phone-title { font-family: var(--serif); font-size: 24px; line-height: 1.35; color: #fff6ea; padding: 0; }
 .om-phone-cover .om-phone-sub { font-size: 14px; color: #fff6ea; opacity: .85; padding: 0; }
 .om-phone-hint { padding: 14px; text-align: center; font-size: 14px; color: var(--muted); }
+/* 11-16 가격 상자 — '가안 · 지금은 결제 없음' 작은 꼬리표 */
+.om-price-note { display: inline-block; margin-left: 6px; font-size: 13px; font-weight: 400; color: var(--muted, #8a6f5e); }
