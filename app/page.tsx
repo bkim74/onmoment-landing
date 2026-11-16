@@ -11,6 +11,8 @@ const RECORDS = `${APP}/?tab=history`; // 앱이 지원하는 주소(기록 탭 
 const START = (src: string) => `${APP}/start?src=${src}`;
 // 완성될 한 권(#book) — 실제 동의받은 책으로 다시 만들 때까지 끈다(11-16 지시서 · 범님 11-16 "이 품질이면" 판단)
 const SHOW_BOOK = false;
+// 길잡이 — 긴 한 페이지의 구간들(보이는 구간만 · 순서대로)
+const NAV_MAP: [string, string][] = [["how", "함께 쓰는 법"], ["journeys", "일곱 여정"], ["receive", "받는 날"], ["offering", "가격"], ["book-event", "이벤트"], ["faq", "묻는 것"]];
 
 export const metadata: Metadata = {
   title: "온순간 — 함께한 날들을 모아, 소중한 분에게 건네는 나의 이야기",
@@ -32,13 +34,19 @@ export default function Home() {
       <a className="skip" href="#content">본문으로 바로가기</a>
       <div id="stage">
         <div id="app" data-one-main>
-          <header className="site-header wrap">
-            <a className="brand" href="/"><span className="brand-mark" aria-hidden="true">✳︎</span><span>온순간</span><small>ONMOMENT</small></a>
-            <nav className="header-links" aria-label="서비스 안내">
-              <a href="#journeys">일곱 여정</a>
-              <a href="#book-event">책 선물 이벤트</a>
-              <a href={RECORDS} data-app-link>내 기록</a>
-            </nav>
+          {/* 길잡이 머리(11-17 고객 피드백: 스크롤이 길다 · 지도처럼 늘 보이면 길찾기 쉽다) — 반투명으로 위에 붙고, 지금 구간 · 얼마나 왔는지 */}
+          <header className="site-header om-nav" data-om-nav>
+            <div className="om-nav-row wrap">
+              <a className="brand" href="/"><span className="brand-mark" aria-hidden="true">✳︎</span><span>온순간</span><small>ONMOMENT</small></a>
+              <nav className="om-nav-map" aria-label="이 페이지 길잡이" data-om-nav-map>
+                {NAV_MAP.map(([id, label]) => <a key={id} href={`#${id}`} data-nav-to={id}>{label}</a>)}
+              </nav>
+              <div className="om-nav-end">
+                <a className="om-nav-records" href={RECORDS} data-app-link>내 기록</a>
+                <a className="om-nav-cta" href="#journeys">선물 준비하기</a>
+              </div>
+            </div>
+            <span className="om-nav-progress" aria-hidden="true"><i data-om-nav-progress /></span>
           </header>
 
           <main id="content" className="campaign-hub one-main" tabIndex={-1}>
@@ -415,6 +423,7 @@ export default function Home() {
         </div>
       </div>
       <Script id="book-pages" strategy="afterInteractive">{`(()=>{const s=document.querySelector('[data-bk-strip]');if(!s)return;const pages=[...s.children],c=document.querySelector('[data-bk-count]');const pos=(p)=>p.getBoundingClientRect().left-s.getBoundingClientRect().left+s.scrollLeft-4;const cur=()=>{if(s.scrollLeft>=s.scrollWidth-s.clientWidth-2&&s.scrollLeft>0)return pages.length-1;let i=0,b=1e9;pages.forEach((p,k)=>{const d=Math.abs(pos(p)-s.scrollLeft);if(d<b){b=d;i=k}});return i};const show=()=>{if(c)c.textContent=(cur()+1)+' / '+pages.length};const go=(d)=>{const i=Math.max(0,Math.min(pages.length-1,cur()+d));s.scrollTo({left:pos(pages[i])})};document.querySelector('[data-bk-prev]')?.addEventListener('click',()=>go(-1));document.querySelector('[data-bk-next]')?.addEventListener('click',()=>go(1));s.addEventListener('keydown',(e)=>{if(e.key==='ArrowRight'){e.preventDefault();go(1)}if(e.key==='ArrowLeft'){e.preventDefault();go(-1)}});s.addEventListener('scroll',()=>requestAnimationFrame(show),{passive:true});show();})();`}</Script>
+      <Script id="om-nav" strategy="afterInteractive">{`(()=>{const h=document.querySelector('[data-om-nav]');if(!h)return;const links=[...document.querySelectorAll('[data-nav-to]')];const secs=links.map(a=>document.getElementById(a.dataset.navTo)).filter(Boolean);const bar=document.querySelector('[data-om-nav-progress]');const map=document.querySelector('[data-om-nav-map]');let cur='';const set=(id)=>{if(id===cur)return;cur=id;links.forEach(a=>{const on=a.dataset.navTo===id;a.classList.toggle('on',on);if(on){a.setAttribute('aria-current','location');if(map&&map.scrollWidth>map.clientWidth){const l=a.offsetLeft-map.clientWidth/2+a.clientWidth/2;map.scrollTo({left:l,behavior:'smooth'})}}else a.removeAttribute('aria-current')})};const tick=()=>{const y=window.scrollY,H=document.documentElement.scrollHeight-innerHeight;h.classList.toggle('scrolled',y>24);if(bar)bar.style.transform='scaleX('+(H>0?Math.min(1,y/H):0)+')';const line=h.offsetHeight+innerHeight*0.25;let id='';for(const s of secs){if(s.getBoundingClientRect().top<=line)id=s.id}set(id)};let raf=0;addEventListener('scroll',()=>{if(!raf)raf=requestAnimationFrame(()=>{raf=0;tick()})},{passive:true});addEventListener('resize',tick);tick();})();`}</Script>
       <Script src="/landing/app-origin.js" strategy="afterInteractive" />
       <Script src="/landing/launch.js" strategy="afterInteractive" />
     </>
