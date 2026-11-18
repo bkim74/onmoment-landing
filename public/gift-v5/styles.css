@@ -27,3 +27,7 @@ button:disabled{cursor:not-allowed}.brand-mark{font-size:36px;line-height:1;colo
 
 /* 온순간 표식 — /mark.png 를 글자색(currentColor)으로 칠한다 */
 .om-mark{display:inline-block;width:1.05em;height:1.05em;background:currentColor;-webkit-mask:url(/mark.png) center/contain no-repeat;mask:url(/mark.png) center/contain no-repeat;vertical-align:-.15em}
+
+/* 11-19 범님: 로고는 원본처럼 먹색 · 글자보다 조금 작게(예전 ✳︎ 글자 크기 31~36px 를 물려받지 않게) */
+.om-mark{width:.88em;height:.88em;background:#151411;vertical-align:-.08em}
+.brand-mark.om-mark,.brand-mark .om-mark{font-size:1em!important}
