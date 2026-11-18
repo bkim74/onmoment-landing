@@ -143,3 +143,5 @@ html { scroll-padding-top: 52px; }
 /* 11-19 범님: 로고는 원본처럼 먹색 · 글자보다 조금 작게(예전 ✳︎ 글자 크기 31~36px 를 물려받지 않게) */
 .om-mark{width:.88em;height:.88em;background:#151411;vertical-align:-.08em}
 .brand-mark.om-mark,.brand-mark .om-mark{font-size:1em!important}
+/* 장식 자리(표지 · 문 · 작은 별)의 표식은 그 자리 글자색을 따른다(어두운 표지에서도 보이게) */
+.om-mark.om-mark-ink{background:currentColor}
