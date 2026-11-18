@@ -11,6 +11,8 @@ const RECORDS = `${APP}/?tab=history`; // 앱이 지원하는 주소(기록 탭 
 const START = (src: string) => `${APP}/start?src=${src}`;
 // 완성될 한 권(#book) — 실제 동의받은 책으로 다시 만들 때까지 끈다(11-16 지시서 · 범님 11-16 "이 품질이면" 판단)
 const SHOW_BOOK = false;
+// 지난 책 선물 이벤트(11/13~19 응모 · 11/20 추첨) — 11-19 종료, 표시만 끔
+const SHOW_OLD_EVENT = false;
 // 길잡이 — 긴 한 페이지의 구간들(보이는 구간만 · 순서대로)
 const NAV_MAP: [string, string][] = [["how", "함께 쓰는 법"], ["journeys", "일곱 여정"], ["receive", "받는 날"], ["offering", "가격"], ["book-event", "이벤트"], ["faq", "묻는 것"]];
 
@@ -37,7 +39,7 @@ export default function Home() {
           {/* 길잡이 머리(11-17 고객 피드백: 스크롤이 길다 · 지도처럼 늘 보이면 길찾기 쉽다) — 반투명으로 위에 붙고, 지금 구간 · 얼마나 왔는지 */}
           <header className="site-header om-nav" data-om-nav>
             <div className="om-nav-row wrap">
-              <a className="brand" href="/"><span className="brand-mark" aria-hidden="true">✳︎</span><span>온순간</span><small>ONMOMENT</small></a>
+              <a className="brand" href="/"><span className="brand-mark om-mark" aria-hidden="true"></span><span>온순간</span><small>ONMOMENT</small></a>
               <nav className="om-nav-map" aria-label="이 페이지 길잡이" data-om-nav-map>
                 {NAV_MAP.map(([id, label]) => <a key={id} href={`#${id}`} data-nav-to={id}>{label}</a>)}
               </nav>
@@ -92,7 +94,7 @@ export default function Home() {
                 </article>
                 <article className="om-role" data-role="self">
                   <h3>나에게 남기는 분</h3>
-                  <ol><li>오늘 떠오른 한 장면을 한 줄로 남겨요.</li><li>내 기록에서 언제든 다시 읽어요. 기본은 나만 봐요.</li></ol>
+                  <ol><li>하루 동안 말과 사진을 남기고, 밤에 한 장으로 간직해요.</li><li>내 기록에서 언제든 다시 읽어요. 기본은 나만 봐요.</li></ol>
                   <a className="button" href={START("roles")} data-app-link>나에게 남기기 <span>↗</span></a>
                 </article>
               </div>
@@ -112,7 +114,7 @@ export default function Home() {
                     <p className="om-bk-cover-kicker">칠순을 맞은 김영수님께</p>
                     <h3 className="om-bk-cover-title">포크 두 개,<br />포크 다섯 개</h3>
                     <p className="om-bk-cover-sub">다섯 사람이 기억하는 장면들</p>
-                    <span className="om-bk-cover-mark" aria-hidden="true">✳︎</span>
+                    <span className="om-bk-cover-mark om-mark" aria-hidden="true"></span>
                   </article>
                   <article className="om-bk-page om-bk-center" aria-label="제사">
                     <p className="om-bk-epigraph">“늦지 마라.”</p>
@@ -340,8 +342,16 @@ export default function Home() {
               </details>
             </section>
 
-            {/* 9 이벤트 — 일반 종이책 주문과 상태를 나눈다 */}
+            {/* 9 이벤트 — 11-19: 지난 책 선물 이벤트(11/13~19 응모 · 11/20 추첨)는 표시만 끈다(SHOW_OLD_EVENT, 소스 보존). 새 이벤트: 함께 쓴 이야기, 책 한 권으로 */}
             <section id="book-event" className="section wrap om-event">
+              <p className="eyebrow">함께 쓴 이야기 이벤트</p>
+              <h2>함께 쓴 이야기,<br />책 한 권으로</h2>
+              <p className="lead">11월 26일까지 소중한 분께 함께 쓴 이야기를 건네시면, 그중 두 분께 그 이야기를 실제 책으로 엮어 드려요.</p>
+              <p>11월 27일에 고른 두 분께 따로 연락드려요.</p>
+              <div className="cta-row"><a className="button primary" href={`${APP}/start?src=event-1119&next=%2Fprepare`} data-app-link>함께 쓰기 시작하기 <span>↗</span></a></div>
+            </section>
+            {SHOW_OLD_EVENT && (
+            <section className="section wrap om-event">
               <p className="eyebrow">온순간 첫 책 선물 이벤트 · 11월 13일 ~ 26일</p>
               <h2>내가 쓴 하루가,<br />나에게 돌아오는 선물.</h2>
               <p className="lead">11월 13일부터 26일까지 온순간에 남긴 작은 장면들을 모아, 추첨으로 3분께 맞춤 선물책을 만들어 드려요. 두 시선을 한 권에 담아요.</p>
@@ -369,6 +379,7 @@ export default function Home() {
               <div className="cta-row"><a className="button primary" href={START("book-event")} data-app-link>오늘의 한 장면 남기기 <span>↗</span></a></div>
               <p className="fine">이벤트 책은 추첨으로 만드는 시범 제작이에요. 일반 종이책 주문은 준비하고 있어요.</p>
             </section>
+            )}
 
             {/* 10 FAQ */}
             <section id="faq" className="section wrap om-faq">
@@ -376,7 +387,7 @@ export default function Home() {
               <h2>작은 궁금함에, 작은 답을.</h2>
               <details><summary>지금은 무엇부터 할 수 있나요?</summary><p>나에게 한 장면을 남기거나, 일곱 여정 가운데 하나를 골라 이야기 선물 디지털본을 준비할 수 있어요. 둘 다 같은 온순간 계정으로 이어져요. 종이책 주문과 유료 요금제는 준비하고 있어요.</p></details>
               <details><summary>매일 써야 하나요?</summary><p>아니요. 떠오른 날에 한 장면이면 충분해요. 글 한 줄이나 사진 한 장도 하루의 장면이에요.</p></details>
-              <details><summary>돈이 드나요?</summary><p>지금 기록과 이야기 선물 디지털본은 무료 시범이에요. 결제가 열리면 이야기 선물은 준비하는 분이 한 번 결제하고(디지털 이야기책 29,900원 · 양장본 49,000원, 가안), 초대받은 가족은 결제 없이 함께 써요. 확정 조건은 시작 전에 안내해요. 책 선물 이벤트도 결제나 친구 초대가 응모 조건이 아니에요.</p></details>
+              <details><summary>돈이 드나요?</summary><p>지금 기록과 이야기 선물 디지털본은 무료 시범이에요. 결제가 열리면 이야기 선물은 준비하는 분이 한 번 결제하고(디지털 이야기책 29,900원 · 양장본 49,000원, 가안), 초대받은 가족은 결제 없이 함께 써요. 확정 조건은 시작 전에 안내해요. 함께 쓴 이야기 이벤트도 결제는 필요 없어요.</p></details>
               <details><summary>내가 쓴 기록은 누가 보나요?</summary><p>내 기록은 기본적으로 나만 봐요. 일부를 선물로 고를 때는 보낼 내용을 한 번 더 확인해요.</p></details>
               <details><summary>초대받아 쓴 글은 누가 읽나요?</summary><p>선물을 준비하는 분이 모인 글을 함께 읽고 엮어요. 완성한 책은 받는 링크를 가진 분이 읽어요. 링크는 다시 전달될 수 있으니, 꼭 필요한 이야기만 담아 주세요.</p></details>
               <details><summary>초대받은 사람도 가입해야 하나요?</summary><p>초대 링크로 바로 쓸 수 있어요. 쓴 글을 내 기록에도 간직하고 싶을 때만 로그인해요.</p></details>
