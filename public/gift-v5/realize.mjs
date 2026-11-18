@@ -79,5 +79,5 @@ export function realize(html, { app = "https://app.onmoment.kr", page = "hub" } 
   return s;
 }
 
-export const header = () => `<header class="site-header wrap"><a class="brand" href="/gift/"><span class="brand-mark" aria-hidden="true">✳︎</span><span>온순간</span><small>ONMOMENT</small></a><nav class="header-links" aria-label="서비스 안내"><a href="/gift/#journeys">일곱 여정</a><a href="/gift/how/">만드는 방법</a><a class="active" href="/gift/#journeys">나의 소중한 날 찾기 ↗</a></nav></header>`;
+export const header = () => `<header class="site-header wrap"><a class="brand" href="/gift/"><span class="brand-mark om-mark" aria-hidden="true"></span><span>온순간</span><small>ONMOMENT</small></a><nav class="header-links" aria-label="서비스 안내"><a href="/gift/#journeys">일곱 여정</a><a href="/gift/how/">만드는 방법</a><a class="active" href="/gift/#journeys">나의 소중한 날 찾기 ↗</a></nav></header>`;
 export const footer = () => `<footer class="footer wrap"><p>온순간, 가장 나답게.</p><p>디지털본 무료 시범 · 예시 장면은 가상이에요 · <a href="/privacy/">개인정보 처리방침</a> · <a href="/terms/">이용약관</a> · <a href="/">온순간 처음으로</a></p></footer>`;
