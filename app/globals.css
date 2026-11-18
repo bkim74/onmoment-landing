@@ -136,3 +136,6 @@ html { scroll-padding-top: 52px; }
 .view-sheet hr{margin:14px 0;border:0;border-top:1px solid rgba(61,40,23,.14)}
 .two-views-note{margin:14px 0 0;font-size:14px;line-height:1.7;color:#5f5a4d;word-break:keep-all}
 @media (min-width:720px){.two-views-pages{grid-template-columns:1fr 1fr}}
+
+/* 온순간 표식 — /mark.png 를 글자색(currentColor)으로 칠한다 */
+.om-mark{display:inline-block;width:1.05em;height:1.05em;background:currentColor;-webkit-mask:url(/mark.png) center/contain no-repeat;mask:url(/mark.png) center/contain no-repeat;vertical-align:-.15em}

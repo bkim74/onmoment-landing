@@ -126,7 +126,7 @@ export default function CompareClient() {
 
   return (
     <main className="cmp" data-step={s.step} data-order={s.order}>
-      <p className="cmp-brand">✳︎ 온순간 · 화면 비교</p>
+      <p className="cmp-brand"><span className="om-mark" aria-hidden="true"></span> 온순간 · 화면 비교</p>
       {s.step === "intro" && (
         <section className="cmp-q" data-intro>
           <h1>두 가지 첫 화면을 보고, 생각을 들려주세요.</h1>
