@@ -93,6 +93,13 @@ export default function PrivacyPage() {
               <p>초대 베타 안내를 보내기 위해 신청한 이메일 주소를 저장합니다. 다른 목적으로 쓰지 않습니다.</p>
             </div>
             <div>
+              <p className="mb-1 font-medium text-coffee-deep">나의 이야기 초상</p>
+              <p className="mb-4">
+                초상을 만들 때 고른 사진의 그분 위치(사진 속 비율 좌표) · 부르는 이름 · 고른 문장 · 건네는 문장과 완성된 그림을 암호화해 보관합니다.
+                고친 초상은 새 버전으로 남고, 내가 확인한 버전만 간직됩니다. 건넬 때는 확인하고 '함께 보여 주기'를 켠 초상만 받는 분께 보이며, 언제든 거두거나 지울 수 있습니다.
+              </p>
+            </div>
+            <div>
               <p className="mb-1 font-medium text-coffee-deep">이야기 초상 · 나눔 키트 미리 신청</p>
               <p>
                 안내 연락을 위해 이메일 주소, 고른 항목(여정 · 행사 · 관심 있는 것 · 함께 쓰는 사람 수 · 답례 수량)과 적어 주신 글을 저장합니다.
@@ -233,6 +240,10 @@ export default function PrivacyPage() {
               {
                 name: "Google AI — Gemini API (미국)",
                 purpose: "AI 비춤 처리. API를 통한 처리 결과는 Google의 AI 학습에 사용되지 않습니다.",
+              },
+              {
+                name: "OpenAI — Images API (미국)",
+                purpose: "나의 이야기 초상 그림 제작(시범 기간에는 온순간이 정한 분께만). 이번 초상에 직접 고른 사진 속 그분 부분(잘라낸 이미지)과 고른 기록 문장 · 부르는 이름만 전달되고, 다른 기록은 전달되지 않습니다. API로 보낸 자료는 OpenAI의 모델 학습에 쓰이지 않습니다. 다만 악용 방지를 위해 OpenAI가 최대 30일 보관할 수 있습니다(무보관 설정은 적용하지 않았습니다).",
               },
               {
                 name: "Resend (미국)",
