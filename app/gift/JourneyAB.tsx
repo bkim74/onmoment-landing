@@ -1,11 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import type { JourneyAB as J, Scene, Variant } from "@/lib/landing/journeyAB";
+import type { JourneyAB as J, PriceItem, Scene, Variant } from "@/lib/landing/journeyAB";
 import s from "./journeyAB.module.css";
 
-// 여정 A/B 랜딩 한 장. A = 완성된 순간 먼저(결과물 → 만드는 길 → 두 장 → 상담) · B = 내 장면 먼저(가상 장면 고르기 → 두 장 → 결과물 → 상담).
-//   랜딩에서는 개인 문장을 받지 않는다 — 내 이야기는 앱에서 한 번만 쓴다(00_PLAN §7). 상담 신청만 app 의 /api/gift-inquiry 로.
+// 여정 A/B 랜딩 한 장. A = 완성된 순간 먼저(결과물 → 만드는 길 → 두 장 → 가격 → 미리 신청) · B = 내 장면 먼저(가상 장면 고르기 → 두 장 → 결과물 → 가격 → 미리 신청).
+//   랜딩에서는 개인 문장을 받지 않는다 — 내 이야기는 앱에서 한 번만 쓴다(00_PLAN §7). 미리 신청만 app 의 /api/gift-inquiry 로.
 const PROD_APP = "https://app.onmoment.kr";
 function appOrigin(): string {
   if (typeof location === "undefined" || !location.hostname.endsWith(".vercel.app")) return PROD_APP;
@@ -90,13 +90,46 @@ export default function JourneyAB({ journey: j, variant }: { journey: J; variant
         </>
       )}
 
+      <Prices j={j} />
       <Inquiry j={j} variant={variant} app={app} moment={moment} setMoment={setMoment} />
 
       <footer className={s.foot}>
-        <p>이야기 초상과 나눔 키트는 상담으로 함께 정하는 시범 제작이에요. 그림과 장면은 가상 예시예요.</p>
+        <p>이야기 초상과 나눔 키트는 시범 기간 동안 미리 신청을 받아 한 분 한 분 직접 만들어요. 가격은 예시이며, 실제 구성과 견적은 이메일로 안내해요. 그림과 장면은 가상 예시예요.</p>
         <p><a href="/privacy/">개인정보 처리방침</a> · <a href="/terms/">이용약관</a> · <a href={`/gift/${j.key}/`}>이 여정 더 보기</a></p>
       </footer>
     </main>
+  );
+}
+
+const won = (n: number) => `${n.toLocaleString("ko-KR")}원`;
+function PriceList({ items, unit }: { items: PriceItem[]; unit?: string }) {
+  return (
+    <ul className={s.prices}>
+      {items.map((p) => (
+        <li key={p.name}>
+          <div><strong>{p.name}</strong><span>{p.desc}</span></div>
+          <b>{won(p.price)}{unit && <small>{unit}</small>}</b>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+function Prices({ j }: { j: J }) {
+  return (
+    <section className={s.block} data-prices>
+      <h2 className={s.h2}>미리 보는 가격</h2>
+      <p className={s.guide}>이야기 책과 카드(디지털)는 지금 무료로 만들 수 있어요. 이야기 초상과 나눔 키트는 아래처럼 준비해요.</p>
+      <h3 className={s.h3}>이야기 초상</h3>
+      <PriceList items={j.portraits} />
+      {j.kits.length > 0 && (
+        <>
+          <h3 className={s.h3}>나눔 키트 <small>30개부터 · 배송 포함</small></h3>
+          <PriceList items={j.kits} unit=" / 개" />
+        </>
+      )}
+      <p className={s.meta}>예시 가격이에요. 모든 초상은 사람이 직접 확인해 보내 드려요.</p>
+    </section>
   );
 }
 
@@ -115,7 +148,7 @@ function Actions({ start, primary = "한 장면으로 시작하기" }: { start: 
   return (
     <div className={s.actions}>
       <a className={s.ink} href={start}>{primary}</a>
-      <a className={s.quiet} href="#inquiry">초상 · 키트 상담 받기</a>
+      <a className={s.quiet} href="#inquiry">초상 · 키트 미리 신청</a>
     </div>
   );
 }
@@ -191,14 +224,14 @@ function Inquiry({ j, variant, app, moment, setMoment }: { j: J; variant: Varian
     return (
       <section id="inquiry" className={s.block}>
         <h2 className={s.h2}>신청을 받았어요</h2>
-        <p className={s.guide}>적어 주신 이메일로 구성과 일정을 안내해 드릴게요.</p>
+        <p className={s.guide}>적어 주신 이메일로 초상 시안과 구성 · 견적을 보내 드릴게요.</p>
       </section>
     );
   }
   return (
     <section id="inquiry" className={s.block}>
-      <h2 className={s.h2}>초상 · 키트 상담 받기</h2>
-      <p className={s.guide}>어떤 날인지 알려 주시면, 이메일로 구성과 일정을 안내해 드려요.</p>
+      <h2 className={s.h2}>초상 · 키트 미리 신청</h2>
+      <p className={s.guide}>행사 날짜와 인원을 남기시면, 이야기 초상 시안과 키트 구성 · 견적을 이메일로 보내 드려요. 시범 기간에는 온순간이 한 분 한 분 직접 만들어요.</p>
       <form className={s.form} onSubmit={submit}>
         <label className={s.field}>
           <span>어떤 날인가요</span>
@@ -224,9 +257,9 @@ function Inquiry({ j, variant, app, moment, setMoment }: { j: J; variant: Varian
         <input className={s.hp} name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" />
         <label className={s.consent}>
           <input type="checkbox" name="consent" required />
-          <span>상담 연락을 위해 이메일과 적은 내용을 저장하는 데 동의해요. <a href="/privacy/">처리방침</a></span>
+          <span>안내 연락을 위해 이메일과 적은 내용을 저장하는 데 동의해요. <a href="/privacy/">처리방침</a></span>
         </label>
-        <button className={s.ink} type="submit" disabled={state === "sending"}>{state === "sending" ? "보내는 중" : "상담 신청하기"}</button>
+        <button className={s.ink} type="submit" disabled={state === "sending"}>{state === "sending" ? "보내는 중" : "미리 신청하기"}</button>
         {state === "error" && <p className={s.err} role="alert">잠시 연결이 어려워요. 조금 뒤 다시 보내 주세요.</p>}
       </form>
     </section>

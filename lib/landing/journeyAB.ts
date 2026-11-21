@@ -1,10 +1,20 @@
 // 여정 A/B 랜딩 설정 — 네 여정 × A(완성된 순간 먼저) · B(내 장면 먼저). (11-22 · exchange/outbox/2026-11-22_journey-mvp/00_PLAN.md §7)
-//   여정 키 · 행사 id 는 앱 정본(src/lib/giftBook/canon.js)과 같다 — 상담 신청 API 가 이 값만 받는다.
+//   여정 키 · 행사 id 는 앱 정본(src/lib/giftBook/canon.js)과 같다 — 미리 신청 API 가 이 값만 받는다.
 //   그림(portrait)은 지금 가상 예시 사진 · 이야기 초상 완성본이 오면 이 칸만 바꾼다.
 //   장면 · 문장은 모두 가상 예시다(실제 사용자 말 아님).
 
 export type Scene = { who: string; text: string; send: string }; // send = 이 장면에서 건넬 한 문장(가상)
 export type Outcome = { name: string; desc: string };
+export type PriceItem = { name: string; desc: string; price: number };
+
+// 예시 가격(가설 · 견적 전) — 품질은 최상: 사람이 모든 초상을 확인 · 한 번 고쳐 드림 · 호텔 40수 수건 · 스페셜티 드립백 · 원목 액자
+const P_DIGITAL: PriceItem = { name: "디지털 초상", desc: "원화 파일과 인쇄용 파일 · 사람이 확인하고 한 번 고쳐 드려요", price: 59000 };
+const P_FRAME: PriceItem = { name: "액자 초상", desc: "8×10 아트지 인쇄 · 원목 액자 · 선물 포장 · 배송 포함", price: 119000 };
+const P_POSTCARD: PriceItem = { name: "초상 엽서 세트", desc: "디지털 초상 + 두꺼운 지류 엽서 5장", price: 79000 };
+const K_CARD: PriceItem = { name: "이야기 카드 나눔", desc: "고급지 카드에 초상과 한 문장 · QR · 봉투", price: 2500 };
+const K_DRIP: PriceItem = { name: "드립백 나눔", desc: "스페셜티 드립백 2개 · 이야기 카드 · 종이 상자", price: 6900 };
+const K_TOWEL: PriceItem = { name: "수건 나눔", desc: "호텔 40수 수건에 초상 상징 자수 · 이야기 카드 · 상자", price: 15000 };
+const K_HEART: PriceItem = { name: "마음 나눔", desc: "수건 · 드립백 2개 · 이야기 카드 · 선물 상자", price: 19000 };
 export type JourneyAB = {
   key: "parents" | "beginnings" | "couple" | "self";
   label: string;
@@ -16,6 +26,8 @@ export type JourneyAB = {
   b: { question: string; scenes: Scene[] };
   cards: { gone: string | null; kept: string };
   moments: { id: string; label: string }[];
+  portraits: PriceItem[]; // 이야기 초상 — 원가 · 가격 가설: exchange/outbox/2026-11-22_journey-mvp/04_PRICING_COST_v1.md
+  kits: PriceItem[]; // 나눔 키트(개당 · 30개부터)
   group: boolean; // 함께 쓰는 사람 수를 묻는가
   kit: boolean; // 답례 수량을 묻는가
 };
@@ -54,6 +66,8 @@ export const JOURNEY_AB: Record<JourneyAB["key"], JourneyAB> = {
       { id: "golden", label: "금혼 · 50주년" },
       { id: "everyday", label: "평범한 오늘" },
     ],
+    portraits: [P_DIGITAL, P_FRAME],
+    kits: [K_CARD, K_TOWEL, K_HEART],
     group: true,
     kit: true,
   },
@@ -87,6 +101,8 @@ export const JOURNEY_AB: Record<JourneyAB["key"], JourneyAB> = {
       { id: "everyday", label: "평범한 오늘" },
       { id: "other", label: "그 밖의 날 (백일 등)" },
     ],
+    portraits: [P_DIGITAL, P_FRAME],
+    kits: [K_CARD, K_DRIP, K_HEART],
     group: true,
     kit: true,
   },
@@ -121,6 +137,8 @@ export const JOURNEY_AB: Record<JourneyAB["key"], JourneyAB> = {
       { id: "everyday", label: "평범한 오늘" },
       { id: "other", label: "그 밖의 날 (결혼식 등)" },
     ],
+    portraits: [P_DIGITAL, P_FRAME],
+    kits: [K_CARD, K_DRIP, K_HEART],
     group: false,
     kit: true,
   },
@@ -155,6 +173,8 @@ export const JOURNEY_AB: Record<JourneyAB["key"], JourneyAB> = {
       { id: "transition", label: "새 출발" },
       { id: "retirement", label: "나의 은퇴" },
     ],
+    portraits: [P_DIGITAL, P_POSTCARD, P_FRAME],
+    kits: [],
     group: false,
     kit: false,
   },
