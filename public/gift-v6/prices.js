@@ -18,7 +18,7 @@ window.ONMOMENT_PRICES = {
     capsule:{label:'18살 타임캡슐',use:'하객이 남긴 첫해 한 줄을 봉인해 열여덟 살 생일에 우편으로 보내요.',price:29000,unit:'set'},
     mail_year:{label:'1년 뒤 나에게 우편 카드',use:'오늘의 내 말이 1년 뒤 종이 카드로 도착해요.',price:4900,unit:'set'},
     memory_qr:{label:'기억 방명록 QR 스탠드',use:'이름 대신 그분과의 한 장면을 남기면, 가족에게 기억 책으로 모여요.',price:19000,unit:'set'},
-    parents_voice:{label:'부모님 목소리 한 장',use:'자녀가 보낸 질문 세 개에 부모님이 말로 답하면, 그 말 그대로 책의 첫 장이 돼요.',price:19000,unit:'set'},
+    parents_voice:{label:'부모님께 듣는 이야기',use:'질문 세 개에 말로 답하시면, 부모님 말 그대로 책의 첫 장이 돼요.',price:19000,unit:'set'},
     thanks_reading:{label:'감사의 여정 낭독',use:'그간의 수고에 대한 자녀 · 손주의 감사를 미리 모아, 그날 차례대로 읽는 순서표와 사회자 대본으로 드려요.',price:19000,unit:'set'},
     couple_reveal:{label:'서로 열기 카드',use:'두 사람이 각자 쓴 한 줄이 함께 열리는 두 면 카드예요. 디지털은 기본으로 드려요.',price:9900,unit:'set'},
     farewell_box:{label:'송별 상자',use:'동료마다 한 장씩 실물 카드와 함께한 시간 초상을 상자에 담아요. 회사 결제용 견적서도 드려요.',price:59000,unit:'set'},
