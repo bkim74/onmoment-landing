@@ -5,6 +5,16 @@ import { writeFileSync } from "node:fs";
 import { readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import vm from "node:vm";
+// 행사 패키지 옵션 자세히 보기의 단일 출처 = lib/landing/optionDetails.json → public/gift-v6/prices.js 끝의 표시 구간(직접 고치지 않는다)
+{
+  const pf = fileURLToPath(new URL("../../public/gift-v6/prices.js", import.meta.url));
+  const det = JSON.parse(readFileSync(fileURLToPath(new URL("../../lib/landing/optionDetails.json", import.meta.url)), "utf8"));
+  delete det._note;
+  const block = `/*om:details:start — lib/landing/optionDetails.json 에서 build_gift_v5.mjs 가 채워요. 직접 고치지 않아요.*/\nwindow.ONMOMENT_PRICES.details = ${JSON.stringify(det)};\n/*om:details:end*/\n`;
+  let src = readFileSync(pf, "utf8");
+  src = /\/\*om:details:start[\s\S]*?\/\*om:details:end\*\/\n?/.test(src) ? src.replace(/\/\*om:details:start[\s\S]*?\/\*om:details:end\*\/\n?/, () => block) : src.replace(/\n*$/, "\n") + block;
+  writeFileSync(pf, src);
+}
 const pub = new URL("../../public/gift-v5/", import.meta.url);
 // 이야기 초상 예시의 단일 출처 = public/gift-v6/journeys.js (화면에서는 같은 파일을 읽는다)
 { const ctx = { window: {} }; vm.runInNewContext(readFileSync(fileURLToPath(new URL("../../public/gift-v6/journeys.js", import.meta.url)), "utf8"), ctx); globalThis.ONMOMENT_JOURNEYS = ctx.window.ONMOMENT_JOURNEYS; }
