@@ -90,3 +90,26 @@
 .reading-entry h2{font-size:24px}
 .reading-entry p{font-size:16px;line-height:1.7;max-width:640px}
 .reading-entry .button{justify-self:start;min-height:52px}
+
+/* 이야기 초상 예시 — 예시 책 바로 아래, 첫 장면 한 칸(정사각) + 원문 · 건네는 말 */
+.journey-portrait{padding-block:56px 48px;background:var(--paper)}
+.portrait-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 18px;margin-bottom:26px}
+.portrait-head .eyebrow{flex-basis:100%;margin:0}
+.portrait-head h2{font-size:32px;line-height:1.5}
+.portrait-sample{font-size:14px;color:var(--muted)}
+.portrait-grid{display:grid;grid-template-columns:minmax(0,420px) minmax(0,1fr);gap:34px;align-items:start}
+.portrait-art{margin:0;border:1px solid var(--line);border-radius:6px;overflow:hidden;background:var(--sheet)}
+.portrait-art img{display:block;width:100%;height:auto;object-fit:cover}
+.portrait-scenes{display:flex;gap:10px;margin-bottom:18px}
+.portrait-scenes button{min-width:44px;min-height:44px;border:1px solid var(--line);border-radius:999px;background:var(--sheet);font:400 17px var(--serif);color:var(--ink)}
+.portrait-scenes button[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--sheet)}
+.portrait-source{font:400 19px/1.9 var(--serif);color:var(--ink)}
+.portrait-by{margin-top:8px;font-size:15px;color:var(--muted)}
+.portrait-gift{margin-top:22px;padding:16px 18px;border-left:3px solid var(--wine);background:var(--sheet)}
+.portrait-gift small{display:block;font-size:14px;color:var(--wine);margin-bottom:4px}
+.portrait-gift p{font:400 18px/1.85 var(--serif)}
+.portrait-private{margin-top:16px;font-size:15px;color:var(--muted)}
+.portrait-links{display:flex;flex-wrap:wrap;gap:6px 24px;margin-top:26px}
+.portrait-links .text-button{min-height:44px;display:inline-flex;align-items:center}
+@container (max-width:760px){.portrait-grid{grid-template-columns:1fr;gap:22px}.portrait-art{max-width:420px}.journey-portrait{padding-block:40px 36px}.portrait-head h2{font-size:27px}}
+@media (max-width:760px){.portrait-grid{grid-template-columns:1fr;gap:22px}.portrait-art{max-width:420px}}

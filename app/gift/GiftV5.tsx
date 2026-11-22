@@ -13,6 +13,7 @@ export default function GiftV5({ page }: { page: string }) {
       <div id="stage">
         <div id="app" data-gift-root data-page={page} dangerouslySetInnerHTML={{ __html: data.header + body + data.footer }} />
       </div>
+      {page !== "hub" && page !== "how" && <script src="/gift-v6/journeys.js" />}
       <script type="module" src="/gift-v5/client.mjs" />
     </>
   );
