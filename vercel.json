@@ -17,16 +17,6 @@
   ],
   "redirects": [
     {
-      "source": "/journeys/teen",
-      "destination": "/gift/beginnings/",
-      "permanent": true
-    },
-    {
-      "source": "/journeys/teen/",
-      "destination": "/gift/beginnings/",
-      "permanent": true
-    },
-    {
       "source": "/journeys/baby",
       "destination": "/gift/beginnings/",
       "permanent": true
@@ -68,12 +58,12 @@
     },
     {
       "source": "/journeys/pilgrim",
-      "destination": "/gift/together/",
+      "destination": "/gift/self/",
       "permanent": true
     },
     {
       "source": "/journeys/pilgrim/",
-      "destination": "/gift/together/",
+      "destination": "/gift/self/",
       "permanent": true
     },
     {
