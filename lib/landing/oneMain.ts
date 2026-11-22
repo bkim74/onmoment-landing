@@ -32,8 +32,7 @@ export const OLD_TO_JOURNEY: Record<string, { key: string; note: string }> = {
   parents: { key: "parents", note: "" },
   couple: { key: "couple", note: "" },
   baby: { key: "beginnings", note: "출산·육아" },
-  teen: { key: "beginnings", note: "사춘기" },
-  pilgrim: { key: "together", note: "여행·순례" },
+  pilgrim: { key: "self", note: "순례·리트릿 · 돌아온 뒤의 나" },
   unsure: { key: "self", note: "" },
   retire: { key: "self", note: "나의 은퇴" },
 };
