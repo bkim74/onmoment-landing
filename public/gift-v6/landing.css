@@ -45,3 +45,16 @@
 .om-gift-v6{min-height:100vh;overflow-x:hidden}
 
 .om-gift-v6 .member-lines .source-by,.om-gift-v6 .member-lines .source-quote{font-size:1.0625rem;line-height:1.65}
+
+/* 이야기 초상이 만들어지는 순서 — 모든 여정 공통(사진 표시 · 대목 고르기 · 그림 결 · 건네는 말과 나에게 남기는 말) */
+.om-gift-v6 .pitch-section{background:var(--soft2)}
+.om-gift-v6 .pitch-two{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:40px}
+.om-gift-v6 .pitch-col{background:var(--white);border:1px solid var(--line);border-radius:6px;padding:24px 26px}
+.om-gift-v6 .pitch-col h3{font-size:20px;margin-bottom:8px}
+.om-gift-v6 .pitch-col p{color:var(--muted);font-size:16px;line-height:1.8}
+.om-gift-v6 .pitch-trust{margin-top:24px;padding-left:14px;border-left:3px solid var(--accent);font-size:16px;line-height:1.8;color:var(--ink)}
+.om-gift-v6 .pitch-uses{margin-top:40px}
+.om-gift-v6 .pitch-uses h3{font-size:20px;margin-bottom:12px}
+.om-gift-v6 .pitch-uses ul{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:0;padding:0;list-style:none}
+.om-gift-v6 .pitch-uses li{border-top:1px solid var(--line);padding-top:12px;font-size:16px;line-height:1.7}
+@media(max-width:760px){.om-gift-v6 .pitch-two,.om-gift-v6 .pitch-uses ul{grid-template-columns:1fr}.om-gift-v6 .pitch-two{margin-top:30px}.om-gift-v6 .pitch-col{padding:20px 20px}.om-gift-v6 .pitch-uses{margin-top:30px}}
