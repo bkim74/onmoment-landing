@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import Script from "next/script";
 import data from "@/lib/landing/giftV5.json";
 
-// 독서모임에서 함께 쓰기(2026-11-16) — '우리의 시간을 남기기' 안의 전용 입구. 메인에 여덟째 카드 · 별도 서비스 메뉴는 두지 않는다.
+// 독서모임에서 함께 쓰기(2026-11-16) — '우리 모임 이야기' 안의 전용 입구. 메인에 여덟째 카드 · 별도 서비스 메뉴는 두지 않는다.
 //   공통 경험: 내 삶의 한 장면을 남기고 → 다시 바라보고 → 원하는 만큼 나누고 → 원할 때 이야기책으로 간직한다. 책은 내 이야기를 떠올리는 계기.
 //   '독서모임'(만나는 우리) 과 '이야기책 만들기'(결과물) 를 나눠 말한다. 예시는 가상.
 const APP = process.env.NEXT_PUBLIC_APP_ORIGIN ?? "https://app.onmoment.kr";
@@ -34,7 +34,7 @@ export default function ReadingClubPage() {
           <main id="content" className="campaign-hub one-main" tabIndex={-1}>
             <section className="hero wrap journey-hub">
               <div>
-                <p className="eyebrow"><a href="/gift/together/">우리의 시간을 남기기</a> · 독서모임에서 함께 쓰기</p>
+                <p className="eyebrow"><a href="/gift/together/">우리 모임 이야기</a> · 독서모임에서 함께 쓰기</p>
                 <h1>같은 책을 읽고,<br />서로 다른 삶의 이야기를 만나요.</h1>
                 <p className="lead">책을 읽으며 떠오른 내 경험을 남겨보세요.<br />나누고 싶은 만큼만 모임에 전할 수 있어요.</p>
                 <div className="cta-row">

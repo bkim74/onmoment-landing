@@ -97,7 +97,7 @@ window.ONMOMENT_JOURNEYS = {
   },
   "beginnings": {
     "key": "beginnings",
-    "label": "우리 아이 첫 이야기",
+    "label": "우리 아이 이야기",
     "occasionLabel": "백일 · 첫돌 · 아이의 첫해",
     "eyebrow": "처음의 시간을 함께 담아요",
     "headlineA": "너의 처음과,\n나의 처음을 한 장에.",
@@ -175,7 +175,7 @@ window.ONMOMENT_JOURNEYS = {
   },
   "couple": {
     "key": "couple",
-    "label": "평범한 날의 사랑",
+    "label": "두 사람 이야기",
     "occasionLabel": "연인 · 부부 · 우리의 기념일",
     "eyebrow": "둘만 아는 평범한 날",
     "headlineA": "우리다운 선물은,\n평범한 날에 있었어.",
@@ -256,7 +256,7 @@ window.ONMOMENT_JOURNEYS = {
   },
   "self": {
     "key": "self",
-    "label": "오늘의 나",
+    "label": "나의 이야기",
     "occasionLabel": "나의 생일 · 새 출발 · 오늘",
     "eyebrow": "나에게 주는 한 장의 선물",
     "headlineA": "지금의 나를,\n곁에 두고 싶은 한 장으로.",

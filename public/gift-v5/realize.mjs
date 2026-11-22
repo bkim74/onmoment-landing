@@ -68,7 +68,7 @@ export function realize(html, { app = "https://app.onmoment.kr", page = "hub" } 
   let s = html;
   for (const [a, b] of SAY) s = s.split(a).join(b);
   s = s.replace(DECISION_ASIDE, NOW_ASIDE).replace(SCOPE, NOW_SCOPE).replace(CONTINUITY, NOW_CONTINUITY);
-  // 독서모임 입구(11-16) — '우리의 시간을 남기기' 안에서만. 메인에 여덟째 카드 · 별도 메뉴는 두지 않는다
+  // 독서모임 입구(11-16) — '우리 모임 이야기' 안에서만. 메인에 여덟째 카드 · 별도 메뉴는 두지 않는다
   // 11-16 지시서 D3: 이번 배포에서 독서모임 입구를 뺀다(READING_ENTRY · /gift/together/reading/ 소스는 보존). 다시 켜려면 아래 false 를 지운다
   if (false && page === "together") s = s.replace('<section class="occasion-panel wrap" id="journey-occasion">', `${READING_ENTRY}<section class="occasion-panel wrap" id="journey-occasion">`);
   if (page === "hub") s = s.replace(/(<section class="section wrap">(?:(?!<\/section>)[\s\S])*?한 장면에서, 한 권까지[\s\S]*?)(<\/section>)/, `$1${HOW_ENTRY}$2`);
