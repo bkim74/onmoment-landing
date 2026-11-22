@@ -25,6 +25,8 @@ window.ONMOMENT_PRICES = {
     group_book:{label:'한 해 모임 책',use:'각자 한 쪽과 단체 초상을 한 권으로. 디지털 책은 기본, 인쇄본은 한 권씩.',price:19000,unit:'per',min:5,step:1},
     teen_desk:{label:'책상 위 접이 카드',use:'책상 위에 세워 두고 보는 접이 카드예요.',price:9900,unit:'set'}
   },
+  // 여정별 한 줄 고민 문구 — 패키지 화면(landing.js)과 메인 #packages 카드가 같은 문장을 쓴다
+  pain: {parents:'더 늦기 전에, 부모님 말로. 그간의 수고에 자녀들의 감사를 미리 모아 그날 낭독으로.',beginnings:'사진은 수천 장인데, 이야기는 없을 때. 첫해의 한 줄을 열여덟 살의 너에게.',teen:'잔소리 대신 놓아두는 한 장. 말이 줄어든 요즘에도 마음은 건너가요.',retire:'뻔한 상패 대신, 함께한 장면들로. 동료마다 한 장씩, 송별 상자에 담아요.',together:'한 해를 각자의 한 쪽으로. 같은 날을 서로 다르게 본 말이 한 권이 돼요.',couple:'올해 기념일은 서로 열어 보는 한 줄로. 꽃과 식사 사이에 둘만의 말을.',self:'그냥 지나가는 하루 대신, 1년 뒤의 나에게 도착하는 한 장.',remember:'경황없는 날에도, 그분과의 장면은 남도록. 이름 대신 한 장면을 남기는 방명록.'},
   bundles: {
     parents:{recommended:['parents_voice','thanks_reading','favor'],more:['wall','book','frame','live']},
     beginnings:{recommended:['capsule','favor'],more:['reading','book','frame','live']},
