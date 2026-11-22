@@ -1,0 +1,219 @@
+{
+  "source": ".om-verify/evC/src/lib/giftBook/canon.js",
+  "syncedAt": "2026-11-22T10:31:44.092Z",
+  "journeys": [
+    {
+      "key": "parents",
+      "label": "부모님께 감사하기",
+      "short": "가족마다 기억하는 그날을 모아, 오래 미뤄둔 고마움을 건네요.",
+      "moments": [
+        {
+          "id": "everyday",
+          "label": "평범한 오늘"
+        },
+        {
+          "id": "sixty",
+          "label": "환갑"
+        },
+        {
+          "id": "seventy",
+          "label": "칠순"
+        },
+        {
+          "id": "eighty",
+          "label": "팔순"
+        },
+        {
+          "id": "anniversary",
+          "label": "부모님 결혼기념일"
+        },
+        {
+          "id": "silver",
+          "label": "은혼 · 25주년"
+        },
+        {
+          "id": "golden",
+          "label": "금혼 · 50주년"
+        }
+      ]
+    },
+    {
+      "key": "couple",
+      "label": "부부·연인에게 마음 전하기",
+      "short": "부부·연인의 기념일. 우리만 아는 장면으로 내 마음을 전해요.",
+      "moments": [
+        {
+          "id": "everyday",
+          "label": "평범한 오늘"
+        },
+        {
+          "id": "anniversary",
+          "label": "부부 결혼기념일"
+        },
+        {
+          "id": "couple-day",
+          "label": "연인의 기념일"
+        },
+        {
+          "id": "birthday",
+          "label": "소중한 이의 생일"
+        }
+      ]
+    },
+    {
+      "key": "retire",
+      "label": "함께한 시간에 감사하기",
+      "short": "은퇴·송별·활동 마무리. 함께해서 힘이 되었던 장면을 건네요.",
+      "moments": [
+        {
+          "id": "everyday",
+          "label": "평범한 오늘"
+        },
+        {
+          "id": "retirement",
+          "label": "은퇴·퇴임"
+        },
+        {
+          "id": "new-job",
+          "label": "이직·전근"
+        },
+        {
+          "id": "moving",
+          "label": "해외 이주 송별"
+        },
+        {
+          "id": "leader",
+          "label": "모임 리더·운영진 활동 마무리"
+        },
+        {
+          "id": "friend-start",
+          "label": "친구의 결혼·새 출발"
+        }
+      ]
+    },
+    {
+      "key": "beginnings",
+      "label": "자녀에게 건네기",
+      "short": "출산·첫돌·사춘기·졸업·독립·결혼. 아이와 함께한 기억과 응원을 부모의 말로 담아요.",
+      "moments": [
+        {
+          "id": "everyday",
+          "label": "평범한 오늘"
+        },
+        {
+          "id": "birth",
+          "label": "출산"
+        },
+        {
+          "id": "first-birthday",
+          "label": "첫돌"
+        },
+        {
+          "id": "adolescence",
+          "label": "사춘기"
+        },
+        {
+          "id": "graduation",
+          "label": "졸업"
+        },
+        {
+          "id": "independence",
+          "label": "독립·첫 출발"
+        },
+        {
+          "id": "wedding",
+          "label": "결혼"
+        }
+      ]
+    },
+    {
+      "key": "together",
+      "label": "우리의 시간을 남기기",
+      "short": "독서모임·동창회·송년회·여행, 함께한 어느 날이든. 같은 시간을 각자의 시선으로 남겨요.",
+      "moments": [
+        {
+          "id": "everyday",
+          "label": "평범한 오늘"
+        },
+        {
+          "id": "book-club",
+          "label": "독서모임"
+        },
+        {
+          "id": "year-end",
+          "label": "송년회·한 해 마무리"
+        },
+        {
+          "id": "anniversary",
+          "label": "창립기념·활동 주년"
+        },
+        {
+          "id": "reunion",
+          "label": "동창회·오랜 친구의 재회"
+        },
+        {
+          "id": "family",
+          "label": "가족 대모임"
+        },
+        {
+          "id": "course",
+          "label": "리트릿·성인 교육 수료"
+        },
+        {
+          "id": "trip",
+          "label": "여행·순례·등산·도전 완주"
+        }
+      ]
+    },
+    {
+      "key": "remember",
+      "label": "함께 기억하기",
+      "short": "추모·기일·삶을 기억하는 모임. 원하는 때, 원하는 범위로 함께 기억해요.",
+      "moments": [
+        {
+          "id": "everyday",
+          "label": "문득 생각나는 날"
+        },
+        {
+          "id": "remembrance",
+          "label": "삶을 기억하는 모임"
+        },
+        {
+          "id": "anniversary",
+          "label": "기일"
+        },
+        {
+          "id": "family-record",
+          "label": "가족의 기억을 다음 세대에"
+        }
+      ]
+    },
+    {
+      "key": "self",
+      "label": "나에게 건네기",
+      "short": "생일·은퇴·한 해 마무리·인생 전환. 지나온 나를 지금의 시선으로 읽어요.",
+      "moments": [
+        {
+          "id": "everyday",
+          "label": "평범한 오늘"
+        },
+        {
+          "id": "birthday",
+          "label": "나의 생일"
+        },
+        {
+          "id": "retirement",
+          "label": "나의 은퇴"
+        },
+        {
+          "id": "year-end",
+          "label": "한 해 마무리"
+        },
+        {
+          "id": "transition",
+          "label": "인생 전환의 순간"
+        }
+      ]
+    }
+  ]
+}

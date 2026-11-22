@@ -91,10 +91,10 @@
       if(a.getAttribute('href').startsWith('#'))return;
       const u=new URL(a.href);
       if(u.origin!==location.origin)return;
-      if(u.pathname!=='/'&&!/^\/journeys\/(teen|couple|parents|retire|baby|pilgrim|unsure)\/$/.test(u.pathname)&&u.pathname!=='/keepsakes/')return;
+      if(u.pathname!=='/'&&!/^\/journeys\/(teen|couple|parents|retire|baby|pilgrim|unsure)\/$/.test(u.pathname)&&!/^\/gift\/(parents|couple|beginnings|self|retire)\/$/.test(u.pathname)&&u.pathname!=='/keepsakes/')return;
       u.searchParams.delete('code');
       u.searchParams.set('way',mode);
-      if(u.pathname==='/journeys/parents/'||(u.pathname==='/keepsakes/'&&baseJourney?.journey==='parents'))u.searchParams.set('occasion',parentOccasion);else u.searchParams.delete('occasion');
+      if(u.pathname==='/journeys/parents/'||u.pathname==='/gift/parents/'||(u.pathname==='/keepsakes/'&&baseJourney?.journey==='parents'))u.searchParams.set('occasion',parentOccasion);else u.searchParams.delete('occasion');
       if(u.pathname==='/keepsakes/'&&baseJourney?.journey)u.searchParams.set('journey',baseJourney.journey);
       a.href=u.toString();
     });

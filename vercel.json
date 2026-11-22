@@ -4,9 +4,87 @@
     {
       "source": "/(.*)",
       "headers": [
-        { "key": "X-Robots-Tag", "value": "noai, noimageai" },
-        { "key": "Link", "value": "<https://onmoment.kr/terms/>; rel=\"license\"" }
+        {
+          "key": "X-Robots-Tag",
+          "value": "noai, noimageai"
+        },
+        {
+          "key": "Link",
+          "value": "<https://onmoment.kr/terms/>; rel=\"license\""
+        }
       ]
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/journeys/teen",
+      "destination": "/gift/beginnings/",
+      "permanent": true
+    },
+    {
+      "source": "/journeys/teen/",
+      "destination": "/gift/beginnings/",
+      "permanent": true
+    },
+    {
+      "source": "/journeys/baby",
+      "destination": "/gift/beginnings/",
+      "permanent": true
+    },
+    {
+      "source": "/journeys/baby/",
+      "destination": "/gift/beginnings/",
+      "permanent": true
+    },
+    {
+      "source": "/journeys/couple",
+      "destination": "/gift/couple/",
+      "permanent": true
+    },
+    {
+      "source": "/journeys/couple/",
+      "destination": "/gift/couple/",
+      "permanent": true
+    },
+    {
+      "source": "/journeys/parents",
+      "destination": "/gift/parents/",
+      "permanent": true
+    },
+    {
+      "source": "/journeys/parents/",
+      "destination": "/gift/parents/",
+      "permanent": true
+    },
+    {
+      "source": "/journeys/retire",
+      "destination": "/gift/self/",
+      "permanent": true
+    },
+    {
+      "source": "/journeys/retire/",
+      "destination": "/gift/self/",
+      "permanent": true
+    },
+    {
+      "source": "/journeys/pilgrim",
+      "destination": "/gift/together/",
+      "permanent": true
+    },
+    {
+      "source": "/journeys/pilgrim/",
+      "destination": "/gift/together/",
+      "permanent": true
+    },
+    {
+      "source": "/journeys/unsure",
+      "destination": "/gift/self/",
+      "permanent": true
+    },
+    {
+      "source": "/journeys/unsure/",
+      "destination": "/gift/self/",
+      "permanent": true
     }
   ]
 }

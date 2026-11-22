@@ -18,13 +18,13 @@ export const MAIN_JOURNEYS: MainJourney[] = [
 /** 여정마다 나에게 남기기(11-16 범님: 여정은 하나) — 이야기 선물의 일곱 여정이 유일한 여정이다. 예전 개인 기록 주제는 이 여정 안의 상황으로 들어갔다.
  *  href: 나에게 남기는 쪽 안내가 있으면 그 페이지(예전 주제 페이지), 없으면 여정 상세 */
 export const SELF_SIDE: { key: string; line: string; href: string }[] = [
-  { key: "parents", line: "내가 만난 당신을, 한 권에 담아서.", href: "/journeys/parents/" },
-  { key: "couple", line: "같은 하루, 서로 다른 우리.", href: "/journeys/couple/" },
+  { key: "parents", line: "내가 만난 당신을, 한 권에 담아서.", href: "/gift/parents/" },
+  { key: "couple", line: "같은 하루, 서로 다른 우리.", href: "/gift/couple/" },
   { key: "retire", line: "함께한 시간에서 받은 것을, 내 말로.", href: "/gift/retire/" },
-  { key: "beginnings", line: "너의 처음 곁에, 나의 처음도 있었어. 사춘기 아이 곁의 나도.", href: "/journeys/baby/" },
-  { key: "together", line: "길에서 만난 나를, 일상에서도 만나도록.", href: "/journeys/pilgrim/" },
+  { key: "beginnings", line: "너의 처음 곁에, 나의 처음도 있었어. 사춘기 아이 곁의 나도.", href: "/gift/beginnings/" },
+  { key: "together", line: "길에서 만난 나를, 일상에서도 만나도록.", href: "/gift/together/" },
   { key: "remember", line: "기억하는 마음을, 조용히 남겨 두어요.", href: "/gift/remember/" },
-  { key: "self", line: "무엇이 될지 몰라도, 오늘의 나부터.", href: "/journeys/unsure/" },
+  { key: "self", line: "무엇이 될지 몰라도, 오늘의 나부터.", href: "/gift/self/" },
 ];
 
 /** 예전 주제 페이지(/journeys/<예전 키>/) → 지금의 여정. 주소는 그대로 열리고, 맨 위에 새 여정으로 가는 안내를 단다 */
