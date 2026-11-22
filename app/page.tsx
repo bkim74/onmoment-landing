@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Script from "next/script";
 import { MAIN_JOURNEYS, SELF_SIDE } from "@/lib/landing/oneMain";
+import { getPackages } from "@/lib/landing/packages";
 
 // 하나의 메인(2026-11-16 전달서) — 이야기 선물을 앞에, 예전 메인의 개인 기록 · 이벤트 · 권리 안내를 같은 브랜드 안에 흡수한다.
 //   순서(11-16 하나의 이야기): 선물의 모습 → 할 일 → 완성될 한 권 → 일곱 여정 → 건네는 한 쪽 · 나에게 남는 한 쪽 → 받는 날 → 지금 쓸 수 있는 것 · 가격 → 나에게도 남는 기록 → 이벤트 · FAQ → 마무리.
@@ -14,7 +15,7 @@ const SHOW_BOOK = false;
 // 지난 책 선물 이벤트(11/13~19 응모 · 11/20 추첨) — 11-19 종료, 표시만 끔
 const SHOW_OLD_EVENT = false;
 // 길잡이 — 긴 한 페이지의 구간들(보이는 구간만 · 순서대로)
-const NAV_MAP: [string, string][] = [["how", "함께 쓰는 법"], ["journeys", "여정 고르기"], ["one-story", "하나의 이야기"], ["receive", "받는 날"], ["offering", "가격"], ["book-event", "이벤트"], ["faq", "묻는 것"]];
+const NAV_MAP: [string, string][] = [["how", "함께 쓰는 법"], ["packages", "선물 패키지"], ["journeys", "여정 고르기"], ["one-story", "하나의 이야기"], ["receive", "받는 날"], ["offering", "가격"], ["book-event", "이벤트"], ["faq", "묻는 것"]];
 
 const ONE_STORY_STEPS: { label: string; sub: string; href: string }[] = [
   { label: "기다림", sub: "우리 아이 이야기", href: "/gift/beginnings/" },
@@ -71,6 +72,7 @@ export default function Home() {
                 <p className="lead">함께한 장면과 그때의 마음을 내 말로 남겨보세요.<br />그중 전하고 싶은 만큼 골라, 이야기 선물로 건네세요.</p>
                 <div className="cta-row">
                   <a className="button primary" href="#journeys">이야기 선물 준비하기 <span>↗</span></a>
+                  <a className="button" href="#packages">선물 패키지 보기</a>
                   <a className="button" href={RECORDS} data-app-link>내 기록</a>
                 </div>
                 <p className="fine">한 문장부터 · 내 말 그대로 · 원할 때 책으로</p>
@@ -80,6 +82,26 @@ export default function Home() {
                 <div className="image-note"><p>너를 이야기하다 나를 알게 되고,<br />네 이야기를 읽다가 나를 만난다.</p><span>찬연한 너와 나의 이야기.</span></div>
                 <figcaption>제작 방향 이미지 · 실제 사양은 별도 확인</figcaption>
               </figure>
+            </section>
+
+            {/* 1-2 온순간 선물 패키지 — 히어로 바로 뒤. 카드 데이터는 lib/landing/packages.ts(prices.js 단일 출처) */}
+            <section id="packages" className="section wrap om-pkgs">
+              <div className="section-head">
+                <div><p className="eyebrow">온순간 선물 패키지</p><h2>그날을 위한, 우리만의 이야기 선물.</h2></div>
+                <p>가족 · 동료의 실제 한 줄과 그분을 닮은 이야기 초상으로 — 행사 날 펼쳐지고, 손에 들려 가고, 한 권으로 남아요.</p>
+              </div>
+              <ul className="om-pkg-row">
+                {getPackages().map((p) => (
+                  <li key={p.key} className="om-pkg-card">
+                    <img src={p.img} width={280} height={280} alt="" loading="lazy" />
+                    <h3>{p.name}</h3>
+                    <p className="om-pkg-pain">{p.pain}</p>
+                    <ul className="om-pkg-chips">{p.chips.map((c) => <li key={c}>{c}</li>)}</ul>
+                    <p className="om-pkg-price"><small>기본 무료 · 추천 구성 예시</small> {p.from.toLocaleString("ko-KR")}원</p>
+                    <a className="om-pkg-link" href={`/gift/${p.key}/a/`}>패키지 보기 →<span className="om-sr"> · {p.name}</span></a>
+                  </li>
+                ))}
+              </ul>
             </section>
 
             {/* 2 각자의 자리에서 할 일 — 가장 먼저(범님 11-16: 효능감은 '내가 무엇을 하면 되는지'에서 시작한다) */}
@@ -330,15 +352,7 @@ export default function Home() {
                   <p>지금은 무료 시범 운영이에요. 결제가 열리기 전에 먼저 알려 드려요.</p>
                 </div>
               </div>
-              <nav className="om-packages" aria-label="여정별 선물 패키지">
-                <h3>여정별 선물 패키지 <span className="om-price-note">이야기 초상 · 실물 구성 · 예시 가격</span></h3>
-                <ul>
-                  {[["parents", "부모님 이야기"], ["beginnings", "우리 아이 이야기"], ["couple", "두 사람 이야기"], ["self", "나의 이야기"], ["retire", "함께한 시간 이야기"], ["together", "우리 모임 이야기"], ["remember", "함께 기억하는 이야기"]].map(([k, n]) => (
-                    <li key={k}><a href={`/gift/${k}/a/`}>{n} 패키지 →</a></li>
-                  ))}
-                  <li><a href="/gift/teen/a/">사춘기 아이와 함께 패키지 →</a></li>
-                </ul>
-              </nav>
+              <p className="om-pkg-back"><a href="#packages">여정별 선물 패키지는 위에서 볼 수 있어요 ↑</a></p>
               <div className="cta-row om-offer-cta">
                 <a className="button primary" href="#journeys">이야기 선물 준비하기 <span>↗</span></a>
                 <a className="button" href={START("offering")} data-app-link>나에게 남기기</a>
