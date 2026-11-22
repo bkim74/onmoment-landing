@@ -14,7 +14,17 @@ const SHOW_BOOK = false;
 // 지난 책 선물 이벤트(11/13~19 응모 · 11/20 추첨) — 11-19 종료, 표시만 끔
 const SHOW_OLD_EVENT = false;
 // 길잡이 — 긴 한 페이지의 구간들(보이는 구간만 · 순서대로)
-const NAV_MAP: [string, string][] = [["how", "함께 쓰는 법"], ["journeys", "여정 고르기"], ["receive", "받는 날"], ["offering", "가격"], ["book-event", "이벤트"], ["faq", "묻는 것"]];
+const NAV_MAP: [string, string][] = [["how", "함께 쓰는 법"], ["journeys", "여정 고르기"], ["one-story", "하나의 이야기"], ["receive", "받는 날"], ["offering", "가격"], ["book-event", "이벤트"], ["faq", "묻는 것"]];
+
+const ONE_STORY_STEPS: { label: string; sub: string; href: string }[] = [
+  { label: "기다림", sub: "우리 아이 이야기", href: "/gift/beginnings/" },
+  { label: "첫돌", sub: "우리 아이 이야기", href: "/gift/beginnings/" },
+  { label: "사춘기", sub: "우리 아이 이야기", href: "/gift/teen/" },
+  { label: "부모님 칠순", sub: "부모님 이야기", href: "/gift/parents/" },
+  { label: "함께한 시간", sub: "은퇴", href: "/gift/retire/" },
+  { label: "함께 기억하는 이야기", sub: "기일 · 가족의 기억", href: "/gift/remember/" },
+  { label: "오늘의 나", sub: "나의 이야기", href: "/gift/self/" },
+];
 
 export const metadata: Metadata = {
   title: "온순간 — 함께한 날들을 모아, 소중한 분에게 건네는 나의 이야기",
@@ -57,6 +67,7 @@ export default function Home() {
               <div>
                 <p className="eyebrow">내 이야기를 남기고, 원하는 만큼 선물하는 온순간</p>
                 <h1>함께한 날들을 모아,<br />소중한 분에게 건네는 <span style={{ whiteSpace: "nowrap" }}>나의 이야기.</span></h1>
+                <p className="lead om-subline">부모님 칠순도, 우리 아이 첫돌도, 오늘의 나도 — 하나의 계정에, 한 사람의 이야기로 이어집니다.</p>
                 <p className="lead">함께한 장면과 그때의 마음을 내 말로 남겨보세요.<br />그중 전하고 싶은 만큼 골라, 이야기 선물로 건네세요.</p>
                 <div className="cta-row">
                   <a className="button primary" href="#journeys">이야기 선물 준비하기 <span>↗</span></a>
@@ -215,6 +226,26 @@ export default function Home() {
                 </a>
               </div>
               <p className="om-note">사진은 분위기를 돕는 이미지예요. 내 선물에는 사진 없이 한 문장만 써도 돼요.</p>
+            </section>
+
+            {/* 4-1 하나의 이야기 — 어디서 시작해도 한 사람의 이야기로 */}
+            <section id="one-story" className="section wrap om-onestory">
+              <div className="section-head">
+                <div><p className="eyebrow">하나의 이야기</p><h2>어디서 시작해도,<br />이야기는 하나로 이어져요.</h2></div>
+              </div>
+              <p className="om-onestory-tag">예시 · 한 사람의 이야기가 이어지는 모습</p>
+              <ol className="om-timeline">
+                {ONE_STORY_STEPS.map((st) => (
+                  <li key={st.label}><a href={st.href}><strong>{st.label}</strong><span>{st.sub}</span></a></li>
+                ))}
+              </ol>
+              <ul className="om-facts">
+                <li>어느 여정으로 시작해도 내 기록 한 곳에 쌓여요.</li>
+                <li>같은 사람의 카드는 그 사람의 이야기로 모여요.</li>
+                <li>간직한 장면은 카드에서 이야기 초상으로, 책으로 자라요.</li>
+              </ul>
+              <p className="om-trust">나에게 남기는 말은 늘 나에게만 남아요.</p>
+              <div className="cta-row"><a className="button primary" href="https://app.onmoment.kr/start?src=home-one-story&next=%2F" data-app-link>오늘 한 장면으로 시작하기 <span>↗</span></a></div>
             </section>
 
             {/* 5 건네는 한 쪽, 나에게 남는 한 쪽 — 선물은 곧 나에게 주는 선물(말이 아니라 구조로). 보낼 문장은 내가 고른다 */}
