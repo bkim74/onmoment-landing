@@ -1,36 +1,42 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { AB_KEYS, JOURNEY_AB, VARIANTS, type Variant } from "@/lib/landing/journeyAB";
-import JourneyAB from "../../JourneyAB";
+import JourneyV6 from "../../JourneyV6";
 
 // 여정 A/B 랜딩(11-22) — /gift/parents/a/ · /gift/parents/b/ · beginnings · couple · self
-//   A = 완성된 순간 먼저 · B = 내 장면 먼저. 그림체 · 상품은 같고 순서만 다르다. 검색에는 내보내지 않는다(시험 페이지).
+//   A = 완성된 순간 먼저 · B = 내 장면 먼저. 화면은 public/gift-v6 의 렌더러가 그린다. 검색에는 내보내지 않는다(시험 페이지).
 type P = { params: Promise<{ journey: string; variant: string }> };
 
+const KEYS = ["parents", "beginnings", "couple", "self"] as const;
+const VARIANTS = ["a", "b"] as const;
+const LABEL: Record<(typeof KEYS)[number], string> = {
+  parents: "부모님 이야기",
+  beginnings: "우리 아이 첫 이야기",
+  couple: "평범한 날의 사랑",
+  self: "오늘의 나",
+};
+const LEAD = "사진과 내 말이 만나는 한 장. 한 장면부터 시작해요.";
+
 export function generateStaticParams() {
-  return AB_KEYS.flatMap((journey) => VARIANTS.map((variant) => ({ journey, variant })));
+  return KEYS.flatMap((journey) => VARIANTS.map((variant) => ({ journey, variant })));
 }
 export const dynamicParams = false;
 
-const pick = (j: string, v: string) =>
-  (AB_KEYS as string[]).includes(j) && (VARIANTS as readonly string[]).includes(v) ? { j: JOURNEY_AB[j as keyof typeof JOURNEY_AB], v: v as Variant } : null;
+const ok = (j: string, v: string) => (KEYS as readonly string[]).includes(j) && (VARIANTS as readonly string[]).includes(v);
 
 export async function generateMetadata({ params }: P): Promise<Metadata> {
   const { journey, variant } = await params;
-  const p = pick(journey, variant);
-  if (!p) return {};
-  const title = `${p.j.label} — 온순간`;
+  if (!ok(journey, variant)) return {};
+  const title = `${LABEL[journey as (typeof KEYS)[number]]} — 나의 이야기 초상 | 온순간`;
   return {
     title,
-    description: p.j.a.lead,
+    description: LEAD,
     robots: { index: false, follow: false },
-    openGraph: { title, description: p.j.a.lead, images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "온순간" }] },
+    openGraph: { title, description: LEAD, images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "온순간" }] },
   };
 }
 
 export default async function Page({ params }: P) {
   const { journey, variant } = await params;
-  const p = pick(journey, variant);
-  if (!p) notFound();
-  return <JourneyAB journey={p.j} variant={p.v} />;
+  if (!ok(journey, variant)) notFound();
+  return <JourneyV6 journey={journey} variant={variant} />;
 }
