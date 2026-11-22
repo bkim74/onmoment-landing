@@ -336,7 +336,7 @@ export default function Home() {
                   {[["parents", "부모님 이야기"], ["beginnings", "우리 아이 이야기"], ["couple", "두 사람 이야기"], ["self", "나의 이야기"], ["retire", "함께한 시간 이야기"], ["together", "우리 모임 이야기"], ["remember", "함께 기억하는 이야기"]].map(([k, n]) => (
                     <li key={k}><a href={`/gift/${k}/a/`}>{n} 패키지 →</a></li>
                   ))}
-                  <li><a href="/gift/teen/">사춘기 아이와 함께 →</a></li>
+                  <li><a href="/gift/teen/a/">사춘기 아이와 함께 패키지 →</a></li>
                 </ul>
               </nav>
               <div className="cta-row om-offer-cta">

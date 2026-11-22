@@ -6,7 +6,7 @@ import JourneyV6 from "../../JourneyV6";
 //   A = 완성된 순간 먼저 · B = 내 장면 먼저. 화면은 public/gift-v6 의 렌더러가 그린다. 검색에는 내보내지 않는다(시험 페이지).
 type P = { params: Promise<{ journey: string; variant: string }> };
 
-const KEYS = ["parents", "beginnings", "couple", "self", "retire", "together", "remember"] as const;
+const KEYS = ["parents", "beginnings", "couple", "self", "retire", "together", "remember", "teen"] as const;
 const VARIANTS = ["a", "b"] as const;
 const LABEL: Record<(typeof KEYS)[number], string> = {
   parents: "부모님 이야기",
@@ -16,6 +16,7 @@ const LABEL: Record<(typeof KEYS)[number], string> = {
   retire: "함께한 시간 이야기",
   together: "우리 모임 이야기",
   remember: "함께 기억하는 이야기",
+  teen: "사춘기 아이와 함께",
 };
 const LEAD = "사진과 내 말이 만나는 한 장. 한 장면부터 시작해요.";
 

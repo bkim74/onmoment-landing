@@ -37,6 +37,7 @@ export default function JourneyV6({ journey, variant }: { journey: string; varia
     (async () => {
       try {
         await load("/gift-v6/journeys.js", () => !!w.ONMOMENT_JOURNEYS);
+        await load("/gift-v6/prices.js", () => !!(w as W & { ONMOMENT_PRICES?: unknown }).ONMOMENT_PRICES);
         await load("/gift-v6/landing.js", () => !!w.ONMOMENT_RENDER);
         if (alive && w.ONMOMENT_RENDER) {
           el.innerHTML = "";

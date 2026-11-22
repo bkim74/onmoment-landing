@@ -113,3 +113,10 @@
 .portrait-links .text-button{min-height:44px;display:inline-flex;align-items:center}
 @container (max-width:760px){.portrait-grid{grid-template-columns:1fr;gap:22px}.portrait-art{max-width:420px}.journey-portrait{padding-block:40px 36px}.portrait-head h2{font-size:27px}}
 @media (max-width:760px){.portrait-grid{grid-template-columns:1fr;gap:22px}.portrait-art{max-width:420px}}
+
+/* 이야기 초상 예시 — 글로만 보이는 행사(그림 자리에 부드러운 종이 한 장) */
+.portrait-grid-text{grid-template-columns:minmax(0,220px) minmax(0,1fr)}
+.portrait-paper{aspect-ratio:1;border:1px solid var(--line);border-radius:6px;background:linear-gradient(160deg,var(--sheet),var(--paper));display:grid;place-items:center;font:400 96px/1 var(--serif);color:var(--line)}
+.portrait-paper span{transform:translateY(18px)}
+@container (max-width:760px){.portrait-grid-text{grid-template-columns:1fr}.portrait-paper{aspect-ratio:auto;height:72px;max-width:420px;font-size:64px;place-items:start center}.portrait-paper span{transform:translateY(12px)}}
+@media (max-width:760px){.portrait-grid-text{grid-template-columns:1fr}.portrait-paper{aspect-ratio:auto;height:72px;max-width:420px;font-size:64px;place-items:start center}.portrait-paper span{transform:translateY(12px)}}

@@ -8,6 +8,8 @@ import vm from "node:vm";
 const pub = new URL("../../public/gift-v5/", import.meta.url);
 // 이야기 초상 예시의 단일 출처 = public/gift-v6/journeys.js (화면에서는 같은 파일을 읽는다)
 { const ctx = { window: {} }; vm.runInNewContext(readFileSync(fileURLToPath(new URL("../../public/gift-v6/journeys.js", import.meta.url)), "utf8"), ctx); globalThis.ONMOMENT_JOURNEYS = ctx.window.ONMOMENT_JOURNEYS; }
+// 행사별 이야기 초상 · FAQ 덮어쓰기의 단일 출처 = lib/landing/momentPortrait.json (화면에서는 페이지에 실린 같은 JSON)
+globalThis.ONMOMENT_MOMENT_PORTRAIT = JSON.parse(readFileSync(fileURLToPath(new URL("../../lib/landing/momentPortrait.json", import.meta.url)), "utf8"));
 const { hubHTML, journeyHTML } = await import(new URL("landing.mjs", pub));
 const { JOURNEY_LIST } = await import(new URL("journeys.mjs", pub));
 const { realize, header, footer } = await import(new URL("realize.mjs", pub));

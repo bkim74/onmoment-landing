@@ -24,14 +24,38 @@ function bookPanel(c,k,view,button,esc){
 
 // 이야기 초상 예시 — v6 장면(public/gift-v6/journeys.js, 단일 출처)의 첫 장면을 정사각 한 칸으로. 장면 1·2·3 단추로 그림·원문·글쓴이·건네는 말이 함께 바뀐다.
 //   빌드(미리 그리기)에서는 globalThis.ONMOMENT_JOURNEYS 를 채워 부르고, 화면에서는 journeys.js 가 같은 값을 둔다. 값이 없으면 아무것도 그리지 않는다.
+//   행사(단계)별 덮어쓰기 = lib/landing/momentPortrait.json (globalThis.ONMOMENT_MOMENT_PORTRAIT — 빌드는 파일에서, 화면은 페이지에 실린 같은 JSON 에서).
+//   text = 그림 없이 글로만 · teen = 한 장씩 그림 세 장 · same = 같은 여정의 다른 행사 값 · faq = 여정 FAQ 앞에 더함 · packageLink = 패키지 링크.
 const PORTRAIT_CROP=[[0,650],[650,784],[1434,738]];
-export function portraitHTML(id,idx=0,esc=fallbackEsc){
+export function momentOverride(id,momentId){
+ const all=globalThis.ONMOMENT_MOMENT_PORTRAIT||{};let o=all[id]?.[momentId],n=0;
+ while(o&&o.same&&n++<3)o=all[id]?.[o.same];
+ return o&&!o.same?o:null;
+}
+export function faqItems(id,momentId,base){
+ const extra=momentOverride(id,momentId)?.faq||[];if(!extra.length)return base;
+ const seen=new Set(extra.map(([q])=>q));
+ return [...extra,...base.filter(([q])=>!seen.has(q))];
+}
+export function portraitHTML(id,idx=0,esc=fallbackEsc,momentId){
  const d=globalThis.ONMOMENT_JOURNEYS?.[id];if(!d||!d.scenes?.length)return '';
+ const ov=momentOverride(id,momentId);
+ const pkg=ov?.packageLink||`/gift/${id}/a/`;
+ const extra=id==='beginnings'&&pkg!=='/gift/teen/'?`<a class="text-button" href="/gift/teen/">사춘기 아이와 함께 →</a>`:'';
+ const head=`<section id="journey-portrait" class="journey-portrait" aria-label="이야기 초상 예시"><div class="wrap"><div class="portrait-head"><p class="eyebrow">STORY PORTRAIT</p><h2>이야기 초상 예시</h2><p class="portrait-sample">가상 이야기 · 상품 시안</p></div>`;
+ const foot=`<div class="portrait-links"><a class="text-button" href="${esc(pkg)}">선물 패키지 · 장면 더 보기 →</a>${extra}</div></div></section>`;
+ const textBox=(s,buttons)=>`<div class="portrait-text">${buttons}<p class="portrait-source">${esc(s.source)}</p><p class="portrait-by">${esc(s.author)}</p><div class="portrait-gift"><small>건네는 말</small><p>${esc(s.giftLine)}</p></div><p class="portrait-private">나에게 남기는 말은 나에게만 남아요</p></div>`;
+ const buttons=(n,i)=>`<div class="portrait-scenes" role="group" aria-label="장면 고르기">${Array.from({length:n},(_,k)=>`<button type="button" data-action="portrait-scene" data-journey="${id}" data-scene="${k}" aria-pressed="${k===i}" aria-label="장면 ${k+1}">${k+1}</button>`).join('')}</div>`;
+ if(ov?.text)return `${head}<div class="portrait-grid portrait-grid-text"><div class="portrait-paper" aria-hidden="true"><span>“</span></div>${textBox(ov.text,'')}</div>${foot}`;
+ if(ov?.teen?.length){
+  const i=Math.min(Math.max(Number(idx)||0,0),ov.teen.length-1),s=ov.teen[i];
+  const note=d2=>(globalThis.ONMOMENT_JOURNEYS?.teen?.scenes||[]).find(x=>x.img===d2)?.note||'';
+  return `${head}<div class="portrait-grid"><figure class="portrait-art"><img src="${esc(s.img)}" alt="${esc(note(s.img))}" width="724" height="724" loading="lazy" style="aspect-ratio:1;object-fit:cover"></figure>${textBox(s,buttons(ov.teen.length,i))}</div>${foot}`;
+ }
  const i=Math.min(Math.max(Number(idx)||0,0),d.scenes.length-1),s=d.scenes[i];
  let ratio=1,pos=[0,50,100][i];
  if(id==='couple'){const c=PORTRAIT_CROP[i];ratio=c[1]/724;pos=c[0]/(2172-c[1])*100;}
-  const extra=id==='beginnings'?`<a class="text-button" href="/gift/teen/">사춘기 아이와 함께 →</a>`:'';
- return `<section id="journey-portrait" class="journey-portrait" aria-label="이야기 초상 예시"><div class="wrap"><div class="portrait-head"><p class="eyebrow">STORY PORTRAIT</p><h2>이야기 초상 예시</h2><p class="portrait-sample">가상 이야기 · 상품 시안</p></div><div class="portrait-grid"><figure class="portrait-art"><img src="/gift-v6/story-${id}.webp" alt="${esc(s.note)}" width="${Math.round(ratio*724)}" height="724" loading="lazy" style="aspect-ratio:${ratio};object-position:${pos}% 50%"></figure><div class="portrait-text"><div class="portrait-scenes" role="group" aria-label="장면 고르기">${d.scenes.map((_,n)=>`<button type="button" data-action="portrait-scene" data-journey="${id}" data-scene="${n}" aria-pressed="${n===i}" aria-label="장면 ${n+1}">${n+1}</button>`).join('')}</div><p class="portrait-source">${esc(s.source)}</p><p class="portrait-by">${esc(s.author)}</p><div class="portrait-gift"><small>건네는 말</small><p>${esc(s.giftLine)}</p></div><p class="portrait-private">나에게 남기는 말은 나에게만 남아요</p></div></div><div class="portrait-links"><a class="text-button" href="/gift/${id}/a/">선물 패키지 · 장면 더 보기 →</a>${extra}</div></div></section>`;
+ return `${head}<div class="portrait-grid"><figure class="portrait-art"><img src="/gift-v6/story-${id}.webp" alt="${esc(s.note)}" width="${Math.round(ratio*724)}" height="724" loading="lazy" style="aspect-ratio:${ratio};object-position:${pos}% 50%"></figure>${textBox(s,buttons(d.scenes.length,i))}</div>${foot}`;
 }
 
 export function journeyHTML(id,choice={},esc=fallbackEsc){
@@ -47,12 +71,12 @@ export function journeyHTML(id,choice={},esc=fallbackEsc){
  <section class="occasion-panel wrap" id="journey-occasion"><div class="occasion-top"><div><p class="eyebrow">MAKE IT YOUR OCCASION</p><h2>어떤 날에 건네시나요?</h2></div><p>그날에 맞는 예시와 물음으로 살펴보세요.</p></div><div class="moment-options" aria-label="${j.label}의 행사 선택">${j.moments.map(o=>`<button data-action="moment" data-journey="${id}" data-moment="${o.id}" aria-pressed="${o.id===m.id}">${o.label}</button>`).join('')}</div>${m.targetChoice?`<div class="target-picker"><strong>이번 이야기는 누구에게 건네나요?</strong><div><button data-action="target" data-journey="${id}" data-target="child" aria-pressed="${target==='child'}">아이의 훗날에게</button><button data-action="target" data-journey="${id}" data-target="parents" aria-pressed="${target==='parents'}">부모의 오늘에게</button></div><p class="fine">선택한 사람에 맞춰 질문과 예시가 달라져요.</p></div>`:''}<p class="occasion-result" aria-live="polite"><span>지금 보고 있는 선물</span><strong>${m.label}${m.targetChoice?` · ${target==='child'?'아이에게':'부모에게'}`:''}</strong>${c.two?' · 엄마·아빠·두 분 함께의 기억을 나누어 담아요.':c.private?' · 읽는 사람은 나예요.':c.memorial?' · 날짜와 참여는 가족이 원하는 만큼.':''}</p></section>
  <section class="campaign-heart wrap"><p class="eyebrow">ONLY YOU CAN TELL</p><h2>${k.heart.join('<br>')}</h2><p>${lines(k.heartBody)}</p><span class="heart-flower om-mark" aria-hidden="true"></span></section>
  <section id="journey-example" class="campaign-product"><div class="wrap"><div class="section-head"><div><p class="eyebrow">A BOOK OF YOUR MOMENTS</p><h2>이런 이야기를,<br>선물하게 됩니다.</h2></div><div class="book-tabs" aria-label="책 디자인 예시">${tabs.map(([v,t])=>`<button data-action="book-view" data-journey="${id}" data-view="${v}" aria-pressed="${view===v}">${t}</button>`).join('')}</div></div>${bookPanel(c,k,view,button,esc)}<div class="product-foot"><span>가상 구성 예시 · 실제 인쇄 규격·배치는 제작 전 확인</span><button class="text-button" data-action="scroll" data-target="journey-prompts">내 이야기는 어떻게 쓰나요? ↓</button></div></div></section>
- ${portraitHTML(id,choice.portrait,esc)}
+ ${portraitHTML(id,choice.portrait,esc,m.id)}
  <section id="journey-prompts" class="section wrap campaign-questions"><div class="section-head"><div><p class="eyebrow">FROM A MEMORY TO YOUR WORDS</p><h2>잘 쓰려고 애쓰기 전에,<br>그날을 떠올려보세요.</h2></div><p>한 문장으로 시작해도 괜찮아요.<br>물음은 막힐 때만, 답하고 싶은 것만.<br>내 마음에 맞는 말은 내가 골라요.</p></div><div class="question-triptych">${c.questions.map((q,i)=>`<article><span>0${i+1}</span><small>${['장면을 꺼내고','내 마음을 살피고','내 말로 건네요'][i]}</small><h3>${q}</h3></article>`).join('')}</div><div class="question-next">${button('button primary','내 장면으로 한 쪽 써보기')}<p>쓴 뒤에는 내 글과 사진이 담긴 한 쪽을 먼저 확인해요.</p></div></section>
  <section class="campaign-care"><div class="wrap care-grid"><div class="care-heading"><p class="eyebrow">MADE WITH CARE</p><h2>${k.care.join('<br>')}</h2><figure><img src="${photo(k.image)}" alt="${k.imageAlt}" loading="lazy"><figcaption>마음이 놓이는 속도로 준비하세요.</figcaption></figure></div><div class="care-details">${j.features.map(([t,d],i)=>`<article><span>0${i+1}</span><div><h3>${t}</h3><p>${d}</p></div></article>`).join('')}<p class="care-principle">${c.memorial?'말하고 싶지 않은 기억은 남기지 않아도 괜찮아요.':c.private?'나만의 공간으로 시작합니다. 건넬지는 내가 정합니다.':'있는 그대로 담습니다. 전할 이야기는 내가 정합니다.'}</p></div></div></section>
  <section class="section wrap campaign-process"><div class="section-head"><div><p class="eyebrow">YOUR FIRST PAGE STARTS HERE</p><h2>첫 한 쪽부터,<br>건네는 순간까지.</h2></div><p>${c.solo?'혼자 준비하는 선물은<br>참여자를 초대하지 않아도 돼요.':c.memorial?'가족이 정한 속도로.<br>지금은 참여하지 않아도 괜찮아요.':'누가 썼는지, 어떤 글을 확인했는지.<br>준비의 다음 단계를 한곳에서 봐요.'}</p></div><div class="journey-process">${stepNames.map((t,i)=>`<div><span>0${i+1}</span><h3>${t}</h3><p>${stepDetails[i]}</p></div>`).join('')}</div></section>
  <section class="wrap campaign-decision"><div><p class="eyebrow">먼저 내 이야기로 확인하세요</p><h2>“이 선물, 드리고 싶다.”<br>그 마음이 들면 다음으로.</h2><p>내 글이 담긴 한 쪽을 먼저 보세요.<br>책 전체와 제작 조건을 확인한 뒤<br>정말 건넬 선물인지 결정하면 돼요.</p>${button()}<p class="fine">현재는 시안 체험 · 결제되지 않아요.</p></div><aside><p class="eyebrow">제작 전, 세 가지를 함께 확인해요</p><ol><li><span>01</span><div><strong>어떤 책을 받는지</strong><p>표지·원고·사진·제본·분량</p></div></li><li><span>02</span><div><strong>총 얼마가 드는지</strong><p>제작·추가 부수·배송 포함 금액</p></div></li><li><span>03</span><div><strong>언제 받을 수 있는지</strong><p>원고 확정일·제작 일정·도착일</p></div></li></ol><a class="text-button" href="#conditions">제작 조건 확인 화면 보기 →</a><p class="fine">가격·규격·납기는 확정 전입니다.</p></aside></section>
- <section class="section wrap journey-faq campaign-faq"><p class="eyebrow">BEFORE YOUR FIRST PAGE</p><h2>마음에 걸리는 것이 있다면.</h2>${j.faq.map(([q,a])=>`<details><summary>${q}</summary><p>${a}</p></details>`).join('')}<details><summary>지금 어디까지 체험할 수 있나요?</summary><p>내 글·사진 작성과 한 쪽 확인, 준비·책 미리보기 흐름을 체험할 수 있어요. 실제 공동 참여·AI·결제·인쇄·배송은 연결 전입니다. 가상 자료로 사용해 주세요.</p></details></section>
+ <section class="section wrap journey-faq campaign-faq"><p class="eyebrow">BEFORE YOUR FIRST PAGE</p><h2>마음에 걸리는 것이 있다면.</h2>${faqItems(id,m.id,j.faq).map(([q,a])=>`<details><summary>${q}</summary><p>${a}</p></details>`).join('')}<details><summary>지금 어디까지 체험할 수 있나요?</summary><p>내 글·사진 작성과 한 쪽 확인, 준비·책 미리보기 흐름을 체험할 수 있어요. 실제 공동 참여·AI·결제·인쇄·배송은 연결 전입니다. 가상 자료로 사용해 주세요.</p></details></section>
  <section class="campaign-closing"><figure><img src="${photo(k.image)}" alt="" loading="lazy"></figure><div><p class="eyebrow">${j.label} · ${m.label}</p><h2>${k.closing.join('<br>')}</h2>${button()}${c.private?'<a class="text-button quiet-exit" href="#mine">책 없이 내 기록으로 시작하기 →</a>':c.memorial?'<a class="text-button quiet-exit" href="#journeys">지금은 여기까지</a>':'<p>그 이야기는, 내 삶의 한 장면이기도 해요.<br>원하면 내 기록에도 따로 간직하세요.</p>'}</div></section>
  <section class="other-journeys wrap"><h3>다른 소중한 날에도</h3><nav aria-label="다른 여정">${JOURNEY_LIST.filter(o=>o.id!==id).map(o=>`<a href="#journey/${o.id}">${o.label} ↗</a>`).join('')}</nav></section>
  <div class="campaign-sticky"><div><span>${m.label}</span><strong>${j.label}</strong></div>${button('button primary',c.memorial?'한 장면 남기기':c.shared?'우리 이야기 시작하기':'내 한 쪽 써보기')}</div>

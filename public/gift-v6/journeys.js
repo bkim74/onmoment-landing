@@ -4,8 +4,7 @@
  * giftLine = editable proposed wording, not a user's original or an approved quote.
  * nextLine = optional private next-choice example, never an automatic commitment.
  * Generated art = concept samples, not evidence of currently guaranteed output quality.
- * kitPrice is a CURRENTLY OBSERVED BASE PRODUCT EXAMPLE supplied by the root audit:
- * 119000 = framed portrait only; 79000 = portrait postcard set (five cards) only.
+ * Prices live in ONE file: public/gift-v6/prices.js (catalog + kitUnits). Do not repeat numbers here.
  * kitItems describe a proposed complete kit and are NOT all included in kitPrice.
  * kitPriceNote must stay visible next to the price; extra cards/books/stands/notebooks
  * require separate pricing. The repository pricing source wins at integration.
@@ -70,8 +69,6 @@ window.ONMOMENT_JOURNEYS = {
       "건네는 문장 카드·봉투",
       "나에게 남는 디지털 기록"
     ],
-    "kitPrice": 119000,
-    "kitPriceNote": "액자 초상 예시 119,000원 · 카드·봉투·행사 나눔 구성은 별도 견적",
     "addOnTitle": "잔치에서 함께 나눌 때",
     "addOnItems": [
       "참석자용 이야기 카드",
@@ -148,8 +145,6 @@ window.ONMOMENT_JOURNEYS = {
       "건네는 문장·봉투",
       "부모에게 남는 디지털 기록"
     ],
-    "kitPrice": 119000,
-    "kitPriceNote": "액자 초상 예시 119,000원 · 카드북·추가 구성은 별도 견적",
     "addOnTitle": "첫돌에 함께 나눌 때",
     "addOnItems": [
       "첫해 이야기 카드",
@@ -229,8 +224,6 @@ window.ONMOMENT_JOURNEYS = {
       "탁상 액자·봉투",
       "각자에게 남는 디지털 기록"
     ],
-    "kitPrice": 119000,
-    "kitPriceNote": "액자 초상 예시 119,000원 · 두 시선 카드·추가 구성은 별도 견적",
     "addOnTitle": "결혼식에서 함께 나눌 때",
     "addOnItems": [
       "두 사람의 이야기 카드",
@@ -307,8 +300,6 @@ window.ONMOMENT_JOURNEYS = {
       "이어 적는 작은 노트",
       "나만의 디지털 기록"
     ],
-    "kitPrice": 79000,
-    "kitPriceNote": "초상 엽서 세트 예시 79,000원 · 스탠드·노트는 별도 구성",
     "addOnTitle": "내 곁에 두는 방식",
     "addOnItems": [
       "책상 위 카드 스탠드",
@@ -682,5 +673,90 @@ Object.assign(window.ONMOMENT_JOURNEYS, {
     "key": "remember",
     "theme": "#665641",
     "kitPrice": null
+  },
+  "teen": {
+    "key": "teen",
+    "appJ": "beginnings",
+    "appO": "adolescence",
+    "label": "사춘기 아이와 함께",
+    "occasionLabel": "우리 아이 이야기 · 사춘기",
+    "eyebrow": "사춘기 아이와 함께",
+    "headlineA": "아이도 자라는 중.\n나도 자라는 중.",
+    "introA": "너는 초코, 나는 멜론. 별말 없이 집으로 걷던 날도 우리 둘의 이야기가 돼요.",
+    "headlineB": "그날 네게 건넬 말,\n오늘 내게 남는 말.",
+    "introB": "기억에 가까운 장면을 골라 보세요. 한 사람이 쓴 두 문장을 펼쳐볼 수 있어요.",
+    "cta": "아이에게 건넬 한 줄 쓰기",
+    "theme": "#956042",
+    "storyLabel": "사춘기 아이와 함께한 장면",
+    "recipientLabel": "아이에게 건네는 말",
+    "mineLabel": "나에게 남기는 말",
+    "interest": "접이 카드와 봉투",
+    "scenes": [
+      {
+        "id": "ice",
+        "label": "편의점 앞",
+        "img": "/teen-portrait/ice.webp",
+        "source": "편의점에서 나는 멜론 맛, 아이는 초코를 골랐다. 집에 가는 길에 아이가 자기 것을 살짝 들어 보였다. 나도 내 것을 들어 보였다.",
+        "title": "서로 다른 맛 하나씩",
+        "giftLine": "너는 초코, 나는 멜론. 나란히 서서 아이스크림으로 짠 하던 게 생각나.",
+        "author": "부모가 남긴 말 · 가상 예시",
+        "note": "편의점 앞에서 멜론 아이스크림을 든 엄마와 초코 아이스크림을 든 아이가 서로를 본다.",
+        "nextLine": "요즘 너랑 무슨 말을 해야 하나 자주 고민했다. 그날은 나도 그냥 내 맛을 골랐다."
+      },
+      {
+        "id": "song",
+        "label": "버스 창가",
+        "img": "/teen-portrait/song.webp",
+        "source": "버스에서 아이가 이어폰 한쪽을 내밀었다. 나는 곡 이름을 물어보고 휴대폰에 적었다. 집에 와서 한 번 더 틀었다.",
+        "title": "한쪽씩 들은 노래",
+        "giftLine": "집에 와서 네가 들려준 노래를 또 틀었어. 이번엔 맨 끝까지 들었어.",
+        "author": "부모가 남긴 말 · 가상 예시",
+        "note": "버스 창가에 앉은 아이가 옆자리 엄마에게 흰 이어폰 한쪽을 건넨다.",
+        "nextLine": "아이에게 물어볼 말만 준비하고 탔는데, 집에 가져온 건 노래 제목이었다."
+      },
+      {
+        "id": "toast",
+        "label": "늦은 부엌",
+        "img": "/teen-portrait/toast.webp",
+        "source": "밤에 둘이 토스트를 구웠다. 나는 조금 탄 모서리를 먼저 집었고, 아이는 옆 조각을 집었다. 부엌에 서서 한 장씩 먹었다.",
+        "title": "조금 탄 쪽은 내 거",
+        "giftLine": "그날 밤 토스트, 나는 조금 탄 쪽이 맛있더라. 다음에 구워도 그 조각은 내 거야.",
+        "author": "부모가 남긴 말 · 가상 예시",
+        "note": "조용한 부엌에서 엄마와 아이가 접시 위 바삭하게 구워진 토스트를 한 조각씩 집는다.",
+        "nextLine": "그날 학교 얘기는 한마디도 안 했다. 그래도 나는 그 저녁을 다시 보내고 싶다."
+      }
+    ],
+    "kitName": "사춘기 아이와 함께",
+    "kitImg": "/teen-portrait/fold.webp",
+    "kitAlt": "편의점 앞 그림이 인쇄된 접이 카드, 종이 봉투와 다른 장면의 낱장들",
+    "kitTitle": "접이 카드와 봉투",
+    "kitDescription": "앞면엔 그날의 그림, 안쪽엔 네게 건넬 말. 버스에서 듣던 노래 제목처럼, 우리 둘만 알아볼 이야기 하나를 접어 건네요. 내 쪽에 적은 말은 내 기록에 둡니다.",
+    "kitItems": [
+      "앞면에 그날의 그림이 담긴 접이 카드",
+      "안쪽에 아이에게 건네는 말",
+      "종이 봉투",
+      "다른 장면의 낱장 카드"
+    ],
+    "addOnTitle": "더하고 싶다면",
+    "addOnItems": [
+      "다른 장면의 낱장 카드",
+      "아이에게 건넬 접이 카드 한 부 더"
+    ],
+    "ritualTitle": "그날 네게 건넬 말,\n오늘 내게 남는 말.",
+    "ritualBody": "내가 본 일과 내가 느낀 것을 한 줄 적으면 돼요. 아이의 참여나 답장은 선택이에요.",
+    "faq": [
+      {
+        "q": "요즘 아이가 말을 별로 안 해요. 혼자 써도 되나요?",
+        "a": "네. 내가 본 일과 내가 느낀 것을 한 줄 적으면 돼요. 아이의 참여나 답장은 선택이에요."
+      },
+      {
+        "q": "서로 다르게 기억하면 어떻게 하나요?",
+        "a": "부모는 부모의 말로, 아이는 자기 말로 남겨요. 아이가 직접 쓰고 함께 보기로 한 문장만 이름과 함께 놓아요."
+      },
+      {
+        "q": "사진이나 아이의 글이 있어야 하나요?",
+        "a": "글 한 줄로 시작할 수 있어요. 나중에 초상을 만들고 싶을 때 쓸 사진과 장면을 고릅니다."
+      }
+    ]
   }
 });
