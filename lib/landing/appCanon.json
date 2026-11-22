@@ -1,6 +1,6 @@
 {
-  "source": ".om-verify/evC/src/lib/giftBook/canon.js",
-  "syncedAt": "2026-11-22T10:31:44.092Z",
+  "source": "onmoment-recovery c193282b src/lib/giftBook/canon.js",
+  "syncedAt": "2026-11-22T11:05:34.929Z",
   "journeys": [
     {
       "key": "parents",
@@ -99,6 +99,10 @@
         {
           "id": "everyday",
           "label": "평범한 오늘"
+        },
+        {
+          "id": "pregnancy",
+          "label": "기다림 · 임신"
         },
         {
           "id": "birth",
