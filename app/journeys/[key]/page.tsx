@@ -32,6 +32,11 @@ export default async function JourneyPage({ params }: { params: Promise<{ key: s
         <p data-journey-now style={{ margin: 0, padding: "14px max(16px, env(safe-area-inset-left, 0px))", background: "#f1f4ec", color: "#2f2a24", fontSize: 16, lineHeight: 1.6, textAlign: "center" }}>
           이 이야기는 이제 <strong>‘{nj.name}{m.note ? ` · ${m.note}` : ""}’</strong> 여정 안에 있어요. <a href={`/gift/${nj.key}/`} style={{ color: "#6f2f2a", textDecoration: "underline", textUnderlineOffset: 3 }}>{nj.name} 살펴보기 →</a>
         </p>) : null; })()}
+      {j.key === "teen" && (
+        <nav className="wrap" aria-label="사춘기 이야기 초상">
+          <a className="text-link" href="/gift/teen/">사춘기의 하루를 그림 카드로 만나기 →</a>
+        </nav>
+      )}
       <div dangerouslySetInnerHTML={{ __html: journeyHtml(j, APP) }} />
       <Script src="/landing/v4.js" strategy="afterInteractive" />
       <Script src="/landing/app-origin.js" strategy="afterInteractive" />

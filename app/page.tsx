@@ -14,7 +14,7 @@ const SHOW_BOOK = false;
 // 지난 책 선물 이벤트(11/13~19 응모 · 11/20 추첨) — 11-19 종료, 표시만 끔
 const SHOW_OLD_EVENT = false;
 // 길잡이 — 긴 한 페이지의 구간들(보이는 구간만 · 순서대로)
-const NAV_MAP: [string, string][] = [["how", "함께 쓰는 법"], ["journeys", "일곱 여정"], ["receive", "받는 날"], ["offering", "가격"], ["book-event", "이벤트"], ["faq", "묻는 것"]];
+const NAV_MAP: [string, string][] = [["how", "함께 쓰는 법"], ["journeys", "여정 고르기"], ["receive", "받는 날"], ["offering", "가격"], ["book-event", "이벤트"], ["faq", "묻는 것"]];
 
 export const metadata: Metadata = {
   title: "온순간 — 함께한 날들을 모아, 소중한 분에게 건네는 나의 이야기",
@@ -187,7 +187,7 @@ export default function Home() {
             {/* 4 일곱 여정 — 모두 사진 */}
             <section id="journeys" className="section wrap journey-directory">
               <div className="section-head">
-                <div><p className="eyebrow">일곱 가지 이야기 선물</p><h2>선물하고 싶은 분이<br />떠오르셨나요?</h2></div>
+                <div><p className="eyebrow">이야기 선물</p><h2>선물하고 싶은 분이<br />떠오르셨나요?</h2></div>
                 <p>소중한 날마다, 다른 마음으로.<br />여정을 고르면 그날에 맞는 물음과 예시로<br />첫 장면을 쓸 수 있어요.</p>
               </div>
               <div className="journey-card-grid">
@@ -203,6 +203,16 @@ export default function Home() {
                     </div>
                   </a>
                 ))}
+                <a href="/gift/teen/" className="journey-card tone-rose" data-journey="teen">
+                  <figure><img src="/teen-portrait/ice.webp" width={724} height={724} loading="lazy" alt="편의점 앞에서 아이스크림을 하나씩 든 부모와 아이" /></figure>
+                  <div className="journey-card-body">
+                    <p>사춘기 아이와 함께한 하루</p>
+                    <h3>아이도 자라는 중. 나도 자라는 중.<span aria-hidden="true">↗</span></h3>
+                    <p className="card-desire">“너는 초코, 나는 멜론.”</p>
+                    <small>부모인 나에게 · 원하면 아이에게</small>
+                    <span className="om-card-more">이야기 초상 보기 →</span>
+                  </div>
+                </a>
               </div>
               <p className="om-note">사진은 분위기를 돕는 이미지예요. 내 선물에는 사진 없이 한 문장만 써도 돼요.</p>
             </section>
