@@ -16,7 +16,7 @@ function startLink(journey: "self" | "beginnings", occasion: "everyday" | "adole
   const app = new URL("/start", process.env.NEXT_PUBLIC_APP_ORIGIN || "https://app.onmoment.kr");
   const next = new URLSearchParams({ j: journey, o: occasion });
   app.searchParams.set("src", "journey-" + journey);
-  app.searchParams.set("next", "/prepare?" + next.toString());
+  app.searchParams.set("next", "/first?" + next.toString());
   return app.href.replaceAll("&", "&amp;").replaceAll('"', "&quot;");
 }
 

@@ -54,12 +54,10 @@ export function appOrigin() {
   return o && /^https:\/\/[a-z0-9-]+\.vercel\.app$/.test(o) ? o : prod;
 }
 
-/** 여정 · 행사 · 대상을 그대로 앱 준비 화면으로 — /start 를 지나 /prepare?j=&o=&t= */
-export function startHref(app, j, o, t) {
-  const q = new URLSearchParams({ j });
-  if (o) q.set("o", o);
-  if (t && (o === "birth" || o === "first-birthday")) q.set("t", t);
-  return `${app}/start?src=journey-${j}&next=${encodeURIComponent(`/prepare?${q.toString()}`)}`;
+/** 여정 · 행사를 그대로 앱 첫 장면으로 — /start 를 지나 /first?j=&o= (고른 행사가 없으면 everyday) */
+export function startHref(app, j, o) {
+  const q = new URLSearchParams({ j, o: o || "everyday" });
+  return `${app}/start?src=journey-${j}&next=${encodeURIComponent(`/first?${q.toString()}`)}`;
 }
 
 /** 시안 HTML → 운영 HTML */

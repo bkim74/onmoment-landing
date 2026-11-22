@@ -287,3 +287,9 @@ html{scroll-padding-top:120px}
 .om-trust { margin: 0 0 24px; font-size: 16px; color: var(--muted); line-height: 1.7; }
 @media (max-width: 1050px) { .om-timeline { grid-template-columns: repeat(4, minmax(0, 1fr)); } .om-timeline li + li::before { display: none; } }
 @media (max-width: 640px) { .om-timeline { grid-template-columns: 1fr; gap: 8px; } .om-timeline a { min-height: 56px; } }
+
+/* 여정별 선물 패키지(#offering) — 특화 입구로 가는 길 */
+.om-packages{margin:28px 0 8px}.om-packages h3{margin:0 0 12px}
+.om-packages ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px}
+.om-packages a{display:flex;align-items:center;min-height:48px;padding:10px 14px;border:1px solid var(--line);border-radius:6px;background:var(--sheet);color:var(--ink);text-decoration:none;font-size:16px;overflow-wrap:anywhere}
+.om-packages a:hover,.om-packages a:focus-visible{border-color:var(--wine)}

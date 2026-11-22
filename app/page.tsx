@@ -214,16 +214,6 @@ export default function Home() {
                     </div>
                   </a>
                 ))}
-                <a href="/gift/teen/" className="journey-card tone-rose" data-journey="teen">
-                  <figure><img src="/teen-portrait/ice.webp" width={724} height={724} loading="lazy" alt="편의점 앞에서 아이스크림을 하나씩 든 부모와 아이" /></figure>
-                  <div className="journey-card-body">
-                    <p>사춘기 아이와 함께한 하루</p>
-                    <h3>아이도 자라는 중. 나도 자라는 중.<span aria-hidden="true">↗</span></h3>
-                    <p className="card-desire">“너는 초코, 나는 멜론.”</p>
-                    <small>부모인 나에게 · 원하면 아이에게</small>
-                    <span className="om-card-more">이야기 초상 보기 →</span>
-                  </div>
-                </a>
               </div>
               <p className="om-note">사진은 분위기를 돕는 이미지예요. 내 선물에는 사진 없이 한 문장만 써도 돼요.</p>
             </section>
@@ -245,7 +235,7 @@ export default function Home() {
                 <li>간직한 장면은 카드에서 이야기 초상으로, 책으로 자라요.</li>
               </ul>
               <p className="om-trust">나에게 남기는 말은 늘 나에게만 남아요.</p>
-              <div className="cta-row"><a className="button primary" href="https://app.onmoment.kr/start?src=home-one-story&next=%2F" data-app-link>오늘 한 장면으로 시작하기 <span>↗</span></a></div>
+              <div className="cta-row"><a className="button primary" href="https://app.onmoment.kr/start?src=home-one-story&next=%2Ffirst" data-app-link>오늘 한 장면으로 시작하기 <span>↗</span></a></div>
             </section>
 
             {/* 5 건네는 한 쪽, 나에게 남는 한 쪽 — 선물은 곧 나에게 주는 선물(말이 아니라 구조로). 보낼 문장은 내가 고른다 */}
@@ -340,6 +330,15 @@ export default function Home() {
                   <p>지금은 무료 시범 운영이에요. 결제가 열리기 전에 먼저 알려 드려요.</p>
                 </div>
               </div>
+              <nav className="om-packages" aria-label="여정별 선물 패키지">
+                <h3>여정별 선물 패키지 <span className="om-price-note">이야기 초상 · 실물 구성 · 예시 가격</span></h3>
+                <ul>
+                  {[["parents", "부모님 이야기"], ["beginnings", "우리 아이 이야기"], ["couple", "두 사람 이야기"], ["self", "나의 이야기"], ["retire", "함께한 시간 이야기"], ["together", "우리 모임 이야기"], ["remember", "함께 기억하는 이야기"]].map(([k, n]) => (
+                    <li key={k}><a href={`/gift/${k}/a/`}>{n} 패키지 →</a></li>
+                  ))}
+                  <li><a href="/gift/teen/">사춘기 아이와 함께 →</a></li>
+                </ul>
+              </nav>
               <div className="cta-row om-offer-cta">
                 <a className="button primary" href="#journeys">이야기 선물 준비하기 <span>↗</span></a>
                 <a className="button" href={START("offering")} data-app-link>나에게 남기기</a>

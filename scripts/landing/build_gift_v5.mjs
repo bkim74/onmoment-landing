@@ -2,8 +2,12 @@
 //   운영 범위 맞춤 · 실제 주소 잇기는 public/gift-v5/realize.mjs 한 곳. 화면 안 다시 그리기(client.mjs)도 같은 함수를 쓴다.
 //   실행: node scripts/landing/build_gift_v5.mjs
 import { writeFileSync } from "node:fs";
+import { readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
+import vm from "node:vm";
 const pub = new URL("../../public/gift-v5/", import.meta.url);
+// 이야기 초상 예시의 단일 출처 = public/gift-v6/journeys.js (화면에서는 같은 파일을 읽는다)
+{ const ctx = { window: {} }; vm.runInNewContext(readFileSync(fileURLToPath(new URL("../../public/gift-v6/journeys.js", import.meta.url)), "utf8"), ctx); globalThis.ONMOMENT_JOURNEYS = ctx.window.ONMOMENT_JOURNEYS; }
 const { hubHTML, journeyHTML } = await import(new URL("landing.mjs", pub));
 const { JOURNEY_LIST } = await import(new URL("journeys.mjs", pub));
 const { realize, header, footer } = await import(new URL("realize.mjs", pub));

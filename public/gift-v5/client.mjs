@@ -1,6 +1,6 @@
 // 이야기 선물 랜딩 — 화면 안 움직임. 시안 v5 app.js 의 랜딩 부분만 옮겼다(역할 시안 · 브라우저 저장 원고는 없다).
 //   행사 · 대상 · 책 보기를 바꾸면 같은 landing.mjs 로 다시 그리고, '써보기'는 고른 여정 · 행사 · 대상 그대로 앱 준비 화면으로 간다.
-import { journeyHTML } from "./landing.mjs";
+import { journeyHTML, portraitHTML } from "./landing.mjs";
 import { getJourney } from "./journeys.mjs";
 import { appOrigin, realize, startHref } from "./realize.mjs";
 
@@ -39,6 +39,11 @@ if (root) {
       const ex = () => document.getElementById("journey-example")?.getBoundingClientRect().top || 0;
       const top = ex(); draw(); window.scrollBy(0, ex() - top);
       root.querySelector(`[data-action="book-view"][data-view="${b.dataset.view}"]`)?.focus({ preventScroll: true });
+    } else if (a === "portrait-scene") {
+      choice.portrait = Number(b.dataset.scene) || 0;
+      const sec = root.querySelector("#journey-portrait");
+      const html = portraitHTML(page, choice.portrait);
+      if (sec && html) { sec.outerHTML = html; root.querySelector(`#journey-portrait [data-scene="${choice.portrait}"]`)?.focus({ preventScroll: true }); }
     } else if (a === "scroll") {
       document.getElementById(b.dataset.target)?.scrollIntoView({ behavior: "smooth", block: "start" });
     } else if (a === "start-journey") {
