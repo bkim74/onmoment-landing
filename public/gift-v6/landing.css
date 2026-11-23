@@ -181,3 +181,35 @@
 .om-gift-v6 .gv-count{margin:0;font-size:16px;font-weight:700}
 .om-gift-v6.dark .gv-x,.om-gift-v6.dark .gv-nav{border-color:#8d9a84}
 @media(max-width:760px){.om-gift-v6 .rep-intro{font-size:18px}.om-gift-v6 .rep-open{justify-self:stretch}.om-gift-v6 .gv{padding:12px 14px calc(12px + env(safe-area-inset-bottom))}}
+
+/* 부모님 — 무료 한 장 먼저 · 한 장 다음에 할 수 있는 일 · 종이책 견본(11-23) */
+.om-gift-v6.v-package [hidden]{display:none!important}
+.om-gift-v6.v-package .pf-actions{gap:12px 22px}
+.om-gift-v6.v-package .btn.pf-cta{min-height:56px;font-size:18px;padding:14px 30px}
+.om-gift-v6.v-package .pf-link{min-height:44px;display:inline-flex;align-items:center;padding:4px 0;font-size:16px}
+.om-gift-v6.v-package .pf-jump{margin-top:6px}
+.om-gift-v6.v-package .pf-card{max-width:640px;margin:0 auto 26px;background:var(--white);border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.om-gift-v6.v-package .pf-img{width:100%;height:auto;background:var(--soft)}
+.om-gift-v6.v-package .pf-card figcaption{padding:20px 22px 24px}
+.om-gift-v6.v-package .pf-badge{display:inline-block;font-size:14px;font-weight:650;color:var(--ink);border:1px solid var(--line);border-radius:999px;padding:3px 12px;margin-bottom:12px}
+.om-gift-v6.v-package .pf-line{font-family:var(--serif);font-size:22px;line-height:1.8}
+.om-gift-v6.v-package .pf-center{display:flex;justify-content:center}
+.om-gift-v6.v-package .pf-rows{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+.om-gift-v6.v-package .pf-row{display:flex;gap:16px;justify-content:space-between;align-items:flex-start;background:var(--white);border:1px solid var(--line);border-radius:6px;padding:20px 22px}
+.om-gift-v6.v-package .pf-row h3{font-size:20px;margin-bottom:6px}
+.om-gift-v6.v-package .pf-row p{font-size:16px;line-height:1.8;color:var(--muted);margin-bottom:10px}
+.om-gift-v6.v-package .pf-status{flex:none;font-size:14px;font-weight:650;border:1px solid var(--line);border-radius:999px;padding:3px 12px;white-space:nowrap;color:var(--ink)}
+.om-gift-v6.v-package .pf-status.pf-live{background:var(--soft)}
+.om-gift-v6.v-package .pf-order-row{display:flex;gap:12px;flex-wrap:wrap}
+.om-gift-v6.v-package .pf-order-row .btn{min-height:56px}
+.om-gift-v6.v-package .pf-product .rep-fig{max-width:640px}
+@media(max-width:640px){.om-gift-v6.v-package .pf-row{flex-direction:column-reverse;gap:10px}.om-gift-v6.v-package .pf-cta{width:100%}.om-gift-v6.v-package .pf-order-row .btn{width:100%}.om-gift-v6.v-package .pf-line{font-size:20px}}
+@media(max-width:760px){
+.om-gift-v6.v-package .hero{padding-top:22px}
+.om-gift-v6.v-package .hero h1{font-size:32px;margin-bottom:12px}
+.om-gift-v6.v-package .hero-copy>.pf-actions{order:4;margin-top:16px}
+.om-gift-v6.v-package .hero-copy>.pf-jump{order:5}
+.om-gift-v6.v-package .hero-copy>.choice-list{order:6;margin-top:18px}
+.om-gift-v6.v-package .hero-image,.om-gift-v6.v-package .preview-area{order:9}
+.om-gift-v6.v-package .hero-copy>.eyebrow{margin-bottom:8px}
+}

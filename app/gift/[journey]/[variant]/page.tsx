@@ -8,6 +8,8 @@ type P = { params: Promise<{ journey: string; variant: string }> };
 
 const KEYS = ["parents", "beginnings", "couple", "self", "retire", "together", "remember", "teen"] as const;
 const VARIANTS = ["a", "b"] as const;
+// 부모님 패키지(11-23) — /gift/parents/package/ 만. 주소로만 공유하고 어디에서도 잇지 않는다.
+const PKG = "package";
 const LABEL: Record<(typeof KEYS)[number], string> = {
   parents: "부모님 이야기",
   beginnings: "우리 아이 이야기",
@@ -21,16 +23,17 @@ const LABEL: Record<(typeof KEYS)[number], string> = {
 const LEAD = "사진과 내 말이 만나는 한 장. 한 장면부터 시작해요.";
 
 export function generateStaticParams() {
-  return KEYS.flatMap((journey) => VARIANTS.map((variant) => ({ journey, variant })));
+  return [...KEYS.flatMap((journey) => VARIANTS.map((variant) => ({ journey, variant }))), { journey: "parents", variant: PKG }];
 }
 export const dynamicParams = false;
 
-const ok = (j: string, v: string) => (KEYS as readonly string[]).includes(j) && (VARIANTS as readonly string[]).includes(v);
+const ok = (j: string, v: string) =>
+  (KEYS as readonly string[]).includes(j) && ((VARIANTS as readonly string[]).includes(v) || (j === "parents" && v === PKG));
 
 export async function generateMetadata({ params }: P): Promise<Metadata> {
   const { journey, variant } = await params;
   if (!ok(journey, variant)) return {};
-  const title = `${LABEL[journey as (typeof KEYS)[number]]} — 나의 이야기 초상 | 온순간`;
+  const title = variant === PKG ? "부모님 이야기 패키지 — 온순간" : `${LABEL[journey as (typeof KEYS)[number]]} — 나의 이야기 초상 | 온순간`;
   return {
     title,
     description: LEAD,
