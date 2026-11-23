@@ -1,5 +1,4 @@
 import {JOURNEY_LIST,getJourney,getMoment,context,campaign} from './journeys.mjs';
-import {parentsHTML} from './parents.mjs';
 const asset=name=>new URL(`../assets/${name}`,import.meta.url).href;
 const photo=name=>asset(`journeys/${name}`);
 const lines=s=>s.replaceAll('\n','<br>');
@@ -61,7 +60,6 @@ export function portraitHTML(id,idx=0,esc=fallbackEsc,momentId){
 
 export function journeyHTML(id,choice={},esc=fallbackEsc){
  const j=getJourney(id),m=getMoment(id,choice.moment),target=choice.target||'child',p={occasion:id,moment:m.id,target},c=context(p),k=campaign(p),view=['cover','inside','voices'].includes(choice.bookView)?choice.bookView:'inside';
- if(id==='parents')return parentsHTML({...j,__others:JOURNEY_LIST.filter(o=>o.id!==id).map(o=>`<a href="#journey/${o.id}">${o.label} ↗</a>`).join('')},m,k,photo,esc);
  const button=(className='button primary',label=k.cta)=>`<button class="${className}" data-action="start-journey" data-journey="${id}" data-moment="${m.id}" data-target="${target}">${label}<span aria-hidden="true">↗</span></button>`;
  const tabs=[['cover','표지'],['inside','한 쪽 펼쳐보기'],...(!c.solo?[['voices','함께 모인 이야기']]:[])];
  const stepNames=c.solo?['장면 하나를 남겨요','내 말이 담긴 한 쪽을 봐요','원할 때 책으로 건네요']:['그날과 읽을 사람을 정해요','각자의 한 장면을 모아요','함께 확인하고 건네요'];
