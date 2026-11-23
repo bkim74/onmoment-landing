@@ -13,12 +13,13 @@ export const JOURNEYS={
 export const JOURNEY_LIST=['parents','couple','retire','beginnings','together','remember','self'].map((k)=>JOURNEYS[k]);
 export function getJourney(id){return JOURNEYS[id]||JOURNEYS.parents;}
 export function getMoment(journeyId,momentId){const j=getJourney(journeyId);return j.moments.find(m=>m.id===momentId)||j.moments[0];}
+const pickJosa=(w,t)=>{const c=w.charCodeAt(w.length-1)-0xac00,f=c>=0&&c<=11171&&c%28!==0;const pair={은:['는','은'],는:['는','은'],이:['가','이'],가:['가','이'],을:['를','을'],를:['를','을'],과:['와','과'],와:['와','과']}[t];return pair?pair[f?1:0]:t;};
 export function context(p){const j=getJourney(p.occasion),m=getMoment(j.id,p.moment);let questions=j.questions,sample=j.sample,recipient=m.recipient,author=j.author,relation=j.relation,when=j.when;
  if(j.id==='parents'&&m.two){questions=['엄마·아빠·두 분 함께 중 누구와의 어떤 장면이 떠오르나요?','두 분이 함께 만든 시간은 내게 어떤 의미인가요?','각각의 부모님께, 또는 두 분께 지금 건네고 싶은 말은 무엇인가요?'];sample='주말마다 두 분은 시장을 함께 다녀오셨어요.\n\n엄마가 고른 것들을 아빠가 들고,\n돌아오는 길엔 늘 같은 가게에 들렀지요.\n\n서로 다른 두 사람이 만들어온\n그 평범한 풍경이 참 고마워요.';}
  if(j.id==='beginnings'&&m.targetChoice){const child=p.target!=='parents';recipient=child?'지우':'새 부모가 된 두 분';questions=child?['아이를 맞이하거나 함께 지내며 기억에 남은 장면은 무엇인가요?','그 장면에서 나는 어떤 마음이었나요?','훗날 아이가 읽을 수 있도록 어떤 말을 남기고 싶나요?']:['새 부모가 된 소중한 분들과 함께한 장면은 무엇인가요?','그 모습을 보며 내게 어떤 마음이 들었나요?','지금의 부모에게 부담 없이 전하고 싶은 말은 무엇인가요?'];sample=child?'처음 네 손을 잡았을 때,\n생각보다 작은 손가락에 놀랐어.\n\n그날 내가 어떤 마음이었는지\n언젠가 네가 궁금해하면 들려주고 싶어.\n\n우리에게 와줘서 반가워.':'너희가 아기를 안고 서로 웃던 모습이 기억나.\n\n처음이라 낯선 날도 있겠지만,\n필요할 때 곁에서 함께하고 싶어.\n\n너희의 새로운 일상을 응원해.';}
  if(j.id==='beginnings'&&m.id==='wedding')sample='너희가 서로의 이야기를 듣다가\n같이 웃음을 터뜨리던 저녁이 생각나.\n\n서로 다른 두 사람이 함께 고른 오늘.\n앞으로도 두 사람만의 속도로\n마음을 나누며 걸어가길 바라.';
 
- if(j.id==='parents'&&!m.two){sample=sample.replaceAll('아빠',recipient);if(recipient==='할머니'){author='지우';relation='손주';}}
+ if(j.id==='parents'&&!m.two){sample=sample.replace(/아빠(은|는|이|가|을|를|과|와)?/g,(_,t)=>recipient+(t?pickJosa(recipient,t):''));if(recipient==='할머니'){author='지우';relation='손주';}}
  if(j.id==='beginnings'&&m.targetChoice){when='처음 만난 날';if(p.target==='parents'){author='지연';relation='친구';}}
  if(j.id==='beginnings'&&m.id==='wedding'){author='서연';relation='친구';when='함께 식사하던 저녁';}
  if(j.id==='retire'&&m.id==='moving'){author='수빈';relation='오랜 친구';when='낯선 도시에서 만난 날';sample='처음 이 도시에 왔을 때,\n네가 버스 정류장까지 마중 나왔었지.\n\n함께 걸으며 듣던 동네 이야기가\n낯선 곳을 조금 편하게 만들어줬어.\n\n멀리 가서도 네 속도로 잘 지내길 바라.';}

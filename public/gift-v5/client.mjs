@@ -17,7 +17,7 @@ if (root) {
   const choice = {};
   if (page !== "hub" && page !== "how") {
     const j = getJourney(page);
-    const o = q.get("o");
+    const o = page === "parents" && q.get("o") === "campaign" ? "seventy" : q.get("o");
     if (o && j.moments.some((m) => m.id === o)) choice.moment = o;
     const t = q.get("t");
     if (t === "child" || t === "parents") choice.target = t;

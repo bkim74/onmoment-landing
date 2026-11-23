@@ -19,6 +19,13 @@ import vm from "node:vm";
   src = /\/\*om:gifts:start[\s\S]*?\/\*om:gifts:end\*\/\n?/.test(src) ? src.replace(/\/\*om:gifts:start[\s\S]*?\/\*om:gifts:end\*\/\n?/, () => gblock) : src.replace(/\n*$/, "\n") + gblock;
   writeFileSync(pf, src);
 }
+// 부모님 기본 랜딩(public/gift-v5/parents.mjs)의 사진 · 단가 상수가 원본과 같은지 확인
+{
+  const { PARENTS_FREE } = await import(new URL("../../public/gift-v5/parents.mjs", import.meta.url));
+  const g = JSON.parse(readFileSync(fileURLToPath(new URL("../../public/onmoment-gifts/v2/manifest.ko.json", import.meta.url)), "utf8")).journeys.parents.gallery;
+  const price = /book:\{[^}]*price:(\d+)/.exec(readFileSync(fileURLToPath(new URL("../../public/gift-v6/prices.js", import.meta.url)), "utf8"))?.[1];
+  if (g[0].src !== PARENTS_FREE.scene.src || g[2].src !== PARENTS_FREE.book.src || Number(price) !== PARENTS_FREE.price) { console.error("parents.mjs 상수가 manifest · prices.js 와 달라요"); process.exit(1); }
+}
 const pub = new URL("../../public/gift-v5/", import.meta.url);
 // 이야기 초상 예시의 단일 출처 = public/gift-v6/journeys.js (화면에서는 같은 파일을 읽는다)
 { const ctx = { window: {} }; vm.runInNewContext(readFileSync(fileURLToPath(new URL("../../public/gift-v6/journeys.js", import.meta.url)), "utf8"), ctx); globalThis.ONMOMENT_JOURNEYS = ctx.window.ONMOMENT_JOURNEYS; }

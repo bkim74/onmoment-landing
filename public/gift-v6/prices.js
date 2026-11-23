@@ -30,7 +30,7 @@ window.ONMOMENT_PRICES = {
   // 여정별 문구 덮어쓰기 — 단일 출처. landing.js 는 journeyCopy[여정] → 기본 문구 순으로만 읽는다(다른 여정 문구로 떨어지지 않음).
   // details[키].img · imgNote 는 상품 사진 자리(비어 있으면 아무것도 그리지 않음).
   journeyCopy: {
-    parents:{"eyebrow":"행사 패키지","optLabel":{},"optUse":{},"detailLead":{},"pitch":{"step1Head":"사진에서 얼굴을 한 번 눌러요","step1Body":"고른 사진의 그 부분만 씁니다. 사진이 없으면 한 줄로 장면을 그려요."}},
+    parents:{"eyebrow":"행사 패키지","optLabel":{"book":"양장본 1권"},"optUse":{},"detailLead":{},"pitch":{"step1Head":"사진에서 얼굴을 한 번 눌러요","step1Body":"고른 사진의 그 부분만 씁니다. 사진이 없으면 한 줄로 장면을 그려요."}},
     beginnings:{"eyebrow":"첫해 패키지","optLabel":{"book":"아이에게 남기는 책 양장"},"optUse":{"book":"모인 말 전부를 양장 책으로 담아요. 디지털 책은 기본으로 드려요.","frame":"첫해를 곁에 두고 보는 한 장이에요."},"detailLead":{"book":"모인 말 전부를 양장 책으로 담아요. 디지털 책은 기본으로 드려요.","frame":"첫해를, 곁에 두고 보는 한 장."},"pitch":{"step1Head":"사진에서 얼굴을 한 번 눌러요","step1Body":"고른 사진의 그 부분만 씁니다. 사진이 없으면 한 줄로 장면을 그려요."}},
     teen:{"eyebrow":"책상 위에 건네는 한 장","optLabel":{},"optUse":{"frame":"아이 방이나 책상에 두는 한 장이에요."},"detailLead":{"frame":"아이 책상 곁에 두는 한 장."},"pitch":{"step1Head":"사진에서 얼굴을 한 번 눌러요","step1Body":"고른 사진의 그 부분만 씁니다. 사진이 없으면 한 줄로 장면을 그려요."}},
     retire:{"eyebrow":"송별 패키지","optLabel":{"book":"송별 책 양장"},"optUse":{"book":"동료들의 말 전부를 한 권으로 담아요. 디지털 책은 기본으로 드려요.","frame":"함께한 시간을 책상에 두는 한 장이에요."},"detailLead":{"book":"동료들의 말 전부를 한 권으로 담아요. 디지털 책은 기본으로 드려요.","frame":"함께한 시간을, 책상 곁에 두는 한 장."},"pitch":{"step1Head":"사진에서 얼굴을 한 번 눌러요","step1Body":"고른 사진의 그 부분만 씁니다. 사진이 없으면 한 줄로 장면을 그려요."}},
