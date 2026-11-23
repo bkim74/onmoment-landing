@@ -13,6 +13,10 @@ import vm from "node:vm";
   const block = `/*om:details:start — lib/landing/optionDetails.json 에서 build_gift_v5.mjs 가 채워요. 직접 고치지 않아요.*/\nwindow.ONMOMENT_PRICES.details = ${JSON.stringify(det)};\n/*om:details:end*/\n`;
   let src = readFileSync(pf, "utf8");
   src = /\/\*om:details:start[\s\S]*?\/\*om:details:end\*\/\n?/.test(src) ? src.replace(/\/\*om:details:start[\s\S]*?\/\*om:details:end\*\/\n?/, () => block) : src.replace(/\n*$/, "\n") + block;
+  // 선물 에디션 v2 — 대표 상품 · 펼쳐 보기 · 옵션 상세 그림의 단일 출처 = public/onmoment-gifts/v2/manifest.ko.json
+  const gifts = JSON.parse(readFileSync(fileURLToPath(new URL("../../public/onmoment-gifts/v2/manifest.ko.json", import.meta.url)), "utf8"));
+  const gblock = `/*om:gifts:start — public/onmoment-gifts/v2/manifest.ko.json 에서 build_gift_v5.mjs 가 채워요. 직접 고치지 않아요.*/\nwindow.ONMOMENT_PRICES.gifts = ${JSON.stringify(gifts)};\n/*om:gifts:end*/\n`;
+  src = /\/\*om:gifts:start[\s\S]*?\/\*om:gifts:end\*\/\n?/.test(src) ? src.replace(/\/\*om:gifts:start[\s\S]*?\/\*om:gifts:end\*\/\n?/, () => gblock) : src.replace(/\n*$/, "\n") + gblock;
   writeFileSync(pf, src);
 }
 const pub = new URL("../../public/gift-v5/", import.meta.url);
