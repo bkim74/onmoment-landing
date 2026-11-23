@@ -1,0 +1,630 @@
+{
+  "version": 2,
+  "language": "ko",
+  "assetType": "ai-concept",
+  "disclosure": "가상 이야기로 만든 AI 제작 시안",
+  "journeys": {
+    "parents": {
+      "name": "부모님께 감사하기",
+      "sceneTitle": "귤을 나누던 식탁",
+      "product": "가족 이야기책",
+      "optionId": "book",
+      "offerStatus": "catalog-example",
+      "intro": "가족이 승인한 말과 그날의 그림을 책 한 권에 담습니다.",
+      "sampleLines": [
+        "엄마, 다음에는 제가 먼저 귤을 까 드릴게요."
+      ],
+      "gallery": [
+        {
+          "role": "scene",
+          "label": "쓰는 순간",
+          "alt": "어머니의 손에 들린 가족책 표지에 귤을 나누는 어머니와 딸이 이어져 그려져 있습니다.",
+          "src": "/onmoment-gifts/v2/parents/scene.webp",
+          "width": 1536,
+          "height": 1024,
+          "mobile": {
+            "src": "/onmoment-gifts/v2/parents/scene-640.webp",
+            "width": 640,
+            "height": 427
+          }
+        },
+        {
+          "role": "inside",
+          "label": "안쪽 읽기",
+          "alt": "가족 이야기책을 펼치면 귤을 건네던 그림과 딸이 고른 한 줄이 마주 보입니다.",
+          "src": "/onmoment-gifts/v2/parents/inside.webp",
+          "width": 1024,
+          "height": 763
+        },
+        {
+          "role": "contents",
+          "label": "받는 구성",
+          "alt": "귤을 건네는 어머니의 그림이 앞표지 전체에 인쇄된 가족책 한 권입니다.",
+          "src": "/onmoment-gifts/v2/parents/contents.webp",
+          "width": 1024,
+          "height": 763
+        },
+        {
+          "role": "detail",
+          "label": "표지 확대",
+          "alt": "어머니와 딸이 귤을 주고받는 책 표지의 인쇄를 가까이서 본 모습입니다.",
+          "src": "/onmoment-gifts/v2/parents/detail.webp",
+          "width": 538,
+          "height": 410,
+          "sourceType": "대표컷의 확대"
+        }
+      ],
+      "editionTitle": "귤을 나누던 식탁",
+      "designNote": "귤 한 알을 건네는 손이 표지의 주황빛 면으로 이어집니다."
+    },
+    "beginnings": {
+      "name": "우리 아이",
+      "sceneTitle": "처음 잡은 손",
+      "product": "첫해에 봉하는 편지",
+      "optionId": null,
+      "offerStatus": "proposal",
+      "intro": "부모가 오늘 적어 봉하고 가족이 보관하는 편지와 봉투입니다.",
+      "sampleLines": [
+        "작은 네 손을 잡고, 나도 함께 웃었어."
+      ],
+      "gallery": [
+        {
+          "role": "scene",
+          "label": "쓰는 순간",
+          "alt": "부모의 손이 살구색 봉투에서 아이의 손 그림이 담긴 편지를 꺼냅니다.",
+          "src": "/onmoment-gifts/v2/beginnings/scene.webp",
+          "width": 1536,
+          "height": 1024,
+          "mobile": {
+            "src": "/onmoment-gifts/v2/beginnings/scene-640.webp",
+            "width": 640,
+            "height": 427
+          }
+        },
+        {
+          "role": "inside",
+          "label": "안쪽 읽기",
+          "alt": "편지 왼쪽에는 작은 손으로 손가락을 쥔 그림, 오른쪽에는 부모가 고른 한 줄이 보입니다.",
+          "src": "/onmoment-gifts/v2/beginnings/inside.webp",
+          "width": 1024,
+          "height": 763
+        },
+        {
+          "role": "contents",
+          "label": "받는 구성",
+          "alt": "손가락을 쥔 그림의 접이 편지 한 장과 살구색 봉투 한 개의 구성 예시입니다.",
+          "src": "/onmoment-gifts/v2/beginnings/contents.webp",
+          "width": 1024,
+          "height": 763
+        },
+        {
+          "role": "detail",
+          "label": "표지 확대",
+          "alt": "작은 손이 어른 손가락을 쥔 그림과 편지 종이의 결입니다.",
+          "src": "/onmoment-gifts/v2/beginnings/detail.webp",
+          "width": 584,
+          "height": 368,
+          "sourceType": "대표컷의 확대"
+        }
+      ],
+      "editionTitle": "처음 잡은 손",
+      "designNote": "손가락을 꼭 쥐던 힘을 편지 겉면에 크게 그렸습니다."
+    },
+    "teen": {
+      "name": "사춘기",
+      "sceneTitle": "짠.",
+      "product": "책상 위 접이 카드",
+      "optionId": "teen_desk",
+      "offerStatus": "catalog-example",
+      "intro": "부모가 건네기로 고른 한 줄만 카드에 인쇄합니다.",
+      "sampleLines": [
+        "너는 초코, 나는 멜론. 둘이 아이스크림으로 짠 하던 날."
+      ],
+      "gallery": [
+        {
+          "role": "scene",
+          "label": "쓰는 순간",
+          "alt": "아이 책상에 두 아이스크림이 맞닿은 판화풍 접이 카드와 봉투가 놓여 있습니다.",
+          "src": "/onmoment-gifts/v2/teen/scene.webp",
+          "width": 1536,
+          "height": 1024,
+          "mobile": {
+            "src": "/onmoment-gifts/v2/teen/scene-640.webp",
+            "width": 640,
+            "height": 427
+          }
+        },
+        {
+          "role": "inside",
+          "label": "안쪽 읽기",
+          "alt": "펼친 카드 안에 초코와 멜론 아이스크림으로 짠하던 날의 두 줄이 인쇄되어 있습니다.",
+          "src": "/onmoment-gifts/v2/teen/inside.webp",
+          "width": 1024,
+          "height": 763
+        },
+        {
+          "role": "contents",
+          "label": "받는 구성",
+          "alt": "두 아이스크림이 맞닿은 짠. 접이 카드 한 장과 빈 봉투 한 개가 놓여 있습니다.",
+          "src": "/onmoment-gifts/v2/teen/contents.webp",
+          "width": 1024,
+          "height": 763
+        },
+        {
+          "role": "detail",
+          "label": "표지 확대",
+          "alt": "표지에 인쇄된 초코색과 멜론색 아이스크림이 만나는 부분입니다.",
+          "src": "/onmoment-gifts/v2/teen/detail.webp",
+          "width": 523,
+          "height": 328,
+          "sourceType": "대표컷의 확대"
+        }
+      ],
+      "editionTitle": "짠.",
+      "designNote": "초코와 멜론이 부딪힌 작은 틈이 표지에 남습니다."
+    },
+    "retire": {
+      "name": "은퇴·송별",
+      "sceneTitle": "첫날의 의자",
+      "product": "동료들의 송별 상자",
+      "optionId": "farewell_box",
+      "offerStatus": "catalog-example",
+      "intro": "동료의 카드와 함께한 시간 초상 한 장을 상자에 모읍니다.",
+      "sampleLines": [
+        "첫날, 제 의자를 먼저 빼 주셨어요."
+      ],
+      "gallery": [
+        {
+          "role": "scene",
+          "label": "쓰는 순간",
+          "alt": "의자가 그려진 짙은 초록색 송별 상자에서 동료의 모습이 담긴 초상을 꺼냅니다.",
+          "src": "/onmoment-gifts/v2/retire/scene.webp",
+          "width": 1536,
+          "height": 1024,
+          "mobile": {
+            "src": "/onmoment-gifts/v2/retire/scene-640.webp",
+            "width": 640,
+            "height": 427
+          }
+        },
+        {
+          "role": "inside",
+          "label": "한 장 꺼내기",
+          "alt": "상자에서 꺼낸 동료 카드에 첫날 의자를 빼 준 사람을 기억하는 한 줄과 의자 그림이 있습니다.",
+          "src": "/onmoment-gifts/v2/retire/inside.webp",
+          "width": 1024,
+          "height": 763
+        },
+        {
+          "role": "contents",
+          "label": "받는 구성",
+          "alt": "의자 그림의 상자 뚜껑과 본체, 컬러 이야기 초상 한 장, 동료 카드 묶음이 나란히 놓여 있습니다.",
+          "src": "/onmoment-gifts/v2/retire/contents.webp",
+          "width": 1024,
+          "height": 763
+        },
+        {
+          "role": "detail",
+          "label": "표지 확대",
+          "alt": "송별 상자의 의자와 안에 담긴 초상의 인쇄를 가까이서 보았습니다.",
+          "src": "/onmoment-gifts/v2/retire/detail.webp",
+          "width": 599,
+          "height": 389,
+          "sourceType": "대표컷의 확대"
+        }
+      ],
+      "editionTitle": "첫날의 의자",
+      "designNote": "의자가 새겨진 상자를 열면 그날의 초상과 동료의 말이 나옵니다."
+    },
+    "together": {
+      "name": "우리의 시간",
+      "sceneTitle": "접어 둔 쪽",
+      "product": "한 해 모임 책",
+      "optionId": "group_book",
+      "offerStatus": "catalog-example",
+      "intro": "같은 날을 다르게 기억한 두 사람의 글을 한 펼침에서 읽습니다.",
+      "sampleLines": [
+        "나는 앞쪽을 접었어.",
+        "나는 거의 끝을 접었어."
+      ],
+      "gallery": [
+        {
+          "role": "scene",
+          "label": "쓰는 순간",
+          "alt": "독서 모임에서 파란 표지에 주황색 접힌 귀가 인쇄된 모임 책을 건넵니다.",
+          "src": "/onmoment-gifts/v2/together/scene.webp",
+          "width": 1536,
+          "height": 1024,
+          "mobile": {
+            "src": "/onmoment-gifts/v2/together/scene-640.webp",
+            "width": 640,
+            "height": 427
+          }
+        },
+        {
+          "role": "inside",
+          "label": "안쪽 읽기",
+          "alt": "모임 책 한 펼침에 각자 접어 둔 쪽에 대한 두 사람의 글이 담겨 있습니다.",
+          "src": "/onmoment-gifts/v2/together/inside.webp",
+          "width": 1024,
+          "height": 763
+        },
+        {
+          "role": "contents",
+          "label": "받는 구성",
+          "alt": "파랑과 주황으로 디자인한 모임 책 다섯 권을 펼쳐 놓은 주문 수량 예시입니다.",
+          "src": "/onmoment-gifts/v2/together/contents.webp",
+          "width": 1024,
+          "height": 763
+        },
+        {
+          "role": "detail",
+          "label": "표지 확대",
+          "alt": "책 표지 귀퉁이의 주황색 인쇄와 파란 제본이 보입니다.",
+          "src": "/onmoment-gifts/v2/together/detail.webp",
+          "width": 583,
+          "height": 440,
+          "sourceType": "대표컷의 확대"
+        }
+      ],
+      "editionTitle": "접어 둔 쪽",
+      "designNote": "내가 접은 쪽과 네가 접은 쪽을 한 권 안에 나란히 놓았습니다."
+    },
+    "couple": {
+      "name": "연인·부부",
+      "sceneTitle": "한쪽 어깨",
+      "product": "서로 열기 카드",
+      "optionId": "couple_reveal",
+      "offerStatus": "catalog-example",
+      "intro": "한 우산을 썼던 두 사람이 각자 본 것을 두 면에 적습니다.",
+      "sampleLines": [
+        "네 어깨만 젖었더라.",
+        "네 쪽으로 조금 더 기울였어."
+      ],
+      "gallery": [
+        {
+          "role": "scene",
+          "label": "쓰는 순간",
+          "alt": "비가 지난 창가에서 기울어진 남색 우산 그림의 접이 카드 한 장을 건넵니다.",
+          "src": "/onmoment-gifts/v2/couple/scene.webp",
+          "width": 1536,
+          "height": 1024,
+          "mobile": {
+            "src": "/onmoment-gifts/v2/couple/scene-640.webp",
+            "width": 640,
+            "height": 427
+          }
+        },
+        {
+          "role": "inside",
+          "label": "안쪽 읽기",
+          "alt": "카드 양쪽에 젖은 어깨를 본 사람과 우산을 기울인 사람의 한 줄이 담겨 있습니다.",
+          "src": "/onmoment-gifts/v2/couple/inside.webp",
+          "width": 1024,
+          "height": 763
+        },
+        {
+          "role": "contents",
+          "label": "받는 구성",
+          "alt": "기울어진 남색 우산이 표지 전체를 가로지르는 접이 카드 한 장입니다.",
+          "src": "/onmoment-gifts/v2/couple/contents.webp",
+          "width": 1024,
+          "height": 763
+        },
+        {
+          "role": "detail",
+          "label": "표지 확대",
+          "alt": "종이 위로 짙은 우산의 선이 기울어져 있습니다.",
+          "src": "/onmoment-gifts/v2/couple/detail.webp",
+          "width": 553,
+          "height": 419,
+          "sourceType": "대표컷의 확대"
+        }
+      ],
+      "editionTitle": "한쪽 어깨",
+      "designNote": "한 우산 아래서 서로 다르게 본 비 오는 저녁입니다."
+    },
+    "self": {
+      "name": "나에게",
+      "sceneTitle": "오늘의 속도",
+      "product": "1년 뒤 나에게 오는 우편 카드",
+      "optionId": "mail_year",
+      "offerStatus": "catalog-example",
+      "intro": "지금 내가 고른 말을 1년 뒤의 내가 직접 읽습니다.",
+      "sampleLines": [
+        "오늘은 천천히 걸었고, 내일도 내 속도로 가고 싶다."
+      ],
+      "gallery": [
+        {
+          "role": "scene",
+          "label": "쓰는 순간",
+          "alt": "손에 든 가로 엽서에 나무 그늘과 공원 벤치에 앉은 사람이 전면으로 인쇄돼 있습니다.",
+          "src": "/onmoment-gifts/v2/self/scene.webp",
+          "width": 1536,
+          "height": 1024,
+          "mobile": {
+            "src": "/onmoment-gifts/v2/self/scene-640.webp",
+            "width": 640,
+            "height": 427
+          }
+        },
+        {
+          "role": "inside",
+          "label": "뒷면 읽기",
+          "alt": "엽서의 오늘 쓴 말 아래에 다시 읽는 날 적을 여백이 있습니다.",
+          "src": "/onmoment-gifts/v2/self/inside.webp",
+          "width": 1024,
+          "height": 763
+        },
+        {
+          "role": "contents",
+          "label": "받는 구성",
+          "alt": "공원 벤치에 앉은 나의 장면을 앞면 전체에 인쇄한 엽서 한 장입니다.",
+          "src": "/onmoment-gifts/v2/self/contents.webp",
+          "width": 1024,
+          "height": 763
+        },
+        {
+          "role": "detail",
+          "label": "표지 확대",
+          "alt": "엽서에 인쇄한 파란색과 공원의 잎사귀가 보입니다.",
+          "src": "/onmoment-gifts/v2/self/detail.webp",
+          "width": 583,
+          "height": 389,
+          "sourceType": "대표컷의 확대"
+        }
+      ],
+      "editionTitle": "오늘의 속도",
+      "designNote": "한 해 뒤 내가 뒤집어 읽을 한 장입니다."
+    },
+    "remember": {
+      "name": "함께 기억하기",
+      "sceneTitle": "두 번 접은 신문",
+      "product": "가족이 함께 엮는 기억 책",
+      "optionId": "book",
+      "offerStatus": "catalog-example",
+      "intro": "가족이 건네기로 고른 평소의 장면을 한 권으로 엮습니다.",
+      "sampleLines": [
+        "신문을 두 번 접고 웃으시던 눈이 기억나요."
+      ],
+      "gallery": [
+        {
+          "role": "scene",
+          "label": "쓰는 순간",
+          "alt": "밝은 아침 식탁에 신문을 든 할아버지의 웃는 눈이 그려진 기억 책이 놓여 있습니다.",
+          "src": "/onmoment-gifts/v2/remember/scene.webp",
+          "width": 1536,
+          "height": 1024,
+          "mobile": {
+            "src": "/onmoment-gifts/v2/remember/scene-640.webp",
+            "width": 640,
+            "height": 427
+          }
+        },
+        {
+          "role": "inside",
+          "label": "안쪽 읽기",
+          "alt": "신문을 접던 할아버지의 그림과 가족이 기억하는 한 줄이 한 펼침에 보입니다.",
+          "src": "/onmoment-gifts/v2/remember/inside.webp",
+          "width": 1024,
+          "height": 763
+        },
+        {
+          "role": "contents",
+          "label": "받는 구성",
+          "alt": "신문을 접은 선과 웃고 있는 할아버지가 앞표지에 인쇄된 기억 책 한 권입니다.",
+          "src": "/onmoment-gifts/v2/remember/contents.webp",
+          "width": 1024,
+          "height": 763
+        },
+        {
+          "role": "detail",
+          "label": "표지 확대",
+          "alt": "접힌 신문의 선과 할아버지 눈가를 담은 표지의 질감입니다.",
+          "src": "/onmoment-gifts/v2/remember/detail.webp",
+          "width": 692,
+          "height": 420,
+          "sourceType": "대표컷의 확대"
+        }
+      ],
+      "editionTitle": "두 번 접은 신문",
+      "designNote": "신문 접힌 선 위로 웃으시던 눈이 먼저 보입니다."
+    }
+  },
+  "optionOverrides": {
+    "parents": {
+      "book": "/onmoment-gifts/v2/parents/contents.webp",
+      "frame": "/onmoment-gifts/v2/options/frame.webp"
+    },
+    "teen": {
+      "teen_desk": "/onmoment-gifts/v2/teen/contents.webp"
+    },
+    "retire": {
+      "farewell_box": "/onmoment-gifts/v2/retire/contents.webp"
+    },
+    "together": {
+      "group_book": "/onmoment-gifts/v2/together/contents.webp"
+    },
+    "couple": {
+      "couple_reveal": "/onmoment-gifts/v2/couple/contents.webp"
+    },
+    "self": {
+      "mail_year": "/onmoment-gifts/v2/self/contents.webp"
+    },
+    "remember": {
+      "book": "/onmoment-gifts/v2/remember/contents.webp"
+    }
+  },
+  "optionDefaults": {
+    "frame": {
+      "name": "액자 재질 견본",
+      "alt": "원목 프레임의 옆면과 뒤쪽 지지대를 보여 주는 재질 견본입니다.",
+      "usage": "부모님 외 여정이나 일반 옵션에서 액자 구조를 설명하는 용도.",
+      "src": "/onmoment-gifts/v2/options/frame-material.webp",
+      "width": 761,
+      "height": 505
+    },
+    "wall": {
+      "name": "가족 초상 포토월",
+      "alt": "세움대 위에 귤을 건네는 어머니의 모습을 크게 인쇄한 포토월이 서 있습니다.",
+      "usage": "부모님 행사 시안. 패널과 세움대. 사람·행사장은 규모를 보여 주는 배경. 치수는 상품 정본을 따른다.",
+      "src": "/onmoment-gifts/v2/options/wall.webp",
+      "width": 763,
+      "height": 507
+    },
+    "favor": {
+      "name": "답례 이야기 카드",
+      "alt": "귤을 건네는 손 그림이 담긴 답례 카드 한 장과 봉투 한 개입니다.",
+      "usage": "1인분 예시. 실제 최소 주문 수량과 총액은 가격 정본에서 표시.",
+      "src": "/onmoment-gifts/v2/options/favor.webp",
+      "width": 763,
+      "height": 507
+    },
+    "favor_drip": {
+      "name": "답례 카드와 드립백",
+      "alt": "종이 상자 속에 귤 그림의 답례 카드와 드립백이 한 개씩 담겨 있습니다.",
+      "usage": "1인분 예시. 포장·수량의 최종 사양은 제작 후 확인.",
+      "src": "/onmoment-gifts/v2/options/favor_drip.webp",
+      "width": 763,
+      "height": 507
+    },
+    "parents_voice": {
+      "name": "부모님께 듣는 이야기",
+      "alt": "어르신이 손에 든 휴대폰에 음성 답변 화면이 보이는 이용 시안입니다.",
+      "usage": "디지털 서비스 이용 시안. 휴대폰은 구성 외.",
+      "src": "/onmoment-gifts/v2/options/parents_voice.webp",
+      "width": 761,
+      "height": 505
+    },
+    "thanks_reading": {
+      "name": "가족이 함께 읽을 말",
+      "alt": "가족 식탁에서 한 사람이 인쇄한 낭독 순서와 대본을 읽는 활용 예시입니다.",
+      "usage": "디지털 인쇄 파일. 고객이 출력한 활용 장면.",
+      "src": "/onmoment-gifts/v2/options/thanks_reading.webp",
+      "width": 761,
+      "height": 505
+    },
+    "reading": {
+      "name": "낭독 순서와 대본",
+      "alt": "노트북에서 낭독용 인쇄 파일을 펼쳐 보는 이용 시안입니다.",
+      "usage": "디지털 인쇄 파일. 노트북·배송 상품 없음.",
+      "src": "/onmoment-gifts/v2/options/reading.webp",
+      "width": 761,
+      "height": 505
+    },
+    "live": {
+      "name": "라이브 월",
+      "alt": "모임 공간의 화면과 탁상 안내 카드를 배치해 보는 이용 시안입니다.",
+      "usage": "화면 링크·안내 파일 예시. 화면 장비는 구성 외. 이미지의 QR은 접속용으로 사용하지 않음.",
+      "src": "/onmoment-gifts/v2/options/live.webp",
+      "width": 761,
+      "height": 505
+    },
+    "capsule": {
+      "name": "열여덟 살 타임캡슐",
+      "alt": "아이의 첫해를 담은 소책자를 우편 봉투에서 꺼내는 제작 시안입니다.",
+      "usage": "기존 장기 발송 상품 예시. 가족이 지금 보관하는 제안 편지와 별개.",
+      "src": "/onmoment-gifts/v2/options/capsule.webp",
+      "width": 761,
+      "height": 505
+    },
+    "memory_qr": {
+      "name": "기억 방명록 스탠드",
+      "alt": "밝은 탁상에 세워 둔 기억 방명록 안내와 받침을 보여 줍니다.",
+      "usage": "조문 등 참여자가 원한 행사에서 선택. 디지털 기억 책 포함. 시안의 QR은 접속용으로 사용하지 않음.",
+      "src": "/onmoment-gifts/v2/options/memory_qr.webp",
+      "width": 761,
+      "height": 505
+    },
+    "book-material": {
+      "name": "양장 책 제본 견본",
+      "alt": "밝은 천 표지와 제본된 안쪽 종이를 볼 수 있는 중립적인 양장 책 견본입니다.",
+      "usage": "개인 이야기나 해당 여정의 작품 이미지가 없을 때 제본을 설명하는 용도.",
+      "src": "/onmoment-gifts/v2/options/book-material.webp",
+      "width": 761,
+      "height": 505
+    },
+    "frame-material": {
+      "name": "액자 재질 견본",
+      "alt": "원목 프레임의 옆면과 뒤쪽 지지대를 보여 주는 재질 견본입니다.",
+      "usage": "부모님 외 여정이나 일반 옵션에서 액자 구조를 설명하는 용도.",
+      "src": "/onmoment-gifts/v2/options/frame-material.webp",
+      "width": 761,
+      "height": 505
+    },
+    "frame-parents": {
+      "name": "원목 초상 액자",
+      "alt": "원목 액자에 귤을 든 어머니의 초상이 인쇄된 예시입니다.",
+      "usage": "부모님 여정의 초상 예시.",
+      "src": "/onmoment-gifts/v2/options/frame.webp",
+      "width": 763,
+      "height": 507
+    },
+    "book": {
+      "name": "양장 책 제본 견본",
+      "alt": "양장 표지와 제본된 종이의 두께를 확인하는 중립적인 재질 견본입니다.",
+      "usage": "개인 이야기나 해당 여정의 작품 이미지가 없을 때 제본을 설명하는 용도.",
+      "src": "/onmoment-gifts/v2/options/book-material.webp",
+      "width": 761,
+      "height": 505
+    },
+    "teen_desk": {
+      "name": "책상 위 접이 카드",
+      "alt": "아이스크림 그림 접이 카드 한 장과 봉투 한 개를 펼쳐 놓은 모습입니다.",
+      "usage": "해당 여정 시안",
+      "src": "/onmoment-gifts/v2/teen/contents.webp",
+      "width": 1024,
+      "height": 763
+    },
+    "mail_year": {
+      "name": "1년 뒤 나에게 오는 우편 카드",
+      "alt": "공원 장면을 인쇄한 가로 엽서 한 장을 놓은 모습입니다.",
+      "usage": "해당 여정 시안",
+      "src": "/onmoment-gifts/v2/self/contents.webp",
+      "width": 1024,
+      "height": 763
+    },
+    "couple_reveal": {
+      "name": "서로 열기 카드",
+      "alt": "남색 우산이 그려진 접이 카드 한 장의 앞면입니다.",
+      "usage": "해당 여정 시안",
+      "src": "/onmoment-gifts/v2/couple/contents.webp",
+      "width": 1024,
+      "height": 763
+    },
+    "group_book": {
+      "name": "한 해 모임 책",
+      "alt": "같은 모임 책 다섯 권을 나란히 놓은 주문 수량 예시입니다.",
+      "usage": "해당 여정 시안",
+      "src": "/onmoment-gifts/v2/together/contents.webp",
+      "width": 1024,
+      "height": 763
+    },
+    "farewell_box": {
+      "name": "동료들의 송별 상자",
+      "alt": "송별 상자와 뚜껑, 초상 한 장, 동료들의 낱장 카드를 함께 놓은 예시입니다.",
+      "usage": "해당 여정 시안",
+      "src": "/onmoment-gifts/v2/retire/contents.webp",
+      "width": 1024,
+      "height": 763
+    }
+  },
+  "catalogOptionIds": [
+    "reading",
+    "wall",
+    "favor",
+    "favor_drip",
+    "book",
+    "frame",
+    "live",
+    "capsule",
+    "mail_year",
+    "memory_qr",
+    "parents_voice",
+    "thanks_reading",
+    "couple_reveal",
+    "farewell_box",
+    "group_book",
+    "teen_desk"
+  ]
+}

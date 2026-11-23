@@ -75,10 +75,29 @@ window.ONMOMENT_RENDER = function (root, journeyKey, variantKey) {
   const optLine = () => { const parts=Object.keys(optState).filter(k=>optState[k].on).map(k=>optionDefs[k].unit==='per'?k+'×'+optState[k].qty:k); return parts.length?'[옵션] '+parts.join(', '):''; };
   const optCardHTML = (k) => { const o=optionDefs[k],st=optState[k],per=o.unit==='per';
     return `<li class='opt-card' data-opt='${k}'><div class='opt-main'><div class='opt-text'><h3 class='opt-label'>${esc(o.label)}</h3><p class='opt-use'><small>그날의 쓰임</small>${esc(o.use)}</p><p class='opt-price'>${per?won(o.price)+'/부 · '+o.min+'부부터':won(o.price)}<small> · 예시 가격</small></p></div><button type='button' class='opt-toggle' data-opt-toggle='${k}' aria-pressed='${st.on}'><span class='sr-only'>${esc(o.label)} </span><span aria-hidden='true' class='opt-check'>${st.on?'✓':'+'}</span> 담기</button></div>${per?`<div class='opt-qty' role='group' aria-label='${esc(o.label)} 부수'><span class='opt-qty-label'>부수</span><button type='button' class='opt-step' data-opt-step='${k}' data-dir='-1' aria-label='${esc(o.label)} ${o.step||10}부 줄이기'>−</button><span class='opt-qty-num' data-opt-qty='${k}'>${st.qty}부</span><button type='button' class='opt-step' data-opt-step='${k}' data-dir='1' aria-label='${esc(o.label)} ${o.step||10}부 늘리기'>+</button></div>`:''}${(window.ONMOMENT_PRICES.details||{})[k]?`<button type='button' class='opt-more' data-opt-detail='${k}' aria-haspopup='dialog'>자세히 보기<span class='sr-only'> · ${esc(o.label)}</span></button>`:''}</li>`; };
+  // 선물 에디션 v2 — 단일 출처 = public/onmoment-gifts/v2/manifest.ko.json (prices.js 의 gifts 구간)
+  const G=window.ONMOMENT_PRICES.gifts||null;
+  const GJ=G&&G.journeys?G.journeys[d.key]:null;
+  const shipText=(k)=>{const inc=((window.ONMOMENT_PRICES.details||{})[k]||{}).included||[];const hit=inc.join(' · ');return /배송/.test(hit)?'배송 포함':/우편/.test(hit)?'우편 발송 포함':'배송 조건은 미리 신청 때 안내드려요';};
+  const REP_NOTE={retire:'상자의 재질과 마감은 제작 견적 뒤에 정해져요.',together:'그림은 다섯 권 주문 예시예요.',self:'발송 시점 · 받을 주소 · 반송 조건은 주문 직전에 한 번 더 확인해요.'};
+  const repHTML=()=>{
+    if(!GJ)return '';
+    const sc=GJ.gallery[0],mb=sc.mobile;
+    const o=GJ.optionId?optionDefs[GJ.optionId]:null;
+    let price;
+    if(!o||GJ.offerStatus==='proposal'){price='제안 상품 · 가격은 미리 신청 때 안내드려요';}
+    else{const per=o.unit==='per';price=won(per?o.price*o.min:o.price)+(per?' ('+o.min+'부 기준)':'')+' · 예시 가격 · '+shipText(GJ.optionId);}
+    const srcset=mb?" srcset='"+esc(mb.src)+" "+mb.width+"w, "+esc(sc.src)+" "+sc.width+"w' sizes='(max-width:760px) calc(100vw - 40px), 880px'":'';
+    return "<div class='rep' id='rep'><figure class='rep-fig'><img class='rep-img' src='"+esc(sc.src)+"'"+srcset+" width='"+sc.width+"' height='"+sc.height+"' alt='"+esc(sc.alt)+"' loading='lazy' decoding='async'><figcaption class='rep-disc'>"+esc(G.disclosure)+"</figcaption></figure>"
+      +"<div class='rep-body'><p class='rep-intro'>"+esc(GJ.intro)+"</p><h3 class='rep-name'><small>"+esc(GJ.sceneTitle)+"</small>"+esc(GJ.product)+"</h3>"
+      +"<p class='rep-sample'><small>예시 문장</small>"+GJ.sampleLines.map(x=>"“"+esc(x)+"”").join('<br>')+"</p>"
+      +"<p class='rep-price'>"+esc(price)+"</p>"+(REP_NOTE[d.key]?"<p class='rep-note'>"+esc(REP_NOTE[d.key])+"</p>":'')
+      +"<button type='button' class='btn rep-open' data-rep-open aria-haspopup='dialog'>펼쳐 보기</button></div></div>";
+  };
   function options(){
     const PAIN=window.ONMOMENT_PRICES.pain||{};
     const own = PAIN[d.key]||'진심은 쉽게, 준비는 링크 한 번으로.';
-    return `<section class='section options-section' id='options'><div class='wrap'><div class='section-top'><div><p class='eyebrow'>${esc(JC.eyebrow||'패키지')}</p><h2>${remembering?'기억의 자리 고르기':d.key==='parents'?'행사 패키지 고르기':'패키지 고르기'}</h2></div><p class='lede'>${esc(own)}</p></div><p class='opt-free'>기본 무료: 한 줄 모으기 · 디지털 카드 · 초상 첫 장 · ${d.key==='parents'?'행사 뒤 ':''}디지털 책 · 준비하며 나에게 남는 한 장</p><ul class='opt-list' aria-label='먼저 담아 둔 구성'>${bundle.recommended.map(optCardHTML).join('')}</ul><h3 class='opt-more-title'>더하고 싶다면</h3><ul class='opt-list' aria-label='더할 수 있는 구성'>${bundle.more.map(optCardHTML).join('')}</ul><p class='price-note'>모두 예시 가격이에요. 최종 구성과 가격은 미리 신청 뒤 안내해 드려요.</p><div class='opt-bar'><p class='opt-total' id='opt-total' role='status' aria-live='polite' aria-atomic='true'></p><a class='btn' href='#inquiry' id='opt-apply'>이 구성으로 미리 신청</a></div></div></section>`;
+    return `<section class='section options-section' id='options'><div class='wrap'><div class='section-top'><div><p class='eyebrow'>${esc(JC.eyebrow||'패키지')}</p><h2>${remembering?'기억의 자리 고르기':d.key==='parents'?'행사 패키지 고르기':'패키지 고르기'}</h2></div><p class='lede'>${esc(own)}</p></div>${repHTML()}<p class='opt-free'>기본 무료: 한 줄 모으기 · 디지털 카드 · 초상 첫 장 · ${d.key==='parents'?'행사 뒤 ':''}디지털 책 · 준비하며 나에게 남는 한 장</p><ul class='opt-list' aria-label='먼저 담아 둔 구성'>${bundle.recommended.map(optCardHTML).join('')}</ul><h3 class='opt-more-title'>더하고 싶다면</h3><ul class='opt-list' aria-label='더할 수 있는 구성'>${bundle.more.map(optCardHTML).join('')}</ul><p class='price-note'>모두 예시 가격이에요. 최종 구성과 가격은 미리 신청 뒤 안내해 드려요.</p><div class='opt-bar'><p class='opt-total' id='opt-total' role='status' aria-live='polite' aria-atomic='true'></p><a class='btn' href='#inquiry' id='opt-apply'>이 구성으로 미리 신청</a></div></div></section>`;
   }
   function after(){const s=d.scenes[0];return `<section class='section after-section'${remembering?" id='after-memory'":''}><div class='wrap after-grid'><div><p class='eyebrow'>${remembering?'가족이 남긴 두 시선':d.key==='self'?'그다음의 나에게':'선물을 만들며, 내게 남는 것'}</p><h2>${br(d.ritualTitle)}</h2><p class='lede'>${esc(d.ritualBody)}</p><a class='after-link' href='${appUrl}' data-app-cta='after'${external}>${d.key==='self'?'오늘의 한 장 시작하기':'내 말로 한 장 시작하기'}</a></div><div class='two-cards' id='two-cards'><article class='two-card'><small>${extension ? esc(extension.recipient) : d.recipientLabel ? esc(d.recipientLabel) : d.key==='self'?'오늘 내가 고른 문장':'그분께 건네고 싶은 문장'} · 예시</small><p>${esc(s.giftLine)}</p><p class='small'>${d.key==='self'?'곁에 두고 다시 읽는 한 장.':'건넬 말과 공개 범위를 내가 골라요.'}</p></article><article class='two-card'><small>${extension || d.mineLabel ? '나에게 남기는 말' : d.key==='self'?'다음에 해보고 싶은 일':'나에게 남겨둘 다음 장면'} · 예시</small><p>${esc(s.nextLine)}</p><p class='small'>내 원문과 함께 나만의 기록에.<br>더 적는 것은 내가 원할 때.</p></article></div></div></section>`;}
   function faq(){return `<section class='section'><div class='wrap faq-grid'><div><p class='eyebrow'>시작하기 전에</p><h2>궁금한 것을<br>먼저 살펴보세요.</h2></div><div>${d.faq.map((x,i)=>`<details class='faq-item' ${i===0?'open':''}><summary>${esc(x.q)}</summary><p>${esc(x.a)}</p></details>`).join('')}</div></div></section>`;}
@@ -143,7 +162,10 @@ window.ONMOMENT_RENDER = function (root, journeyKey, variantKey) {
     document.getElementById('sheet-price').textContent=(per?won(o.price)+'/부 · '+o.min+'부부터':won(o.price))+' · 예시 가격';
     let rl=x.roles||{};if(d.key==='self'&&(k==='book'||k==='frame')){rl={'나':Object.keys(rl).reduce((a,r)=>a.concat(rl[r]),[])};}
     const lead=(JC.detailLead&&JC.detailLead[k])||x.lead;
-    const imgHTML=x.img?"<figure class='sheet-fig'><img src='"+esc(x.img)+"' alt='"+esc(x.imgAlt||o.label)+"' loading='lazy'><figcaption class='visual-status'>"+esc(x.imgNote||'가상 이야기로 만든 제작 시안')+"</figcaption></figure>":'';
+    const optImg=(kk)=>{if(!G)return null;const ov=(G.optionOverrides[d.key]||{})[kk],D=G.optionDefaults;if(ov){const m=Object.keys(D).map(y=>D[y]).find(y=>y.src===ov);if(m)return m;const g=GJ&&GJ.gallery.find(y=>y.src===ov);return g?{src:g.src,alt:g.alt,width:g.width,height:g.height}:null;}return D[kk]||null;};
+    const SHEET_NOTE={parents_voice:'이용 시안 · 휴대폰은 구성 밖이에요',reading:'이용 시안 · 노트북은 구성 밖이에요',live:'이용 시안 · 화면은 구성 밖이에요',thanks_reading:'활용 예시',memory_qr:'그림 속 QR은 시안이에요'};
+    if(!x.img){const gi=optImg(k);if(gi){x.img=gi.src;x.imgAlt=gi.alt;x.imgW=gi.width;x.imgH=gi.height;x.imgNote=G.disclosure+(SHEET_NOTE[k]?' · '+SHEET_NOTE[k]:'');}}
+    const imgHTML=x.img?"<figure class='sheet-fig'><img src='"+esc(x.img)+"' alt='"+esc(x.imgAlt||o.label)+"'"+(x.imgW?" width='"+x.imgW+"' height='"+x.imgH+"'":'')+"><figcaption class='visual-status'>"+esc(x.imgNote||'가상 이야기로 만든 제작 시안')+"</figcaption></figure>":'';
     const roles=Object.keys(rl).map(r=>"<div class='sheet-role'><h4>"+esc(r)+"</h4><ol>"+li(rl[r])+"</ol></div>").join('');
     document.getElementById('sheet-body').innerHTML="<p class='sheet-lead'>"+esc(lead)+"</p>"+imgHTML+"<section class='sheet-sec'><h3>받는 것</h3><ul>"+li(x.gets)+"</ul></section><section class='sheet-sec'><h3>이렇게 진행돼요</h3>"+roles+"</section>"+(x.when?"<p class='sheet-when'><strong>언제</strong> "+esc(x.when)+"</p>":'')+"<section class='sheet-sec sheet-two'><div><h3>포함</h3><ul>"+li(x.included)+"</ul></div><div><h3>별도</h3><ul>"+li(x.extra)+"</ul></div></section>"+((x.faq||[]).length?"<section class='sheet-sec'><h3>자주 묻는 것</h3>"+x.faq.map(q=>"<details class='sheet-faq'><summary>"+esc(q[0])+"</summary><p>"+esc(q[1])+"</p></details>").join('')+"</section>":'');
     sheetToggleLabel();
@@ -168,6 +190,32 @@ window.ONMOMENT_RENDER = function (root, journeyKey, variantKey) {
     if(e.key==='Tab'){const f=Array.prototype.filter.call(sheetEl.querySelectorAll('button,summary,a[href],input,select,textarea,[tabindex]:not([tabindex="-1"])'),n=>!n.disabled&&n.offsetParent!==null);if(!f.length)return;const first=f[0],last=f[f.length-1];if(!sheetEl.contains(document.activeElement)){e.preventDefault();first.focus();}else if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}}
   });
   document.querySelectorAll('[data-opt-detail]').forEach(b=>b.addEventListener('click',()=>openSheet(b.dataset.optDetail,b)));
+  if(GJ&&document.querySelector('[data-rep-open]')){
+    const gal=GJ.gallery;let gi=0,gFrom=null,gLock='',gx=null;
+    const gv=document.createElement('div');gv.className='gv-wrap';gv.hidden=true;
+    gv.innerHTML="<div class='gv-back' data-gv-close></div><div class='gv' role='dialog' aria-modal='true' aria-labelledby='gv-title' tabindex='-1'><div class='gv-head'><div><h2 id='gv-title' class='gv-title'></h2><p class='gv-label' id='gv-label'></p></div><button type='button' class='gv-x' data-gv-close>닫기</button></div><figure class='gv-fig'><img id='gv-img' alt=''><figcaption class='gv-disc'></figcaption></figure><div class='gv-ctl'><button type='button' class='gv-nav' data-gv-prev aria-label='이전 그림'>이전</button><p class='gv-count' id='gv-count' aria-live='polite'></p><button type='button' class='gv-nav' data-gv-next aria-label='다음 그림'>다음</button></div></div>";
+    root.appendChild(gv);
+    const gvEl=gv.querySelector('.gv'),gvImg=document.getElementById('gv-img');
+    const gShow=(n)=>{gi=(n+gal.length)%gal.length;const g=gal[gi];gvImg.removeAttribute('width');gvImg.removeAttribute('height');gvImg.width=g.width;gvImg.height=g.height;gvImg.alt=g.alt;gvImg.src=g.src;
+      document.getElementById('gv-label').textContent=g.label;document.getElementById('gv-count').textContent=(gi+1)+' / '+gal.length;
+      const nx=gal[(gi+1)%gal.length];if(nx){const pre=new Image();pre.src=nx.src;} };
+    const gOpen=(from)=>{gFrom=from;document.getElementById('gv-title').textContent=GJ.product;gv.querySelector('.gv-disc').textContent=G.disclosure;gShow(0);
+      Array.prototype.forEach.call(root.children,c=>{if(c!==gv)c.setAttribute('inert','');});
+      gLock=document.body.style.overflow;document.body.style.overflow='hidden';gv.hidden=false;void gv.offsetWidth;gv.classList.add('open');
+      gv.querySelector('.gv-x').focus({preventScroll:true});track('landing_package_select',{packageId:'rep-'+d.key});};
+    const gClose=()=>{if(gv.hidden)return;gv.classList.remove('open');gv.hidden=true;Array.prototype.forEach.call(root.children,c=>c.removeAttribute('inert'));document.body.style.overflow=gLock;if(gFrom&&document.contains(gFrom))gFrom.focus({preventScroll:true});};
+    document.querySelectorAll('[data-rep-open]').forEach(b=>b.addEventListener('click',()=>gOpen(b)));
+    gv.addEventListener('click',e=>{if(e.target.closest('[data-gv-close]'))gClose();else if(e.target.closest('[data-gv-prev]'))gShow(gi-1);else if(e.target.closest('[data-gv-next]'))gShow(gi+1);});
+    gv.addEventListener('touchstart',e=>{gx=e.changedTouches[0].clientX;},{passive:true});
+    gv.addEventListener('touchend',e=>{if(gx==null)return;const dx=e.changedTouches[0].clientX-gx;gx=null;if(Math.abs(dx)>45)gShow(gi+(dx<0?1:-1));},{passive:true});
+    document.addEventListener('keydown',e=>{
+      if(gv.hidden)return;
+      if(e.key==='Escape'){e.preventDefault();gClose();return;}
+      if(e.key==='ArrowRight'){e.preventDefault();gShow(gi+1);return;}
+      if(e.key==='ArrowLeft'){e.preventDefault();gShow(gi-1);return;}
+      if(e.key==='Tab'){const f=Array.prototype.filter.call(gvEl.querySelectorAll('button'),n=>!n.disabled);if(!f.length)return;const first=f[0],last=f[f.length-1];if(!gvEl.contains(document.activeElement)){e.preventDefault();first.focus();}else if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}}
+    });
+  }
   optRefresh();
   document.getElementById('opt-apply').addEventListener('click',(e)=>{e.preventDefault();optRefresh();track('landing_inquiry_open',{packageId:'options'});const t=document.getElementById('inquiry');t.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});});
   const startUrl = (occasion) => { const j=d.key==='teen'?'beginnings':d.key; const o=occasion&&occasion!=='other'?occasion:'everyday'; return 'https://app.onmoment.kr/start?src=journey-'+j+'&next='+encodeURIComponent('/prepare?j='+j+'&o='+o); };
