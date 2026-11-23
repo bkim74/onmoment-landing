@@ -27,6 +27,18 @@ window.ONMOMENT_PRICES = {
   },
   // 여정별 한 줄 고민 문구 — 패키지 화면(landing.js)과 메인 #packages 카드가 같은 문장을 쓴다
   pain: {parents:'더 늦기 전에, 부모님 말로. 그간의 수고에 자녀들의 감사를 미리 모아 그날 낭독으로.',beginnings:'사진은 수천 장인데, 이야기는 없을 때. 첫해의 한 줄을 열여덟 살의 너에게.',teen:'잔소리 대신 놓아두는 한 장. 말이 줄어든 요즘에도 마음은 건너가요.',retire:'뻔한 상패 대신, 함께한 장면들로. 동료마다 한 장씩, 송별 상자에 담아요.',together:'한 해를 각자의 한 쪽으로. 같은 날을 서로 다르게 본 말이 한 권이 돼요.',couple:'올해 기념일은 서로 열어 보는 한 줄로. 꽃과 식사 사이에 둘만의 말을.',self:'그냥 지나가는 하루 대신, 1년 뒤의 나에게 도착하는 한 장.',remember:'경황없는 날에도, 그분과의 장면은 남도록. 이름 대신 한 장면을 남기는 방명록.'},
+  // 여정별 문구 덮어쓰기 — 단일 출처. landing.js 는 journeyCopy[여정] → 기본 문구 순으로만 읽는다(다른 여정 문구로 떨어지지 않음).
+  // details[키].img · imgNote 는 상품 사진 자리(비어 있으면 아무것도 그리지 않음).
+  journeyCopy: {
+    parents:{"eyebrow":"행사 패키지","optLabel":{},"optUse":{},"detailLead":{},"pitch":{"step1Head":"사진에서 얼굴을 한 번 눌러요","step1Body":"고른 사진의 그 부분만 씁니다. 사진이 없으면 한 줄로 장면을 그려요."}},
+    beginnings:{"eyebrow":"첫해 패키지","optLabel":{"book":"아이에게 남기는 책 양장"},"optUse":{"book":"모인 말 전부를 양장 책으로 담아요. 디지털 책은 기본으로 드려요.","frame":"첫해를 곁에 두고 보는 한 장이에요."},"detailLead":{"book":"모인 말 전부를 양장 책으로 담아요. 디지털 책은 기본으로 드려요.","frame":"첫해를, 곁에 두고 보는 한 장."},"pitch":{"step1Head":"사진에서 얼굴을 한 번 눌러요","step1Body":"고른 사진의 그 부분만 씁니다. 사진이 없으면 한 줄로 장면을 그려요."}},
+    teen:{"eyebrow":"책상 위에 건네는 한 장","optLabel":{},"optUse":{"frame":"아이 방이나 책상에 두는 한 장이에요."},"detailLead":{"frame":"아이 책상 곁에 두는 한 장."},"pitch":{"step1Head":"사진에서 얼굴을 한 번 눌러요","step1Body":"고른 사진의 그 부분만 씁니다. 사진이 없으면 한 줄로 장면을 그려요."}},
+    retire:{"eyebrow":"송별 패키지","optLabel":{"book":"송별 책 양장"},"optUse":{"book":"동료들의 말 전부를 한 권으로 담아요. 디지털 책은 기본으로 드려요.","frame":"함께한 시간을 책상에 두는 한 장이에요."},"detailLead":{"book":"동료들의 말 전부를 한 권으로 담아요. 디지털 책은 기본으로 드려요.","frame":"함께한 시간을, 책상 곁에 두는 한 장."},"pitch":{"step1Head":"사진에서 얼굴을 한 번 눌러요","step1Body":"고른 사진의 그 부분만 씁니다. 사진이 없으면 한 줄로 장면을 그려요."}},
+    together:{"eyebrow":"모임 패키지","optLabel":{},"optUse":{},"detailLead":{},"pitch":{"step1Head":"사진에서 얼굴을 한 번 눌러요","step1Body":"고른 사진의 그 부분만 씁니다. 사진이 없으면 한 줄로 장면을 그려요."}},
+    couple:{"eyebrow":"두 사람 패키지","optLabel":{"book":"두 사람의 책 양장"},"optUse":{"book":"함께 남긴 말을 한 권으로 담아요. 디지털 책은 기본으로 드려요.","frame":"두 사람의 평범한 날을 곁에 두는 한 장이에요."},"detailLead":{"book":"함께 남긴 말을 한 권으로 담아요. 디지털 책은 기본으로 드려요.","frame":"두 사람의 평범한 날을, 곁에 두는 한 장."},"pitch":{"step1Head":"사진에서 얼굴을 한 번 눌러요","step1Body":"고른 사진의 그 부분만 씁니다. 사진이 없으면 한 줄로 장면을 그려요."}},
+    self:{"eyebrow":"나에게 보내는 한 장","optLabel":{"book":"나에게 남기는 책 양장"},"optUse":{"book":"내가 남긴 한 줄들을 한 권으로 담아요. 디지털 책은 기본으로 드려요.","frame":"오늘의 나를 곁에 두는 한 장이에요."},"detailLead":{"book":"내가 남긴 한 줄들을 한 권으로 담아요. 디지털 책은 기본으로 드려요.","frame":"오늘의 나를, 곁에 두는 한 장."},"pitch":{"step1Head":"사진에서 내 얼굴을 한 번 눌러요","step1Body":"고른 사진의 그 부분만 씁니다. 사진이 없으면 한 줄로 장면을 그려요.","giveHead":"다음의 나에게","giveBody":"1년 뒤의 나에게 건네는 말이에요."}},
+    remember:{"eyebrow":"기억의 자리","optLabel":{"book":"기억 책 양장"},"optUse":{"book":"모인 장면 전부를 한 권으로 담아요. 디지털 책은 기본으로 드려요.","frame":"그분과의 장면을 곁에 두는 한 장이에요."},"detailLead":{"book":"모인 장면 전부를 한 권으로 담아요. 디지털 책은 기본으로 드려요.","frame":"그분과의 장면을, 곁에 두는 한 장."},"pitch":{"step1Head":"사진에서 얼굴을 한 번 눌러요","step1Body":"고른 사진의 그 부분만 씁니다. 사진이 없으면 한 줄로 장면을 그려요."}}
+  },
   bundles: {
     parents:{recommended:['parents_voice','thanks_reading','favor'],more:['favor_drip','wall','book','frame','live']},
     beginnings:{recommended:['capsule','favor'],more:['reading','book','frame','live']},
