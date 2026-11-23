@@ -150,3 +150,4 @@
   .om-gift-v6 .next-steps{padding:22px 18px}
 }
 @media(prefers-reduced-motion:reduce){.om-gift-v6 .sheet,.om-gift-v6 .sheet-back{transition:none}}
+.om-gift-v6 .sheet-fig{margin:0 0 22px}.om-gift-v6 .sheet-fig img{width:100%;height:auto;display:block;border-radius:12px}
