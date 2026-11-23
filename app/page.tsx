@@ -237,7 +237,7 @@ export default function Home() {
                     <h3>{p.name}</h3>
                     <p className="om-pkg-pain">{p.pain}</p>
                     <p className="om-pkg-free">무료로 한 장부터</p>
-                    <p className="om-pkg-price">실물은 {p.from.toLocaleString("ko-KR")}원부터 · {p.item}</p>
+                    <p className="om-pkg-price">더 담고 싶을 때 {p.from.toLocaleString("ko-KR")}원부터 · {p.item}</p>
                     <a className="om-pkg-link" href={`/gift/${p.key}/a/`}>패키지 보기 →<span className="om-sr"> · {p.name}</span></a>
                   </li>
                 ))}
