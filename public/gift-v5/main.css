@@ -297,13 +297,14 @@ html{scroll-padding-top:120px}
 /* 온순간 선물 패키지(#packages) — 모바일은 가로 스냅 줄, 데스크톱은 4열 */
 .om-pkgs .om-pkg-row{list-style:none;margin:0;padding:4px 0 12px;display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
 .om-pkg-card{flex:0 0 280px;scroll-snap-align:start;display:flex;flex-direction:column;gap:10px;padding:14px;border:1px solid var(--line);border-radius:8px;background:var(--sheet);min-width:0}
-.om-pkg-card img{display:block;width:100%;aspect-ratio:1/1;object-fit:cover;object-position:left center;border-radius:4px;background:var(--paper)}
+.om-pkg-fig{margin:0}.om-pkg-card img{display:block;width:100%;height:auto;border-radius:4px;background:var(--paper)}
+.om-pkg-fig figcaption{margin-top:6px;font-size:14px;line-height:1.6;color:var(--muted)}
 .om-pkg-card h3{margin:4px 0 0;font-size:20px;line-height:1.4}
 .om-pkg-pain{margin:0;font-size:16px;line-height:1.7;color:var(--ink)}
 .om-pkg-chips{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:6px}
 .om-pkg-chips li{padding:3px 10px;border:1px solid var(--line);border-radius:999px;font-size:14px;line-height:1.6;color:var(--ink);background:var(--paper)}
-.om-pkg-price{margin:auto 0 0;font-size:18px;font-weight:600;color:var(--ink)}
-.om-pkg-price small{font-size:14px;font-weight:400;color:var(--muted)}
+.om-pkg-free{margin:auto 0 0;font-size:20px;font-weight:700;line-height:1.4;color:var(--wine)}
+.om-pkg-price{margin:0;font-size:16px;line-height:1.6;color:var(--ink)}
 .om-pkg-link{display:flex;align-items:center;min-height:48px;color:var(--wine);font-size:16px;font-weight:600;text-decoration:underline;text-underline-offset:3px}
 .om-pkg-card{position:relative}.om-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .om-pkg-back{margin:24px 0 8px;font-size:16px}.om-pkg-back a{display:inline-flex;align-items:center;min-height:48px;color:var(--wine);text-decoration:underline;text-underline-offset:3px}

@@ -15,7 +15,7 @@ const SHOW_BOOK = false;
 // 지난 책 선물 이벤트(11/13~19 응모 · 11/20 추첨) — 11-19 종료, 표시만 끔
 const SHOW_OLD_EVENT = false;
 // 길잡이 — 긴 한 페이지의 구간들(보이는 구간만 · 순서대로)
-const NAV_MAP: [string, string][] = [["how", "함께 쓰는 법"], ["packages", "선물 패키지"], ["journeys", "여정 고르기"], ["one-story", "하나의 이야기"], ["receive", "받는 날"], ["offering", "가격"], ["book-event", "이벤트"], ["faq", "묻는 것"]];
+const NAV_MAP: [string, string][] = [["how", "함께 쓰는 법"], ["journeys", "여정 고르기"], ["packages", "선물 패키지"], ["one-story", "하나의 이야기"], ["receive", "받는 날"], ["offering", "가격"], ["book-event", "이벤트"], ["faq", "묻는 것"]];
 
 const ONE_STORY_STEPS: { label: string; sub: string; href: string }[] = [
   { label: "기다림", sub: "우리 아이 이야기", href: "/gift/beginnings/" },
@@ -84,25 +84,6 @@ export default function Home() {
               </figure>
             </section>
 
-            {/* 1-2 온순간 선물 패키지 — 히어로 바로 뒤. 카드 데이터는 lib/landing/packages.ts(prices.js 단일 출처) */}
-            <section id="packages" className="section wrap om-pkgs">
-              <div className="section-head">
-                <div><p className="eyebrow">온순간 선물 패키지</p><h2>그날을 위한, 우리만의 이야기 선물.</h2></div>
-                <p>가족 · 동료의 실제 한 줄과 그분을 닮은 이야기 초상으로 — 행사 날 펼쳐지고, 손에 들려 가고, 한 권으로 남아요.</p>
-              </div>
-              <ul className="om-pkg-row">
-                {getPackages().map((p) => (
-                  <li key={p.key} className="om-pkg-card">
-                    <img src={p.img} width={280} height={280} alt="" loading="lazy" />
-                    <h3>{p.name}</h3>
-                    <p className="om-pkg-pain">{p.pain}</p>
-                    <ul className="om-pkg-chips">{p.chips.map((c) => <li key={c}>{c}</li>)}</ul>
-                    <p className="om-pkg-price"><small>기본 무료 · 추천 구성 예시</small> {p.from.toLocaleString("ko-KR")}원</p>
-                    <a className="om-pkg-link" href={`/gift/${p.key}/a/`}>패키지 보기 →<span className="om-sr"> · {p.name}</span></a>
-                  </li>
-                ))}
-              </ul>
-            </section>
 
             {/* 2 각자의 자리에서 할 일 — 가장 먼저(범님 11-16: 효능감은 '내가 무엇을 하면 되는지'에서 시작한다) */}
             <section id="how" className="section wrap om-roles">
@@ -238,6 +219,29 @@ export default function Home() {
                 ))}
               </div>
               <p className="om-note">사진은 분위기를 돕는 이미지예요. 내 선물에는 사진 없이 한 문장만 써도 돼요.</p>
+            </section>
+
+            {/* 1-2 온순간 선물 패키지 — 일곱 여정 다음. 카드 데이터는 lib/landing/packages.ts(prices.js 단일 출처) */}
+            <section id="packages" className="section wrap om-pkgs">
+              <div className="section-head">
+                <div><p className="eyebrow">온순간 선물 패키지</p><h2>그날을 위한, 우리만의 이야기 선물.</h2></div>
+                <p>가족 · 동료의 실제 한 줄과 그분을 닮은 이야기 초상으로 — 행사 날 펼쳐지고, 손에 들려 가고, 한 권으로 남아요.</p>
+              </div>
+              <ul className="om-pkg-row">
+                {getPackages().map((p) => (
+                  <li key={p.key} className="om-pkg-card">
+                    <figure className="om-pkg-fig">
+                      <img src={p.img.src} width={p.img.width} height={p.img.height} alt={p.img.alt} loading="lazy" />
+                      <figcaption>{p.product} · {p.caption}</figcaption>
+                    </figure>
+                    <h3>{p.name}</h3>
+                    <p className="om-pkg-pain">{p.pain}</p>
+                    <p className="om-pkg-free">무료로 한 장부터</p>
+                    <p className="om-pkg-price">실물은 {p.from.toLocaleString("ko-KR")}원부터 · {p.item}</p>
+                    <a className="om-pkg-link" href={`/gift/${p.key}/a/`}>패키지 보기 →<span className="om-sr"> · {p.name}</span></a>
+                  </li>
+                ))}
+              </ul>
             </section>
 
             {/* 4-1 하나의 이야기 — 어디서 시작해도 한 사람의 이야기로 */}
